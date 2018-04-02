@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+	<!--
+		<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config
+		2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+	-->
+
+<configuration>
+    <settings>
+        <!-- changes from the defaults for testing -->
+        <setting name="cacheEnabled" value="false" />
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="defaultExecutorType" value="REUSE" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.Usuario" alias="usuario"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.UsuarioRol" alias="usuarioRol"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.Rol" alias="rol"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.Recurso" alias="recurso"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.RolRecurso" alias="rolRecurso"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.bean.FiltroUsuario" alias="filtroUsuario"/>
+        <typeAlias type="gob.dp.sid.administracion.seguridad.entity.UsuarioLogin" alias="usuarioLogin"/>
+        
+        <typeAlias type="gob.dp.sid.administracion.parametro.entity.Catalogo" alias="catalogo"/>
+        <typeAlias type="gob.dp.sid.administracion.parametro.bean.FiltroCatalogo" alias="filtroCatalogo"/>
+        <typeAlias type="gob.dp.sid.comun.entity.Parametro" alias="parametro"/>
+        <typeAlias type="gob.dp.sid.comun.entity.FiltroParametro" alias="filtroParametro"/>
+        
+        <typeAlias type="gob.dp.sid.comun.Auditoria" alias="auditoria"/>
+        <typeAlias type="gob.dp.sid.comun.entity.Departamento" alias="departamento"/>
+        <typeAlias type="gob.dp.sid.comun.entity.Provincia" alias="provincia"/>
+        <typeAlias type="gob.dp.sid.comun.entity.Distrito" alias="distrito"/>
+        <typeAlias type="gob.dp.sid.comun.entity.Menu" alias="menu"/>
+        
+        <typeAlias type="gob.dp.sid.registro.entity.Expediente" alias="expediente"/>
+        <typeAlias type="gob.dp.sid.registro.entity.Persona" alias="persona"/>
+        <typeAlias type="gob.dp.sid.registro.entity.Entidad" alias="entidad"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedientePersona" alias="expedientePersona"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteEntidad" alias="expedienteEntidad"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteGestion" alias="expedienteGestion"/>
+        <typeAlias type="gob.dp.sid.registro.entity.EtapaEstado" alias="etapaEstado"/>
+        <typeAlias type="gob.dp.sid.registro.entity.GestionEtapa" alias="gestionEtapa"/>
+        <typeAlias type="gob.dp.sid.registro.entity.OficinaDefensorial" alias="oficinaDefensorial"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteDerivacion" alias="expedienteDerivacion"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteConsulta" alias="expedienteConsulta"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteClasificacion" alias="expedienteClasificacion"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteNivel" alias="expedienteNivel"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteClasificacionTipo" alias="expedienteClasificacionTipo"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteClasificacionTipo" alias="expedienteClasiTipo"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteONP" alias="expedienteONP"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteTiempo" alias="expedienteTiempo"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteEtapa" alias="expedienteEtapa"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteSuspencion" alias="expedienteSuspencion"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteAmpliacion" alias="expedienteAmpliacion"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteHistorial" alias="expedienteHistorial"/>
+        <typeAlias type="gob.dp.sid.registro.entity.ExpedienteFormularioVirtual" alias="expedienteFormularioVirtual"/>
+        
+        <typeAlias type="gob.dp.sid.reporte.entity.Reporte" alias="reporte"/>
+        <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidExpediente" alias="reporteSidExpediente"/>
+        <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidConteo" alias="reporteSidConteo"/>
+        
+        <typeAlias type="gob.dp.sid.bandeja.entity.Bandeja" alias="bandeja"/>
+        <typeAlias type="gob.dp.sid.bandeja.entity.FiltroBusquedaMensaje" alias="filtroBusquedaMensaje"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="gob/dp/sid/administracion/seguridad/dao/xml/Usuario.xml" />
+        <mapper resource="gob/dp/sid/administracion/seguridad/dao/xml/Rol.xml" />
+        <mapper resource="gob/dp/sid/administracion/seguridad/dao/xml/Recurso.xml" />
+        <mapper resource="gob/dp/sid/administracion/seguridad/dao/xml/Auditoria.xml" />
+        <mapper resource="gob/dp/sid/administracion/seguridad/dao/xml/UsuarioLogin.xml" />
+        
+        <mapper resource="gob/dp/sid/administracion/parametro/dao/xml/Catalogo.xml" />
+        <mapper resource="gob/dp/sid/reporte/dao/xml/ReporteSidExpediente.xml" />
+        
+        <mapper resource="gob/dp/sid/comun/dao/xml/Departamento.xml" />
+        <mapper resource="gob/dp/sid/comun/dao/xml/Provincia.xml" />
+        <mapper resource="gob/dp/sid/comun/dao/xml/Distrito.xml" />
+        <mapper resource="gob/dp/sid/comun/dao/xml/Menu.xml" />
+        <mapper resource="gob/dp/sid/comun/dao/xml/Parametro.xml" />
+        
+        <mapper resource="gob/dp/sid/registro/dao/xml/Expediente.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/Persona.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/Entidad.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedientePersona.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteEntidad.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteGestion.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/EtapaEstado.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/GestionEtapa.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/OficinaDefensorial.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteDerivacion.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteConsulta.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteClasificacion.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteNivel.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteClasificacionTipo.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteClasiTipo.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteONP.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteTiempo.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteEtapa.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteSuspencion.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteAmpliacion.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteHistorial.xml" />
+        <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteFormularioVirtual.xml" />
+        
+        <mapper resource="gob/dp/sid/bandeja/dao/xml/Bandeja.xml" />
+    </mappers>
+    
+</configuration>

@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+
+    <ui:composition template="../template/templateCabeceraExpediente.xhtml">
+        <ui:define name="content2">
+            <gc:confirmSubmit bean="#{registroController.registarExpedienteGestion()}" mensaje="Esta seguro de registrar la gestión?" />
+            
+            <ul class="nav nav-tabs">
+                <li role="presentation">
+                    <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Datos generales</span>
+                    </a>
+                </li>
+                <li role="presentation"><a style="cursor: pointer" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
+                    </a>
+                </li>
+                <li role="presentation"  class="active">
+                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarHistorial()}">
+                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Historial</span>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Compartir</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="btn-group" role="group" style="float: right; width: 10%">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-th-list" /> Acciones
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
+                                    <span class="glyphicon glyphicon-export" />Derivar
+                                </a>
+                            </li>
+                            <li>
+                                <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}">
+                                    <span class="glyphicon glyphicon-question-sign" />Consultar
+                                </a>
+                            </li>
+                            <li>
+                                <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}">
+                                    <span class="glyphicon glyphicon-time" />Suspender
+                                </a>
+                            </li>
+                            <li>
+                                <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}">
+                                    <span class="glyphicon glyphicon-plus" />Ampliar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <table style="width: 100%">
+                        <td style="width: 20%; vertical-align: top">
+
+                        </td>
+                        <td style="vertical-align: top">
+
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>            

@@ -1,0 +1,458 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+
+    <ui:composition template="../template/template.xhtml">
+
+        <ui:define name="content">
+            <h:form id="idForm" class="form-horizontal">
+                <h:messages />
+                <style>
+                    .trPadding{
+                        padding-bottom: 10px;
+                    }
+                    .trPaddingRight{
+                        padding-right: 10px;
+                        padding-bottom: 10px;
+                    }
+
+                    .trPaddingLeft{
+                        padding-left: 10px;
+                        padding-bottom: 10px;
+                    }
+
+                    .clasRED{
+                        background: #F2DEDE;
+                        border: solid #A94442;
+                    }
+                </style>
+                <script>
+                    function confirmar1() {
+                        if ($('.idAccion').val() === '0') {
+                            $('.idAccion').focus().addClass("clasRED");
+                            alertar("Debe seleccionar una acción");
+                            return false;
+                        } else {
+                            $('.idAccion').removeClass("clasRED");
+                        }
+                        if ($('.fechaRegistro').val() === '') {
+                            $('.fechaRegistro').focus().addClass("clasRED");
+                            alertar("Debe ingresar la fecha de registro");
+                            return false;
+                        }
+                        else {
+                            $('.fechaRegistro').removeClass("clasRED");
+                        }
+                        if ($('.idForma').val() === '0') {
+                            $('.idForma').focus().addClass("clasRED");
+                            alertar("Debe seleccionar una forma");
+                            return false;
+                        } else {
+                            $('.idForma').removeClass("clasRED");
+                        }
+                        if ($('.descripcion').val() === '') {
+                            $('.descripcion').focus().addClass("clasRED");
+                            alertar("Debe ingresar una descripción");
+                            return false;
+                        } else {
+                            $('.descripcion').removeClass("clasRED");
+                        }
+                        if ($('.respuesta').val() === '') {
+                            $('.respuesta').focus().addClass("clasRED");
+                            alertar("Debe ingresar una respuesta");
+                            return false;
+                        } else {
+                            $('.respuesta').removeClass("clasRED");
+                        }
+                        if ($('.tipo').val() === '0') {
+                            $('.tipo').focus().addClass("clasRED");
+                            alertar("Debe seleccionar un tipo");
+                            return false;
+                        } else {
+                            $('.tipo').removeClass("clasRED");
+                        }
+                        if ($('.nombre').val() === '') {
+                            $('.nombre').focus().addClass("clasRED");
+                            alertar("Debe ingresar el nombre");
+                            return false;
+                        } else {
+                            $('.nombre').removeClass("clasRED");
+                        }
+                        if ($('.apellidoPaterno').val() === '') {
+                            $('.apellidoPaterno').focus().addClass("clasRED");
+                            alertar("Debe ingresar el apellido paterno");
+                            return false;
+                        } else {
+                            $('.apellidoPaterno').removeClass("clasRED");
+                        }
+                        if ($('.apellidoMaterno').val() === '') {
+                            $('.apellidoMaterno').focus().addClass("clasRED");
+                            alertar("Debe ingresar el apellido materno");
+                            return false;
+                        } else {
+                            $('.apellidoMaterno').removeClass("clasRED");
+                        }
+                        if ($('.document').val() === '0') {
+                            $('.document').focus().addClass("clasRED");
+                            alertar("Debe ingresar el tipo de documento");
+                            return false;
+                        } else {
+                            $('.document').removeClass("clasRED");
+                        }
+                        if ($('.nroDocumento').val() === '') {
+                            $('.nroDocumento').focus().addClass("clasRED");
+                            alertar("Debe ingresar el número de documento");
+                            return false;
+                        } else {
+                            $('.nroDocumento').removeClass("clasRED");
+                        }
+                        if ($('.direccion').val() === '') {
+                            $('.direccion').focus().addClass("clasRED");
+                            alertar("Debe ingresar la direccion");
+                            return false;
+                        } else {
+                            $('.direccion').removeClass("clasRED");
+                        }
+                        if ($('.departamento').val() === '0') {
+                            $('.departamento').focus().addClass("clasRED");
+                            alertar("Debe ingresar el departamento");
+                            return false;
+                        } else {
+                            $('.departamento').removeClass("clasRED");
+                        }
+                        if ($('.provincia').val() === '0') {
+                            $('.provincia').focus().addClass("clasRED");
+                            alertar("Debe ingresar la provincia");
+                            return false;
+                        } else {
+                            $('.provincia').removeClass("clasRED");
+                        }
+                        if ($('.distrito').val() === '0') {
+                            $('.distrito').focus().addClass("clasRED");
+                            alertar("Debe ingresar el distrito");
+                            return false;
+                        } else {
+                            $('.distrito').removeClass("clasRED");
+                        }
+                        if ($('.distrito').val() === '0') {
+                            $('.distrito').focus().addClass("clasRED");
+                            alertar("Debe ingresar el distrito");
+                            return false;
+                        } else {
+                            $('.distrito').removeClass("clasRED");
+                        }
+                        if ($('.sexo').is(':checked')) {
+                            $('.sexo').focus().addClass("clasRED");
+                            alertar("Debe ingresar el sexo");
+                            return false;
+                        } else {
+                            $('.sexo').removeClass("clasRED");
+                        }
+                        $(".confirmacion1").modal('show');
+                    }
+                </script>
+                <gc:confirmSubmit classGC="confirmacion1" bean="#{registroController.guardarRegistroCAV()}" mensaje="Esta seguro que desea realizar el registro?"/>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 45%; padding-right: 5px">
+                            <div class="panel panel-featured-top-primary">
+                                <div class="panel-body">
+                                    <span class="text-resalt-primary">Datos de la atención</span>
+                                    <br/>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 20%;" class="trPadding">
+                                                <span class="text-bold">Acción:</span>
+                                            </td> 
+                                            <td style="width: 30%" class="trPaddingRight">
+                                                <h:selectOneMenu value="#{registroController.expedienteFormularioVirtual.accion}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarListaAccionCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%" class="trPadding">
+                                                <span class="text-bold">Fecha:</span>
+                                            </td>
+                                            <td style="width: 30%" class="trPaddingRight">
+                                                <gc:calendar clase="fechaRegistro" value="#{registroController.expedienteFormularioVirtual.fecha}"/>
+                                            </td>
+                                            <td style="width: 20%" class="trPaddingLeft">
+                                                <span class="text-bold">Forma:</span>
+                                            </td>
+                                            <td style="width: 30%" class="trPadding">
+                                                <h:selectOneMenu value="#{registroController.expedienteFormularioVirtual.forma}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarExpedienteTipoIngreso(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="trPadding">
+                                                <span class="text-bold">Descripción:</span>
+                                            </td>
+                                            <td colspan="3" class="trPadding">
+                                                <textarea class="descripcion" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.descripcion}" style="width: 100%;" placeholder="Descripción"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Respuesta:</span>
+                                            </td>
+                                            <td colspan="3" class="trPadding">
+                                                <textarea class="respuesta" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.respuesta}" style="width: 100%;" placeholder="Respuesta"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/><br/>
+                                    <span class="text-resalt-primary">Datos de la persona</span>
+                                    <br/>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Tipo:</span>
+                                            </td>
+                                            <td class="trPaddingRight">
+                                                <h:selectOneMenu class="tipo" value="#{registroController.expedienteFormularioVirtual.tipo}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td colspan="2" class="trPadding">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Nombre:</span>
+                                            </td>
+                                            <td colspan="3" class="trPadding">
+                                                <h:inputText class="nombre" value="#{registroController.expedienteFormularioVirtual.nombre}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%" class="trPadding">
+                                                <span class="text-bold">A. paterno:</span>
+                                            </td>
+                                            <td style="width: 30%" class="trPaddingRight">
+                                                <h:inputText class="apellidoPaterno" value="#{registroController.expedienteFormularioVirtual.apellidoPaterno}" />
+                                            </td>
+                                            <td style="width: 20%" class="trPaddingLeft">
+                                                <span class="text-bold">A. Materno</span>
+                                            </td>
+                                            <td style="width: 30%" class="trPadding">
+                                                <h:inputText class="apellidoMaterno" value="#{registroController.expedienteFormularioVirtual.apellidoMaterno}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Documento:</span>
+                                            </td>
+                                            <td class="trPaddingRight">
+                                                <h:selectOneMenu class="document" value="#{registroController.expedienteFormularioVirtual.tipoDocumento}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td class="trPaddingLeft">
+                                                <span class="text-bold">Nro. Documento:</span>
+                                            </td>
+                                            <td class="trPadding">
+                                                <h:inputText class="nroDocumento" value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Dirección:</span>
+                                            </td>
+                                            <td colspan="3" class="trPadding">
+                                                <h:inputText class="direccion" value="#{registroController.expedienteFormularioVirtual.direccion}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Departamento:</span>
+                                            </td>
+                                            <td class="trPaddingRight">
+                                                <h:selectOneMenu class="departamento" value="#{registroController.expedienteFormularioVirtual.departamento}" onchange="loadingModal()">
+                                                    <f:selectItem itemLabel="Departamento" itemValue="0"/>
+                                                    <f:selectItems value="#{listasComunesController.listaDepartamentos(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    <f:ajax listener="#{registroController.comboProvinciaId(registroController.expedienteFormularioVirtual.departamento)}" render="cmbProvincia1 cmbDistrito1" onevent="closeModal"/>
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td class="trPaddingLeft">
+                                                <span class="text-bold">Provincia</span>
+                                            </td>
+                                            <td class="trPadding">
+                                                <h:selectOneMenu class="provincia" id="cmbProvincia1" value="#{registroController.expedienteFormularioVirtual.provincia}" onchange="loadingModal()">
+                                                    <f:selectItem itemLabel="Provincia" itemValue="0"/>
+                                                    <f:selectItems value="#{registroController.listaProvincia}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                                    <f:ajax listener="#{registroController.comboDistritoId(registroController.expedienteFormularioVirtual.provincia, registroController.expedienteFormularioVirtual.departamento)}" render="cmbDistrito1" onevent="closeModal"/>
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Distrito:</span>
+                                            </td>
+                                            <td class="trPaddingRight">
+                                                <h:selectOneMenu class="distrito" id="cmbDistrito1" value="#{registroController.expedienteFormularioVirtual.distrito}">
+                                                    <f:selectItem itemLabel="Distrito" itemValue="0"/>
+                                                    <f:selectItems value="#{registroController.listaDistrito}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td class="trPaddingLeft">
+                                                <span class="text-bold">Sexo:</span>
+                                            </td>
+                                            <td class="trPadding">
+                                                <h:selectOneRadio class="sexo" value="#{registroController.expedienteFormularioVirtual.sexo}">
+                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                                </h:selectOneRadio>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="trPadding">
+                                                <span class="text-bold">Email:</span>
+                                            </td>
+                                            <td class="trPaddingRight">
+                                                <h:inputText class="email" value="#{registroController.expedienteFormularioVirtual.email}" />
+                                            </td>
+                                            <td class="trPaddingLeft">
+
+                                            </td>
+                                            <td class="trPadding">
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="panel-footer">
+                                    <a class="btn btn-primary" onclick="confirmar1()">
+                                        <span class="glyphicon glyphicon-floppy-disk" />Guardar
+                                    </a>
+                                    &#160;&#160;&#160;
+                                    <a class="btn btn-info" jsf:action="#{registroController.limpiarCAV()}">
+                                        <span class="glyphicon glyphicon-user" />Nuevo
+                                    </a>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td style="padding-left: 5px; vertical-align: top;" >
+                            <div class="panel panel-featured-top-primary " style="height: 765px;overflow-y:auto;">
+                                <div class="panel-body" style="overflow-x: auto; width: 130%">
+                                    <span class="text-resalt-primary">Búsqueda de atenciones</span>
+                                    <table style="width: 80%">
+                                        <tr>
+                                            <td style="width: 20%">
+                                                <label>Fecha de ingreso</label>
+                                                <gc:calendar value="#{registroController.filtroFormularioVirtual.fecha}"/>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <label>Acción</label>
+                                                <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.accion}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarListaAccionCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <label>Forma de ingreso</label>
+                                                <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.forma}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarListaFormaCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                            <td style="width: 10%; text-align: center">
+                                                <a jsf:action="#{registroController.buscarCAV()}" class="btn btn-primary">
+                                                    <span class="glyphicon glyphicon-search" />Buscar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/><br/>
+                                    <span class="text-resalt-primary">Lista de atenciones</span>
+                                    <br/>
+                                    <style>
+                                        .col1 { width: 10%; }
+                                        .col2 { width: 45%; }
+                                        .col3 { width: 5%; }
+                                        .col4 { width: 15%; }
+                                        .colr{
+                                            color: red;
+                                            background: blue;
+                                        }
+                                    </style>
+                                    <h:dataTable value="#{registroController.listaExpedienteFormularioVirtual}" var="item" class="table table-hover" >
+                                        <h:column headerClass="col5" class="colr" >
+                                            <f:facet name="header"></f:facet>
+                                            <a jsf:action="#{registroController.seteaFormularioVirtual(item)}" jsf:rendered="#{item.estado == 'A'}">
+                                                <span class="glyphicon glyphicon-pencil" />
+                                            </a>
+                                            &#160;&#160;&#160;
+                                            <h:panelGroup rendered="#{item.estado == 'A'}">
+                                                <a onclick="confirmar0#{item.id}()" >
+                                                    <span class="glyphicon glyphicon-remove" style="color: red" />
+                                                </a>
+                                            </h:panelGroup>
+                                            <script>
+                                                function confirmar0#{item.id}() {
+                                                    $(".confirmacion0#{item.id}").modal('show');
+                                                }
+                                            </script>
+                                            <gc:confirmSubmitRemove classGC="confirmacion0#{item.id}" bean="#{registroController.inactivaRegistroCAV(item.id)}" mensaje="Esta seguro que desea anular el registro?"/>
+                                        </h:column>
+                                        <h:column headerClass="col1">
+                                            <div style="#{item.accion == null? 'background: #FFD400' : ''}">
+                                                    <f:facet name="header">Ingreso</f:facet>
+                                            <h:outputText value="#{item.fecha}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                            </h:outputText>
+                                            </div>
+                                        </h:column>
+                                        <h:column headerClass="col1">
+                                            <div style="#{item.accion == null? 'background: #FFD400' : ''}">
+                                            <f:facet name="header">Forma</f:facet>
+                                            <h:outputText value="#{item.formaDescripcion}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column headerClass="col1">
+                                            <div style="#{item.accion == null? 'background: #FFD400' : ''}">
+                                            <f:facet name="header">Acción</f:facet>
+                                            <h:outputText value="#{item.accionDescripcion}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column headerClass="col2">
+                                            <div style="#{item.accion == null? 'background: #FFD400' : ''}">
+                                            <f:facet name="header">Descripción</f:facet>
+                                            <h:outputText value="#{item.descripcion}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column headerClass="col5">
+                                            <f:facet name="header">Doc.</f:facet>
+                                            <h:panelGroup rendered="#{item.ruta != null}">
+                                                <a target="_blank" href="/filesystem/#{item.ruta}">
+                                                    <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                </a>
+                                            </h:panelGroup>
+                                        </h:column>
+                                        <h:column headerClass="col4">
+                                            <f:facet name="header">Expediente</f:facet>
+                                            <h:outputText value="#{item.numeroExpediente}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>            
