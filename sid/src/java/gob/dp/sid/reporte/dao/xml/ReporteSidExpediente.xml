@@ -1,0 +1,1647 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.reporte.dao.ReporteSidExpedienteDAO">
+    
+    <resultMap id="reporteSidExpedienteMap" type="reporteSidExpediente">
+        <result property="idExpediente" column="N_IDEXPEDIENTE" />
+        <result property="numeroExpediente" column="C_NUMEROEXPEDIENTE" />
+        <result property="tipoExpediente" column="TIPOEXPEDIENTE" />
+        <result property="fechaRegistro" column="D_FECHAREGISTRO" />
+        <result property="etapaExpediente" column="ETAPAEXPEDIENTE" />
+        <result property="estadoGeneral" column="C_ESTADOGENERAL" />
+        <result property="sumilla" column="C_SUMILLA" />
+        <result property="fechaIngreso" column="D_FECHAINGRESO" />
+        <result property="nombreOD" column="OD" />
+        <result property="comisionado" column="USUARIONOMBRE" />
+        <result property="numeroExpediente" column="C_NUMEROEXPEDIENTE" />
+        <result property="canalIngreso" column="CANALINGRESO" />
+        <result property="canalIngresoDetalle" column="CANALINGRESODETALLE" />
+        <result property="tipoGrupoVulnerable" column="C_TIPOGRUPOVULNERABLE"/>
+        <result property="estadoCalificacion" column="ESTADOCALIFICACION"/>
+        <result property="estadoInvestigacion" column="ESTADOINVESTIGACION"/>
+        <result property="estadoPersuacion" column="ESTADOPERSUACION"/>
+        <result property="estadoSeguimiento" column="ESTADOSEGUIMIENTO"/>
+        <result property="estadoRegistro" column="ESTADOREGISTRO"/>
+        <result property="etiqueta" column="C_ETIQUETA"/>
+        <result property="codigoGestion" column="C_CODIGOGESTION"/>
+        <result property="fechaRecepcionGestion" column="D_FECHA"/>
+        <result property="entidadGestion" column="C_NOMENTIDAD"/>
+        <result property="descripcionGestion" column="C_DESCRIPCION"/>
+        <result property="fechaRegistroGestion" column="D_FECHAREGISTRO"/>
+        <result property="fechaModificacionGestion" column="D_FECHAMODIFICACION"/>
+        <result property="respuestaGestion" column="C_RESPUESTA"/>
+        <result property="fechaRespuestaGestion" column="D_FECHARESPUESTA"/>
+        <result property="codigoGestionOrigen" column="C_CODIGOGESTIONORIGEN"/>
+        <result property="tipoAccion" column="C_TIPOACCION"/>
+        <result property="dependenciaOrigen" column="C_DEPENDENCIA_ORIGEN"/>
+        <result property="dependenciaDestino" column="C_DEPENDENCIA_DESTINO"/>
+    </resultMap> 
+    
+    <resultMap id="reporteSidConteoMap" type="reporteSidConteo">
+        <result property="totalExpediente" column="TOTAL" />
+        <result property="totalExpedienteQueja" column="TOTAL_QUEJA" />
+        <result property="totalExpedienteQuejaTramite" column="TOTAL_QUEJA_TRAMITE" />
+        <result property="totalExpedienteQuejaConcluido" column="TOTAL_QUEJA_CONCLUIDO" />
+        <result property="totalExpedienteQuejaConcluidoFundado" column="TOTAL_QUEJA_CONCLUIDO_FUNDADO" />
+        <result property="totalExpedienteQuejaConcluidoFundadoAcogido" column="Q_CONCLUIDO_FUNDADO_ACOGIDO" />
+        <result property="totalExpedienteQuejaConcluidoFundadoAcogidoParcial" column="Q_FUNDADO_ACOGIDOPAR" />
+        <result property="totalExpedienteQuejaConcluidoFundadoAcogidoParcialAcogido" column="Q_FUNDADO_ACOGIDOPAR_ACOGIDO" />
+        <result property="totalExpedienteQuejaConcluidoFundadoAcogidoParcialAcogidoParcial" column="Q_FUNDA_ACOGIDOPAR_ACOGIDOPAR" />
+        <result property="totalExpedienteQuejaConcluidoFundadoAcogidoParcialNoAcogido" column="Q_FUNDADO_ACOGIDOPAR_NOACOGIDO" />
+        <result property="totalExpedienteQuejaConcluidoFundadoNoAcogidoAcogido" column="Q_FUNDADO_NOACOGIDOP_ACOGIDO" />
+        <result property="totalExpedienteQuejaConcluidoFundadoNoAcogidoAcogidoParcial" column="Q_FUNDADO_NOACOGIDO_ACOGIDOPAR" />
+        <result property="totalExpedienteQuejaConcluidoFundadoNoAcogidoNoAcogido" column="Q_FUNDADO_NOACOGIDO_NOACOGIDO" />
+        <result property="totalExpedientePetitorio" column="TOTAL_PETITORIO" />
+        <result property="totalExpedientePetitorioTramite" column="TOTAL_PETITORIO_TRAMITE" />
+        <result property="totalExpedientePetitorioConcluido" column="TOTAL_PETITORIO_CONCLUIDO" />
+        <result property="totalExpedientePetitorioConcluidoAcogido" column="TOTAL_PET_CONCLUIDO_ACO" />
+        <result property="totalExpedientePetitorioConcluidoNoAcogido" column="TOTAL_PET_CONCLUIDO_NACO" />
+        <result property="totalExpedienteConsulta" column="TOTAL_CONSULTA" />
+        <result property="totalExpedienteConsultaTramite" column="TOTAL_CONSULTA_TRAMITE" />
+        <result property="totalExpedienteConsultaConcluido" column="TOTAL_CONSULTA_CONCLUIDO" />
+        <result property="totalGestion" column="TOTAL_GESTION" />
+        <result property="totalGestionSi" column="TOTAL_GESTION_SI" />
+        <result property="totalGestionNo" column="TOTAL_GESTION_NO" />
+        <result property="entidad" column="C_NOMENTIDAD" />
+        <result property="departamento" column="C_DESCDPTO" />
+        <result property="nombrePrimerNivel" column="NOMBREPRIMERNIVEL" />
+        <result property="nombreSegundoNivel" column="NOMBRESEGUNDORNIVEL" />
+        <result property="nombreTercerNivel" column="NOMBRETERCERNIVEL" />
+        <result property="nombreCuartoNivel" column="NOMBRECUARTONIVEL" />
+        <result property="nombreQuintoNivel" column="NOMBREQUINTONIVEL" />
+        <result property="nombreSextoNivel" column="NOMBRESEXTONIVEL" />
+        <result property="codigoComisionado" column="CODIGO_USUARIO" />
+        <result property="nombreComsionado" column="NOM_USUARIO" />
+        <result property="apellidoPaternoComisionado" column="APE_PATERNO" />
+        <result property="apellidoMaternoComisionado" column="APE_MATERNO" />
+        <result property="codigoComisionado" column="C_CARGO" />
+        <result property="nombreAdjuntia" column="C_NOMBRE" />
+        
+         
+    </resultMap> 
+
+    <select id="listaExpedienteReporte" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, A.D_FECHAREGISTRO, C.NOMBRE_PARAMETRO CANALINGRESO, E.C_VALOR ETAPAEXPEDIENTE, F.C_NOMBRE ESTADOCALIFICACION, 
+G.C_NOMBRE ESTADOINVESTIGACION, H.C_NOMBRE ESTADOPERSUACION, I.C_NOMBRE ESTADOSEGUIMIENTO, A.C_TIPOGRUPOVULNERABLE, A.C_ETIQUETA,
+CASE WHEN C_ESTADOGENERAL = 'A' THEN 'Trámite' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO IS NULL THEN 'Concluido' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO = 1 THEN 'Desistido' END ESTADOGENERAL,
+CASE N_VERSION WHEN 0 THEN 'Borrador' ELSE 'En registro' END ESTADOREGISTRO, A.C_SUMILLA, J.C_NOMBRE OD, A.D_FECHAINGRESO, A.C_USUREGISTRO, K.NOM_USUARIO||' '||K.APE_PATERNO||' '||K.APE_MATERNO USUARIONOMBRE, A.N_IDEXPEDIENTE
+FROM SID_REG_EXPEDIENTE A 
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDE_ENTIDAD N ON N.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+LEFT JOIN SID_REG_ENTIDAD M ON M.N_ID_ENTIDAD = N.N_ID_ENTIDAD 
+LEFT JOIN SID_REG_EXPEDIENTE_CLASI O ON O.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN SID_REG_EXPEDE_PERSONA P ON P.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+LEFT JOIN SID_REG_PERSONA Q ON Q.N_IDPERSONA = P.N_IDPERSONA
+WHERE A.C_ESTADO = 'A' 
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND A.C_ESTADOGENERAL = 'C' AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="codigoEntidad != null">
+    AND N.N_ID_ENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND M.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="ODBusqueda != ''">
+    AND J.N_ID_OD = #{ODBusqueda}
+</if>
+<if test="usuarioCodigo != ''">
+    AND K.CODIGO_USUARIO = #{usuarioCodigo}
+</if>
+<if test="gruposVulnerables != null">
+    AND A.C_TIPOGRUPOVULNERABLE  IN
+            <foreach item="item" index="index" collection="gruposVulnerables"
+           open="(" separator="," close=")">
+                #{item}
+            </foreach>
+</if>
+<if test="etiqueta != ''">
+    AND A.C_ETIQUETA = #{etiqueta}
+</if>
+<if test="idPrimerNivel != 0">
+    AND O.N_ID_PRIMERNIVEL = #{idPrimerNivel}
+</if>
+<if test="idSegundoNivel != 0">
+    AND O.N_ID_SEGUNDONIVEL = #{idSegundoNivel}
+</if>
+<if test="idTercerNivel != 0">
+    AND O.N_ID_TERCERNIVEL = #{idTercerNivel}
+</if>
+<if test="idCuartoNivel != 0">
+    AND O.N_ID_CUARTONIVEL = #{idCuartoNivel}
+</if>
+<if test="idQuintoNivel != 0">
+    AND O.N_ID_QUINTONIVEL = #{idQuintoNivel}
+</if>
+<if test="idSextoNivel != 0">
+    AND O.N_ID_SEXTONIVEL = #{idSextoNivel}
+</if>
+
+<if test="idDepartamentoRecurrente != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idProvinciaRecurrente != ''">
+    AND Q.C_IDPROV = #{idProvinciaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idDistritoRecurrente != ''">
+    AND Q.C_IDDISTR = #{idDistritoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="esDiscapacitadoRecurrente != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoLenguaRecurrente != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoPuebloRecurrente != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+
+<if test="idDepartamentoAfectado != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idProvinciaAfectado != ''">
+    AND Q.C_IDPROV = #{idProvinciaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idDistritoAfectado != ''">
+    AND Q.C_IDDISTR = #{idDistritoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="esDiscapacitadoAfectado != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoLenguaAfectado != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoPuebloAfectado != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+ORDER BY A.N_IDEXPEDIENTE DESC
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+   <select id="listaExpedienteReporteExport" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+       
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, A.D_FECHAREGISTRO, C.NOMBRE_PARAMETRO CANALINGRESO, E.C_VALOR ETAPAEXPEDIENTE, F.C_NOMBRE ESTADOCALIFICACION, 
+G.C_NOMBRE ESTADOINVESTIGACION, H.C_NOMBRE ESTADOPERSUACION, I.C_NOMBRE ESTADOSEGUIMIENTO, A.C_TIPOGRUPOVULNERABLE, A.C_ETIQUETA,
+CASE WHEN C_ESTADOGENERAL = 'A' THEN 'Trámite' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO IS NULL THEN 'Concluido' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO = 1 THEN 'Desistido' END ESTADOGENERAL,
+CASE N_VERSION WHEN 0 THEN 'Borrador' ELSE 'En registro' END ESTADOREGISTRO, A.C_SUMILLA, J.C_NOMBRE OD, A.D_FECHAINGRESO, A.C_USUREGISTRO, K.NOM_USUARIO||' '||K.APE_PATERNO||' '||K.APE_MATERNO USUARIONOMBRE, A.N_IDEXPEDIENTE
+FROM SID_REG_EXPEDIENTE A 
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDE_ENTIDAD N ON N.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+LEFT JOIN SID_REG_ENTIDAD M ON M.N_ID_ENTIDAD = N.N_ID_ENTIDAD 
+LEFT JOIN SID_REG_EXPEDIENTE_CLASI O ON O.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+WHERE A.C_ESTADO = 'A' 
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND A.C_ESTADOGENERAL = 'C' AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="codigoEntidad != null">
+    AND N.N_ID_ENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND M.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND K.CODIGO_USUARIO = #{usuarioCodigo}
+</if>
+<if test="gruposVulnerables != null">
+    AND A.C_TIPOGRUPOVULNERABLE  IN
+            <foreach item="item" index="index" collection="gruposVulnerables"
+           open="(" separator="," close=")">
+                #{item}
+            </foreach>
+</if>
+ORDER BY A.N_IDEXPEDIENTE DESC
+        
+    </select>
+     
+    <select id="listaGestionReporte" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+       SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+         SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, X.D_FECHA, X.C_CODIGOGESTION, M.C_NOMENTIDAD, 
+            X.C_DESCRIPCION, X.D_FECHAREGISTRO, X.D_FECHAMODIFICACION, X.C_RESPUESTA,  X.D_FECHARESPUESTA, X.C_CODIGOGESTIONORIGEN
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN SID_REG_GESTION_ETAPA Y ON A.C_NUMEROEXPEDIENTE = Y.C_NUMEROEXPEDIENTE
+INNER JOIN SID_REG_GESTION X ON X.N_ID_GESTION = Y.N_ID_GESTION
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO 
+LEFT JOIN SID_REG_ENTIDAD M ON M.N_ID_ENTIDAD =X.N_IDENTIDAD 
+LEFT JOIN SID_REG_EXPEDIENTE_CLASI O ON O.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN SID_REG_EXPEDE_PERSONA P ON P.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+LEFT JOIN SID_REG_PERSONA Q ON Q.N_IDPERSONA = P.N_IDPERSONA
+WHERE A.C_ESTADO = 'A'
+       <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND A.C_ESTADOGENERAL = 'C' AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="codigoEntidad != null">
+    AND X.N_IDENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND M.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="ODBusqueda != ''">
+    AND J.N_ID_OD = #{ODBusqueda}
+</if>
+<if test="usuarioCodigo != ''">
+    AND K.CODIGO_USUARIO = #{usuarioCodigo}
+</if>
+<if test="gruposVulnerables != null">
+    AND A.C_TIPOGRUPOVULNERABLE  IN
+            <foreach item="item" index="index" collection="gruposVulnerables"
+           open="(" separator="," close=")">
+                #{item}
+            </foreach>
+</if>
+<if test="etiqueta != ''">
+    AND A.C_ETIQUETA = #{etiqueta}
+</if>
+<if test="idPrimerNivel != 0">
+    AND O.N_ID_PRIMERNIVEL = #{idPrimerNivel}
+</if>
+<if test="idSegundoNivel != 0">
+    AND O.N_ID_SEGUNDONIVEL = #{idSegundoNivel}
+</if>
+<if test="idTercerNivel != 0">
+    AND O.N_ID_TERCERNIVEL = #{idTercerNivel}
+</if>
+<if test="idCuartoNivel != 0">
+    AND O.N_ID_CUARTONIVEL = #{idCuartoNivel}
+</if>
+<if test="idQuintoNivel != 0">
+    AND O.N_ID_QUINTONIVEL = #{idQuintoNivel}
+</if>
+<if test="idSextoNivel != 0">
+    AND O.N_ID_SEXTONIVEL = #{idSextoNivel}
+</if>
+
+<if test="idDepartamentoRecurrente != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idProvinciaRecurrente != ''">
+    AND Q.C_IDPROV = #{idProvinciaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idDistritoRecurrente != ''">
+    AND Q.C_IDDISTR = #{idDistritoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="esDiscapacitadoRecurrente != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoLenguaRecurrente != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoPuebloRecurrente != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+
+<if test="idDepartamentoAfectado != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idProvinciaAfectado != ''">
+    AND Q.C_IDPROV = #{idProvinciaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idDistritoAfectado != ''">
+    AND Q.C_IDDISTR = #{idDistritoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="esDiscapacitadoAfectado != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoLenguaAfectado != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoPuebloAfectado != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select> 
+    
+    
+    <select id="listaGestionReporteExport" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+       
+         SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, X.D_FECHA, X.C_CODIGOGESTION, M.C_NOMENTIDAD, 
+            X.C_DESCRIPCION, X.D_FECHAREGISTRO, X.D_FECHAMODIFICACION, X.C_RESPUESTA,  X.D_FECHARESPUESTA, X.C_CODIGOGESTIONORIGEN
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN SID_REG_GESTION_ETAPA Y ON A.C_NUMEROEXPEDIENTE = Y.C_NUMEROEXPEDIENTE
+INNER JOIN SID_REG_GESTION X ON X.N_ID_GESTION = Y.N_ID_GESTION
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO 
+LEFT JOIN SID_REG_ENTIDAD M ON M.N_ID_ENTIDAD =X.N_IDENTIDAD 
+LEFT JOIN SID_REG_EXPEDIENTE_CLASI O ON O.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN SID_REG_EXPEDE_PERSONA P ON P.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+LEFT JOIN SID_REG_PERSONA Q ON Q.N_IDPERSONA = P.N_IDPERSONA
+WHERE A.C_ESTADO = 'A'
+       <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND A.C_ESTADOGENERAL = 'C' AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="codigoEntidad != null">
+    AND X.N_IDENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND M.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="ODBusqueda != ''">
+    AND J.N_ID_OD = #{ODBusqueda}
+</if>
+<if test="usuarioCodigo != ''">
+    AND K.CODIGO_USUARIO = #{usuarioCodigo}
+</if>
+<if test="gruposVulnerables != null">
+    AND A.C_TIPOGRUPOVULNERABLE  IN
+            <foreach item="item" index="index" collection="gruposVulnerables"
+           open="(" separator="," close=")">
+                #{item}
+            </foreach>
+</if>
+<if test="etiqueta != ''">
+    AND A.C_ETIQUETA = #{etiqueta}
+</if>
+<if test="idPrimerNivel != 0">
+    AND O.N_ID_PRIMERNIVEL = #{idPrimerNivel}
+</if>
+<if test="idSegundoNivel != 0">
+    AND O.N_ID_SEGUNDONIVEL = #{idSegundoNivel}
+</if>
+<if test="idTercerNivel != 0">
+    AND O.N_ID_TERCERNIVEL = #{idTercerNivel}
+</if>
+<if test="idCuartoNivel != 0">
+    AND O.N_ID_CUARTONIVEL = #{idCuartoNivel}
+</if>
+<if test="idQuintoNivel != 0">
+    AND O.N_ID_QUINTONIVEL = #{idQuintoNivel}
+</if>
+<if test="idSextoNivel != 0">
+    AND O.N_ID_SEXTONIVEL = #{idSextoNivel}
+</if>
+
+<if test="idDepartamentoRecurrente != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idProvinciaRecurrente != ''">
+    AND Q.C_IDPROV = #{idProvinciaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="idDistritoRecurrente != ''">
+    AND Q.C_IDDISTR = #{idDistritoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="esDiscapacitadoRecurrente != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoLenguaRecurrente != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+<if test="tipoPuebloRecurrente != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloRecurrente} 
+    AND P.C_TIPO IN ('01','03')
+</if>
+
+<if test="idDepartamentoAfectado != ''">
+    AND Q.C_IDDEPA = #{idDepartamentoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idProvinciaAfectado != ''">
+    AND Q.C_IDPROV = #{idProvinciaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="idDistritoAfectado != ''">
+    AND Q.C_IDDISTR = #{idDistritoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="esDiscapacitadoAfectado != ''">
+    AND Q.C_INDDISCAPACITADO = #{esDiscapacitadoAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoLenguaAfectado != ''">
+    AND Q.C_TIPOLENGUA = #{tipoLenguaAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+<if test="tipoPuebloAfectado != ''">
+    AND Q.C_TIPOPUEBLO = #{tipoPuebloAfectado} 
+    AND P.C_TIPO IN ('02','03')
+</if>
+
+    </select> 
+    
+    
+    
+    <select id="listaEntidadReporte" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT COUNT(DISTINCT Z.N_IDEXPEDIENTE) TOTAL, COUNT(DISTINCT B.N_IDEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT C.N_IDEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT D.N_IDEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO,
+COUNT(DISTINCT E.N_IDEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO_FUNDADO, COUNT(DISTINCT F.N_IDEXPEDIENTE) Q_CONCLUIDO_FUNDADO_ACOGIDO, COUNT(DISTINCT G.N_IDEXPEDIENTE) Q_FUNDADO_ACOGIDOPAR_ACOGIDO, COUNT(DISTINCT H.N_IDEXPEDIENTE) Q_FUNDA_ACOGIDOPAR_ACOGIDOPAR, 
+COUNT(DISTINCT I.N_IDEXPEDIENTE) Q_FUNDADO_ACOGIDOPAR_NOACOGIDO, COUNT(DISTINCT J.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDOP_ACOGIDO, COUNT(DISTINCT K.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDO_ACOGIDOPAR, COUNT(DISTINCT L.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDO_NOACOGIDO,
+COUNT(DISTINCT M.N_IDEXPEDIENTE) TOTAL_PETITORIO, COUNT(DISTINCT N.N_IDEXPEDIENTE) TOTAL_PETITORIO_TRAMITE, COUNT(DISTINCT O.N_IDEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, COUNT(DISTINCT P.N_IDEXPEDIENTE) TOTAL_PET_CONCLUIDO_ACO, COUNT(DISTINCT Q.N_IDEXPEDIENTE) TOTAL_PET_CONCLUIDO_NACO,
+COUNT(DISTINCT R.N_ID_GESTION) TOTAL_GESTION, COUNT(DISTINCT S.N_ID_GESTION) TOTAL_GESTION_SI, COUNT(DISTINCT T.N_ID_GESTION) TOTAL_GESTION_NO, 
+A.C_NOMENTIDAD, X.C_DESCDPTO
+FROM SID_REG_ENTIDAD A
+INNER JOIN (
+        SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 
+        INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_ESTADO = 'A'
+        <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A1.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A1.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A1.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A1.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A1.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A1.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A1.C_USUREGISTRO = #{usuarioCodigo}
+</if>
+        ) Z
+ON A.N_ID_ENTIDAD = Z.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A') B
+ON A.N_ID_ENTIDAD = B.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'A') C
+ON A.N_ID_ENTIDAD = C.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C') D
+ON A.N_ID_ENTIDAD = D.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3) E
+ON A.N_ID_ENTIDAD = E.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 5 AND A1.C_ESTADOSEGUIMIENTO IS NULL) F
+ON A.N_ID_ENTIDAD = F.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 7) G
+ON A.N_ID_ENTIDAD = G.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 18) H
+ON A.N_ID_ENTIDAD = H.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 8) I
+ON A.N_ID_ENTIDAD = I.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 7) J
+ON A.N_ID_ENTIDAD = J.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 18) K
+ON A.N_ID_ENTIDAD = K.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 8) L
+ON A.N_ID_ENTIDAD = L.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A') M
+ON A.N_ID_ENTIDAD = M.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A' AND C_ESTADOGENERAL = 'A') N
+ON A.N_ID_ENTIDAD = N.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A' AND C_ESTADOGENERAL = 'C') O
+ON A.N_ID_ENTIDAD = O.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOGESTION = 12 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 14) P
+ON A.N_ID_ENTIDAD = P.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOGESTION = 12 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 15) Q
+ON A.N_ID_ENTIDAD = Q.N_ID_ENTIDAD
+LEFT JOIN SID_REG_GESTION R ON A.N_ID_ENTIDAD = R.N_IDENTIDAD
+LEFT JOIN (SELECT N_ID_GESTION, N_IDENTIDAD FROM SID_REG_GESTION WHERE C_RESPUESTA = 'SI') S ON A.N_ID_ENTIDAD = S.N_IDENTIDAD
+LEFT JOIN (SELECT N_ID_GESTION, N_IDENTIDAD FROM SID_REG_GESTION WHERE C_RESPUESTA = 'NO') T ON A.N_ID_ENTIDAD = T.N_IDENTIDAD
+LEFT JOIN SID_UBIGEO_DPTO X ON A.C_IDDEPARTAMENTO = X.C_ID_DPTO
+WHERE 1 = 1 
+<if test="codigoEntidad != null">
+    AND A.N_ID_ENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND A.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+GROUP BY A.C_NOMENTIDAD, X.C_DESCDPTO
+        
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    
+    <select id="listaEntidadReporteExport" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+      
+        SELECT COUNT(DISTINCT Z.N_IDEXPEDIENTE) TOTAL, COUNT(DISTINCT B.N_IDEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT C.N_IDEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT D.N_IDEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO,
+COUNT(DISTINCT E.N_IDEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO_FUNDADO, COUNT(DISTINCT F.N_IDEXPEDIENTE) Q_CONCLUIDO_FUNDADO_ACOGIDO, COUNT(DISTINCT G.N_IDEXPEDIENTE) Q_FUNDADO_ACOGIDOPAR_ACOGIDO, COUNT(DISTINCT H.N_IDEXPEDIENTE) Q_FUNDA_ACOGIDOPAR_ACOGIDOPAR, 
+COUNT(DISTINCT I.N_IDEXPEDIENTE) Q_FUNDADO_ACOGIDOPAR_NOACOGIDO, COUNT(DISTINCT J.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDOP_ACOGIDO, COUNT(DISTINCT K.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDO_ACOGIDOPAR, COUNT(DISTINCT L.N_IDEXPEDIENTE) Q_FUNDADO_NOACOGIDO_NOACOGIDO,
+COUNT(DISTINCT M.N_IDEXPEDIENTE) TOTAL_PETITORIO, COUNT(DISTINCT N.N_IDEXPEDIENTE) TOTAL_PETITORIO_TRAMITE, COUNT(DISTINCT O.N_IDEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, COUNT(DISTINCT P.N_IDEXPEDIENTE) TOTAL_PET_CONCLUIDO_ACO, COUNT(DISTINCT Q.N_IDEXPEDIENTE) TOTAL_PET_CONCLUIDO_NACO,
+COUNT(DISTINCT R.N_ID_GESTION) TOTAL_GESTION, COUNT(DISTINCT S.N_ID_GESTION) TOTAL_GESTION_SI, COUNT(DISTINCT T.N_ID_GESTION) TOTAL_GESTION_NO, 
+A.C_NOMENTIDAD, X.C_DESCDPTO
+FROM SID_REG_ENTIDAD A
+INNER JOIN (
+        SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 
+        INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_ESTADO = 'A'
+        <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A1.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A1.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A1.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A1.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A1.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A1.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A1.C_USUREGISTRO = #{usuarioCodigo}
+</if>
+        ) Z
+ON A.N_ID_ENTIDAD = Z.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A') B
+ON A.N_ID_ENTIDAD = B.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'A') C
+ON A.N_ID_ENTIDAD = C.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C') D
+ON A.N_ID_ENTIDAD = D.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3) E
+ON A.N_ID_ENTIDAD = E.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 5 AND A1.C_ESTADOSEGUIMIENTO IS NULL) F
+ON A.N_ID_ENTIDAD = F.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 7) G
+ON A.N_ID_ENTIDAD = G.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 18) H
+ON A.N_ID_ENTIDAD = H.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 17 AND A1.C_ESTADOSEGUIMIENTO = 8) I
+ON A.N_ID_ENTIDAD = I.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 7) J
+ON A.N_ID_ENTIDAD = J.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 18) K
+ON A.N_ID_ENTIDAD = K.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOINVESTIGACION = 3 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 8) L
+ON A.N_ID_ENTIDAD = L.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A') M
+ON A.N_ID_ENTIDAD = M.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A' AND C_ESTADOGENERAL = 'A') N
+ON A.N_ID_ENTIDAD = N.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '03' AND A1.C_ESTADO = 'A' AND C_ESTADOGENERAL = 'C') O
+ON A.N_ID_ENTIDAD = O.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOGESTION = 12 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 14) P
+ON A.N_ID_ENTIDAD = P.N_ID_ENTIDAD
+LEFT JOIN (SELECT A1.N_IDEXPEDIENTE, B1.N_ID_ENTIDAD FROM SID_REG_EXPEDIENTE A1 INNER JOIN SID_REG_EXPEDE_ENTIDAD B1 ON A1.N_IDEXPEDIENTE = B1.N_IDEXPEDIENTE  WHERE A1.C_TIPOCLASIFICACION = '01' AND A1.C_ESTADO = 'A' AND A1.C_ESTADOGENERAL = 'C' AND A1.C_ESTADOGESTION = 12 AND A1.C_ESTADOPERSUACION = 6 AND A1.C_ESTADOSEGUIMIENTO = 15) Q
+ON A.N_ID_ENTIDAD = Q.N_ID_ENTIDAD
+LEFT JOIN SID_REG_GESTION R ON A.N_ID_ENTIDAD = R.N_IDENTIDAD
+LEFT JOIN (SELECT N_ID_GESTION, N_IDENTIDAD FROM SID_REG_GESTION WHERE C_RESPUESTA = 'SI') S ON A.N_ID_ENTIDAD = S.N_IDENTIDAD
+LEFT JOIN (SELECT N_ID_GESTION, N_IDENTIDAD FROM SID_REG_GESTION WHERE C_RESPUESTA = 'NO') T ON A.N_ID_ENTIDAD = T.N_IDENTIDAD
+LEFT JOIN SID_UBIGEO_DPTO X ON A.C_IDDEPARTAMENTO = X.C_ID_DPTO
+WHERE 1 = 1 
+<if test="codigoEntidad != null">
+    AND A.N_ID_ENTIDAD = #{codigoEntidad}
+</if>
+<if test="idDepartamentoEntidad != ''">
+    AND A.C_IDDEPARTAMENTO = #{idDepartamentoEntidad}
+</if>
+GROUP BY A.C_NOMENTIDAD, X.C_DESCDPTO
+        
+        
+    </select>
+    
+<select id="listaExpedienteReporteClasificacion" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT B.C_NOMBREPARAMETRO NOMBREPRIMERNIVEL, '' NOMBRESEGUNDORNIVEL, '' NOMBRETERCERNIVEL, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO NOMBREPRIMERNIVEL, C.C_NOMBREPARAMETRO NOMBRESEGUNDORNIVEL, '' NOMBRETERCERNIVEL, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A'   
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION F ON A.N_ID_QUINTONIVEL = F.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, G.C_NOMBREPARAMETRO,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION F ON A.N_ID_QUINTONIVEL = F.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION G ON A.N_ID_SEXTONIVEL = G.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, G.C_NOMBREPARAMETRO
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="listaExpedienteReporteClasificacionExport" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        
+        SELECT B.C_NOMBREPARAMETRO NOMBREPRIMERNIVEL, '' NOMBRESEGUNDORNIVEL, '' NOMBRETERCERNIVEL, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO NOMBREPRIMERNIVEL, C.C_NOMBREPARAMETRO NOMBRESEGUNDORNIVEL, '' NOMBRETERCERNIVEL, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A'   
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, '' NOMBRECUARTONIVEL, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, '' NOMBREQUINTONIVEL, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, '' NOMBRESEXTONIVEL, 
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION F ON A.N_ID_QUINTONIVEL = F.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO
+UNION ALL
+SELECT B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, G.C_NOMBREPARAMETRO,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_REG_EXPEDIENTE_CLASI A
+INNER JOIN SID_REG_CLASIFICACION B ON A.N_ID_PRIMERNIVEL = B.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION C ON A.N_ID_SEGUNDONIVEL = C.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION D ON A.N_ID_TERCERNIVEL = D.N_ID_CLASIFICACION 
+INNER JOIN SID_REG_CLASIFICACION E ON A.N_ID_CUARTONIVEL = E.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION F ON A.N_ID_QUINTONIVEL = F.N_ID_CLASIFICACION
+INNER JOIN SID_REG_CLASIFICACION G ON A.N_ID_SEXTONIVEL = G.N_ID_CLASIFICACION
+INNER JOIN SID_REG_EXPEDIENTE X ON X.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE AND X.C_ESTADO = 'A' 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) C ON C.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) D ON D.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') D1 ON D1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '01' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'A') D2 ON D2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) E ON E.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E1 ON E1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '02' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') E2 ON E2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL) F ON F.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F1 ON F1.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION = '03' AND C_ESTADO = 'A' AND TRIM(C_NUMEROEXPEDIENTE) IS NOT NULL AND C_ESTADOGENERAL = 'C') F2 ON F2.C_NUMEROEXPEDIENTE = A.C_NUMEROEXPEDIENTE 
+    WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(X.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND X.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND X.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND X.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBREPARAMETRO, C.C_NOMBREPARAMETRO, D.C_NOMBREPARAMETRO, E.C_NOMBREPARAMETRO, F.C_NOMBREPARAMETRO, G.C_NOMBREPARAMETRO
+    </select>
+    
+    <select id="listaExpedienteReporteComisionado" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT A.CODIGO_USUARIO, A.NOM_USUARIO, A.APE_PATERNO, A.APE_MATERNO, A.C_CARGO, B.C_NOMBRE,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_SEG_USUARIO A
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL B ON A.N_ID_OD = B.N_ID_OD
+INNER JOIN SID_REG_EXPEDIENTE C ON C.C_USUREGISTRO = A.CODIGO_USUARIO AND TRIM(C.C_NUMEROEXPEDIENTE) IS NOT NULL AND C.C_ESTADO = 'A'
+LEFT JOIN SID_REG_EXPEDIENTE D ON D.C_USUREGISTRO = A.CODIGO_USUARIO AND D.C_ESTADO = 'A' AND TRIM(D.C_NUMEROEXPEDIENTE) IS NOT NULL AND D.C_TIPOCLASIFICACION = '01' 
+LEFT JOIN SID_REG_EXPEDIENTE E ON E.C_USUREGISTRO = A.CODIGO_USUARIO AND E.C_ESTADO = 'A' AND TRIM(E.C_NUMEROEXPEDIENTE) IS NOT NULL AND E.C_TIPOCLASIFICACION = '02' 
+LEFT JOIN SID_REG_EXPEDIENTE F ON F.C_USUREGISTRO = A.CODIGO_USUARIO AND F.C_ESTADO = 'A' AND TRIM(F.C_NUMEROEXPEDIENTE) IS NOT NULL AND F.C_TIPOCLASIFICACION = '03' 
+LEFT JOIN SID_REG_EXPEDIENTE D1 ON D1.C_TIPOCLASIFICACION = '01' AND D1.C_ESTADO = 'A' AND TRIM(D1.C_NUMEROEXPEDIENTE) IS NOT NULL AND D1.C_ESTADOGENERAL = 'C' AND D1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE D2 ON D2.C_TIPOCLASIFICACION = '01' AND D2.C_ESTADO = 'A' AND TRIM(D2.C_NUMEROEXPEDIENTE) IS NOT NULL AND D2.C_ESTADOGENERAL = 'A' AND D2.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE E1 ON E1.C_TIPOCLASIFICACION = '02' AND E1.C_ESTADO = 'A' AND TRIM(E1.C_NUMEROEXPEDIENTE) IS NOT NULL AND E1.C_ESTADOGENERAL = 'C' AND E1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE E2 ON E2.C_TIPOCLASIFICACION = '02' AND E2.C_ESTADO = 'A' AND TRIM(E2.C_NUMEROEXPEDIENTE) IS NOT NULL AND E2.C_ESTADOGENERAL = 'C' AND E2.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE F1 ON F1.C_TIPOCLASIFICACION = '03' AND F1.C_ESTADO = 'A' AND TRIM(F1.C_NUMEROEXPEDIENTE) IS NOT NULL AND F1.C_ESTADOGENERAL = 'C' AND F1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE F2 ON F2.C_TIPOCLASIFICACION = '03' AND F2.C_ESTADO = 'A' AND TRIM(F2.C_NUMEROEXPEDIENTE) IS NOT NULL AND F2.C_ESTADOGENERAL = 'C' AND F2.C_USUREGISTRO = A.CODIGO_USUARIO
+        WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND C.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND C.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND C.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY A.CODIGO_USUARIO, A.NOM_USUARIO, A.APE_PATERNO, A.APE_MATERNO, A.C_CARGO, B.C_NOMBRE
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    
+    <select id="listaExpedienteReporteComisionadoExport" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        
+        SELECT A.CODIGO_USUARIO, A.NOM_USUARIO, A.APE_PATERNO, A.APE_MATERNO, A.C_CARGO, B.C_NOMBRE,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_SEG_USUARIO A
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL B ON A.N_ID_OD = B.N_ID_OD
+INNER JOIN SID_REG_EXPEDIENTE C ON C.C_USUREGISTRO = A.CODIGO_USUARIO AND TRIM(C.C_NUMEROEXPEDIENTE) IS NOT NULL AND C.C_ESTADO = 'A'
+LEFT JOIN SID_REG_EXPEDIENTE D ON D.C_USUREGISTRO = A.CODIGO_USUARIO AND D.C_ESTADO = 'A' AND TRIM(D.C_NUMEROEXPEDIENTE) IS NOT NULL AND D.C_TIPOCLASIFICACION = '01' 
+LEFT JOIN SID_REG_EXPEDIENTE E ON E.C_USUREGISTRO = A.CODIGO_USUARIO AND E.C_ESTADO = 'A' AND TRIM(E.C_NUMEROEXPEDIENTE) IS NOT NULL AND E.C_TIPOCLASIFICACION = '02' 
+LEFT JOIN SID_REG_EXPEDIENTE F ON F.C_USUREGISTRO = A.CODIGO_USUARIO AND F.C_ESTADO = 'A' AND TRIM(F.C_NUMEROEXPEDIENTE) IS NOT NULL AND F.C_TIPOCLASIFICACION = '03' 
+LEFT JOIN SID_REG_EXPEDIENTE D1 ON D1.C_TIPOCLASIFICACION = '01' AND D1.C_ESTADO = 'A' AND TRIM(D1.C_NUMEROEXPEDIENTE) IS NOT NULL AND D1.C_ESTADOGENERAL = 'C' AND D1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE D2 ON D2.C_TIPOCLASIFICACION = '01' AND D2.C_ESTADO = 'A' AND TRIM(D2.C_NUMEROEXPEDIENTE) IS NOT NULL AND D2.C_ESTADOGENERAL = 'A' AND D2.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE E1 ON E1.C_TIPOCLASIFICACION = '02' AND E1.C_ESTADO = 'A' AND TRIM(E1.C_NUMEROEXPEDIENTE) IS NOT NULL AND E1.C_ESTADOGENERAL = 'C' AND E1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE E2 ON E2.C_TIPOCLASIFICACION = '02' AND E2.C_ESTADO = 'A' AND TRIM(E2.C_NUMEROEXPEDIENTE) IS NOT NULL AND E2.C_ESTADOGENERAL = 'C' AND E2.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE F1 ON F1.C_TIPOCLASIFICACION = '03' AND F1.C_ESTADO = 'A' AND TRIM(F1.C_NUMEROEXPEDIENTE) IS NOT NULL AND F1.C_ESTADOGENERAL = 'C' AND F1.C_USUREGISTRO = A.CODIGO_USUARIO
+LEFT JOIN SID_REG_EXPEDIENTE F2 ON F2.C_TIPOCLASIFICACION = '03' AND F2.C_ESTADO = 'A' AND TRIM(F2.C_NUMEROEXPEDIENTE) IS NOT NULL AND F2.C_ESTADOGENERAL = 'C' AND F2.C_USUREGISTRO = A.CODIGO_USUARIO
+        WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND C.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND C.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND C.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY A.CODIGO_USUARIO, A.NOM_USUARIO, A.APE_PATERNO, A.APE_MATERNO, A.C_CARGO, B.C_NOMBRE
+        
+    </select>
+    
+    
+    <select id="listaExpedienteReporteDependencia" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT B.C_NOMBRE,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_SEG_OFICINA_DEFENSORIAL B 
+INNER JOIN SID_REG_EXPEDIENTE C ON C.N_CODIGOOD = B.N_ID_OD AND TRIM(C.C_NUMEROEXPEDIENTE) IS NOT NULL AND C.C_ESTADO = 'A'
+LEFT JOIN SID_REG_EXPEDIENTE D ON D.N_CODIGOOD = B.N_ID_OD AND D.C_ESTADO = 'A' AND TRIM(D.C_NUMEROEXPEDIENTE) IS NOT NULL AND D.C_TIPOCLASIFICACION = '01' 
+LEFT JOIN SID_REG_EXPEDIENTE E ON E.N_CODIGOOD = B.N_ID_OD AND E.C_ESTADO = 'A' AND TRIM(E.C_NUMEROEXPEDIENTE) IS NOT NULL AND E.C_TIPOCLASIFICACION = '02' 
+LEFT JOIN SID_REG_EXPEDIENTE F ON F.N_CODIGOOD = B.N_ID_OD AND F.C_ESTADO = 'A' AND TRIM(F.C_NUMEROEXPEDIENTE) IS NOT NULL AND F.C_TIPOCLASIFICACION = '03' 
+LEFT JOIN SID_REG_EXPEDIENTE D1 ON D1.C_TIPOCLASIFICACION = '01' AND D1.C_ESTADO = 'A' AND TRIM(D1.C_NUMEROEXPEDIENTE) IS NOT NULL AND D1.C_ESTADOGENERAL = 'C' AND D1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE D2 ON D2.C_TIPOCLASIFICACION = '01' AND D2.C_ESTADO = 'A' AND TRIM(D2.C_NUMEROEXPEDIENTE) IS NOT NULL AND D2.C_ESTADOGENERAL = 'A' AND D2.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE E1 ON E1.C_TIPOCLASIFICACION = '02' AND E1.C_ESTADO = 'A' AND TRIM(E1.C_NUMEROEXPEDIENTE) IS NOT NULL AND E1.C_ESTADOGENERAL = 'C' AND E1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE E2 ON E2.C_TIPOCLASIFICACION = '02' AND E2.C_ESTADO = 'A' AND TRIM(E2.C_NUMEROEXPEDIENTE) IS NOT NULL AND E2.C_ESTADOGENERAL = 'C' AND E2.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE F1 ON F1.C_TIPOCLASIFICACION = '03' AND F1.C_ESTADO = 'A' AND TRIM(F1.C_NUMEROEXPEDIENTE) IS NOT NULL AND F1.C_ESTADOGENERAL = 'C' AND F1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE F2 ON F2.C_TIPOCLASIFICACION = '03' AND F2.C_ESTADO = 'A' AND TRIM(F2.C_NUMEROEXPEDIENTE) IS NOT NULL AND F2.C_ESTADOGENERAL = 'C' AND F2.N_CODIGOOD = B.N_ID_OD
+            WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND C.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND C.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND C.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBRE
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="listaExpedienteReporteDependenciaExport" resultMap="reporteSidConteoMap" parameterType="reporteSidExpediente">
+        
+        SELECT B.C_NOMBRE,
+COUNT(DISTINCT C.C_NUMEROEXPEDIENTE) TOTAL, COUNT(DISTINCT D.C_NUMEROEXPEDIENTE) TOTAL_QUEJA, COUNT(DISTINCT E.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA, COUNT(DISTINCT F.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO, 
+COUNT(DISTINCT D1.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_CONCLUIDO, COUNT(DISTINCT E1.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_CONCLUIDO, COUNT(DISTINCT F1.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_CONCLUIDO, 
+COUNT(DISTINCT D2.C_NUMEROEXPEDIENTE) TOTAL_QUEJA_TRAMITE, COUNT(DISTINCT E2.C_NUMEROEXPEDIENTE) TOTAL_CONSULTA_TRAMITE, COUNT(DISTINCT F2.C_NUMEROEXPEDIENTE) TOTAL_PETITORIO_TRAMITE
+FROM SID_SEG_OFICINA_DEFENSORIAL B 
+INNER JOIN SID_REG_EXPEDIENTE C ON C.N_CODIGOOD = B.N_ID_OD AND TRIM(C.C_NUMEROEXPEDIENTE) IS NOT NULL AND C.C_ESTADO = 'A'
+LEFT JOIN SID_REG_EXPEDIENTE D ON D.N_CODIGOOD = B.N_ID_OD AND D.C_ESTADO = 'A' AND TRIM(D.C_NUMEROEXPEDIENTE) IS NOT NULL AND D.C_TIPOCLASIFICACION = '01' 
+LEFT JOIN SID_REG_EXPEDIENTE E ON E.N_CODIGOOD = B.N_ID_OD AND E.C_ESTADO = 'A' AND TRIM(E.C_NUMEROEXPEDIENTE) IS NOT NULL AND E.C_TIPOCLASIFICACION = '02' 
+LEFT JOIN SID_REG_EXPEDIENTE F ON F.N_CODIGOOD = B.N_ID_OD AND F.C_ESTADO = 'A' AND TRIM(F.C_NUMEROEXPEDIENTE) IS NOT NULL AND F.C_TIPOCLASIFICACION = '03' 
+LEFT JOIN SID_REG_EXPEDIENTE D1 ON D1.C_TIPOCLASIFICACION = '01' AND D1.C_ESTADO = 'A' AND TRIM(D1.C_NUMEROEXPEDIENTE) IS NOT NULL AND D1.C_ESTADOGENERAL = 'C' AND D1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE D2 ON D2.C_TIPOCLASIFICACION = '01' AND D2.C_ESTADO = 'A' AND TRIM(D2.C_NUMEROEXPEDIENTE) IS NOT NULL AND D2.C_ESTADOGENERAL = 'A' AND D2.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE E1 ON E1.C_TIPOCLASIFICACION = '02' AND E1.C_ESTADO = 'A' AND TRIM(E1.C_NUMEROEXPEDIENTE) IS NOT NULL AND E1.C_ESTADOGENERAL = 'C' AND E1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE E2 ON E2.C_TIPOCLASIFICACION = '02' AND E2.C_ESTADO = 'A' AND TRIM(E2.C_NUMEROEXPEDIENTE) IS NOT NULL AND E2.C_ESTADOGENERAL = 'C' AND E2.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE F1 ON F1.C_TIPOCLASIFICACION = '03' AND F1.C_ESTADO = 'A' AND TRIM(F1.C_NUMEROEXPEDIENTE) IS NOT NULL AND F1.C_ESTADOGENERAL = 'C' AND F1.N_CODIGOOD = B.N_ID_OD
+LEFT JOIN SID_REG_EXPEDIENTE F2 ON F2.C_TIPOCLASIFICACION = '03' AND F2.C_ESTADO = 'A' AND TRIM(F2.C_NUMEROEXPEDIENTE) IS NOT NULL AND F2.C_ESTADOGENERAL = 'C' AND F2.N_CODIGOOD = B.N_ID_OD
+            WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(C.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND C.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND C.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND C.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+GROUP BY B.C_NOMBRE
+        
+    </select>
+    
+    <select id="listaExpedienteReporteGestionInterna" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHA D_FECHAREGISTRO, C.D_FECHA D_FECHAINGRESO, CASE WHEN NVL(C.C_CODIGO, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'CONSULTA' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGO C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_CONSULTA  WHERE C_ETAPA = 1) B ON A.C_NUMEROEXPEDIENTE = B.C_NUMEROEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_CONSULTA  WHERE C_ETAPA = 6) C ON A.C_NUMEROEXPEDIENTE = C.C_NUMEROEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE  A.C_ESTADO = 'A'
+        <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+
+UNION ALL
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO  TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_DERIVACION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'DERIVACION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO  C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_DERIVACION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_DERIVACION  WHERE C_ETAPA = 1) B ON A.C_NUMEROEXPEDIENTE = B.C_NUMEROEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_DERIVACION  WHERE C_ETAPA = 3) C ON A.C_NUMEROEXPEDIENTE = C.C_NUMEROEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_OD
+WHERE  A.C_ESTADO = 'A'
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+        UNION ALL
+SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION  D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_AMPLIACION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'AMPLIACION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_AMPLIACION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_AMPLIACION  WHERE N_ETAPA = 1) B ON A.N_IDEXPEDIENTE = B.N_IDEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_AMPLIACION  WHERE N_ETAPA = 3) C ON A.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+UNION ALL
+SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_SUSPENCION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'SUSPENCION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_SUSPENCION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_SUSPENCION  WHERE N_ETAPA = 1) B ON A.N_IDEXPEDIENTE = B.N_IDEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_SUSPENCION  WHERE N_ETAPA = 3) C ON A.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    
+    <select id="listaExpedienteReporteGestionInternaExport" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHA D_FECHAREGISTRO, C.D_FECHA D_FECHAINGRESO, CASE WHEN NVL(C.C_CODIGO, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'CONSULTA' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGO C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_CONSULTA  WHERE C_ETAPA = 1) B ON A.C_NUMEROEXPEDIENTE = B.C_NUMEROEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_CONSULTA  WHERE C_ETAPA = 6) C ON A.C_NUMEROEXPEDIENTE = C.C_NUMEROEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE  A.C_ESTADO = 'A'
+        <if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+
+UNION ALL
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO  TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_DERIVACION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'DERIVACION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO  C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_DERIVACION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_DERIVACION  WHERE C_ETAPA = 1) B ON A.C_NUMEROEXPEDIENTE = B.C_NUMEROEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_DERIVACION  WHERE C_ETAPA = 3) C ON A.C_NUMEROEXPEDIENTE = C.C_NUMEROEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_OD
+WHERE  A.C_ESTADO = 'A'
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+        UNION ALL
+SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION  D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_AMPLIACION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'AMPLIACION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_AMPLIACION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_AMPLIACION  WHERE N_ETAPA = 1) B ON A.N_IDEXPEDIENTE = B.N_IDEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_AMPLIACION  WHERE N_ETAPA = 3) C ON A.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+UNION ALL
+SELECT DISTINCT A.C_NUMEROEXPEDIENTE, P.NOMBRE_PARAMETRO TIPOEXPEDIENTE, B.D_FECHAACCION D_FECHAREGISTRO, C.D_FECHAACCION D_FECHAINGRESO, CASE WHEN NVL(C.N_ID_SUSPENCION, '0') = '0' THEN 'No' ELSE 'Si' END C_RESPUESTA, 'SUSPENCION' C_TIPOACCION,
+E.C_NOMBRECOMPLETO C_DEPENDENCIA_ORIGEN, F.C_NOMBRECOMPLETO C_DEPENDENCIA_DESTINO, B.C_CODIGOUSUARIO||B.N_ID_SUSPENCION C_CODIGOGESTION
+FROM SID_REG_EXPEDIENTE A
+INNER JOIN  (SELECT * FROM SID_REG_EXPEDIENTE_SUSPENCION  WHERE N_ETAPA = 1) B ON A.N_IDEXPEDIENTE = B.N_IDEXPEDIENTE 
+INNER JOIN SID_PARAMETRO P ON A.C_TIPOCLASIFICACION = P.VALOR_PARAMETRO AND P.PADRE_PARAMETRO = 10
+LEFT JOIN (SELECT * FROM SID_REG_EXPEDIENTE_SUSPENCION  WHERE N_ETAPA = 3) C ON A.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+INNER JOIN SID_SEG_USUARIO D ON B.C_CODIGOUSUARIO = D.CODIGO_USUARIO
+INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL F ON F.N_ID_OD = B.N_ID_AD
+WHERE 1 = 1
+<if test="fechaIngresoDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaIngresoDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAINGRESO, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaIngresoHastaString})+1 
+</if>   
+<if test="fechaConclusionDesde != null">
+    AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &gt; TO_NUMBER(#{fechaConclusionDesdeString})-1 AND TO_NUMBER(TO_CHAR(A.D_FECHAMODIFICACION, 'YYYYMMDD')) &lt; TO_NUMBER(#{fechaConclusionHastaString})+1 
+</if>
+<if test="tipoExpediente != ''">
+    AND A.C_TIPOCLASIFICACION = #{tipoExpediente}
+</if>
+<if test="canalIngreso != ''">
+    AND A.C_TIPOINGRESO = #{canalIngreso}
+</if>
+<if test="usuarioCodigo != ''">
+    AND A.C_USUREGISTRO = #{usuarioCodigo}
+</if> 
+
+    </select>
+    
+    
+    
+  <select id="listaExpedienteReporteRecurrente" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, A.D_FECHAREGISTRO, C.NOMBRE_PARAMETRO CANALINGRESO, E.C_VALOR ETAPAEXPEDIENTE, F.C_NOMBRE ESTADOCALIFICACION, 
+G.C_NOMBRE ESTADOINVESTIGACION, H.C_NOMBRE ESTADOPERSUACION, I.C_NOMBRE ESTADOSEGUIMIENTO, 
+CASE WHEN C_ESTADOGENERAL = 'A' THEN 'Trámite' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO IS NULL THEN 'Concluido' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO = 1 THEN 'Desistido' END ESTADOGENERAL,
+CASE N_VERSION WHEN 0 THEN 'Borrador' ELSE 'En registro' END ESTADOREGISTRO, A.C_SUMILLA, J.C_NOMBRE OD, A.D_FECHAINGRESO, A.C_USUREGISTRO, K.NOM_USUARIO||' '||K.APE_PATERNO||' '||K.APE_MATERNO USUARIONOMBRE, A.N_IDEXPEDIENTE
+FROM SID_REG_EXPEDIENTE A 
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO
+INNER JOIN SID_REG_EXPEDE_PERSONA N ON N.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+INNER JOIN SID_REG_PERSONA M ON M.N_IDPERSONA = N.N_IDPERSONA
+WHERE A.C_ESTADO = 'A' AND N.C_TIPO IN ('01','03')
+<if test="idDepartamentoRecurrente != ''">
+    AND M.C_IDDEPA = #{idDepartamentoRecurrente} 
+</if>
+<if test="idProvinciaRecurrente != ''">
+    AND M.C_IDPROV = #{idProvinciaRecurrente} 
+</if>
+<if test="idDistritoRecurrente != ''">
+    AND M.C_IDDISTR = #{idDistritoRecurrente} 
+</if>
+<if test="esDiscapacitadoRecurrente != ''">
+    AND M.C_INDDISCAPACITADO = #{esDiscapacitadoRecurrente} 
+</if>
+<if test="tipoLenguaRecurrente != ''">
+    AND M.C_TIPOLENGUA = #{tipoLenguaRecurrente} 
+</if>
+<if test="tipoPuebloRecurrente != ''">
+    AND M.C_TIPOPUEBLO = #{tipoPuebloRecurrente} 
+</if>
+ORDER BY A.N_IDEXPEDIENTE DESC
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>  
+    
+    
+    <select id="listaExpedienteReporteAfectado" resultMap="reporteSidExpedienteMap" parameterType="reporteSidExpediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.C_NUMEROEXPEDIENTE, B.NOMBRE_PARAMETRO TIPOEXPEDIENTE, A.D_FECHAREGISTRO, C.NOMBRE_PARAMETRO CANALINGRESO, E.C_VALOR ETAPAEXPEDIENTE, F.C_NOMBRE ESTADOCALIFICACION, 
+G.C_NOMBRE ESTADOINVESTIGACION, H.C_NOMBRE ESTADOPERSUACION, I.C_NOMBRE ESTADOSEGUIMIENTO, 
+CASE WHEN C_ESTADOGENERAL = 'A' THEN 'Trámite' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO IS NULL THEN 'Concluido' WHEN C_ESTADOGENERAL = 'C' AND N_INDDESESTIMIENTO = 1 THEN 'Desistido' END ESTADOGENERAL,
+CASE N_VERSION WHEN 0 THEN 'Borrador' ELSE 'En registro' END ESTADOREGISTRO, A.C_SUMILLA, J.C_NOMBRE OD, A.D_FECHAINGRESO, A.C_USUREGISTRO, K.NOM_USUARIO||' '||K.APE_PATERNO||' '||K.APE_MATERNO USUARIONOMBRE, A.N_IDEXPEDIENTE
+FROM SID_REG_EXPEDIENTE A 
+LEFT JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+LEFT JOIN SID_PARAMETRO C ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+LEFT JOIN SID_REG_ETAPA_ESTADO D ON A.N_IDEXPEDIENTE = D.N_ID_EXPEDIENTE AND D.C_INDICADOR = 'ACT'
+LEFT JOIN SID_REG_ETAPA E ON D.N_ID_ETAPA = E.N_ID_ETAPA
+LEFT JOIN SID_REG_ESTADO F ON F.N_ID_ESTADO = A.C_ESTADOCALIFICACION
+LEFT JOIN SID_REG_ESTADO G ON G.N_ID_ESTADO = A.C_ESTADOINVESTIGACION
+LEFT JOIN SID_REG_ESTADO H ON H.N_ID_ESTADO = A.C_ESTADOPERSUACION
+LEFT JOIN SID_REG_ESTADO I ON I.N_ID_ESTADO = A.C_ESTADOSEGUIMIENTO
+LEFT JOIN SID_SEG_OFICINA_DEFENSORIAL J ON A.N_CODIGOOD = J.N_ID_OD
+INNER JOIN SID_SEG_USUARIO K ON A.C_USUREGISTRO = K.CODIGO_USUARIO
+INNER JOIN SID_REG_EXPEDE_PERSONA N ON N.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE      
+INNER JOIN SID_REG_PERSONA M ON M.N_IDPERSONA = N.N_IDPERSONA
+WHERE A.C_ESTADO = 'A' AND N.C_TIPO IN ('02','03')
+<if test="idDepartamentoAfectado != ''">
+    AND M.C_IDDEPA = #{idDepartamentoAfectado} 
+</if>
+<if test="idProvinciaAfectado != ''">
+    AND M.C_IDPROV = #{idProvinciaAfectado} 
+</if>
+<if test="idDistritoAfectado != ''">
+    AND M.C_IDDISTR = #{idDistritoAfectado} 
+</if>
+<if test="esDiscapacitadoAfectado != ''">
+    AND M.C_INDDISCAPACITADO = #{esDiscapacitadoAfectado} 
+</if>
+<if test="tipoLenguaAfectado != ''">
+    AND M.C_TIPOLENGUA = #{tipoLenguaAfectado} 
+</if>
+<if test="tipoPuebloAfectado != ''">
+    AND M.C_TIPOPUEBLO = #{tipoPuebloAfectado} 
+</if>
+ORDER BY A.N_IDEXPEDIENTE DESC
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>  
+    
+    
+</mapper>

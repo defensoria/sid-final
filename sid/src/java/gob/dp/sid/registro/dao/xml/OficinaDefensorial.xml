@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.OficinaDefensorialDAO">
+    
+    <resultMap id="oficinaDefensorialMap" type="oficinaDefensorial">
+        <id property="id" column="N_ID_OD" />
+        <result property="nombre" column="C_NOMBRE"/>
+        <result property="tipo" column="C_TIPO"/>
+        <result property="idDepartamento" column="C_ID_DPTO"/>
+    </resultMap> 
+    
+    <select id="listaOficinasDefensoriales" resultMap="oficinaDefensorialMap" >
+        SELECT N_ID_OD, C_NOMBRE FROM SID_SEG_OFICINA_DEFENSORIAL WHERE C_TIPO IN ('OD','MD')
+    </select>
+    
+    <select id="listaAdjuntiasDefensoriales" resultMap="oficinaDefensorialMap" >
+        SELECT N_ID_OD, C_NOMBRE FROM SID_SEG_OFICINA_DEFENSORIAL WHERE C_TIPO = 'AD'
+    </select>
+    
+    <select id="listaAdjuntiasDefensorialesTodos" resultMap="oficinaDefensorialMap" >
+        SELECT * FROM SID_SEG_OFICINA_DEFENSORIAL
+    </select>
+    
+    <select id="obtenerOficinaDefensorial" resultMap="oficinaDefensorialMap" parameterType="Long">
+        SELECT * FROM SID_SEG_OFICINA_DEFENSORIAL WHERE N_ID_OD = #{id}
+    </select>
+    
+    <select id="listaAdjuntiasDefensorialesConsulta" resultMap="oficinaDefensorialMap" >
+        SELECT N_ID_OD, C_NOMBRE FROM SID_SEG_OFICINA_DEFENSORIAL WHERE C_TIPO IN ('AD','PG')
+        ORDER BY C_NOMBRE
+    </select>
+    
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.EntidadDAO">
+    
+    <resultMap id="entidadMap" type="entidad">
+        <id property="id" column="N_ID_ENTIDAD" />
+        <result property="nombre" column="C_NOMENTIDAD"/>
+        <result property="idDepartamento" column="C_IDDEPARTAMENTO"/>
+        <result property="nombreDepartamento" column="C_DESCDPTO"/>
+        <result property="estado" column="C_ESTADO"/>
+        <result property="tipo" column="N_TIPO"/>
+        <result property="tipoDetalle" column="C_DETALLE"/>
+    </resultMap> 
+    
+    
+    <select id="entidadBuscarCadena" resultMap="entidadMap" parameterType="entidad" >
+        SELECT B.* FROM (
+        SELECT A.*,ROWNUM numfila FROM (
+        SELECT A.*, B.C_DESCDPTO, C.C_DETALLE FROM SID_REG_ENTIDAD A
+        INNER JOIN SID_UBIGEO_DPTO B ON A.C_IDDEPARTAMENTO = B.C_ID_DPTO
+        INNER JOIN SID_REG_ENTIDAD_TIPO C ON A.N_TIPO = C.N_ID_TIP
+        WHERE UPPER(A.C_NOMENTIDAD) LIKE '%'||UPPER(#{nombre})||'%' 
+        <if test="idDepartamento != 0">
+            AND A.C_IDDEPARTAMENTO = #{idDepartamento}
+        </if>
+        <if test="tipo != 0">
+            AND A.N_TIPO = #{tipo}
+        </if>
+        AND A.C_ESTADO = 'ACT' ORDER BY C_NOMENTIDAD
+        ) A
+        ) B
+        WHERE B.numfila BETWEEN #{ini} AND #{fin}
+        
+    </select>
+    
+    <select id="entidadPorExpediente" resultMap="entidadMap"  parameterType="long">
+        SELECT A.*, B.C_NOMENTIDAD
+        FROM SID_REG_EXPEDE_ENTIDAD A
+        INNER JOIN SID_REG_ENTIDAD B ON A.N_ID_ENTIDAD = B.N_ID_ENTIDAD
+        WHERE A.N_IDEXPEDIENTE = #{id}
+    </select>
+    
+</mapper>

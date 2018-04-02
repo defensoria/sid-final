@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.ExpedientePersonaDAO">
+    
+    <resultMap id="expedientePersonaMap" type="expedientePersona">
+        <id property="id" column="N_IDEXPEDPERSONA" />
+        <result property="expediente.id" column="N_IDEXPEDIENTE"/>
+        <result property="persona.id" column="N_IDPERSONA"/>
+        <result property="tipo" column="C_TIPO"/>
+        <result property="indicadorReserva" column="N_INDRESERVA"/>
+        <result property="persona.nombre" column="C_NOMBRE"/>
+        <result property="persona.apellidoPat" column="C_APELLIDOPAT"/>
+        <result property="persona.apellidoMat" column="C_APELLIDOMAT"/>
+        <result property="persona.numeroDocumento" column="C_NUMERODOCUMENTO"/>
+        <result property="persona.tipo" column="TIPOPERSONA"/>
+        <result property="direccion" column="C_DIRECCION"/>
+        <result property="email" column="C_EMAIL"/>
+        <result property="telefono1" column="C_TELEFONO1"/>
+        <result property="idDepartamento" column="C_IDDEPA"/>
+        <result property="idProvincia" column="C_IDPROV"/>
+        <result property="idDistrito" column="C_IDDISTR"/>
+        <result property="direccionNotifica" column="C_DIRECCIONNOTIFICA"/>
+        <result property="contacto" column="C_CONTACTO"/>
+        <result property="tipoLengua" column="C_TIPOLENGUA"/>
+        <result property="indicadorDiscapacitado" column="C_INDDISCAPACITADO"/>
+        <result property="tipoPueblo" column="C_TIPOPUEBLO"/>
+    </resultMap> 
+    
+    
+    <insert id="expedientePersonaInsertar" parameterType="expedientePersona">
+        INSERT INTO SID_REG_EXPEDE_PERSONA
+        (
+        <if test="tipo != null">
+            C_TIPO,
+        </if>
+        <if test="indicadorReserva != null">
+            N_INDRESERVA,
+        </if>
+        <if test="direccion != null">
+            C_DIRECCION,
+        </if>
+        <if test="email != null">
+            C_EMAIL,
+        </if>
+        <if test="telefono1 != null">
+            C_TELEFONO1,
+        </if>
+        <if test="idDepartamento != null">
+            C_IDDEPA,
+        </if>
+        <if test="idProvincia != null">
+            C_IDPROV,
+        </if>
+        <if test="idDistrito != null">
+            C_IDDISTR,
+        </if>
+        <if test="direccionNotifica != null">
+            C_DIRECCIONNOTIFICA,
+        </if>
+        <if test="contacto != null">
+            C_CONTACTO,
+        </if>
+        <if test="tipoLengua != null">
+            C_TIPOLENGUA,
+        </if>
+        <if test="indicadorDiscapacitado != null">
+            C_INDDISCAPACITADO,
+        </if>
+        <if test="tipoPueblo != null">
+            C_TIPOPUEBLO,
+        </if>
+        N_IDEXPEDIENTE,
+        N_IDPERSONA,
+        N_IDEXPEDPERSONA
+        )
+        VALUES 
+        (
+        <if test="tipo != null">
+            #{tipo},    
+        </if>
+        <if test="indicadorReserva != null">
+            #{indicadorReserva},    
+        </if>
+        <if test="direccion != null">
+            #{direccion},    
+        </if>
+        <if test="email != null">
+            #{email},    
+        </if>
+        <if test="telefono1 != null">
+            #{telefono1},    
+        </if>
+        <if test="idDepartamento != null">
+            #{idDepartamento},    
+        </if>
+        <if test="idProvincia != null">
+            #{idProvincia},    
+        </if>
+        <if test="idDistrito != null">
+            #{idDistrito},   
+        </if>
+        <if test="direccionNotifica != null">
+            #{direccionNotifica},
+        </if>
+        <if test="contacto != null">
+            #{contacto},
+        </if>
+        <if test="tipoLengua != null">
+            #{tipoLengua},
+        </if>
+        <if test="indicadorDiscapacitado != null">
+            #{indicadorDiscapacitado},
+        </if>
+        <if test="tipoPueblo != null">
+            #{tipoPueblo},
+        </if>
+        #{expediente.id},
+        #{persona.id},
+        SEQ_SID_REG_EXPEDE_PERSONA.NextVal
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SID_REG_EXPEDE_PERSONA.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    
+    <update id="expedientePersonaUpdate" parameterType="expedientePersona">
+        UPDATE SID_REG_EXPEDE_PERSONA
+        <set> 
+            C_TIPO = #{tipo},
+            N_INDRESERVA = #{indicadorReserva}
+        </set>
+        <where>
+            N_IDEXPEDPERSONA = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteDatosPersonaUpdate" parameterType="expedientePersona">
+        UPDATE SID_REG_EXPEDE_PERSONA
+        <set>
+        <if test="email != null">
+            C_EMAIL = #{email},
+        </if>
+        <if test="telefono1 != null">
+            C_TELEFONO1 = #{telefono1},
+        </if>
+        <if test="idDepartamento != null">
+            C_IDDEPA = #{idDepartamento},
+        </if>
+        <if test="idProvincia != null">
+            C_IDPROV = #{idProvincia},
+        </if>
+        <if test="idDistrito != null">
+            C_IDDISTR = #{idDistrito},
+        </if>
+        <if test="direccionNotifica != null">
+            C_DIRECCIONNOTIFICA = #{direccionNotifica},
+        </if>
+        <if test="contacto != null">
+            C_CONTACTO = #{contacto},
+        </if>
+        <if test="tipoLengua != null">
+            C_TIPOLENGUA = #{tipoLengua},
+        </if>
+        <if test="direccion != null">
+            C_DIRECCION = #{direccion},
+        </if>
+        <if test="tipoPueblo != null">
+            C_TIPOPUEBLO = #{tipoPueblo},
+        </if>
+            C_INDDISCAPACITADO = #{indicadorDiscapacitado}
+        </set>
+        <where>
+            N_IDEXPEDPERSONA = #{id}
+        </where>
+    </update>
+    
+    <delete id="expedientePersonaDelete" parameterType="expedientePersona">
+        delete SID_REG_EXPEDE_PERSONA WHERE
+        N_IDEXPEDPERSONA = #{id}
+    </delete>
+    
+    <select id="expedientePersonaContar" parameterType="expedientePersona" resultType="java.lang.Integer" >
+        select count(*) from SID_REG_EXPEDE_PERSONA
+        WHERE
+        N_IDEXPEDPERSONA = #{id}
+    </select>
+    
+    <select id="expedientePersonaBuscarXExpediente" resultMap="expedientePersonaMap"  parameterType="long">
+        SELECT A.*, B.C_NOMBRE, B.C_APELLIDOPAT, B.C_APELLIDOMAT, B.C_NUMERODOCUMENTO, B.C_TIPO TIPOPERSONA, B.C_DIRECCION, B.C_EMAIL, B.C_TELEFONO1
+        FROM SID_REG_EXPEDE_PERSONA A
+        INNER JOIN SID_REG_PERSONA B ON A.N_IDPERSONA = B.N_IDPERSONA
+        WHERE A.N_IDEXPEDIENTE = #{id}
+    </select>
+    
+</mapper>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.PersonaDAO">
+    
+    <resultMap id="personaMap" type="persona">
+        <id property="id" column="N_IDPERSONA" />
+        <result property="nombre" column="C_NOMBRE"/>
+        <result property="apellidoPat" column="C_APELLIDOPAT"/>
+        <result property="apellidoMat" column="C_APELLIDOMAT"/>
+        <result property="numeroDocumento" column="C_NUMERODOCUMENTO"/>
+        <result property="tipoDocumento" column="C_TIPODOCUMENTO"/>
+        <result property="direccion" column="C_DIRECCION"/>
+        <result property="email" column="C_EMAIL"/>
+        <result property="telefono1" column="C_TELEFONO1"/>
+        <result property="direccionNotifica" column="C_DIRECCIONNOTIFICA"/>
+        <result property="idDepartamento" column="C_IDDEPA"/>
+        <result property="idProvincia" column="C_IDPROV"/>
+        <result property="idDistrito" column="C_IDDISTR"/>
+        <result property="usuRegistro" column="C_USUREGISTRO"/>
+        <result property="fechaRegistro" column="D_FECHAREGISTRO"/>
+        <result property="usuModificacion" column="C_USUMODIFICACION"/>
+        <result property="fechaModificacion" column="D_FECHAMODIFICACION"/>
+        <result property="sexo" column="C_SEXO"/>
+        <result property="fechaNacimiento" column="D_FECHANACIMIENTO"/>
+        <result property="tipo" column="C_TIPO"/>
+        <result property="contacto" column="C_CONTACTO"/>
+        <result property="tipoLengua" column="C_TIPOLENGUA"/>
+        <result property="indicadorDiscapacitado" column="C_INDDISCAPACITADO"/>
+        <result property="tipoPueblo" column="C_TIPOPUEBLO"/>   
+        <result property="nacionalidad" column="C_NACIONALIDAD"/>
+    </resultMap> 
+    
+    
+    <insert id="personaInsertar" parameterType="persona">
+        INSERT INTO SID_REG_PERSONA
+        (
+        <if test="nombre != null">
+            C_NOMBRE,
+        </if>
+        <if test="apellidoPat != null">
+            C_APELLIDOPAT,
+        </if>
+        <if test="apellidoMat != null">
+            C_APELLIDOMAT,
+        </if>
+        <if test="numeroDocumento != null">
+            C_NUMERODOCUMENTO,
+        </if>
+        <if test="tipoDocumento != null">
+            C_TIPODOCUMENTO,
+        </if>
+        <if test="ruc != null">
+            C_RUC,
+        </if>
+        <if test="direccion != null">
+            C_DIRECCION,
+        </if>
+        <if test="email != null">
+            C_EMAIL,
+        </if>
+        <if test="telefono1 != null">
+            C_TELEFONO1,
+        </if>
+        <if test="direccionNotifica != null">
+            C_DIRECCIONNOTIFICA,
+        </if>
+        <if test="idDepartamento != null">
+            C_IDDEPA,
+        </if>
+        <if test="idProvincia != null">
+            C_IDPROV,
+        </if>
+        <if test="idDistrito != null">
+            C_IDDISTR,
+        </if>
+        <if test="usuRegistro != null">
+            C_USUREGISTRO,
+        </if>
+        <if test="fechaRegistro != null">
+            D_FECHAREGISTRO,
+        </if>
+        <if test="usuModificacion != null">
+            C_USUMODIFICACION,
+        </if>
+        <if test="fechaModificacion != null">
+            D_FECHAMODIFICACION,
+        </if>
+        <if test="sexo != null">
+            C_SEXO,
+        </if>
+        <if test="fechaNacimiento != null">
+            D_FECHANACIMIENTO,
+        </if>
+        <if test="tipo != null">
+            C_TIPO,
+        </if>
+        <if test="contacto != null">
+            C_CONTACTO,
+        </if>
+        <if test="tipoLengua != null">
+            C_TIPOLENGUA,
+        </if>
+        <if test="indicadorDiscapacitado != null">
+            C_INDDISCAPACITADO,
+        </if>
+        <if test="tipoPueblo != null">
+            C_TIPOPUEBLO,
+        </if>
+        <if test="nacionalidad != null">
+            C_NACIONALIDAD,
+        </if>
+        N_IDPERSONA
+        )
+        VALUES 
+        (
+        <if test="nombre != null">
+            #{nombre},
+        </if>
+        <if test="apellidoPat != null">
+            #{apellidoPat},
+        </if>
+        <if test="apellidoMat != null">
+            #{apellidoMat},
+        </if>
+        <if test="numeroDocumento != null">
+            #{numeroDocumento},
+        </if>
+        <if test="tipoDocumento != null">
+            #{tipoDocumento},
+        </if>
+        <if test="ruc != null">
+            #{ruc},
+        </if>
+        <if test="direccion != null">
+            #{direccion},
+        </if>
+        <if test="email != null">
+            #{email},
+        </if>
+        <if test="telefono1 != null">
+            #{telefono1},
+        </if>
+        <if test="direccionNotifica != null">
+            #{direccionNotifica},
+        </if>
+        <if test="idDepartamento != null">
+            #{idDepartamento},
+        </if>
+        <if test="idProvincia != null">
+            #{idProvincia},
+        </if>
+        <if test="idDistrito != null">
+            #{idDistrito},
+        </if>
+        <if test="usuRegistro != null">
+            #{usuRegistro},
+        </if>
+        <if test="fechaRegistro != null">
+            #{fechaRegistro},
+        </if>
+        <if test="usuModificacion != null">
+            #{usuModificacion},
+        </if>
+        <if test="fechaModificacion != null">
+            #{fechaModificacion},
+        </if>
+        <if test="sexo != null">
+            #{sexo},
+        </if>
+        <if test="fechaNacimiento != null">
+            #{fechaNacimiento},
+        </if>
+        <if test="tipo != null">
+            #{tipo},
+        </if>
+        <if test="contacto != null">
+            #{contacto},
+        </if>
+        <if test="tipoLengua != null">
+            #{tipoLengua},
+        </if>
+        <if test="indicadorDiscapacitado != null">
+            #{indicadorDiscapacitado},
+        </if>
+        <if test="tipoPueblo != null">
+            #{tipoPueblo},
+        </if>
+        <if test="nacionalidad != null">
+            #{nacionalidad},
+        </if>
+        SEQ_SID_REG_PERSONA.NextVal
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SID_REG_PERSONA.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    
+    <update id="personaUpdate" parameterType="persona">
+        UPDATE SID_REG_PERSONA
+        <set>
+            <if test="apellidoPat != null">
+                C_APELLIDOPAT =#{apellidoPat},
+            </if>
+            <if test="apellidoMat != null">
+                C_APELLIDOMAT = #{apellidoMat},
+            </if>
+            <if test="numeroDocumento != null">
+                C_NUMERODOCUMENTO = #{numeroDocumento},
+            </if>
+            <if test="tipoDocumento != null">
+                C_TIPODOCUMENTO = #{tipoDocumento},
+            </if>
+            <if test="ruc != null">
+                C_RUC = #{ruc},
+            </if>
+            <if test="direccion != null">
+                C_DIRECCION = #{direccion},
+            </if>
+            <if test="email != null">
+                C_EMAIL = #{email},
+            </if>
+            <if test="telefono1 != null">
+                C_TELEFONO1 = #{telefono1},
+            </if>
+            <if test="direccionNotifica != null">
+                C_DIRECCIONNOTIFICA = #{direccionNotifica},
+            </if>
+            <if test="idDepartamento != null">
+                C_IDDEPA = #{idDepartamento},
+            </if>
+            <if test="idProvincia != null">
+                C_IDPROV = #{idProvincia},
+            </if>
+            <if test="idDistrito != null">
+                C_IDDISTR = #{idDistrito},
+            </if>
+            <if test="fechaModificacion != null">
+                D_FECHAMODIFICACION = #{fechaModificacion},
+            </if>
+            <if test="usuModificacion != null">
+                C_USUMODIFICACION = #{usuModificacion},
+            </if>
+            <if test="sexo != null">
+                C_SEXO = #{sexo},
+            </if>
+            <if test="fechaNacimiento != null">
+                D_FECHANACIMIENTO = #{fechaNacimiento},
+            </if>
+            <if test="tipo != null">
+                C_TIPO = #{tipo},
+            </if>
+            <if test="contacto != null">
+                C_CONTACTO = #{contacto},
+            </if>
+            <if test="tipoLengua != null">
+                C_TIPOLENGUA = #{tipoLengua},
+            </if>
+            <if test="indicadorDiscapacitado != null">
+                C_INDDISCAPACITADO = #{indicadorDiscapacitado},
+            </if>
+            <if test="tipoPueblo != null">
+                C_TIPOPUEBLO = #{tipoPueblo},
+            </if>
+            <if test="nacionalidad != null">
+                C_NACIONALIDAD  = #{nacionalidad},
+            </if>   
+            C_NOMBRE = #{nombre}
+        </set>
+        <where>
+            N_IDPERSONA = #{id}
+        </where>
+    </update>
+    
+    <select id="personaBuscarCadena" resultMap="personaMap" parameterType="persona" >
+        SELECT B.* FROM (
+        SELECT A.*,ROWNUM numfila FROM (
+        SELECT * FROM SID_REG_PERSONA
+        WHERE UPPER(C_NOMBRE||C_APELLIDOPAT||C_APELLIDOMAT||C_NUMERODOCUMENTO) LIKE '%'||UPPER(#{cadenaPersona})||'%'
+        ) A
+        ) B
+        WHERE 1 = 1
+        and B.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="personaBusarGeneral" resultMap="personaMap" parameterType="persona" >
+        SELECT B.* FROM (
+        SELECT A.*,ROWNUM numfila FROM (
+        SELECT DISTINCT A.* FROM SID_REG_PERSONA A
+        LEFT JOIN SID_REG_EXPEDE_PERSONA B ON 
+        A.N_IDPERSONA = B.N_IDPERSONA
+        LEFT JOIN SID_REG_EXPEDIENTE C
+        ON B.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+        WHERE 1 = 1
+        <if test="nombre != null">
+            AND UPPER(A.C_NOMBRE) LIKE '%'||UPPER(#{nombre})||'%'
+        </if>
+        <if test="apellidoPat != null">
+            AND UPPER(A.C_APELLIDOPAT) LIKE '%'||UPPER(#{apellidoPat})||'%'
+        </if>
+        <if test="apellidoMat != null">
+            AND UPPER(A.C_APELLIDOMAT) LIKE '%'||UPPER(#{apellidoMat})||'%'
+        </if>
+        <if test="numeroExpediente != null">
+            AND C.C_NUMEROEXPEDIENTE = #{numeroExpediente}
+        </if>
+        <if test="numeroDocumento != null">
+            AND A.C_NUMERODOCUMENTO LIKE '%'||#{numeroDocumento}||'%'
+        </if>
+        ORDER BY A.N_IDPERSONA
+        ) A
+        ) B
+        WHERE 1 = 1
+        and B.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="personaXDNI" resultMap="personaMap" parameterType="String" >
+        SELECT * FROM SID_REG_PERSONA WHERE C_NUMERODOCUMENTO =  #{value} 
+    </select>
+    
+    <select id="personaValidaDNI" resultType="Long" parameterType="String" >
+        SELECT COUNT(*) FROM SID_REG_PERSONA WHERE C_NUMERODOCUMENTO =  #{value}
+    </select>
+    
+    <select id="personaBusquedaOne" resultMap="personaMap" parameterType="Long" >
+        SELECT * FROM SID_REG_PERSONA WHERE N_IDPERSONA =  #{id}
+    </select>
+    
+    <select id="personaPorExpediente" resultMap="personaMap"  parameterType="long">
+        SELECT A.C_TIPO, B.C_NOMBRE, B.C_APELLIDOPAT, B.C_APELLIDOMAT, B.C_NUMERODOCUMENTO
+        FROM SID_REG_EXPEDE_PERSONA A
+        INNER JOIN SID_REG_PERSONA B ON A.N_IDPERSONA = B.N_IDPERSONA
+        WHERE A.N_IDEXPEDIENTE = #{id}
+    </select>
+    
+</mapper>

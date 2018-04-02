@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.ExpedienteClasificacionTipoDAO">
+    
+    <resultMap id="expedienteClasificacionTipoMap" type="ExpedienteClasificacionTipo">
+        <id property="id" column="N_ID_CLASIFICACIONTIPO" />
+        <result property="idClasificacion" column="N_ID_CLASIFICACION"/>
+        <result property="detalle" column="C_DETALLE"/>
+        <result property="nivel" column="N_NIVEL"/>
+        <result property="idPadre" column="N_PADRE"/>
+        
+        <result property="nombrePadre" column="NOMBRE_PADRE"/>
+    </resultMap> 
+    
+    <select id="clasificacionCabecera" resultMap="expedienteClasificacionTipoMap" parameterType="Integer">
+        SELECT * FROM SID_REG_CLASIFICACION_TIPO WHERE N_ID_CLASIFICACION = #{id} 
+        ORDER BY N_ID_CLASIFICACIONTIPO
+    </select>
+    
+    <select id="clasificacionPorIdPadre" resultMap="expedienteClasificacionTipoMap" parameterType="Integer">
+        SELECT * FROM SID_REG_CLASIFICACION_TIPO WHERE N_PADRE = #{id} 
+        ORDER BY N_ID_CLASIFICACIONTIPO
+    </select>
+    
+    <select id="clasificacionOne" resultMap="expedienteClasificacionTipoMap" parameterType="Integer">
+        SELECT A.*, B.C_DETALLE NOMBRE_PADRE FROM SID_REG_CLASIFICACION_TIPO A 
+        INNER JOIN SID_REG_CLASIFICACION_TIPO B ON A.N_PADRE = B.N_ID_CLASIFICACIONTIPO
+        WHERE A.N_ID_CLASIFICACIONTIPO = #{id} 
+    </select>
+    
+    <select id="clasificacioneExpedienteClasiTipo" resultMap="expedienteClasificacionTipoMap" parameterType="Long">
+        SELECT A.*, C.C_DETALLE NOMBRE_PADRE FROM SID_REG_CLASIFICACION_TIPO A 
+        INNER JOIN SID_REG_EXPEDIENTE_CLASI_TIPO B ON A.N_ID_CLASIFICACIONTIPO = B.N_ID_CLASIFICACIONTIPO
+        INNER JOIN SID_REG_CLASIFICACION_TIPO C ON A.N_PADRE = C.N_ID_CLASIFICACIONTIPO
+        AND B.N_ID_EXPEDIENTECLASI = #{id} 
+        ORDER BY A.N_ID_CLASIFICACIONTIPO
+    </select>
+    
+</mapper>

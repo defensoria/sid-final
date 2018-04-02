@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.EtapaEstadoDAO">
+    
+    <resultMap id="etapaEstadoMap" type="etapaEstado">
+        <id property="id" column="N_ID_ETAPAESTADO" />
+        <result property="idEtapa" column="N_ID_ETAPA"/>
+        <result property="idEstado" column="N_ID_ESTADO"/>
+        <result property="idExpediente" column="N_ID_EXPEDIENTE"/>
+        <result property="detalle" column="C_DETALLE"/>
+        <result property="numeroExpediente" column="C_NUMEROEXPEDIENTE"/>
+        <result property="indicador" column="C_INDICADOR"/>
+        <result property="indicadorEtapa" column="C_INDICADORETAPA"/>
+        
+        <result property="ultimaEtapa" column="C_VALOR"/>
+        <result property="estadoDetalle" column="ESTADO_DETALLE"/>
+    </resultMap> 
+    
+    
+    <insert id="etapaEstadoInsertar" parameterType="etapaEstado">
+        INSERT INTO SID_REG_ETAPA_ESTADO
+        (
+        <if test="idEtapa != null">
+            N_ID_ETAPA,
+        </if>
+        <if test="idEstado != null">
+            N_ID_ESTADO,
+        </if>
+        <if test="detalle != null">
+            C_DETALLE,
+        </if>
+        <if test="idExpediente != null">
+            N_ID_EXPEDIENTE,
+        </if>
+        <if test="numeroExpediente != null">
+            C_NUMEROEXPEDIENTE,
+        </if>
+        <if test="indicador != null">
+            C_INDICADOR,
+        </if>
+        <if test="indicadorEtapa != null">
+            C_INDICADORETAPA,
+        </if>
+        N_ID_ETAPAESTADO
+        )
+        VALUES 
+        (
+        <if test="idEtapa != null">
+            #{idEtapa},
+        </if>
+        <if test="idEstado != null">
+            #{idEstado},
+        </if>
+        <if test="detalle != null">
+            #{detalle},
+        </if>
+        <if test="idExpediente != null">
+            #{idExpediente},
+        </if>
+        <if test="numeroExpediente != null">
+            #{numeroExpediente},
+        </if>
+        <if test="indicador != null">
+            #{indicador},
+        </if>
+        <if test="indicadorEtapa != null">
+            #{indicadorEtapa},
+        </if>
+        SEQ_SID_REG_ETAPAESTADO.NextVal
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SID_REG_ETAPAESTADO.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    
+    <update id="etapaEstadoUpdate" parameterType="etapaEstado">
+        UPDATE SID_REG_ETAPA_ESTADO
+        <set>
+        <if test="indicadorEtapa != null">
+            C_INDICADORETAPA = #{indicadorEtapa},
+        </if>
+        <if test="indicador != null">
+            C_INDICADOR = #{indicador}
+        </if>
+        </set>
+        <where>
+            N_ID_EXPEDIENTE = #{idExpediente}
+        </where>
+    </update>
+    
+    
+    <select id="etapaEstadoVigente" resultMap="etapaEstadoMap" parameterType="Long">
+SELECT C.*, ROWNUM FROM (
+SELECT A.*, B.C_VALOR, C.C_NOMBRE ESTADO_DETALLE FROM SID_REG_ETAPA_ESTADO A
+INNER JOIN SID_REG_ETAPA B ON B.N_ID_ETAPA = A.N_ID_ETAPA 
+LEFT JOIN SID_REG_ESTADO C ON A.N_ID_ESTADO = C.N_ID_ESTADO
+WHERE A.N_ID_EXPEDIENTE = #{id} ORDER BY A.N_ID_ETAPAESTADO DESC
+) C WHERE ROWNUM = 1
+    </select>
+    
+    <select id="etapaEstadoInicial" resultMap="etapaEstadoMap" parameterType="Long">
+        SELECT * FROM SID_REG_ETAPA_ESTADO 
+        WHERE N_ID_EXPEDIENTE = #{id}
+    </select>
+    
+    <select id="etapaEstadoPorID" resultMap="etapaEstadoMap" parameterType="Long">
+        SELECT * FROM SID_REG_ETAPA_ESTADO WHERE N_ID_ETAPAESTADO = #{id}
+    </select>
+    
+    <select id="etapaEstadoxExpediente" resultMap="etapaEstadoMap" parameterType="String">
+        SELECT DISTINCT  * FROM (SELECT * FROM SID_REG_ETAPA_ESTADO
+WHERE C_INDICADORETAPA = 'VIG'
+AND C_NUMEROEXPEDIENTE = #{value}
+        UNION
+        SELECT * FROM SID_REG_ETAPA_ESTADO
+WHERE C_INDICADOR = 'ACT'
+AND C_NUMEROEXPEDIENTE = #{value}
+        )
+    </select>
+    
+    
+    <select id="etapaEstadoUltimoEstado" resultType="Long" parameterType="String">
+        SELECT MAX(A.N_ID_ESTADO) FROM SID_REG_ETAPA_ESTADO A
+INNER JOIN SID_REG_ESTADO B ON A.N_ID_ESTADO = B.N_ID_ESTADO
+AND A.C_NUMEROEXPEDIENTE = #{value} AND A.N_ID_EXPEDIENTE = 
+(
+SELECT MAX(A.N_ID_EXPEDIENTE) FROM SID_REG_ETAPA_ESTADO A
+INNER JOIN SID_REG_ESTADO B ON A.N_ID_ESTADO = B.N_ID_ESTADO
+AND A.C_NUMEROEXPEDIENTE = #{value}
+)
+    </select>
+    
+</mapper>

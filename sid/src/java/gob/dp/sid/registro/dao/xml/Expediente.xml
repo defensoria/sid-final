@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.ExpedienteDAO">
+    
+    <resultMap id="expedienteMap" type="expediente">
+        <id property="id" column="N_IDEXPEDIENTE" />
+        <result property="numero" column="C_NUMEROEXPEDIENTE"/>
+        <result property="tipoClasificion" column="C_TIPOCLASIFICACION"/>
+        <result property="tipoIngreso" column="C_TIPOINGRESO"/>
+        <result property="tipoTema" column="C_TIPOTEMA"/>
+        <result property="tipoSubtema" column="C_TIPOSUBTEMA"/>
+        <result property="fechaIngreso" column="D_FECHAINGRESO"/>
+        <result property="sumilla" column="C_SUMILLA"/>
+        <result property="observacion" column="C_OBSERVACIONES"/>
+        <result property="estadoCalificacion" column="C_ESTADOCALIFICACION"/>
+        <result property="estadoInvestigacion" column="C_ESTADOINVESTIGACION"/>
+        <result property="estadoPersuacion" column="C_ESTADOPERSUACION"/>
+        <result property="estadoSeguimiento" column="C_ESTADOSEGUIMIENTO"/>
+        <result property="estadoGestion" column="C_ESTADOGESTION"/>
+        <result property="calificacion" column="N_CALIFICACION"/>
+        <result property="usuarioRegistro" column="C_USUREGISTRO"/>
+        <result property="estado" column="C_ESTADO"/>
+        <result property="version" column="N_VERSION"/>
+        <result property="fechaRegistro" column="D_FECHAREGISTRO"/>
+        <result property="fechaModificacion" column="D_FECHAMODIFICACION"/>
+        <result property="etiqueta" column="C_ETIQUETA"/>
+        <result property="general" column="C_ESTADOGENERAL"/>
+        <result property="clasificacionTipoNombre" column="TIPOCLASIFICACION"/>
+        <result property="ingresoTipoNombre" column="TIPOINGRESO"/>
+        <result property="ingresoTipoTema" column="TIPOTEMA"/>
+        <result property="ingresoTipoSubTema" column="TIPOSUBTEMA"/>
+        <result property="indDerivado" column="C_INDDERIVADO"/>
+        <result property="indRelevante" column="N_INDRELEVANTE"/>
+        <result property="count" column="TOTAL"/>
+        <result property="mes" column="MES"/>
+        <result property="usuarioCompleto" column="USUARIOCOMPLETO"/>
+        <result property="codigoOD" column="N_CODIGOOD"/>
+        <result property="consecutivo" column="N_CONSECUTIVO"/>
+        <result property="tipoActuacionResponsabilidad" column="C_TIPOACTUACIONRESPONSA"/>
+        <result property="tipoGrupoVulnerable" column="C_TIPOGRUPOVULNERABLE"/>
+        <result property="tipoGrupoEspecial" column="C_TIPOGRUPOESPECIAL"/>
+        <result property="ruta" column="C_RUTA"/>
+        <result property="conclusion" column="C_CONCLUSION"/>
+        <result property="indicadorDesestimiento" column="N_INDDESESTIMIENTO"/>
+        <result property="indicadorOficio" column="N_INDOFICIO"/>
+        <result property="usuarioResponsable" column="C_USUARIORESPONSABLE"/>
+        <result property="indiceRecomendacion" column="N_INDRECOMENDACION"/>
+        <result property="indiceMayorInformacion" column="N_INDMAYORINFORMA"/>
+        
+        <result property="tipoArchivo" column="C_TIPOARCHIVO"/>
+        <result property="indicadorRecepcionArchivo" column="N_RECEPCIONARCHIVO"/>
+        <result property="fechaArchivo" column="D_FECHAARCHIVO"/>
+        <result property="expedienteAcumulado" column="C_EXPEDIENTESACUMULADOS"/>
+        <result property="ubicacionTipologica" column="C_UBICACIONTIPOLOGICA"/>
+        <result property="observacionArchivo" column="C_OBSERVACIONARCHIVO"/>
+        <result property="indiceReconsideracion" column="N_INDRECONSIDERACION"/>
+        <result property="detalleReconsideracion" column="C_DETALLERECONSIDERACION"/>
+        <result property="indiceAsignacion" column="N_INDASIGNACION"/>
+        <result property="tipoDocumentoArchivo" column="C_TIPODOCUMENTOARCHIVO"/>
+        <result property="numeroFolios" column="N_NROFOLIOS"/>
+        <result property="tipoSoporteArchivo" column="C_TIPOSOPORTEARCHIVO"/>
+        
+        <result property="indicadorAtr" column="N_INDEJERCIATR"/>
+        <result property="tipoAtr" column="C_TIPOEJERCICIOATR"/>
+        <result property="fechaAtr" column="D_FECHAEJERCICIOATR"/>
+        <result property="detalleAtr" column="C_DETALLEEJERCICIOATR"/>
+
+
+        <result property="etapaDetalle" column="C_VALOR"/>
+        <result property="indicadorEtapa" column="C_INDICADORETAPA"/>
+        <result property="idEtapa" column="N_ID_ETAPA"/>
+        <result property="estadoDetalle" column="C_NOMBRE"/>
+        <result property="nombreOD" column="NOMBRE_OD"/>
+        <result property="comisionado" column="COMISIONADO"/>
+    </resultMap> 
+    
+    
+    <insert id="expedienteInsertar" parameterType="expediente">
+        INSERT INTO SID_REG_EXPEDIENTE
+        (
+        <if test="tipoClasificion != null">
+            C_TIPOCLASIFICACION,
+        </if>
+        <if test="tipoIngreso != null">
+            C_TIPOINGRESO,
+        </if>
+        <if test="tipoTema != null">
+            C_TIPOTEMA,
+        </if>
+        <if test="tipoSubtema != null">
+            C_TIPOSUBTEMA,
+        </if>
+        <if test="fechaIngreso != null">
+            D_FECHAINGRESO,
+        </if>
+        <if test="sumilla != null">
+            C_SUMILLA,
+        </if>
+        <if test="observacion != null">
+            C_OBSERVACIONES,
+        </if>
+        <if test="estadoCalificacion != null">
+            C_ESTADOCALIFICACION,
+        </if>
+        <if test="estadoInvestigacion != null">
+            C_ESTADOINVESTIGACION,
+        </if>
+        <if test="estadoPersuacion != null">
+            C_ESTADOPERSUACION,
+        </if>
+        <if test="estadoSeguimiento != null">
+            C_ESTADOSEGUIMIENTO,
+        </if>
+        <if test="estadoGestion != null">
+            C_ESTADOGESTION,
+        </if>
+        <if test="calificacion != null">
+            N_CALIFICACION,
+        </if>
+        <if test="usuarioRegistro != null">
+            C_USUREGISTRO,
+        </if>
+        <if test="usuarioRegistro != null">
+            C_USUCREACION,
+        </if>
+        <if test="estado != null">
+            C_ESTADO,
+        </if>
+        <if test="version != null">
+            N_VERSION,
+        </if>
+        <if test="fechaRegistro != null">
+            D_FECHAREGISTRO,
+        </if>
+        <if test="fechaModificacion != null">
+            D_FECHAMODIFICACION,
+        </if>
+        <if test="numero != null">
+            C_NUMEROEXPEDIENTE,
+        </if>
+        <if test="etiqueta != null">
+            C_ETIQUETA,
+        </if>
+        <if test="indDerivado != null">
+            C_INDDERIVADO,
+        </if>
+        <if test="indRelevante != null">
+            N_INDRELEVANTE,
+        </if>
+        <if test="codigoOD != null">
+            N_CODIGOOD,
+        </if>
+        <if test="consecutivo != null">
+            N_CONSECUTIVO,
+        </if>
+        <if test="tipoActuacionResponsabilidad != null">
+            C_TIPOACTUACIONRESPONSA,
+        </if>
+        <if test="tipoGrupoVulnerable != null">
+            C_TIPOGRUPOVULNERABLE,
+        </if>
+        <if test="tipoGrupoEspecial != null">
+            C_TIPOGRUPOESPECIAL,
+        </if>
+        <if test="ruta != null">
+            C_RUTA,
+        </if>
+        <if test="conclusion != null">
+            C_CONCLUSION,
+        </if>
+        <if test="indicadorOficio != null">
+            N_INDOFICIO,
+        </if>
+        <if test="usuarioResponsable != null">
+            C_USUARIORESPONSABLE,
+        </if>
+        <if test="indiceRecomendacion != null">
+            N_INDRECOMENDACION,
+        </if>
+        <if test="indiceMayorInformacion != null">
+            N_INDMAYORINFORMA,
+        </if>
+        <if test="tipoArchivo != null">
+            C_TIPOARCHIVO,
+        </if>
+        <if test="indicadorRecepcionArchivo != null">
+            N_RECEPCIONARCHIVO,
+        </if>
+        <if test="fechaArchivo != null">
+            D_FECHAARCHIVO,
+        </if>
+        <if test="expedienteAcumulado != null">
+            C_EXPEDIENTESACUMULADOS,
+        </if>
+        <if test="ubicacionTipologica != null">
+            C_UBICACIONTIPOLOGICA,
+        </if>
+        <if test="observacionArchivo != null">
+            C_OBSERVACIONARCHIVO,
+        </if>
+        <if test="tipoDocumentoArchivo != null">
+            C_TIPODOCUMENTOARCHIVO,
+        </if>
+        <if test="numeroFolios != null">
+            N_NROFOLIOS,
+        </if>
+        <if test="tipoSoporteArchivo != null">
+            C_TIPOSOPORTEARCHIVO,
+        </if>
+        <if test="indicadorAtr != null">
+            N_INDEJERCIATR,
+        </if>
+        <if test="tipoAtr != null">
+            C_TIPOEJERCICIOATR,
+        </if>
+        <if test="fechaAtr != null">
+            D_FECHAEJERCICIOATR,
+        </if>
+        <if test="detalleAtr != null">
+            C_DETALLEEJERCICIOATR,
+        </if>
+        <if test="general != null">
+            C_ESTADOGENERAL,
+        </if>
+        N_IDEXPEDIENTE
+        )
+        VALUES 
+        (
+        <if test="tipoClasificion != null">
+            #{tipoClasificion},
+        </if>
+        <if test="tipoIngreso != null">
+            #{tipoIngreso},
+        </if>
+        <if test="tipoTema != null">
+            #{tipoTema},
+        </if>
+        <if test="tipoSubtema != null">
+            #{tipoSubtema},
+        </if>
+        <if test="fechaIngreso != null">
+            #{fechaIngreso},
+        </if>
+        <if test="sumilla != null">
+            #{sumilla},
+        </if>
+        <if test="observacion != null">
+            #{observacion},
+        </if>
+        <if test="estadoCalificacion != null">
+            #{estadoCalificacion},
+        </if>
+        <if test="estadoInvestigacion != null">
+            #{estadoInvestigacion},
+        </if>
+        <if test="estadoPersuacion != null">
+            #{estadoPersuacion},
+        </if>
+        <if test="estadoSeguimiento != null">
+            #{estadoSeguimiento},
+        </if>
+        <if test="estadoGestion != null">
+            #{estadoGestion},
+        </if>
+        <if test="calificacion != null">
+            #{calificacion},
+        </if>
+        <if test="usuarioRegistro != null">
+            #{usuarioRegistro},
+        </if>
+        <if test="usuarioRegistro != null">
+            #{usuarioRegistro},
+        </if>
+        <if test="estado != null">
+            #{estado},
+        </if>
+        <if test="version != null">
+            #{version},
+        </if>
+        <if test="fechaRegistro != null">
+            #{fechaRegistro},
+        </if>
+        <if test="fechaModificacion != null">
+            #{fechaModificacion},
+        </if>
+        <if test="numero != null">
+            #{numero},
+        </if>
+        <if test="etiqueta != null">
+            #{etiqueta},
+        </if>
+        <if test="indDerivado != null">
+            #{indDerivado},
+        </if>
+        <if test="indRelevante != null">
+            #{indRelevante},
+        </if>
+        <if test="codigoOD != null">
+            #{codigoOD},
+        </if>
+        <if test="consecutivo != null">
+            #{consecutivo},
+        </if>
+        <if test="tipoActuacionResponsabilidad != null">
+            #{tipoActuacionResponsabilidad},
+        </if>
+        <if test="tipoGrupoVulnerable != null">
+            #{tipoGrupoVulnerable},
+        </if>
+        <if test="tipoGrupoEspecial != null">
+            #{tipoGrupoEspecial},
+        </if>
+        <if test="ruta != null">
+            #{ruta},
+        </if>
+        <if test="conclusion != null">
+            #{conclusion},
+        </if>
+        <if test="indicadorOficio != null">
+            #{indicadorOficio},
+        </if>
+        <if test="usuarioResponsable != null">
+            #{usuarioRegistro},
+        </if>
+        <if test="indiceRecomendacion != null">
+            #{indiceRecomendacion},
+        </if>
+        <if test="indiceMayorInformacion != null">
+            #{indiceMayorInformacion},
+        </if>
+        <if test="tipoArchivo != null">
+            #{tipoArchivo},
+        </if>
+        <if test="indicadorRecepcionArchivo != null">
+            #{indicadorRecepcionArchivo},
+        </if>
+        <if test="fechaArchivo != null">
+            #{fechaArchivo},
+        </if>
+        <if test="expedienteAcumulado != null">
+            #{expedienteAcumulado},
+        </if>
+        <if test="ubicacionTipologica != null">
+            #{ubicacionTipologica},
+        </if>
+        <if test="observacionArchivo != null">
+            #{observacionArchivo},
+        </if>
+        <if test="tipoDocumentoArchivo != null">
+            #{tipoDocumentoArchivo},
+        </if>
+        <if test="numeroFolios != null">
+            #{numeroFolios},
+        </if>
+        <if test="tipoSoporteArchivo != null">
+            #{tipoSoporteArchivo},
+        </if>
+        <if test="indicadorAtr != null">
+            #{indicadorAtr},
+        </if>
+        <if test="tipoAtr != null">
+            #{tipoAtr},
+        </if>
+        <if test="fechaAtr != null">
+            #{fechaAtr},
+        </if>
+        <if test="detalleAtr != null">
+            #{detalleAtr},
+        </if>
+        <if test="general != null">
+            #{general},
+        </if>
+        SEQ_SID_REG_EXPEDIENTE.NextVal
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SID_REG_EXPEDIENTE.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    
+    <update id="expedienteUpdate" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            <if test="tipoClasificion != null">
+                C_TIPOCLASIFICACION = #{tipoClasificion},
+            </if>
+            <if test="tipoIngreso != null">
+                C_TIPOINGRESO = #{tipoIngreso},
+            </if>
+            <if test="tipoTema != null">
+                C_TIPOTEMA = #{tipoTema},
+            </if>
+            <if test="tipoSubtema != null">
+                C_TIPOSUBTEMA = #{tipoSubtema},
+            </if>
+            <if test="fechaIngreso != null">
+                D_FECHAINGRESO = #{fechaIngreso},
+            </if>
+            <if test="sumilla != null">
+                C_SUMILLA = #{sumilla},
+            </if>
+            <if test="observacion != null">
+                C_OBSERVACIONES = #{observacion},
+            </if>
+            <if test="estadoCalificacion != null">
+                C_ESTADOCALIFICACION  = #{estadoCalificacion},
+            </if>
+            <if test="estadoInvestigacion != null">
+                C_ESTADOINVESTIGACION  = #{estadoInvestigacion},
+            </if>
+            <if test="estadoPersuacion != null">
+                C_ESTADOPERSUACION  = #{estadoPersuacion},
+            </if>
+            <if test="estadoSeguimiento != null">
+                C_ESTADOSEGUIMIENTO  = #{estadoSeguimiento},
+            </if>
+            <if test="estadoGestion != null">
+                C_ESTADOGESTION  = #{estadoGestion},
+            </if>
+            <if test="calificacion != null">
+                N_CALIFICACION = #{calificacion},
+            </if>
+            <if test="usuarioRegistro != null">
+                C_USUREGISTRO = #{usuarioRegistro},
+            </if>
+            <if test="estado != null">
+                C_ESTADO = #{estado},
+            </if>
+            <if test="fechaRegistro != null">
+                D_FECHAREGISTRO = #{fechaRegistro},
+            </if>
+            <if test="etiqueta != null">
+                C_ETIQUETA = #{etiqueta},
+            </if>
+            <if test="usuarioResponsable != null">
+                C_USUARIORESPONSABLE = #{usuarioResponsable},
+            </if>
+            <if test="tipoArchivo != null">
+                C_TIPOARCHIVO = #{tipoArchivo},
+            </if>
+            <if test="indicadorRecepcionArchivo != null">
+                N_RECEPCIONARCHIVO = #{indicadorRecepcionArchivo},
+            </if>
+            <if test="fechaArchivo != null">
+                D_FECHAARCHIVO = #{fechaArchivo},
+            </if>
+            <if test="expedienteAcumulado != null">
+                C_EXPEDIENTESACUMULADOS = #{expedienteAcumulado},
+            </if>
+            <if test="ubicacionTipologica != null">
+                C_UBICACIONTIPOLOGICA = #{ubicacionTipologica},
+            </if>
+            <if test="observacionArchivo != null">
+                C_OBSERVACIONARCHIVO = #{observacionArchivo},
+            </if>
+            <if test="tipoDocumentoArchivo != null">
+                C_TIPODOCUMENTOARCHIVO = #{tipoDocumentoArchivo},
+            </if>
+            <if test="numeroFolios != null">
+                N_NROFOLIOS = #{numeroFolios},
+            </if>
+            <if test="tipoSoporteArchivo != null">
+                C_TIPOSOPORTEARCHIVO = #{tipoSoporteArchivo},
+            </if>
+            <if test="indicadorAtr != null">
+                N_INDEJERCIATR = #{indicadorAtr},
+            </if>
+            <if test="tipoAtr != null">
+                C_TIPOEJERCICIOATR = #{tipoAtr},
+            </if>
+            <if test="fechaAtr != null">
+                D_FECHAEJERCICIOATR = #{fechaAtr},
+            </if>
+            <if test="detalleAtr != null">
+                C_DETALLEEJERCICIOATR = #{detalleAtr},
+            </if>
+            <if test="numero != null">
+                C_NUMEROEXPEDIENTE = #{numero}
+            </if>
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteEliminarArchivo" parameterType="long">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            C_RUTA = null
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteUpdateArchivo" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            <if test="tipoArchivo != null">
+                C_TIPOARCHIVO = #{tipoArchivo},
+            </if>
+            <if test="indicadorRecepcionArchivo != null">
+                N_RECEPCIONARCHIVO = #{indicadorRecepcionArchivo},
+            </if>
+            <if test="fechaArchivo != null">
+                D_FECHAARCHIVO = #{fechaArchivo},
+            </if>
+            <if test="expedienteAcumulado != null">
+                C_EXPEDIENTESACUMULADOS = #{expedienteAcumulado},
+            </if>
+            <if test="ubicacionTipologica != null">
+                C_UBICACIONTIPOLOGICA = #{ubicacionTipologica},
+            </if>
+            <if test="observacionArchivo != null">
+                C_OBSERVACIONARCHIVO = #{observacionArchivo},
+            </if>
+            <if test="tipoDocumentoArchivo != null">
+                C_TIPODOCUMENTOARCHIVO = #{tipoDocumentoArchivo},
+            </if>
+            <if test="numeroFolios != null">
+                N_NROFOLIOS = #{numeroFolios},
+            </if>
+            <if test="tipoSoporteArchivo != null">
+                C_TIPOSOPORTEARCHIVO = #{tipoSoporteArchivo},
+            </if>
+            <if test="numero != null">
+                C_NUMEROEXPEDIENTE = #{numero}
+            </if>
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteUpdateNoClasificacion" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            <if test="tipoIngreso != null">
+                C_TIPOINGRESO = #{tipoIngreso},
+            </if>
+            <if test="tipoTema != null">
+                C_TIPOTEMA = #{tipoTema},
+            </if>
+            <if test="tipoSubtema != null">
+                C_TIPOSUBTEMA = #{tipoSubtema},
+            </if>
+            <if test="fechaIngreso != null">
+                D_FECHAINGRESO = #{fechaIngreso},
+            </if>
+            <if test="sumilla != null">
+                C_SUMILLA = #{sumilla},
+            </if>
+            <if test="observacion != null">
+                C_OBSERVACIONES = #{observacion},
+            </if>
+            <if test="estadoCalificacion != null">
+                C_ESTADOCALIFICACION  = #{estadoCalificacion},
+            </if>
+            <if test="estadoInvestigacion != null">
+                C_ESTADOINVESTIGACION  = #{estadoInvestigacion},
+            </if>
+            <if test="estadoPersuacion != null">
+                C_ESTADOPERSUACION  = #{estadoPersuacion},
+            </if>
+            <if test="estadoSeguimiento != null">
+                C_ESTADOSEGUIMIENTO  = #{estadoSeguimiento},
+            </if>
+            <if test="estadoGestion != null">
+                C_ESTADOGESTION  = #{estadoGestion},
+            </if>
+            <if test="calificacion != null">
+                N_CALIFICACION = #{calificacion},
+            </if>
+            <if test="usuarioRegistro != null">
+                C_USUREGISTRO = #{usuarioRegistro},
+            </if>
+            <if test="estado != null">
+                C_ESTADO = #{estado},
+            </if>
+            <if test="fechaRegistro != null">
+                D_FECHAREGISTRO = #{fechaRegistro},
+            </if>
+            <if test="etiqueta != null">
+                C_ETIQUETA = #{etiqueta},
+            </if>
+            <if test="usuarioResponsable != null">
+                C_USUARIORESPONSABLE = #{usuarioResponsable},
+            </if>
+            
+            <if test="numero != null">
+                C_NUMEROEXPEDIENTE = #{numero}
+            </if>
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteConcluir" parameterType="long">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            C_ESTADOGENERAL = 'C'
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteReconsideracion" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            N_INDRECONSIDERACION = #{indiceReconsideracion},
+            C_DETALLERECONSIDERACION = #{detalleReconsideracion}
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteAsignar" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            C_USUREGISTRO = #{usuarioAsignado},
+            C_USUARIORESPONSABLE = #{usuarioResponsable},
+            N_INDASIGNACION = 1
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteDesistir" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            N_INDDESESTIMIENTO = 1,
+            C_ESTADOGENERAL = 'C'
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <update id="expedienteInactivar" parameterType="expediente">
+        UPDATE SID_REG_EXPEDIENTE
+        <set>
+            C_ESTADO = 'I'
+        </set>
+        <where>
+            N_IDEXPEDIENTE = #{id}
+        </where>
+    </update>
+    
+    <select id="expedienteBuscar" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*, 
+        B.NOMBRE_PARAMETRO TIPOCLASIFICACION,
+        C.NOMBRE_PARAMETRO TIPOINGRESO,
+        D.NOMBRE_PARAMETRO TIPOTEMA,
+        E.NOMBRE_PARAMETRO TIPOSUBTEMA
+        FROM SID_REG_EXPEDIENTE A
+        LEFT JOIN SID_PARAMETRO B 
+        ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        LEFT JOIN SID_PARAMETRO C   
+        ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+        LEFT JOIN SID_PARAMETRO D   
+        ON A.C_TIPOTEMA = D.VALOR_PARAMETRO AND D.PADRE_PARAMETRO = 30   
+        LEFT JOIN SID_PARAMETRO E  
+        ON E.PADRE_PARAMETRO = D.NUM_PARAMETRO AND A.C_TIPOSUBTEMA = E.VALOR_PARAMETRO
+        WHERE A.C_ESTADO = 'A'
+    </select>
+    
+    <select id="expedienteBuscarActivo" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*, 
+        B.NOMBRE_PARAMETRO TIPOCLASIFICACION,
+        C.NOMBRE_PARAMETRO TIPOINGRESO,
+        D.NOMBRE_PARAMETRO TIPOTEMA,
+        E.NOMBRE_PARAMETRO TIPOSUBTEMA
+        FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_REG_ETAPA_ESTADO F ON A.N_IDEXPEDIENTE = F.N_ID_EXPEDIENTE
+        LEFT JOIN SID_PARAMETRO B 
+        ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        LEFT JOIN SID_PARAMETRO C   
+        ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+        LEFT JOIN SID_PARAMETRO D   
+        ON A.C_TIPOTEMA = D.VALOR_PARAMETRO AND D.PADRE_PARAMETRO = 30   
+        LEFT JOIN SID_PARAMETRO E  
+        ON E.PADRE_PARAMETRO = D.NUM_PARAMETRO AND A.C_TIPOSUBTEMA = E.VALOR_PARAMETRO
+        WHERE A.C_ESTADO = 'A'
+        AND F.C_NUMEROEXPEDIENTE = #{numero}
+        AND F.C_INDICADOR = 'ACT'
+    </select>
+    
+    <select id="expedienteBuscarActivoEtapa" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*, 
+        B.NOMBRE_PARAMETRO TIPOCLASIFICACION,
+        C.NOMBRE_PARAMETRO TIPOINGRESO,
+        D.NOMBRE_PARAMETRO TIPOTEMA,
+        E.NOMBRE_PARAMETRO TIPOSUBTEMA
+        FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_REG_ETAPA_ESTADO F ON A.N_IDEXPEDIENTE = F.N_ID_EXPEDIENTE
+        LEFT JOIN SID_PARAMETRO B 
+        ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        LEFT JOIN SID_PARAMETRO C   
+        ON A.C_TIPOINGRESO = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 20
+        LEFT JOIN SID_PARAMETRO D   
+        ON A.C_TIPOTEMA = D.VALOR_PARAMETRO AND D.PADRE_PARAMETRO = 30   
+        LEFT JOIN SID_PARAMETRO E  
+        ON E.PADRE_PARAMETRO = D.NUM_PARAMETRO AND A.C_TIPOSUBTEMA = E.VALOR_PARAMETRO
+        WHERE F.C_NUMEROEXPEDIENTE = #{numero}
+        AND F.C_INDICADORETAPA = 'VIG'
+        AND F.N_ID_ETAPA = #{idEtapa}
+    </select>
+    
+    <select id="expedienteBuscarUsuario" resultMap="expedienteMap" parameterType="String">
+        SELECT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO
+        AND B.PADRE_PARAMETRO = 10
+        WHERE A.C_USUREGISTRO  = #{value}
+        AND A.C_ESTADO = 'A'
+    </select>
+    
+    <select id="expedienteReporteMesUsuario" resultMap="expedienteMap" parameterType="expediente">
+        SELECT COUNT(A.N_IDEXPEDIENTE) TOTAL, TO_CHAR(A.D_FECHAREGISTRO, 'YYYY-MM-DD') MES FROM SID_REG_EXPEDIENTE A
+        WHERE A.C_USUREGISTRO  = #{usuarioRegistro}
+        AND A.C_ESTADO = 'A'
+        AND A.C_TIPOCLASIFICACION = #{tipoClasificion}
+        GROUP BY TO_CHAR(A.D_FECHAREGISTRO, 'YYYY-MM-DD')
+    </select>
+    
+    <select id="expedientexPersona" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, E.C_NOMBRE NOMBRE_OD, L.NOM_USUARIO||' '||L.APE_PATERNO COMISIONADO FROM SID_REG_EXPEDIENTE A 
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        INNER JOIN SID_SEG_USUARIO L ON L.CODIGO_USUARIO = A.C_USUREGISTRO 
+        INNER JOIN SID_REG_EXPEDE_PERSONA C ON A.N_IDEXPEDIENTE = C.N_IDEXPEDIENTE
+        INNER JOIN SID_SEG_USUARIO D ON D.CODIGO_USUARIO = A.C_USUREGISTRO 
+        INNER JOIN SID_SEG_OFICINA_DEFENSORIAL E ON E.N_ID_OD = D.N_ID_OD
+        WHERE C.N_IDPERSONA = #{id} AND A.C_ESTADO = 'A'
+        ORDER BY A.N_IDEXPEDIENTE DESC
+    </select>
+       
+    <select id="expedienteBuscarUsuarioPaginado" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, C.C_INDICADORETAPA, C.N_ID_ETAPA, D.C_NOMBRE, J.C_NOMBRE NOMBRE_OD, L.NOM_USUARIO||' '||L.APE_PATERNO COMISIONADO
+        FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        INNER JOIN SID_SEG_USUARIO L ON L.CODIGO_USUARIO = A.C_USUREGISTRO 
+        INNER JOIN SID_SEG_OFICINA_DEFENSORIAL J ON J.N_ID_OD = A.N_CODIGOOD
+        LEFT JOIN SID_REG_ETAPA_ESTADO C ON A.N_IDEXPEDIENTE = C.N_ID_EXPEDIENTE
+        LEFT JOIN SID_REG_ESTADO D ON C.N_ID_ESTADO = D.N_ID_ESTADO
+        LEFT JOIN SID_REG_EXPEDE_ENTIDAD E ON A.N_IDEXPEDIENTE = E.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_ENTIDAD F ON E.N_ID_ENTIDAD = F.N_ID_ENTIDAD
+        LEFT JOIN SID_REG_EXPEDE_PERSONA G ON G.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_PERSONA H ON G.N_IDPERSONA = H.N_IDPERSONA
+        WHERE A.C_ESTADO = 'A' 
+        <if test="filtroSumilla != null">
+            AND UPPER(A.C_SUMILLA) LIKE '%'||UPPER(#{filtroSumilla})||'%' 
+        </if>
+        <if test="filtroNroExpediente != null">
+            AND A.N_CONSECUTIVO = #{filtroNroExpediente}
+        </if>
+        <if test="anhoBusqueda != null">
+            AND TO_CHAR(A.D_FECHAREGISTRO, 'YYYY') = #{anhoBusqueda}
+        </if>
+        <if test="ODBusqueda != null">
+            AND A.N_CODIGOOD = #{ODBusqueda}
+        </if>
+        <if test="usuarioRegistro != null">
+            AND A.C_USUREGISTRO  = #{usuarioRegistro}     
+        </if>
+        <if test="tipoBusqueda == 1">
+            ORDER BY A.N_IDEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == -1">
+            ORDER BY A.N_IDEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == 2">
+            ORDER BY A.C_NUMEROEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == -2">
+            ORDER BY A.C_NUMEROEXPEDIENTE ASC
+        </if>
+        <if test="tipoBusqueda == 3">
+            ORDER BY A.C_TIPOCLASIFICACION DESC
+        </if>
+        <if test="tipoBusqueda == -3">
+            ORDER BY A.C_TIPOCLASIFICACION ASC
+        </if>
+        <if test="tipoBusqueda == 4">
+            ORDER BY A.D_FECHAREGISTRO DESC
+        </if>
+        <if test="tipoBusqueda == -4">
+            ORDER BY A.D_FECHAREGISTRO ASC
+        </if>
+        <if test="tipoBusqueda == 5">
+            ORDER BY A.C_ESTADOGENERAL DESC
+        </if>
+        <if test="tipoBusqueda == -5">
+            ORDER BY A.C_ESTADOGENERAL ASC
+        </if>
+        <if test="tipoBusqueda == 6">
+            ORDER BY A.N_VERSION DESC
+        </if>
+        <if test="tipoBusqueda == -6">
+            ORDER BY A.N_VERSION ASC
+        </if>
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="expedienteBuscarUsuarioODPaginado" resultMap="expedienteMap" parameterType="expediente">
+        SELECT A.*
+        FROM (
+        SELECT
+        B.*,
+        ROWNUM numfila
+        FROM (
+        SELECT DISTINCT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, C.C_INDICADORETAPA, C.N_ID_ETAPA, D.C_NOMBRE, J.C_NOMBRE NOMBRE_OD, L.NOM_USUARIO||' '||L.APE_PATERNO COMISIONADO
+        FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        INNER JOIN SID_SEG_USUARIO L ON L.CODIGO_USUARIO = A.C_USUREGISTRO 
+        INNER JOIN SID_SEG_OFICINA_DEFENSORIAL J ON J.N_ID_OD = L.N_ID_OD
+        LEFT JOIN SID_REG_ETAPA_ESTADO C ON A.N_IDEXPEDIENTE = C.N_ID_EXPEDIENTE
+        LEFT JOIN SID_REG_ESTADO D ON C.N_ID_ESTADO = D.N_ID_ESTADO
+        LEFT JOIN SID_REG_EXPEDE_ENTIDAD E ON A.N_IDEXPEDIENTE = E.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_ENTIDAD F ON E.N_ID_ENTIDAD = F.N_ID_ENTIDAD
+        LEFT JOIN SID_REG_EXPEDE_PERSONA G ON G.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_PERSONA H ON G.N_IDPERSONA = H.N_IDPERSONA
+        WHERE A.C_ESTADO = 'A' 
+        AND A.N_CODIGOOD  = #{idOficinaDefensorial}
+        <if test="tipoBusqueda == 1">
+            ORDER BY A.N_IDEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == -1">
+            ORDER BY A.N_IDEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == 2">
+            ORDER BY A.C_NUMEROEXPEDIENTE DESC
+        </if>
+        <if test="tipoBusqueda == -2">
+            ORDER BY A.C_NUMEROEXPEDIENTE ASC
+        </if>
+        <if test="tipoBusqueda == 3">
+            ORDER BY A.C_TIPOCLASIFICACION DESC
+        </if>
+        <if test="tipoBusqueda == -3">
+            ORDER BY A.C_TIPOCLASIFICACION ASC
+        </if>
+        <if test="tipoBusqueda == 4">
+            ORDER BY A.D_FECHAREGISTRO DESC
+        </if>
+        <if test="tipoBusqueda == -4">
+            ORDER BY A.D_FECHAREGISTRO ASC
+        </if>
+        <if test="tipoBusqueda == 5">
+            ORDER BY A.C_ESTADOGENERAL DESC
+        </if>
+        <if test="tipoBusqueda == -5">
+            ORDER BY A.C_ESTADOGENERAL ASC
+        </if>
+        <if test="tipoBusqueda == 6">
+            ORDER BY A.N_VERSION DESC
+        </if>
+        <if test="tipoBusqueda == -6">
+            ORDER BY A.N_VERSION ASC
+        </if>
+        ) B
+        ) A WHERE a.numfila BETWEEN #{ini} AND #{fin}
+    </select>
+    
+    <select id="expedienteBuscarUsuarioCompleto" resultMap="expedienteMap" parameterType="expediente">
+        SELECT DISTINCT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, C.C_INDICADORETAPA, C.N_ID_ETAPA, D.C_NOMBRE, J.C_NOMBRE NOMBRE_OD
+        FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        INNER JOIN SID_SEG_USUARIO L ON L.CODIGO_USUARIO = A.C_USUREGISTRO 
+        INNER JOIN SID_SEG_OFICINA_DEFENSORIAL J ON J.N_ID_OD = L.N_ID_OD
+        LEFT JOIN SID_REG_ETAPA_ESTADO C ON A.N_IDEXPEDIENTE = C.N_ID_EXPEDIENTE
+        LEFT JOIN SID_REG_ESTADO D ON C.N_ID_ESTADO = D.N_ID_ESTADO
+        LEFT JOIN SID_REG_EXPEDE_ENTIDAD E ON A.N_IDEXPEDIENTE = E.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_ENTIDAD F ON E.N_ID_ENTIDAD = F.N_ID_ENTIDAD
+        LEFT JOIN SID_REG_EXPEDE_PERSONA G ON G.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE
+        LEFT JOIN SID_REG_PERSONA H ON G.N_IDPERSONA = H.N_IDPERSONA
+        WHERE A.C_ESTADO = 'A' 
+        AND A.C_ESTADOGENERAL = 'A'
+        AND A.C_TIPOCLASIFICACION IN ('01','03')
+        <if test="usuarioRegistro != null">
+            AND A.C_USUREGISTRO  = #{usuarioRegistro}     
+        </if>
+        <if test="numero != null">
+            AND A.N_CONSECUTIVO  = #{numero}      
+        </if>
+        ORDER BY A.N_IDEXPEDIENTE DESC
+    </select>
+    
+    <select id="expedienteBuscarUsuarios" resultMap="expedienteMap" parameterType="expediente">
+        SELECT DISTINCT A.C_USUREGISTRO, B.NOM_USUARIO||' '||B.APE_PATERNO||' '||B.APE_MATERNO  USUARIOCOMPLETO FROM SID_REG_EXPEDIENTE A 
+        INNER JOIN SID_SEG_USUARIO B ON A.C_USUREGISTRO = B.CODIGO_USUARIO
+        WHERE A.C_ESTADO = 'A' AND A.N_VERSION > 0
+    </select>
+    
+    <select id="expedienteBuscarPorId" resultMap="expedienteMap" parameterType="Long">
+        SELECT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, C.C_INDICADORETAPA, C.N_ID_ETAPA, D.C_NOMBRE FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        LEFT JOIN SID_REG_ETAPA_ESTADO C ON A.N_IDEXPEDIENTE = C.N_ID_EXPEDIENTE
+        LEFT JOIN SID_REG_ESTADO D ON C.N_ID_ESTADO = D.N_ID_ESTADO
+        WHERE A.C_ESTADO = 'A' AND A.N_IDEXPEDIENTE = #{id}
+    </select>
+    
+    <select id="expedienteBuscarPorNumero" resultMap="expedienteMap" parameterType="String">
+        SELECT A.*, B.NOMBRE_PARAMETRO AS TIPOCLASIFICACION, C.C_INDICADORETAPA, C.N_ID_ETAPA, D.C_NOMBRE FROM SID_REG_EXPEDIENTE A
+        INNER JOIN SID_PARAMETRO B ON A.C_TIPOCLASIFICACION = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 10
+        LEFT JOIN SID_REG_ETAPA_ESTADO C ON A.N_IDEXPEDIENTE = C.N_ID_EXPEDIENTE
+        LEFT JOIN SID_REG_ESTADO D ON C.N_ID_ESTADO = D.N_ID_ESTADO
+        WHERE A.C_ESTADO = 'A' AND A.C_NUMEROEXPEDIENTE = #{value}
+    </select>
+    
+    <select id="expedienteCodigoPorOD" resultType="Long" parameterType="Long">
+        SELECT MAX(N_CONSECUTIVO) as N_CONSECUTIVO FROM SID_REG_EXPEDIENTE WHERE N_CODIGOOD = #{id} AND TO_CHAR(D_FECHAREGISTRO, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+    </select>
+    
+    <select id="expedienteMayorInformacionCount" resultType="java.lang.Integer" parameterType="String">
+        SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_NUMEROEXPEDIENTE = #{value} and N_INDMAYORINFORMA = 1
+    </select>
+    
+</mapper>
+
