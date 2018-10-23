@@ -6,7 +6,7 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<head>
+<h:head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- Tell the browser to be responsive to screen width -->
@@ -29,7 +29,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     
 <![endif]-->
-</head>
+</h:head>
 
 <body>
     <!-- ============================================================== -->
@@ -406,10 +406,10 @@
                         <h:form>
                         <c:forEach var="x" items="#{menuController.menuPadre}" >
                             <li class="sidebar-item">
-                                <a jsf:action="#{menuController.cargarPagina(x.id)}" class="sidebar-link">
+                                <h:commandLink action="#{menuController.cargarPagina(x.id)}" class="sidebar-link">
                                         <i class="mdi #{x.clase}"></i>
                                         <span class="hide-menu"> #{x.descripcion} </span>
-                                    </a>
+                                    </h:commandLink>
                                 </li>        
                         </c:forEach>
                         </h:form>

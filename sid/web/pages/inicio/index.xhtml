@@ -95,6 +95,18 @@
                                             
                                         </tbody>
                                     </table>
+                                    <ul class="pager">
+                                                <li>
+                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Anterior
+                                                        <f:ajax render="@form" onevent="closeModal"/>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Siguiente
+                                                        <f:ajax render="@form" onevent="closeModal"/>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                 </div>
                             </div>
                         </div>
@@ -123,18 +135,7 @@
                                         </div>
                                         <div class="panel-body">
                                             
-                                            <ul class="pager">
-                                                <li>
-                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Anterior
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Siguiente
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            
                                         </div>
                                     </div>
                                 </td>
