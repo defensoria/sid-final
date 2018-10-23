@@ -1,570 +1,737 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html dir="ltr" lang="es"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      class="fixed" id="idHtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>SID</title>
-        <link href="/sid/faces/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/sid/faces/bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>    
-        <link href="/sid/faces/bootstrap/css/theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/sid/faces/bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/sid/faces/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/sid/faces/bootstrap/css/slider.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/sid/faces/jqueryui/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="/sid/faces/jqueryui/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-        <script src="/sid/faces/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="/sid/faces/bootstrap/js/sb-admin-2.js"></script>
-        <script src="/sid/faces/bootstrap/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-        <script src="/sid/faces/bootstrap/js/bootstrap-slider.min.js" type="text/javascript"></script>
-        <script src="/sid/faces/jqueryui/js/jquery.ui.core.js" type="text/javascript"></script>
-        <script src="/sid/faces/jqueryui/js/jquery.ui.widget.js" type="text/javascript"></script>
-        <script src="/sid/faces/jqueryui/js/jquery.ui.position.js" type="text/javascript"></script>
-        <script src="/sid/faces/jqueryui/js/jquery.ui.menu.js" type="text/javascript"></script>
-        <script src="/sid/faces/jqueryui/js/jquery.ui.autocomplete.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="/sid/faces/bootstrap/css/bootstrap-multiselect.css" type="text/css"/>
-        <script type="text/javascript" src="/sid/faces/bootstrap/js/bootstrap-multiselect.js"></script>
-        <script type="text/javascript" src="/sid/faces/bootstrap/js/bootstrap-multiselect-collapsible-groups.js"></script>
-        <script src="/sid/faces/bootstrap/js/raphael-min.js"></script>
-        <script src="/sid/faces/bootstrap/js/morris.min.js"></script>
-        <link rel="stylesheet" href="/sid/faces/bootstrap/css/morris.css"/>
-    </h:head>
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <style>
-        .error{
-            background: #F2DEDE;
-        }
-        a:hover {
-            cursor: pointer
-        }
-        .disabled-form{
-            background: #EEEEEE; pointer-events:none;
-        }
-    </style>
-    <body>
-        <style>
-            body{
-                font-size: 0.9em;
-            }
-        </style>
-        <div class="modal fade" id="idAlerta">
-            <div class="modal-dialog modal-sm" >
-                <div class="modal-content" style=" background: #FCF8E3">
-                    <div class="modal-header" style="padding: 5px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: black; font-size: large" ></span></button>
-                        <h4 style="color: #8A6D3B"><b>Alerta!</b></h4>
-                    </div>
-                    <div style="background: white;box-sizing: border-box;" >
-                        <div class="modal-body" style="padding: 7px;">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="padding-right: 8px">
-                                        <img style="width: 30px" src="/sid/faces/bootstrap/img/warning.png" />
-                                    </td>
-                                    <td>
-                                        <b><div id="mensaje" style="font-size: 1.2em" class="text-resalt-comun"></div></b>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/sid/faces/assets/images/favicon.png"/>
+    <title>AdminX Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="/sid/faces/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet"/>
+    <link href="/sid/faces/assets/extra-libs/c3/c3.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/sid/faces/dist/css/style.min.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
         </div>
-
-        <!--Info-->
-        <div class="modal fade" id="idInfo">
-            <div class="modal-dialog modal-sm" >
-                <div class="modal-content" style=" background: #D9EDF7">
-                    <div class="modal-header" style="padding: 5px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: black; font-size: large" ></span></button>
-                        <h4 style="color: #3170A5"><b>Info</b></h4>
-                    </div>
-                    <div style="background: white;box-sizing: border-box;" >
-                        <div class="modal-body" style="padding: 7px;">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="padding-right: 8px">
-                                        <img style="width: 30px" src="/sid/faces/bootstrap/img/info.png" />
-                                    </td>
-                                    <td>
-                                        <div id="mensajeInfo" style="font-size: 1.2em" class="text-resalt-comun"></div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/sid/faces/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img src="/sid/faces/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                             <!-- dark Logo text -->
+                             <img src="/sid/faces/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                             <!-- Light Logo text -->    
+                             <img src="/sid/faces/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                 </div>
-            </div>
-        </div>
-
-
-        <!-- Mensajes -->
-        <div class="modal fade" id="idMensaje">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content" style=" background: #FCF8E3">
-                    <div class="modal-header" style="padding: 5px;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: black; font-size: large" ></span></button>
-                        <h4 style="color: #8A6D3B"><b>Alerta</b></h4>
-                    </div>
-                    <div style="background: white;box-sizing: border-box;" >
-                        <div class="modal-body" style="padding: 7px;">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="padding-right: 8px">
-                                        <img style="width: 30px" src="/sid/faces/bootstrap/img/warning.png" />
-                                    </td>
-                                    <td>
-                                        <div class="mensaje" style="color: #878787"></div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
-            
-            function alertar(msg) {
-                $("#idAlerta").modal('show');
-                $("#mensaje").html(msg);
-            }
-
-            function info(msg) {
-                $("#idInfo").modal('show');
-                $("#mensajeInfo").html(msg);
-            }
-
-            function confirmar() {
-                $(".confirmacion").modal('show');
-            }
-
-        </script>
-        <h:form id="formId">
-            <header class="header">
-                <table style="width: 100%">
-                    <tr>
-                        <td style="width: 16%">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <a class="logo" jsf:action="#{menuController.inicio()}">
-                                            <img src="/sid/faces/bootstrap/img/logo.png" height="30" alt="sid" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>( Sistema de Información Defensorial )</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td  style="width: 38%">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="width: 22%">
-                                        <h:selectOneMenu value="#{busquedaController.expediente.anhoBusqueda}">
-                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                            <f:selectItem itemLabel="2015" itemValue="2015" />
-                                            <f:selectItem itemLabel="2016" itemValue="2016" />
-                                            <f:selectItem itemLabel="2017" itemValue="2017" />
-                                        </h:selectOneMenu>
-                                    </td>
-                                    <td>
-                                        <h:selectOneMenu value="#{busquedaController.expediente.ODBusqueda}">
-                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                            <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                        </h:selectOneMenu>
-                                    </td>
-                                    <td>
-                                        <div class="content">
-                                            <div id="idDivRegistro" class="form-group has-feedback" style="width: 100%">
-                                                <input type="text" jsf:value="#{busquedaController.expediente.observacion}" class="form-control input-sm"  placeholder="Buscar"/>
-                                                <a style="margin: auto" jsf:action="#{busquedaController.listarExpedientesPaginado(1)}" >
-                                                    <span style="font-size: medium; top: 0px" class="glyphicon glyphicon-search form-control-feedback"/>
-                                                </a>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <!-- ============================================================== -->
+                        <!-- mega menu -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown mega-dropdown"><a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-none d-md-block">Mega <i class="fa fa-angle-down"></i></span>
+                             <span class="d-block d-md-none"><i class="mdi mdi-dialpad font-24"></i></span>
+                            </a>
+                            <div class="dropdown-menu animated bounceInDown">
+                                <div class="mega-dropdown-menu row">
+                                    <div class="col-lg-3 col-xlg-2 m-b-30">
+                                        <h4 class="m-b-20">CAROUSEL</h4>
+                                        <!-- CAROUSEL -->
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <div class="container p-0"> <img class="d-block img-fluid" src="/sid/faces/assets/images/big/img1.jpg" alt="First slide"/></div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="container p-0"><img class="d-block img-fluid" src="/sid/faces/assets/images/big/img2.jpg" alt="Second slide"/></div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="container p-0"><img class="d-block img-fluid" src="/sid/faces/assets/images/big/img3.jpg" alt="Third slide"/></div>
+                                                </div>
                                             </div>
-
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
                                         </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td>
-                            <div class="header-right">							
-                                <ul class="notifications">
-                                    <li>
-                                        <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                                            <i class="fa fa-bell"></i>
-                                            <span class="badge">#{bandejaController.nroMensajesInternos}</span>
-                                        </a>
-                                        <div class="dropdown-menu notification-menu">
-                                            <div class="notification-title">
-                                                Mensajes
-                                            </div>
-
-                                            <div class="content">
-                                                <ul>
-                                                    <span>Tiene #{bandejaController.nroMensajesInternos} mensajes</span>  
-                                                </ul>
-                                                <hr />
-
-                                                <div class="text-right">
-                                                    <a jsf:action="#{bandejaController.cargarTotalInternos(1)}" class="view-more"><i class="fa fa-arrow-right"></i> ir a la bandeja</a>
+                                        <!-- End CAROUSEL -->
+                                    </div>
+                                    <div class="col-lg-3 m-b-30">
+                                        <h4 class="m-b-20">ACCORDION</h4>
+                                        <!-- Accordian -->
+                                        <div id="accordion">
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingOne">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                  Collapsible Group Item #1
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry.
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>                            
-
-                                    </li>
-                                    <li>
-                                        <a href="#" class="dropdown-toggle notification-icon"  data-toggle="dropdown">
-                                            <i class="fa fa-rss"></i>
-                                            <span class="badge">#{bandejaController.nroMensajesAutomaticos}</span>
-                                        </a> 
-                                        <div class="dropdown-menu notification-menu">
-                                            <div class="notification-title">
-                                                Mensajes
-                                            </div>
-
-                                            <div class="content">
-                                                <ul>
-                                                    <span>Tiene #{bandejaController.nroMensajesAutomaticos} mensajes</span>  
-                                                </ul>
-                                                <hr />
-
-                                                <div class="text-right">
-                                                    <a jsf:action="#{bandejaController.cargarTotalAutomaticos(1)}" class="view-more"><i class="fa fa-arrow-right"></i> ir a la bandeja</a>
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  Collapsible Group Item #2
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry.
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                    </li>
-                                    <li>
-                                        <a href="#" class="dropdown-toggle notification-icon"  data-toggle="dropdown">
-                                            <i class="fa fa-cog fa-fw"></i>
-                                            <span class="badge">#{bandejaController.nroMensajesProgramados}</span>
-                                        </a> 
-                                        <div class="dropdown-menu notification-menu">
-                                            <div class="notification-title">
-                                                Mensajes
-                                            </div>
-
-                                            <div class="content">
-                                                <ul>
-                                                    <span>Tiene #{bandejaController.nroMensajesProgramados} mensajes</span>  
-                                                </ul>
-                                                <hr />
-
-                                                <div class="text-right">
-                                                    <a jsf:action="#{bandejaController.cargarTotalProgramados(1)}" class="view-more"><i class="fa fa-arrow-right"></i> ir a la bandeja</a>
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingThree">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  Collapsible Group Item #3
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry.
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                    </li>
-                                </ul>
-
-                                <span class="separator" style="margin-left: 0px; margin-right: 0px"></span>
-
-                                <div id="userbox" class="userbox">
-                                    <a href="#" data-toggle="dropdown">
-                                        <figure class="profile-picture">
-                                            <img src="/sid/DownloadFileServlet?fileName=#{loginController.usuarioSesion.ruta == null? '/sid/faces/bootstrap/img/user-admin.png' : loginController.usuarioSesion.ruta}" alt="#{loginController.usuarioSesion.nombre} &#160; #{loginController.usuarioSesion.apellidoPaterno} &#160; #{loginController.usuarioSesion.apellidoMaterno}" class="img-circle" data-lock-picture="images/!logged-user.jpg" />
-                                        </figure>
-                                        <div class="profile-info">
-                                            <span >#{loginController.usuarioSesion.nombre} &#160; #{loginController.usuarioSesion.apellidoPaterno} &#160; #{loginController.usuarioSesion.apellidoMaterno}</span>
-                                            <span class="role">#{loginController.usuarioSesion.cargo}</span>
                                         </div>
-
-                                        <i class="fa custom-caret"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu">
-                                        <ul class="list-unstyled">
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a role="menuitem" tabindex="-1" jsf:actionListener="#{usuarioDetalleController.verDetallePerfil()}" jsf:action="perfil"><i class="fa fa-user"></i> Mi perfil</a>
-                                            </li>
-                                            <li>
-                                                <a href="/sid/cerrarSesion" role="menuitem" tabindex="-1" ><i class="fa fa-power-off"></i> Cerrar sesion</a>
-                                            </li>
+                                    </div>
+                                  
+                                    <div class="col-lg-3 col-xlg-4 m-b-30">
+                                        <h4 class="m-b-20">List style</h4>
+                                        <!-- List style -->
+                                        <ul class="list-style-none">
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> You can give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Another Give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Forth link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Another fifth link</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
-            </header>
-            <script>
-                $(document).ready(function(){
-                    $('.selectRadio').multiselect();
-                var stateMenu;
-                var i = 0;
-                stateMenu = sessionStorage.getItem('stateMenu');
-                if (stateMenu === '0') {
-                    $('#idHtml').removeClass("sidebar-left-collapsed");
-                }
-
-                if (stateMenu === '1') {
-                    $('#idHtml').addClass("sidebar-left-collapsed");
-                }
-
-                if (stateMenu !== null) {
-                    if (stateMenu === '0') {
-                        i = 0;
-                    }
-                    if (stateMenu === '1') {
-                        i = 1;
-                    }
-                }
-                    $('#idDivOcultarMenu').click(function () {
-                    if (i === 0) {
-                        $('#idHtml').addClass("sidebar-left-collapsed");
-                        i = 1;
-                    }
-                    else {
-                        $('#idHtml').removeClass("sidebar-left-collapsed");
-                        i = 0;
-                    }
-                    sessionStorage.setItem('stateMenu', i);
-                });
-                });
-            </script>
-            <aside id="sidebar-left" class="sidebar-left" style="max-width: 20%">
-                <div class="sidebar-header">
-                    <div class="sidebar-title">
-                        MENU
-                    </div>
-                    <div class="sidebar-toggle" id="idDivOcultarMenu" >
-                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                    </div>
-                    <!--<div class="sidebar-toggle" >CCC
-                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                    </div>-->
-                    
-                </div>
-                <div class="nano" >
-                    <div class="nano-content">
-                        <nav id="menu" class="nav-main" >
-                            <ul class="nav nav-main">
-                                <c:forEach var="x" items="#{menuController.menuPadre}" >
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End mega menu -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- create new -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
+                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"/> <a class="srh-btn"><i class="ti-close"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- create new -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="flag-icon flag-icon-us"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right  animated bounceInDown" aria-labelledby="navbarDropdown2">
+                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
+                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>
+                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>
+                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                                
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <ul class="list-style-none">
                                     <li>
-                                        <a jsf:action="#{menuController.cargarPagina(x.id)}">
-                                            <i class="#{x.clase}" aria-hidden="true" ></i>
-                                            <span style="width: 100px">#{x.descripcion}</span>
-                                        </a>
+                                        <div class="drop-title bg-primary text-white">
+                                            <h4 class="m-b-0 m-t-5">4 New</h4>
+                                            <span class="font-light">Notifications</span>
+                                        </div>
                                     </li>
-                                </c:forEach>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <!--<div style="text-align: right; height:70%; vertical-align: bottom"> 
-                    <table style="height: 100%">
-                        <tr>
-                            <td style="height: 100%; vertical-align: bottom">
-                                <div><img alt="" src="/sid/faces/bootstrap/img/giz.png" width="50%" style="vertical-align: bottom; position: static"/></div>
-                            </td>
-                        </tr>
-                    </table>
-    
-</div>-->
-            </aside>
-            
-   <style>
-            .site-footer {
-    background: #ECEDF0 none repeat scroll 0 0;
-    border-top: 1px solid #ABB4BE;
-    bottom: 0;
-    left: 0;
-    line-height: 1;
-    position: fixed;
-    white-space: nowrap;
-    z-index: 10;
-    width: 100%;
-    padding-right: 10px;    
-    padding-bottom : 10px;    
-    padding-top: 10px;    
-}
-        </style>         
-        </h:form>
-        <!-- /.navbar-static-side -->
-
-        <section role="main" class="content-body">
-            <header class="page-header" style="left : 73px">
-                <h:form>
-                    <input type="hidden"  class="idCaso" />
-
-                    <table width="100%">
-                        <tr>
-                            <td style="width: 17%"></td>
-                            <td><h2 style="text-decoration: none; display: #{menuController.menuHijo.size() == 3? '':'none'}">
-                                    <span style="font-weight: bold; font-size: 0.8em" class="idNombreCaso"></span>
-                                </h2>
-                                <div class="right-wrapper pull-right">
-                                    <ol class="breadcrumbs">
-                                        <c:forEach var="y" items="#{menuController.menuHijo}" >
-                                            <li>
-                                                <h:commandLink action="#{menuController.cargarPagina(y.id)}">
-                                                    <span class="menuHijo">#{y.descripcion}</span>
-                                                </h:commandLink>
-                                            </li>
-                                        </c:forEach>
-                                    </ol>
+                                    <li>
+                                        <div class="message-center notifications">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center m-b-5" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
+                                
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                                <span class="with-arrow"><span class="bg-danger"></span></span>
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="drop-title text-white bg-danger">
+                                            <h4 class="m-b-0 m-t-5">5 New</h4>
+                                            <span class="font-light">Messages</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message-center message-body">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="rounded-circle"/> <span class="profile-status online pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/2.jpg" alt="user" class="rounded-circle"/> <span class="profile-status busy pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/3.jpg" alt="user" class="rounded-circle"/> <span class="profile-status away pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/4.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center link" href="javascript:void(0);"> <b>See all e-Mails</b> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"/></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                                    <div class=""><img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="img-circle" width="60"/></div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0">Steave Jobs</h4>
+                                        <p class=" m-b-0">varun@gmail.com</p>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-
-
-                    <script>
-                        $(document).ready(function () {
-                            $(".idCaso").val(sessionStorage.getItem("idCaso"));
-
-                            $(".menuHijo").each(function () {
-                                if ($(this).text() === sessionStorage.getItem("menuHijoSession")) {
-                                    $(this).css("font-weight", "bold").css("font-size", "1.5em");
-                                } else {
-                                    $(this).css("font-weight", "normal").css("font-size", "1em");
-                                }
-                            });
-
-                            $(".idNombreCaso").html(sessionStorage.getItem("nombreCaso"));
-                            if ($(".idNombreCaso").text().length > 41) {
-                                $(".idNombreCaso").text($(".idNombreCaso").text().slice(0, 40) + '...');
-                            }
-                            $('.idNombreCaso').mousemove(function () {
-                                $('.idNombreCaso').tooltip({
-                                    placement: 'bottom',
-                                    title: sessionStorage.getItem("nombreCaso")
-                                });
-                            });
-                        });
-                    </script>
-                </h:form>
-
-            </header>
-            <br/>
-            <h:form>
-
-                <div style="left: 0px; display: #{menuController.menuNieto.size() > 0? 'inherit;': 'none;'} top: 110px" class="page-header">
-
-                    <div class="right-wrapper pull-right">
-                        <ol class="breadcrumbs">
-                            <c:forEach var="y" items="#{menuController.menuNieto}" >
-                                <li >
-                                    <a style="text-decoration: none; color: silver" jsf:action="#{menuController.cargarPagina(y.id)}">
-                                        <i aria-hidden="true"></i>
-                                        <span class="menuNieto">#{y.descripcion}</span>
-                                    </a>
-                                </li>
-                            </c:forEach>
-                        </ol>
-                    </div>
-                    <input type="hidden" value="#{menuController.menuNieto.size()}" id="idInputNieto"/>
-                    <script>
-                        $(document).ready(function () {
-                            $(".menuNieto").each(function () {
-                                if ($(this).text() === sessionStorage.getItem("menuNietoSession")) {
-                                    $(this).css("font-weight", "bold").css("font-size", "1.5em");
-                                } else {
-                                    $(this).css("font-weight", "normal").css("font-size", "1em");
-                                }
-                            });
-                            if ($("#idInputNieto").val() === '0') {
-                                $('.idPanelBody').css('padding-top', '10px');
-                            } else {
-                                $('.idPanelBody').css('padding-top', '80px');
-                            }
-
-                        });
-                    </script>
-
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
                 </div>
-            </h:form>
-            
-            <br/><br/><br/><br/><br/>
-            <div class="row">
-                <div>
-                    <div class="panel-body idPanelBody" >
-                        <h:messages />
-                        <ui:insert name="content">
-                        </ui:insert> 
-                    </div>                
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li>
+                            <!-- User Profile-->
+                            <div class="user-profile d-flex no-block dropdown m-t-20">
+                                <div class="user-pic"><img src="/sid/faces/assets/images/users/1.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-content hide-menu m-l-10">
+                                    <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <h5 class="m-b-0 user-name font-medium">Steave Jobs <i class="fa fa-angle-down"></i></h5>
+                                        <span class="op-5 user-email">varun@gmail.com</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End User Profile-->
+                        </li>
+                        
+                        <!-- User Profile-->
+                        <h:form>
+                        <c:forEach var="x" items="#{menuController.menuPadre}" >
+                            <li class="sidebar-item">
+                                <h:commandLink action="#{menuController.cargarPagina(x.id)}" class="sidebar-link">
+                                        <i class="mdi #{x.clase}"></i>
+                                        <span class="hide-menu"> #{x.descripcion} </span>
+                                    </h:commandLink>
+                                </li>        
+                        </c:forEach>
+                        </h:form>
+                       
+                        </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-5 align-self-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-7 align-self-center">
+                        <div class="d-flex no-block justify-content-end align-items-center">
+                            <div class="m-r-10">
+                                <div class="lastmonth"></div>
+                            </div>
+                            <div class=""><small>LAST MONTH</small>
+                                <h4 class="text-info m-b-0 font-medium">$58,256</h4></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-        <script>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                
+                <h:messages />
+                        <ui:insert name="content">
+                        </ui:insert>
+                
+                
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                All Rights Reserved by XXXX. Designed and Developed by <a href="df">Defensoria del Pueblo</a>.
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- customizer Panel -->
+    <!-- ============================================================== -->
+    <aside class="customizer">
+        <a href="javascript:void(0)" class="service-panel-toggle"><i class="fa fa-spin fa-cog"></i></a>
+        <div class="customizer-body">
+            <ul class="nav customizer-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="mdi mdi-wrench font-20"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#chat" role="tab" aria-controls="chat" aria-selected="false"><i class="mdi mdi-message-reply font-20"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="mdi mdi-star-circle font-20"></i></a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- Tab 1 -->
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="p-15 border-bottom">
+                        <!-- Sidebar -->
+                        <h5 class="font-medium m-b-10 m-t-10">Layout Settings</h5>
+                        <div class="custom-control custom-checkbox m-t-10">
+                            <input type="checkbox" class="custom-control-input" name="theme-view" id="theme-view"/>
+                            <label class="custom-control-label" for="theme-view">Dark Theme</label>
+                        </div>
+                        <div class="custom-control custom-checkbox m-t-10">
+                            <input type="checkbox" class="custom-control-input sidebartoggler" name="collapssidebar" id="collapssidebar"/>
+                            <label class="custom-control-label" for="collapssidebar">Collapse Sidebar</label>
+                        </div>
+                        <div class="custom-control custom-checkbox m-t-10">
+                            <input type="checkbox" class="custom-control-input" name="sidebar-position" id="sidebar-position"/>
+                            <label class="custom-control-label" for="sidebar-position">Fixed Sidebar</label>
+                        </div>
+                        <div class="custom-control custom-checkbox m-t-10">
+                            <input type="checkbox" class="custom-control-input" name="header-position" id="header-position"/>
+                            <label class="custom-control-label" for="header-position">Fixed Header</label>
+                        </div>
+                        <div class="custom-control custom-checkbox m-t-10">
+                            <input type="checkbox" class="custom-control-input" name="boxed-layout" id="boxed-layout"/>
+                            <label class="custom-control-label" for="boxed-layout">Boxed Layout</label>
+                        </div>
+                    </div>
+                    <div class="p-15 border-bottom">
+                        <!-- Logo BG -->
+                        <h5 class="font-medium m-b-10 m-t-10">Logo Backgrounds</h5>
+                        <ul class="theme-color">
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin1"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin2"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin3"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin4"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin5"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin6"></a></li>
+                        </ul>
+                        <!-- Logo BG -->
+                    </div>
+                    <div class="p-15 border-bottom">
+                        <!-- Navbar BG -->
+                        <h5 class="font-medium m-b-10 m-t-10">Navbar Backgrounds</h5>
+                        <ul class="theme-color">
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin1"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin2"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin3"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin4"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin5"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin6"></a></li>
+                        </ul>
+                        <!-- Navbar BG -->
+                    </div>
+                    <div class="p-15 border-bottom">
+                        <!-- Logo BG -->
+                        <h5 class="font-medium m-b-10 m-t-10">Sidebar Backgrounds</h5>
+                        <ul class="theme-color">
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin1"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin2"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin3"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin4"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin5"></a></li>
+                            <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin6"></a></li>
+                        </ul>
+                        <!-- Logo BG -->
+                    </div>
+                </div>
+                <!-- End Tab 1 -->
+                <!-- Tab 2 -->
+                <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <ul class="mailbox list-style-none m-t-20">
+                        <li>
+                            <div class="message-center chat-scroll">
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_1' data-user-id='1'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="rounded-circle"/><span class="profile-status online pull-right"></span></span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> 
+                                    </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_2' data-user-id='2'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/2.jpg" alt="user" class="rounded-circle"/> <span class="profile-status busy pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_3' data-user-id='3'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/3.jpg" alt="user" class="rounded-circle"/> <span class="profile-status away pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_4' data-user-id='4'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/4.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Nirav Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_5' data-user-id='5'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/5.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Sunil Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_6' data-user-id='6'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/6.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Akshay Kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_7' data-user-id='7'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/7.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <a href="javascript:void(0)" class="message-item" id='chat_user_8' data-user-id='8'>
+                                    <span class="user-img"> <img src="/sid/faces/assets/images/users/8.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
+                                    <div class="mail-contnet">
+                                        <h5 class="message-title">Varun Dhavan</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                </a>
+                                <!-- Message -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Tab 2 -->
+                <!-- Tab 3 -->
+                <div class="tab-pane fade p-15" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <h6 class="m-t-20 m-b-20">Activity Timeline</h6>
+                    <div class="steamline">
+                        <div class="sl-item">
+                            <div class="sl-left bg-success"> <i class="ti-user"></i></div>
+                            <div class="sl-right">
+                                <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
+                                <div class="desc">you can write anything </div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
+                            <div class="sl-right">
+                                <div class="font-medium">Send documents to Clark</div>
+                                <div class="desc">Lorem Ipsum is simply </div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="/sid/faces/assets/images/users/2.jpg"/> </div>
+                            <div class="sl-right">
+                                <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
+                                <div class="desc">Contrary to popular belief</div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="/sid/faces/assets/images/users/1.jpg"/> </div>
+                            <div class="sl-right">
+                                <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
+                                <div class="desc">Approve meeting with tiger</div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left bg-primary"> <i class="ti-user"></i></div>
+                            <div class="sl-right">
+                                <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
+                                <div class="desc">you can write anything </div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
+                            <div class="sl-right">
+                                <div class="font-medium">Send documents to Clark</div>
+                                <div class="desc">Lorem Ipsum is simply </div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="/sid/faces/assets/images/users/4.jpg"/> </div>
+                            <div class="sl-right">
+                                <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
+                                <div class="desc">Contrary to popular belief</div>
+                            </div>
+                        </div>
+                        <div class="sl-item">
+                            <div class="sl-left"> <img class="rounded-circle" alt="user" src="/sid/faces/assets/images/users/6.jpg"/> </div>
+                            <div class="sl-right">
+                                <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
+                                <div class="desc">Approve meeting with tiger</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Tab 3 -->
+            </div>
+        </div>
+    </aside>
+    <div class="chat-windows"></div>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/sid/faces/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/sid/faces/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/sid/faces/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="/sid/faces/dist/js/app.min.js"></script>
+    <script src="/sid/faces/dist/js/app.init.iconbar.js"></script>
+    <script src="/sid/faces/dist/js/app-style-switcher.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/sid/faces/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/sid/faces/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/sid/faces/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/sid/faces/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/sid/faces/dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="/sid/faces/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="/sid/faces/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 charts -->
+    <script src="/sid/faces/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="/sid/faces/assets/extra-libs/c3/c3.min.js"></script>
+    <!--chartjs -->
+    <script src="/sid/faces/assets/libs/chart.js/dist/Chart.min.js"></script>
+    <script src="/sid/faces/dist/js/pages/dashboards/dashboard1.js"></script>
+    
+</body>
 
-            this.$('.js-loading-bar').modal({
-                backdrop: 'static',
-                show: false
-            });
-
-            function closeModal(data) {
-                if (data.status === 'success') {
-                    $("#loadModal").modal('hide');
-                    $('body').removeClass('modal-open');
-                    $(".modal-backdrop").removeClass("modal-backdrop");
-                }
-            }
-
-            function closeModalInfo(data) {
-                if (data.status === 'success') {
-                    $("#loadModal").modal('hide');
-                    $('body').removeClass('modal-open');
-                    $(".modal-backdrop").removeClass("modal-backdrop");
-                    info("Se han realizado los cambios correctamente");
-                }
-            }
-
-            function loadingModal() {
-                $("#loadModal").modal('show');
-            }
-
-            function soloNumbero(e)
-            {
-                var keynum = window.event ? window.event.keyCode : e.which;
-                if ((keynum === 8) || (keynum === 46))
-                    return true;
-
-                return /\d/.test(String.fromCharCode(keynum));
-            }
-
-            $('.datepicker').datetimepicker({
-                pickTime: false
-            });
-            $(".datepicker").on("changeDate", function (ev) {
-                $(this).datetimepicker("hide");
-            });
-
-            $('.timepicker').datetimepicker({
-                pickDate: false
-            });
-        </script>
-
-        <script language="javascript">
-            // añadimos una función de callback que será invocada 
-            // cuando se produzca el evento de sesión caducada
-            function error() {
-                // obtenemos el componente que implementa la ventana modal para mostrarlo     
-                //alert('Sesion ha expirado');
-
-                window.location = '#{facesContext.externalContext.requestContextPath}/cerrarSesion.jsp';
-            }
-        </script>        
-        
-        
-    </body>
 </html>
