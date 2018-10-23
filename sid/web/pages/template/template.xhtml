@@ -21,11 +21,13 @@
     <link href="/sid/faces/assets/extra-libs/c3/c3.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="/sid/faces/dist/css/style.min.css" rel="stylesheet"/>
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    
 <![endif]-->
 </head>
 
@@ -404,10 +406,10 @@
                         <h:form>
                         <c:forEach var="x" items="#{menuController.menuPadre}" >
                             <li class="sidebar-item">
-                                <h:commandLink action="#{menuController.cargarPagina(x.id)}" class="sidebar-link">
+                                <a jsf:action="#{menuController.cargarPagina(x.id)}" class="sidebar-link">
                                         <i class="mdi #{x.clase}"></i>
                                         <span class="hide-menu"> #{x.descripcion} </span>
-                                    </h:commandLink>
+                                    </a>
                                 </li>        
                         </c:forEach>
                         </h:form>
@@ -731,7 +733,7 @@
     <!--chartjs -->
     <script src="/sid/faces/assets/libs/chart.js/dist/Chart.min.js"></script>
     <script src="/sid/faces/dist/js/pages/dashboards/dashboard1.js"></script>
-    
+
 </body>
 
 </html>

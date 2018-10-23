@@ -20,12 +20,12 @@
                                     </div>
                                     <div class="ml-auto d-flex no-block align-items-center">
                                         <div class="dl">
-                                            <select class="custom-select">
-                                                <option value="0" selected="true">Monthly</option>
-                                                <option value="1">Daily</option>
-                                                <option value="2">Weekly</option>
-                                                <option value="3">Yearly</option>
-                                            </select>
+                                            <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
+                                <button class="btn btn-primary" jsf:action="#{registroController.cargarNuevaBusqueda()}">
+                                    <span class="glyphicon glyphicon-user"/>
+                                    Atención al Usuario
+                                </button>
+                            </h:panelGroup>
                                         </div>
                                     </div>
                                 </div>
@@ -106,33 +106,13 @@
                     <tr>
                         <td></td>
                         <td style="text-align: right">
-                            <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
-                                <a class="btn btn-primary" jsf:action="#{registroController.cargarNuevaBusqueda()}">
-                                    <span class="glyphicon glyphicon-user"/>
-                                    Atención al Usuario
-                                </a>
-                            </h:panelGroup>
+                            
                         </td>
                     </tr>
                 </table>
                 <br/>
                 <div class="panel panel-primary">
-                    <script>
-                        function openModal(b) {
-                            if (b.status === "success") {
-                                $("#myModal").modal("show");
-                            }
-                        }
-
-                        $(document).ready(function () {
-                            $(".tooltip-right").tooltip(
-                                    {placement: "right", viewport:
-                                    {selector: "body", padding: 2}
-                                    }
-                            );
-                        }
-                        );
-                    </script>
+                    
                     <div class="panel-body">
                         <table style="width: 100%" class="table">
                             <tr>
@@ -169,50 +149,7 @@
                                         </div>
                                         <div class="panel-body">
 
-                                            <script>
-                                                $(function () {
-                                                    // Use Morris.Bar
-                                                    Morris.Bar({
-                                                        element: 'graph',
-                                                        data: [
-                                                #{registroController.grafico001}
-                                                        ],
-                                                        xkey: 'x',
-                                                        ykeys: ['y'],
-                                                        labels: ['Y']
-                                                    }).on('click', function (i, row) {
-                                                        console.log(i, row);
-                                                    });
-
-                                                    // Use Morris.Bar
-                                                    Morris.Bar({
-                                                        element: 'graph2',
-                                                        data: [
-                                                #{registroController.grafico002}
-                                                        ],
-                                                        xkey: 'x',
-                                                        ykeys: ['y', 'z'],
-                                                        labels: ['Trámite', 'Concluido']
-                                                    }).on('click', function (i, row) {
-                                                        console.log(i, row);
-                                                    });
-
-
-                                                    var month_data = [
-                                                #{registroController.grafico003}
-                                                    ];
-                                                    Morris.Line({
-                                                        element: 'graph3',
-                                                        data: month_data,
-                                                        xkey: 'period',
-                                                        ykeys: ['queja', 'consulta', 'petitorio'],
-                                                        labels: ['queja', 'consulta', 'petitorio'],
-                                                        smooth: false
-                                                    });
-
-                                                });
-                                            </script>
-                                            <div id="graph"></div>
+                                            
 
                                         </div>
                                     </div>
