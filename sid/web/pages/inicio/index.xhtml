@@ -9,183 +9,837 @@
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
             <h:form>
-            <div class="row">
-                    <div class="col-lg-12">
+                <script>
+                    $(function() {
+    "use strict";
+    // ------------------------------
+    // Basic pie chart
+    // ------------------------------
+    // based on prepared DOM, initialize echarts instance
+        var basicpieChart = echarts.init(document.getElementById('basic-pie'));
+        var option = {
+            // Add title
+                title: {
+                    text: 'Cantidad de expedientes registrados en el SID',
+                    subtext: 'En el año 2018',
+                    x: 'center'
+                },
+
+                // Add tooltip
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+
+                // Add legend
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['Quejas', 'Petitorios', 'Consultas']
+                },
+
+                // Add custom colors
+                color: ['#ffbc34', '#4fc3f7', '#212529'],
+
+                // Display toolbox
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    feature: {
+                        mark: {
+                            show: true,
+                            title: {
+                                mark: 'Markline switch',
+                                markUndo: 'Undo markline',
+                                markClear: 'Clear markline'
+                            }
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false,
+                            title: 'View data',
+                            lang: ['View chart data', 'Close', 'Update']
+                        },
+                        magicType: {
+                            show: true,
+                            title: {
+                                pie: 'Switch to pies',
+                                funnel: 'Switch to funnel',
+                            },
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    y: '20%',
+                                    width: '50%',
+                                    height: '70%',
+                                    funnelAlign: 'left',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore: {
+                            show: true,
+                            title: 'Restore'
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: 'Same as image',
+                            lang: ['Save']
+                        }
+                    }
+                },
+
+                // Enable drag recalculate
+                calculable: true,
+
+                // Add series
+                series: [{
+                    name: 'Casos',
+                    type: 'pie',
+                    radius: '70%',
+                    center: ['50%', '57.5%'],
+                    data: [
+                        {value: 335, name: 'Quejas'},
+                        {value: 310, name: 'Petitorios'},
+                        {value: 234, name: 'Consultas'}
+                    ]
+                }]
+        };
+    
+        basicpieChart.setOption(option);
+    // ------------------------------
+    // Basic pie chart
+    // ------------------------------
+    // based on prepared DOM, initialize echarts instance
+        var basicdoughnutChart = echarts.init(document.getElementById('basic-doughnut'));
+        var option = {
+            // Add title
+                title: {
+                    text: 'Estado de los expedientes según el año vigente',
+                    subtext: 'En el año 2018',
+                    x: 'center'
+                },
+
+                // Add legend
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['Trámite','Concluido','Desistido']
+                },
+
+                // Add custom colors
+                color: ['#212529', '#f62d51', '#2962FF'],
+
+                // Display toolbox
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    feature: {
+                        mark: {
+                            show: true,
+                            title: {
+                                mark: 'Markline switch',
+                                markUndo: 'Undo markline',
+                                markClear: 'Clear markline'
+                            }
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false,
+                            title: 'View data',
+                            lang: ['View chart data', 'Close', 'Update']
+                        },
+                        magicType: {
+                            show: true,
+                            title: {
+                                pie: 'Switch to pies',
+                                funnel: 'Switch to funnel',
+                            },
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    y: '20%',
+                                    width: '50%',
+                                    height: '70%',
+                                    funnelAlign: 'left',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore: {
+                            show: true,
+                            title: 'Restore'
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: 'Same as image',
+                            lang: ['Save']
+                        }
+                    }
+                },
+
+                // Enable drag recalculate
+                calculable: true,
+
+                // Add series
+                series: [
+                    {
+                        name: 'Casos',
+                        type: 'pie',
+                        radius: ['50%', '70%'],
+                        center: ['50%', '57.5%'],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    formatter: '{b}' + '\n\n' + '{c} ({d}%)',
+                                    position: 'center',
+                                    textStyle: {
+                                        fontSize: '17',
+                                        fontWeight: '500'
+                                    }
+                                }
+                            }
+                        },
+
+                        data: [
+                            {value: 234, name: 'Trámite'},
+                            {value: 135, name: 'Concluido'},
+                            {value: 1548, name: 'Desistido'}
+                        ]
+                    }
+                ]
+        };
+    
+        basicdoughnutChart.setOption(option);
+    // ------------------------------
+    // customized chart
+    // ------------------------------
+    // based on prepared DOM, initialize echarts instance
+        var customizedChart = echarts.init(document.getElementById('customized-chart'));
+        var option = {
+            
+            backgroundColor: '#fff',
+
+            title: {
+                text: 'Estado general de los expedientes según el año 2018',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'Casos',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[
+                        {value:210, name:'En registro'},
+                        {value:400, name:'En borrador'}
+                    ].sort(function (a, b) { return a.value - b.value; }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(0, 0, 0, 0.3)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(0, 0, 0, 0.3)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#2962FF',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };    
+       
+    
+        customizedChart.setOption(option);
+    // ------------------------------
+    // Nested chart
+    // ------------------------------
+    // based on prepared DOM, initialize echarts instance
+        var nestedChart = echarts.init(document.getElementById('nested-pie'));
+        var option = {
+            
+           tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+
+
+                // Add legend
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['OD Lima','OD Callao','OD Arequipa','OD Huancavelica','OD Ayacucho','OD Apurimac','OD Puno','OD Madre De Dios','OD Cusco','OD Moquegua']
+                },
+
+                // Add custom colors
+                color: ['#ffbc34', '#4fc3f7', '#212529', '#f62d51', '#2962FF'],
+
+                // Display toolbox
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    feature: {
+                        mark: {
+                            show: true,
+                            title: {
+                                mark: 'Markline switch',
+                                markUndo: 'Undo markline',
+                                markClear: 'Clear markline'
+                            }
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false,
+                            title: 'View data',
+                            lang: ['View chart data', 'Close', 'Update']
+                        },
+                        magicType: {
+                            show: true,
+                            title: {
+                                pie: 'Switch to pies',
+                                funnel: 'Switch to funnel',
+                            },
+                            type: ['pie', 'funnel']
+                        },
+                        restore: {
+                            show: true,
+                            title: 'Restore'
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: 'Same as image',
+                            lang: ['Save']
+                        }
+                    }
+                },
+
+                // Enable drag recalculate
+                calculable: false,
+
+                // Add series
+                series: [
+
+                    // Inner
+                    {
+                        name: 'Sedes',
+                        type: 'pie',
+                        selectedMode: 'single',
+                        radius: [0, '40%'],
+
+                        // for funnel
+                        x: '15%',
+                        y: '7.5%',
+                        width: '40%',
+                        height: '85%',
+                        funnelAlign: 'right',
+                        max: 1548,
+
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    position: 'inner'
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+
+                        data: [
+                            {value: 535, name: 'OD Lima'},
+                            {value: 679, name: 'OD Callao'},
+                            {value: 1548, name: 'OD Arequipa'}
+                        ]
+                    },
+
+                    // Outer
+                    {
+                        name: 'Sedes',
+                        type: 'pie',
+                        radius: ['60%', '85%'],
+
+                        // for funnel
+                        x: '55%',
+                        y: '7.5%',
+                        width: '35%',
+                        height: '85%',
+                        funnelAlign: 'left',
+                        max: 1048,
+
+                        data: [
+                            {value: 535, name: 'OD Huancavelica'},
+                            {value: 310, name: 'OD Ayacucho'},
+                            {value: 234, name: 'OD Apurimac'},
+                            {value: 135, name: 'OD Puno'},
+                            {value: 948, name: 'OD Madre De Dios'},
+                            {value: 251, name: 'OD Cusco'},
+                            {value: 147, name: 'OD Moquegua'}
+                            
+                        ]
+                    }
+                ]
+        };    
+       
+    
+        nestedChart.setOption(option);
+        // ------------------------------
+        // pole chart
+        // ------------------------------
+        // based on prepared DOM, initialize echarts instance
+            var poleChart = echarts.init(document.getElementById('pole-chart'));
+            // Data style
+            var dataStyle = {
+                normal: {
+                    label: {show: false},
+                    labelLine: {show: false}
+                }
+            };
+
+            // Placeholder style
+            var placeHolderStyle = {
+                normal: {
+                    color: 'rgba(0,0,0,0)',
+                    label: {show: false},
+                    labelLine: {show: false}
+                },
+                emphasis: {
+                    color: 'rgba(0,0,0,0)'
+                }
+            };
+            var option = {
+                title: {
+                    text: 'Esta satisfecho con la DF?',
+                    subtext: 'Lima, Peru',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 10,
+                    textStyle: {
+                        color: 'rgba(30,144,255,0.8)',
+                        fontSize: 19,
+                        fontWeight: '500'
+                    }
+                },
+
+                // Add tooltip
+                tooltip: {
+                    show: true,
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+
+                // Add legend
+                legend: {
+                    orient: 'vertical',
+                    x: document.getElementById('pole-chart').offsetWidth / 2,
+                    y: 30,
+                    x: '55%',
+                    itemGap: 15,
+                    data: ['60% Definitivamente si esta satifecho','30% No sabe no opina','10% Definitivamente no esta satisfecho']
+                },
+
+                // Add custom colors
+                color: ['#2962FF', '#4fc3f7', '#f62d51'],
+ 
+                // Add series
+                series: [
+                    {
+                        name: '1',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: ['75%', '90%'],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 60,
+                                name: '60% Definitely yes'
+                            },
+                            {
+                                value: 40,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                            }
+                        ]
+                    },
+
+                    {
+                        name: '2',
+                        type:'pie',
+                        clockWise: false,
+                        radius: ['60%', '75%'],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 30, 
+                                name: '30% Could be better'
+                            },
+                            {
+                                value: 70,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                            }
+                        ]
+                    },
+
+                    {
+                        name: '3',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: ['45%', '60%'],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 10, 
+                                name: '10% Not at the moment'
+                            },
+                            {
+                                value: 90,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                            }
+                        ]
+                    }
+                ]
+            };
+        poleChart.setOption(option);
+        // ------------------------------
+        // nightingale chart
+        // ------------------------------
+        // based on prepared DOM, initialize echarts instance
+            var nightingaleChart = echarts.init(document.getElementById('nightingale-chart'));
+            var option = {
+                 title: {
+                    text: 'Cantidad de expedientes por mes',
+                    subtext: 'Correspondiente al año 2018',
+                    x: 'center'
+                },
+
+                // Add tooltip
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: +{c}$ ({d}%)"
+                },
+
+                // Add legend
+                legend: {
+                    x: 'left',
+                    y: 'top',
+                    orient: 'vertical',
+                    data: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                },
+
+                color: ['#ffbc34', '#4fc3f7', '#212529', '#f62d51', '#2962FF', '#FFC400', '#006064', '#FF1744', '#1565C0', '#FFC400', '#64FFDA', '#607D8B'],
+
+                // Display toolbox
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    feature: {
+                        mark: {
+                            show: true,
+                            title: {
+                                mark: 'Markline switch',
+                                markUndo: 'Undo markline',
+                                markClear: 'Clear markline'
+                            }
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false,
+                            title: 'View data',
+                            lang: ['View chart data', 'Close', 'Update']
+                        },
+                        magicType: {
+                            show: true,
+                            title: {
+                                pie: 'Switch to pies',
+                                funnel: 'Switch to funnel',
+                            },
+                            type: ['pie', 'funnel']
+                        },
+                        restore: {
+                            show: true,
+                            title: 'Restore'
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: 'Same as image',
+                            lang: ['Save']
+                        }
+                    }
+                },
+
+                // Enable drag recalculate
+                calculable: true,
+
+                // Add series
+                series: [
+                    {
+                        name: 'Cantidad de casos',
+                        type: 'pie',
+                        radius: ['15%', '73%'],
+                        center: ['50%', '57%'],
+                        roseType: 'area',
+
+                        // Funnel
+                        width: '40%',
+                        height: '78%',
+                        x: '30%',
+                        y: '17.5%',
+                        max: 450,
+                        sort: 'ascending',
+
+                        data: [
+                            {value: 440, name: 'Enero'},
+                            {value: 260, name: 'Febrero'},
+                            {value: 350, name: 'Marzo'},
+                            {value: 250, name: 'Abril'},
+                            {value: 210, name: 'Mayo'},
+                            {value: 350, name: 'Junio'},
+                            {value: 300, name: 'Julio'},
+                            {value: 430, name: 'Agosto'},
+                            {value: 400, name: 'Septiembre'},
+                            {value: 450, name: 'Octubre'},
+                            {value: 330, name: 'Noviembre'},
+                            {value: 200, name: 'Diciembre'}
+                        ]
+                    }
+                ]
+            };
+        nightingaleChart.setOption(option);
+        //------------------------------------------------------
+       // Resize chart on menu width change and window resize
+       //------------------------------------------------------
+        $(function () {
+
+                // Resize chart on menu width change and window resize
+                $(window).on('resize', resize);
+                $(".sidebartoggler").on('click', resize);
+
+                // Resize function
+                function resize() {
+                    setTimeout(function() {
+
+                        // Resize chart
+                        basicpieChart.resize();
+                        basicdoughnutChart.resize();
+                        customizedChart.resize();
+                        nestedChart.resize();
+                        poleChart.resize();
+                    }, 200);
+                }
+            });
+});
+                </script>
+                
+                
+                
+                <div class="row">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div>
-                                        <h4 class="card-title">Projects of the Month</h4>
-                                        <h5 class="card-subtitle">Overview of Latest Month</h5>
+                                        <h4 class="card-title">Listado de expedientes</h4>
+                                        <h5 class="card-subtitle">Por el comisionado #{loginController.usuarioSesion.codigo}</h5>
                                     </div>
-                                    <div class="ml-auto d-flex no-block align-items-center">
-                                        <div class="dl">
-                                            <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
-                                <button class="btn btn-primary" jsf:action="#{registroController.cargarNuevaBusqueda()}">
-                                    <span class="glyphicon glyphicon-user"/>
-                                    Atención al Usuario
-                                </button>
-                            </h:panelGroup>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table no-wrap v-middle">
-                                        <thead>
-                                            <tr class="border-0">
-                                                <th class="border-0">Nro</th>
-                                                <th class="border-0">Expediente</th>
-                                                <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
-                                                <th class="border-0">Comisionado</th>
-                                                </h:panelGroup>
-                                                
-                                                <th class="border-0">Tipo</th>
-                                                <th class="border-0">Fecha Registro</th>
-                                                <th class="border-0">Etapa</th>
-                                                <th class="border-0">Estado general</th>
-                                                <th class="border-0">Estado registro</th>
-                                                <th class="border-0"></th>
-                                                <th class="border-0"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="x" items="#{registroController.listaExpedienteXUsuarioPaginado}" varStatus="loop">
-                                   <tr>
-                                                <td>
-                                                    <div class="d-flex no-block align-items-center">
-                                                        <div class="m-r-10"></div>
-                                                        <div class="">
-                                                            <h5 class="m-b-0 font-16 font-medium">${loop.index+1}</h5></div>
-                                                    </div>
-                                                </td>
-                                                <td><label title="#{x.sumilla == null? '' : x.sumilla}" class="label label-danger">#{x.numero}</label></td>
-                                                <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
-                                                    <td><h:outputText value="#{x.comisionado}" /></td>
-                                                </h:panelGroup>
-                                                
-                                                <td>
-                                                    <h:outputText value="#{x.clasificacionTipoNombre}" />
-                                                </td>
-                                                <td><h:outputText value="#{x.fechaRegistro}" >
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <h:dataTable value="#{registroController.listaExpedienteXUsuarioPaginado}" var="exped" class="table no-wrap v-middle" binding="#{row3}">
+                                                <h:column>
+                                                    <f:facet name="header">Nro</f:facet>
+                                                    <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row3.rowIndex+1)+(registroController.nroPagina-1)*10}" /></h5>
+                                                    
+                                                </h:column>
+                                                <h:column rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
+                                                    <f:facet name="header">Comisionado</f:facet>
+                                                    <h:outputText value="#{exped.comisionado}" />
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></f:facet>
+                                                    <label title="#{exped.sumilla == null? '' : exped.sumilla}" class="label label-danger">#{exped.numero}</label>
+                                                    
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></f:facet>
+                                                    <h:outputText value="#{exped.clasificacionTipoNombre}" />
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></f:facet>
+                                                    <h:outputText value="#{exped.fechaRegistro}" >
                                                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
                                                     </h:outputText>
-                                                </td>
-                                                <td><h:outputText value="#{x.etapaDetalle}" /></td>
-                                                <td class="blue-grey-text  text-darken-4 font-medium"><h:outputText rendered="#{x.general == 'A'}" value="Trámite" />
-                                                    <h:outputText rendered="#{x.general == 'C' and x.indicadorDesestimiento == null}" value="Concluido" />
-                                                    <h:outputText rendered="#{x.general == 'C' and x.indicadorDesestimiento == 1}" value="Desistido" />
-                                                </td>
-                                                <td><h:outputText value="#{x.version == 0? 'Borrador' : 'En registro' }" /></td>
-                                                <td>
-                                                    <button class="btn btn-info btn-circle" jsf:action="#{registroController.cargarExpedienteEdit(x)}"><i class="fas fa-pencil-alt" ></i> </button>
-                                                </td>
-                                                <td>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Etapa</f:facet>
+                                                    <h:outputText value="#{exped.etapaDetalle}" />
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></f:facet>
+                                                    <h:outputText rendered="#{exped.general == 'A'}" value="Trámite" />
+                                                    <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == null}" value="Concluido" />
+                                                    <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == 1}" value="Desistido" />
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></f:facet>
+                                                    <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
+                                                </h:column>
+                                                <h:column>
                                                     
-                                                    <a class="btn btn-danger btn-circle" onclick="confirmar4#{loop.index+1}()"><i class="fas fa-trash" style="color: white" ></i> </a>
-                                                    
+                                                    <a jsf:action="#{registroController.cargarExpedienteEdit(exped)}">
+                                                        <i class="fas fa-pencil-alt" ></i>
+                                                    </a>
+                                                </h:column>
+                                                <h:column>
+                                                    <a onclick="confirmar4#{row3.rowIndex+1}()">
+                                                        <i class="fas fa-trash"  ></i>
+                                                    </a>
                                                     <script>
-                                                        function confirmar4#{loop.index+1}() {
-                                                            $(".confirmacion4#{loop.index+1}").modal('show');
+                                                        function confirmar4#{row3.rowIndex+1}() {
+                                                            $(".confirmacion4#{row3.rowIndex+1}").modal('show');
                                                         }
                                                     </script>
-                                                    <gc:confirmSubmit bean="#{registroController.inactivarExpediente(x)}" classGC="confirmacion4#{loop.index+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
-                                                </td>
-                                            </tr>
-                                </c:forEach>
-                                            
-                                        </tbody>
-                                    </table>
-                                    <ul class="pager">
-                                                <li>
-                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Anterior
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" jsf:onclick="loadingModal()">Siguiente
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                                    <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmacion4#{row3.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
+                                                </h:column>
+                                            </h:dataTable>
+                                        <ul class="pagination">
+                    <li class="paginate_button page-item previous disabled" id="file_export_previous">
+                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                    </li>
+                    <li class="paginate_button page-item next" id="file_export_next">
+                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                    </li>
+                </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            
-            
-                <table style="width: 100%">
-                    <tr>
-                        <td></td>
-                        <td style="text-align: right">
-                            
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <div class="panel panel-primary">
-                    
-                    <div class="panel-body">
-                        <table style="width: 100%" class="table">
-                            <tr>
-                                <td colspan="2" style="width: 50%; padding-right: 2px;">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <span >Lista de Expedientes</span>
-                                        </div>
-                                        <div class="panel-body">
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <table style="width: 100%">
-                            <tr>
-                                <td style="padding-right: 2px; width: 50%; vertical-align: top">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <span >Atenciones</span>
-                                        </div>
-                                        <div class="panel-body">
-
-                                            
-
-                                        </div>
-                                    </div>
-                                </td>
-                                <td style="padding-left: 2px; vertical-align: top">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <span >Gestión de Casos</span>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div id="graph2"></div>
-                                        </div>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <span >Otros Gráficos</span>
-                                        </div>
-                                        <div class="panel-body">
-
-                                            <div id="graph3"></div>
-
-                                        </div>
-
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                </div>         
+                
+                <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Cantidad de casos según el año 2018</h4>
+                                <div id="basic-pie" style="height:400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Estado de los casos según el año 2018</h4>
+                                <div id="basic-doughnut" style="height:400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Estado general de los casos segun el año 2018</h4>
+                                <div id="customized-chart" style="height:400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Cantidad de casos por sede en el año 2018</h4>
+                                <div id="nested-pie" style="height:400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Grado de satisfacción del ciudadano</h4>
+                                <div id="pole-chart" style="height:400px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-body analytics-info">
+                                <h4 class="card-title">Cantidad de casos por mes del año 2018</h4>
+                                <div id="nightingale-chart" style="height:400px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+                
             </h:form> 
         </ui:define>
     </ui:composition>
+
 </html>            
