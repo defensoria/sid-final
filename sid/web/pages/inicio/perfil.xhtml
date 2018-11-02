@@ -6,27 +6,22 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf">
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
-            <h:form class="form-horizontal" enctype="multipart/form-data">
-                <div class="panel panel-default" style="background: #F5F5F5">
-                    <div class="panel-body">
+            <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h:form class="form-horizontal" enctype="multipart/form-data">
+                
+                    
                         <table style="width: 100%">
                             <tr>
                                 <td>
                                     <span style="color: #0074cc; font-size: x-large;">Perfil</span>
                                 </td>
-                                <td>
-                                    <a class="btn btn-primary" jsf:onclick="return guardarImagen()" jsf:action="#{usuarioDetalleController.agregarImagen()}">
-                                        <span class="glyphicon glyphicon-floppy-disk">Guardar</span>
+                                <td style="text-align: right">
+                                    <a class="btn btn-info" jsf:onclick="return guardarImagen()" jsf:action="#{usuarioDetalleController.agregarImagen()}">
+                                        <i class="fa fa-save"></i> Guardar
                                     </a>
-                                    <script>
-                                        function refrescar(data) {
-
-                                            if (data.status === 'complete') {
-                                                info("Se realizaron los cambios");
-                                            }
-
-                                        }
-                                    </script>
                                 </td>
                             </tr>
                         </table>
@@ -75,14 +70,13 @@
                                     <td>#{usuarioDetalleController.usuario.ruta}</td>
                                     <td>
                                         <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{usuarioDetalleController.usuario.ruta}">
-                                            <span class="glyphicon glyphicon-picture" />
+                                            <span class="far fa-file-image" />
                                         </a>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                    </div>  
-                </div>
+                    
                 <script>
                     function guardarImagen() {
                         if ($(".cMedio").val() !== "") {
@@ -111,6 +105,10 @@
                     }
                 </script>
             </h:form>
+                            </div>
+                        </div>
+</div></div>
+            
         </ui:define>
     </ui:composition>
 </html>

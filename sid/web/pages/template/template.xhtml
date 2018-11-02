@@ -158,10 +158,12 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"/> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"  href="javascript:void(0)"><i class="ti-search"></i></a>
+                            <h:form class="app-search position-absolute" >
+                                <input jsf:value="#{busquedaController.expediente.observacion}" type="text"  class="form-control" placeholder="Buscar por expediente o sumilla"/> 
+                                <h:commandLink action="#{busquedaController.listarExpedientesPaginado(1)}" class="srh-btn" ><i class="ti-search"></i></h:commandLink>
+                                
+                            </h:form>
                         </li>
                     </ul>
                     <!-- ============================================================== -->
@@ -289,10 +291,11 @@
                         <!-- End Messages -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
-                        <!-- User profile and search -->
+                        
                         <!-- ============================================================== -->
+                        <h:form>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"/></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/sid/DownloadFileServlet?fileName=#{loginController.usuarioSesion.ruta == null? '/sid/faces/bootstrap/img/user-admin.png' : loginController.usuarioSesion.ruta}" alt="user" class="rounded-circle" width="31"/></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
@@ -302,17 +305,15 @@
                                         <p class=" m-b-0">#{loginController.usuarioSesion.email}</p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <a class="dropdown-item" jsf:actionListener="#{usuarioDetalleController.verDetallePerfil()}" jsf:action="perfil" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> Mi Perfil</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Bandeja</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <a class="dropdown-item" href="/sid/cerrarSesion"><i class="fa fa-power-off m-r-5 m-l-5"></i> Cerrar sessión</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                <div class="dropdown-divider"></div>
-                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">Ver Perfil</a></div>
                             </div>
                         </li>
+                            </h:form>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -333,6 +334,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
+                        <h:form>
                         <li>
                             <!-- User Profile-->
                             <div class="user-profile d-flex no-block dropdown m-t-20">
@@ -343,19 +345,16 @@
                                         <span class="op-5 user-email">#{loginController.usuarioSesion.email}</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                        <a class="dropdown-item" jsf:actionListener="#{usuarioDetalleController.verDetallePerfil()}" jsf:action="perfil" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> Mi Perfil</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Bandeja</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                        <a class="dropdown-item" href="/sid/cerrarSesion"><i class="fa fa-power-off m-r-5 m-l-5"></i> Cerrar sesión</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- End User Profile-->
                         </li>
-                        
+                        </h:form>
                         <!-- User Profile-->
                         <h:form>
                         <c:forEach var="x" items="#{menuController.menuPadre}" >
@@ -408,6 +407,22 @@
                     </div>
                 </div>
             </div>
+            <script>
+            function alertar(msg) {
+                $("#idAlerta").modal('show');
+                $("#mensaje").html(msg);
+            }
+
+            function info(msg) {
+                $("#idInfo").modal('show');
+                $("#mensajeInfo").html(msg);
+            }
+
+            function confirmar() {
+                $(".confirmacion").modal('show');
+            }
+
+        </script>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->

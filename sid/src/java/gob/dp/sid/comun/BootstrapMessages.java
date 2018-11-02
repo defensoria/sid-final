@@ -167,7 +167,7 @@ public class BootstrapMessages extends MessagesRenderer {
         if(FacesMessage.SEVERITY_WARN.equals(severity)) {
             writer.append("<div class=\"modal fade\" id=\"idAlertaServer\">");
         } else if(FacesMessage.SEVERITY_INFO.equals(severity)) {
-            writer.append("<div class=\"modal fade\" id=\"idInfoServer\">");
+            writer.append("<div class=\"modal fade\" id=\"idInfoServer\" style=\"text-align: left\">");
         } else if(FacesMessage.SEVERITY_ERROR.equals(severity)) {
             writer.append("<div class=\"modal fade\" id=\"idErrorServer\">");
         }    

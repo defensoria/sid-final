@@ -139,9 +139,10 @@ public class BusquedaController extends AbstractManagedBean implements Serializa
                 }
             }
         }
+        expediente.setObservacion(null);
         return "busquedaGeneral";
         }else{
-            msg.messageAlert("Debe ingresar almenos un criterio de búsqueda",null);
+            expediente.setObservacion(null);
         }
         return null;
     }

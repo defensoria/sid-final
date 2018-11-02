@@ -20,8 +20,8 @@
         var option = {
             // Add title
                 title: {
-                    text: 'Cantidad de expedientes registrados en el SID',
-                    subtext: 'En el año 2018',
+                    text: '',
+                    subtext: '',
                     x: 'center'
                 },
 
@@ -116,8 +116,8 @@
         var option = {
             // Add title
                 title: {
-                    text: 'Estado de los expedientes según el año vigente',
-                    subtext: 'En el año 2018',
+                    text: '',
+                    subtext: '',
                     x: 'center'
                 },
 
@@ -232,7 +232,7 @@
             backgroundColor: '#fff',
 
             title: {
-                text: 'Estado general de los expedientes según el año 2018',
+                text: '',
                 left: 'center',
                 top: 20,
                 textStyle: {
@@ -561,8 +561,8 @@
             var nightingaleChart = echarts.init(document.getElementById('nightingale-chart'));
             var option = {
                  title: {
-                    text: 'Cantidad de expedientes por mes',
-                    subtext: 'Correspondiente al año 2018',
+                    text: '',
+                    subtext: '',
                     x: 'center'
                 },
 
@@ -710,16 +710,16 @@
                                                     <h:outputText value="#{exped.comisionado}" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></b></f:facet>
                                                     <label title="#{exped.sumilla == null? '' : exped.sumilla}" class="label label-danger">#{exped.numero}</label>
                                                     
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></b></f:facet>
                                                     <h:outputText value="#{exped.clasificacionTipoNombre}" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></b></f:facet>
                                                     <h:outputText value="#{exped.fechaRegistro}" >
                                                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
                                                     </h:outputText>
@@ -730,13 +730,13 @@
                                                 </h:column>
 
                                                 <h:column>
-                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></b></f:facet>
                                                     <h:outputText rendered="#{exped.general == 'A'}" value="Trámite" />
                                                     <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == null}" value="Concluido" />
                                                     <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == 1}" value="Desistido" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header"><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></b></f:facet>
                                                     <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
                                                 </h:column>
                                                 <h:column>
