@@ -48,7 +48,7 @@ $('.pickadate-datelimits').pickadate({
 $('.pickadate-change-format').pickadate({
     // Escape any 'rule' characters with an exclamation mark (!).
     format: 'Selecte!d Date : dddd, dd mmmm, yyyy',
-    formatSubmit: 'mm/dd/yyyy',
+    formatSubmit: 'dd/mm/yyyy',
     hiddenPrefix: 'prefix__',
     hiddenSuffix: '__suffix'
 });
@@ -128,13 +128,14 @@ $('.pickadate-events').pickadate({
 // Picker Translations
 /***********************************/
 $('.pickadate-translations').pickadate({
+    format: 'dd/mm/yyyy',
     formatSubmit: 'dd/mm/yyyy',
-    monthsFull: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
-    monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-    today: 'aujourd\'hui',
-    clear: 'clair',
-    close: 'Fermer'
+    monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+    today: 'Hoy',
+    clear: 'Limpiar',
+    close: 'Cerrar'
 });
 
 /***********************************/
@@ -335,9 +336,9 @@ $('.pickatime-events').pickatime({
 /***********************************/
 $('.pickatime-translations').pickatime({
     formatSubmit: 'dd/mm/yyyy',
-    monthsFull: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
-    monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    monthsFull: ['Enero', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+    monthsShort: ['Ene', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
     today: 'aujourd\'hui',
     clear: 'clair',
     close: 'Fermer'
@@ -489,8 +490,8 @@ $('.localeRange').daterangepicker({
         endLabel: 'Date limite',
         customRangeLabel: 'SÃ©lectionner une date',
         // daysOfWeek: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi','Samedi'],
-        daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-        monthNames: ['Janvier', 'fÃ©vrier', 'Mars', 'Avril', 'ÐœÐ°i', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+        daysOfWeek: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        monthNames: ['Enero', 'fÃ©vrier', 'Mars', 'Avril', 'ÐœÐ°i', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
         firstDay: 1
     }
 });

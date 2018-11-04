@@ -11,13 +11,17 @@
     </composite:interface>
 
     <composite:implementation>
-        <div class="input-group datepicker" id="#{cc.attrs.idDiv}">
-            <div class="input-group-addon  add-on">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </div>
-            <input type="text" jsf:value="#{cc.attrs.value}" data-format="dd/MM/yyyy" id="#{cc.attrs.id}" class="#{cc.attrs.clase}">
+        <div class="input-group" id="#{cc.attrs.idDiv}">
+            <input type='text'  data-format="dd/MM/yyyy" jsf:value="#{cc.attrs.value}"  placeholder="Fecha" id="#{cc.attrs.id}" class="form-control pickadate-translations #{cc.attrs.clase}">
                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
             </input>
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <span class="ti-calendar"></span>
+                </span>
+            </div>
         </div>
+
+        
     </composite:implementation>
 </html>            
