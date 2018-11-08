@@ -157,7 +157,11 @@
                                 
                                     <a class="dropdown-item" jsf:action="#{registroController.cargarNuevaBusqueda()}">Nueva atención</a>
                             </h:panelGroup>
-                                
+                                <!-- Inicio - jcarrilo -->
+                                <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
+                                    <a class="dropdown-item" jsf:action="#{registroController.cargarNuevaBusqueda()}">Atención al Ciudadano</a>
+                                </h:panelGroup>
+                                <!-- Fin - jcarrilo -->
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
