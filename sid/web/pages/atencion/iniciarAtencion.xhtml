@@ -1,0 +1,351 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+
+    <ui:composition template="../template/template.xhtml">
+        <ui:define name="content">
+            <h:form id="idForm" class="form-horizontal">
+                <style>
+                    .trPadding{
+                        padding-bottom: 10px;
+                    }
+                    .trPaddingRight{
+                        padding-right: 10px;
+                        padding-bottom: 10px;
+                    }
+
+                    .trPaddingLeft{
+                        padding-left: 10px;
+                        padding-bottom: 10px;
+                    }
+
+                    .clasRED{
+                        background: #F2DEDE;
+                        border: solid #A94442;
+                    }
+                </style>
+                <script>
+                    function confirmar1() {
+                        if ($('.idAccion').val() === '0') {
+                            $('.idAccion').focus().addClass("clasRED");
+                            alertar("Debe seleccionar una acción");
+                            return false;
+                        } else {
+                            $('.idAccion').removeClass("clasRED");
+                        }
+                        if ($('.fechaRegistro').val() === '') {
+                            $('.fechaRegistro').focus().addClass("clasRED");
+                            alertar("Debe ingresar la fecha de registro");
+                            return false;
+                        } else {
+                            $('.fechaRegistro').removeClass("clasRED");
+                        }
+                        if ($('.idForma').val() === '0') {
+                            $('.idForma').focus().addClass("clasRED");
+                            alertar("Debe seleccionar una forma");
+                            return false;
+                        } else {
+                            $('.idForma').removeClass("clasRED");
+                        }
+                        if ($('.descripcion').val() === '') {
+                            $('.descripcion').focus().addClass("clasRED");
+                            alertar("Debe ingresar una descripción");
+                            return false;
+                        } else {
+                            $('.descripcion').removeClass("clasRED");
+                        }
+                        if ($('.respuesta').val() === '') {
+                            $('.respuesta').focus().addClass("clasRED");
+                            alertar("Debe ingresar una respuesta");
+                            return false;
+                        } else {
+                            $('.respuesta').removeClass("clasRED");
+                        }
+                        if ($('.tipo').val() === '0') {
+                            $('.tipo').focus().addClass("clasRED");
+                            alertar("Debe seleccionar un tipo");
+                            return false;
+                        } else {
+                            $('.tipo').removeClass("clasRED");
+                        }
+                        if ($('.nombre').val() === '') {
+                            $('.nombre').focus().addClass("clasRED");
+                            alertar("Debe ingresar el nombre");
+                            return false;
+                        } else {
+                            $('.nombre').removeClass("clasRED");
+                        }
+                        if ($('.apellidoPaterno').val() === '') {
+                            $('.apellidoPaterno').focus().addClass("clasRED");
+                            alertar("Debe ingresar el apellido paterno");
+                            return false;
+                        } else {
+                            $('.apellidoPaterno').removeClass("clasRED");
+                        }
+                        if ($('.apellidoMaterno').val() === '') {
+                            $('.apellidoMaterno').focus().addClass("clasRED");
+                            alertar("Debe ingresar el apellido materno");
+                            return false;
+                        } else {
+                            $('.apellidoMaterno').removeClass("clasRED");
+                        }
+                        if ($('.document').val() === '0') {
+                            $('.document').focus().addClass("clasRED");
+                            alertar("Debe ingresar el tipo de documento");
+                            return false;
+                        } else {
+                            $('.document').removeClass("clasRED");
+                        }
+                        if ($('.nroDocumento').val() === '') {
+                            $('.nroDocumento').focus().addClass("clasRED");
+                            alertar("Debe ingresar el número de documento");
+                            return false;
+                        } else {
+                            $('.nroDocumento').removeClass("clasRED");
+                        }
+                        if ($('.direccion').val() === '') {
+                            $('.direccion').focus().addClass("clasRED");
+                            alertar("Debe ingresar la direccion");
+                            return false;
+                        } else {
+                            $('.direccion').removeClass("clasRED");
+                        }
+                        if ($('.departamento').val() === '0') {
+                            $('.departamento').focus().addClass("clasRED");
+                            alertar("Debe ingresar el departamento");
+                            return false;
+                        } else {
+                            $('.departamento').removeClass("clasRED");
+                        }
+                        if ($('.provincia').val() === '0') {
+                            $('.provincia').focus().addClass("clasRED");
+                            alertar("Debe ingresar la provincia");
+                            return false;
+                        } else {
+                            $('.provincia').removeClass("clasRED");
+                        }
+                        if ($('.distrito').val() === '0') {
+                            $('.distrito').focus().addClass("clasRED");
+                            alertar("Debe ingresar el distrito");
+                            return false;
+                        } else {
+                            $('.distrito').removeClass("clasRED");
+                        }
+                        if ($('.distrito').val() === '0') {
+                            $('.distrito').focus().addClass("clasRED");
+                            alertar("Debe ingresar el distrito");
+                            return false;
+                        } else {
+                            $('.distrito').removeClass("clasRED");
+                        }
+                        if ($('.sexo').is(':checked')) {
+                            $('.sexo').focus().addClass("clasRED");
+                            alertar("Debe ingresar el sexo");
+                            return false;
+                        } else {
+                            $('.sexo').removeClass("clasRED");
+                        }
+                        $(".confirmacion1").modal('show');
+                    }
+                </script>
+                <gc:confirmSubmit classGC="confirmacion1" bean="#{registroController.guardarRegistroCAV()}" mensaje="Esta seguro que desea realizar el registro?"/>
+                <div class="row" style="center">
+                    <div class="col-6">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 class="card-title">Tipo de atención</h4>
+                                    </div>
+                                    <div class="col-6" style="text-align: right">
+                                        <a class="btn btn-warning" onclick="confirmar1()">
+                                            <i class="fa fa-save"></i> Guardar
+                                        </a>
+                                        &#160;&#160;&#160;
+                                        <a class="btn btn-info" jsf:action="#{registroController.limpiarCAV()}">
+                                            <span class="fas fa-user" /> Nuevo
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Motivo</label>
+                                            <h:selectOneRadio class="motivo" value="#{registroController.expedienteFormularioVirtual.sexo}">
+                                                <f:selectItem itemLabel="Tramite Administrativo" itemValue="A"/>
+                                                <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">Tipo de Trámite</label>
+                                            <h:selectOneMenu value="#{registroController.expedienteFormularioVirtual.accion}" class="form-control">
+                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                <f:selectItems value="#{listasComunesController.buscarListaAccionCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Fecha</label>
+                                            <gc:calendar clase="fechaRegistro" value="#{registroController.expedienteFormularioVirtual.fecha}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Forma</label>
+                                            <h:selectOneMenu value="#{registroController.expedienteFormularioVirtual.forma}" class="form-control">
+                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoIngreso(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Descripción</label>
+                                            <textarea class="form-control descripcion" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.descripcion}"  placeholder="Descripción"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Respuesta</label>
+                                            <textarea class="form-control respuesta" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.respuesta}" placeholder="Respuesta"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Datos de la persona</h4>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">Tipo</label>
+                                            <h:selectOneMenu class="tipo form-control" value="#{registroController.expedienteFormularioVirtual.tipo}" >
+                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                <f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">Nombres</label>
+                                            <input type="text" class="nombre form-control" jsf:value="#{registroController.expedienteFormularioVirtual.nombre}" placeholder="Nombres"/>
+                                        </div>
+                                    </div>     
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">A. paterno</label>
+                                            <input type="text" class="apellidoPaterno form-control" jsf:value="#{registroController.expedienteFormularioVirtual.apellidoPaterno}" placeholder="Apellido Paterno"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">A. Materno</label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{registroController.expedienteFormularioVirtual.apellidoMaterno}"  placeholder="Apellido Materno"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Documento</label>
+                                            <h:selectOneMenu class="document form-control" value="#{registroController.expedienteFormularioVirtual.tipoDocumento}" >
+                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
+                                            <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Número de documento"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">Dirección</label>
+                                            <input type="text" class="direccion form-control" value="#{registroController.expedienteFormularioVirtual.direccion}" />
+                                        </div>
+                                    </div>     
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Departamento</label>
+                                            <h:selectOneMenu class="departamento form-control" value="#{registroController.expedienteFormularioVirtual.departamento}">
+                                                <f:selectItem itemLabel="Departamento" itemValue="0"/>
+                                                <f:selectItems value="#{listasComunesController.listaDepartamentos(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <f:ajax listener="#{registroController.comboProvinciaId(registroController.expedienteFormularioVirtual.departamento)}" render="cmbProvincia1 cmbDistrito1" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Provincia</label>
+                                            <h:selectOneMenu class="provincia form-control" id="cmbProvincia1" value="#{registroController.expedienteFormularioVirtual.provincia}">
+                                                <f:selectItem itemLabel="Provincia" itemValue="0"/>
+                                                <f:selectItems value="#{registroController.listaProvincia}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                                <f:ajax listener="#{registroController.comboDistritoId(registroController.expedienteFormularioVirtual.provincia, registroController.expedienteFormularioVirtual.departamento)}" render="cmbDistrito1" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Distrito</label>
+                                            <h:selectOneMenu class="distrito form-control" id="cmbDistrito1" value="#{registroController.expedienteFormularioVirtual.distrito}">
+                                                <f:selectItem itemLabel="Distrito" itemValue="0"/>
+                                                <f:selectItems value="#{registroController.listaDistrito}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Sexo</label>
+                                            <h:selectOneRadio class="sexo" value="#{registroController.expedienteFormularioVirtual.sexo}">
+                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>            

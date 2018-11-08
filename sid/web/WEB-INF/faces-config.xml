@@ -184,6 +184,15 @@
         </navigation-case>
   </navigation-rule>
   
+  <!-- Inicio - jcarrillo -->
+  <navigation-rule>
+        <navigation-case>
+                <from-outcome>iniciarAtencion</from-outcome>
+                <to-view-id>/pages/atencion/iniciarAtencion.xhtml</to-view-id>
+        </navigation-case>
+  </navigation-rule>
+  <!-- Fin - jcarrillo -->
+  
   <navigation-rule>
         <navigation-case>
                 <from-outcome>expedienteCompartir</from-outcome>
