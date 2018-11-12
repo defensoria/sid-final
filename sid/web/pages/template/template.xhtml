@@ -159,7 +159,7 @@
                             </h:panelGroup>
                                 <!-- Inicio - jcarrillo -->
                                 <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
-                                    <a class="dropdown-item" jsf:action="#{registroController.cargarInicioAtencion()}">Atención al Ciudadano</a>
+                                    <a class="dropdown-item" jsf:action="#{atencionController.cargarInicioAtencion()}">Atención al Ciudadano</a>
                                 </h:panelGroup>
                                 <!-- Fin - jcarrillo -->
                                 <a class="dropdown-item" href="#">Another action</a>
@@ -409,6 +409,7 @@
                             </nav>
                         </div>
                     </div>
+                    <!--
                     <div class="col-7 align-self-center">
                         <div class="d-flex no-block justify-content-end align-items-center">
                             <div class="m-r-10">
@@ -418,6 +419,7 @@
                                 <h4 class="text-info m-b-0 font-medium">$58,256</h4></div>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
             <script>
