@@ -90,7 +90,7 @@ public class CacheServiceImpl implements CacheService{
 
     private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO = 4403;
     
-    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION = 4403;
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION = 4404;
     /*Fin - jcarrillo*/
             
     private volatile HashMap<Integer, Object> contenedor = null;

@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -36,19 +37,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private ListasComunesController listasComunesController;
     
-    @PostConstruct
-    public void init() {
-        if(atencion==null){
-            atencion = new Atencion();
-        }
-        if(listaTipoAtencion==null){
-            listaTipoAtencion = new ArrayList<>();
-        }
-        System.out.println("Entro init");
-    }
-    
     public String cargarInicioAtencion() {
         try {
+            atencion = new Atencion();
+            listaTipoAtencion = new ArrayList<>();
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -79,9 +71,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 } else if (StringUtils.equals(idMotivo, "I")) {
                     listaTipoAtencion = listasComunesController.listaTipoAtencionIntervencion(false, false, false);
                 }
-                
             }
-            
         } catch (Exception e) {
             log.error("ERROR - actualizarListaTipoAtencion()" + e);
         }

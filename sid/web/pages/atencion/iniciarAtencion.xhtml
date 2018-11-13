@@ -93,7 +93,7 @@
                                             <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipomotivo}">
                                                 <f:selectItem itemLabel="Tramite Administrativo" itemValue="D"/>
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipomotivo)}"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipomotivo)}" render="cmbTipoAtencion"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoatencion" class="control-label col-form-label">Tipo de Atención</label>
-                                            <h:selectOneMenu value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
+                                            <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                             </h:selectOneMenu>

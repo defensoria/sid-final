@@ -10,6 +10,7 @@ import gob.dp.sid.administracion.seguridad.controller.MenuController;
 import gob.dp.sid.administracion.seguridad.controller.SeguridadUtilController;
 import gob.dp.sid.administracion.seguridad.entity.Usuario;
 import gob.dp.sid.administracion.seguridad.service.UsuarioService;
+import gob.dp.sid.atencion.controller.AtencionController;
 import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.bandeja.entity.Bandeja;
 import gob.dp.sid.bandeja.service.BandejaService;
