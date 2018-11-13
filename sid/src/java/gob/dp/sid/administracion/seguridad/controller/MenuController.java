@@ -1,6 +1,7 @@
 package gob.dp.sid.administracion.seguridad.controller;
 
 import gob.dp.sid.administracion.parametro.controller.CatalogoController;
+import gob.dp.sid.atencion.controller.AtencionController;
 import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.comun.controller.BusquedaController;
 import gob.dp.sid.comun.entity.Menu;
@@ -195,6 +196,12 @@ public class MenuController implements Serializable {
             RegistroController registroController = (RegistroController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "registroController");
             return registroController.cargarFormularioVirtual();
         }
+        
+        if (codigoPagina == 36) {
+            AtencionController atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
+            return atencionController.cargarInicioAtencion();
+        }
+        
 
         if (codigoPagina == 32) {
             menuHijo = menuService.menuHijo(8);
