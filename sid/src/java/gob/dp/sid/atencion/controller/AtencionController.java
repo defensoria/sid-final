@@ -7,10 +7,16 @@ package gob.dp.sid.atencion.controller;
 
 import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
+import gob.dp.sid.comun.controller.ListasComunesController;
+import gob.dp.sid.comun.entity.Parametro;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -25,13 +31,24 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     private Atencion atencion;
     
+    private List<Parametro> listaTipoAtencion; 
+    
+    @Autowired
+    private ListasComunesController listasComunesController;
+    
     @PostConstruct
     public void init() {
-        atencion = new Atencion();
+        if(atencion==null){
+            atencion = new Atencion();
+        }
+        if(listaTipoAtencion==null){
+            listaTipoAtencion = new ArrayList<>();
+        }
+        System.out.println("Entro init");
     }
     
     public String cargarInicioAtencion() {
-        try {          
+        try {
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -51,6 +68,24 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void limpiarIniciarAtencion() {
         setAtencion(new Atencion());
     }
+    
+    public void actualizarListaTipoAtencion(String idMotivo){
+        try {
+            if (StringUtils.equals(idMotivo, "")) {
+                listaTipoAtencion.clear();
+            } else {
+                if (StringUtils.equals(idMotivo, "D")) {
+                    listaTipoAtencion = listasComunesController.listaTipoAtencionDocumentario(false, false, false);
+                } else if (StringUtils.equals(idMotivo, "I")) {
+                    listaTipoAtencion = listasComunesController.listaTipoAtencionIntervencion(false, false, false);
+                }
+                
+            }
+            
+        } catch (Exception e) {
+            log.error("ERROR - actualizarListaTipoAtencion()" + e);
+        }
+    }
 
     /**
      * @return the atencion
@@ -64,5 +99,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setAtencion(Atencion atencion) {
         this.atencion = atencion;
+    }
+    
+    /**
+     * @return the listaTipoAtencion
+     */
+    public List<Parametro> getListaTipoAtencion() {
+        return listaTipoAtencion;
+    }
+
+    /**
+     * @param listaTipoAtencion the listaTipoAtencion to set
+     */
+    public void setListaTipoAtencion(List<Parametro> listaTipoAtencion) {
+        this.listaTipoAtencion = listaTipoAtencion;
     }
 }

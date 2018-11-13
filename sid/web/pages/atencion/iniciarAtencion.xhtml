@@ -91,8 +91,9 @@
                                         <div class="form-group">
                                             <label for="inputmotivo" class="control-label col-form-label">Motivo</label>
                                             <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipomotivo}">
-                                                <f:selectItem itemLabel="Tramite Administrativo" itemValue="A"/>
+                                                <f:selectItem itemLabel="Tramite Administrativo" itemValue="D"/>
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipomotivo)}"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
@@ -104,7 +105,7 @@
                                             <label for="inputtipoatencion" class="control-label col-form-label">Tipo de Atención</label>
                                             <h:selectOneMenu value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                <f:selectItems value="#{listasComunesController.buscarListaAccionCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -113,7 +114,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite</label>
-                                            <textarea class="tipotramite form-control" rows="6" jsf:value="#{atencionController.atencion.tipoTramite}"  placeholder="Tipo de Trámite"/>
+                                            <textarea class="tipotramite form-control" rows="12" jsf:value="#{atencionController.atencion.tipoTramite}"  placeholder="Tipo de Trámite"/>
                                         </div>
                                     </div>
                                 </div>
