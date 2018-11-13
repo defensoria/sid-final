@@ -191,6 +191,13 @@
                 <to-view-id>/pages/atencion/iniciarAtencion.xhtml</to-view-id>
         </navigation-case>
   </navigation-rule>
+  
+  <navigation-rule>
+        <navigation-case>
+                <from-outcome>buscarDni</from-outcome>
+                <to-view-id>/pages/atencion/buscarDni.xhtml</to-view-id>
+        </navigation-case>
+  </navigation-rule>
   <!-- Fin - jcarrillo -->
   
   <navigation-rule>

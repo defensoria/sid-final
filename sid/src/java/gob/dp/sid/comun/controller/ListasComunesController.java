@@ -185,6 +185,20 @@ public class ListasComunesController {
         return insertarValoresDefectoParametro(cacheService.buscarListaFormaCAV(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
     
+    /*Inicio - jcarrillo*/
+    public List<Parametro> listaTipoMotivo(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTipoMotivo(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
+    public List<Parametro> listaTipoAtencionDocumentario(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTipoAtencionDocumentario(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
+    public List<Parametro> listaTipoAtencionIntervencion(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTipoAtencionIntervencion(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    /*Fin - jcarrillo*/
+    
     public List<Parametro> buscarListaAccionCAV(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarListaAccionCAV(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
         

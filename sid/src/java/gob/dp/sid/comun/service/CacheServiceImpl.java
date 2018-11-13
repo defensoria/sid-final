@@ -85,7 +85,14 @@ public class CacheServiceImpl implements CacheService{
     
     private static final Integer CACHE_PARAMETRO_LISTA_DOCUMENTO_CAV = 310;
     
+    /*Inicio - jcarrillo*/
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_MOTIVO = 350;
 
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO = 4403;
+    
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION = 4403;
+    /*Fin - jcarrillo*/
+            
     private volatile HashMap<Integer, Object> contenedor = null;
 
     @Autowired
@@ -273,6 +280,23 @@ public class CacheServiceImpl implements CacheService{
     public List<Parametro> buscarListaDocumentoCAV() {
         return buscarParametro(CACHE_PARAMETRO_LISTA_DOCUMENTO_CAV, CACHE_PARAMETRO_LISTA_DOCUMENTO_CAV);
     }
+    
+     /*Inicio - jcarrillo*/
+    @Override
+    public List<Parametro> listaTipoMotivo() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_MOTIVO, CACHE_PARAMETRO_LISTA_TIPO_MOTIVO);
+    }
+    
+    @Override
+    public List<Parametro> listaTipoAtencionDocumentario() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO, CACHE_PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO);
+    }
+    
+    @Override
+    public List<Parametro> listaTipoAtencionIntervencion() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION, CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION);
+    }
+     /*Fin - jcarrillo*/
     
     private Object getElemento(Integer key) {
         if (this.contenedor == null) {

@@ -79,4 +79,11 @@ public interface CacheService {
     
     public List<Parametro> buscarListaDocumentoCAV();
     
+    /*Inicio - jcarrillo*/
+    public List<Parametro> listaTipoMotivo();
+    
+    public List<Parametro> listaTipoAtencionDocumentario();
+    
+    public List<Parametro> listaTipoAtencionIntervencion();
+    /*Fin - jcarrillo*/
 }

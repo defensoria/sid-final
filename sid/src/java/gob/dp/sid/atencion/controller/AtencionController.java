@@ -7,7 +7,6 @@ package gob.dp.sid.atencion.controller;
 
 import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
-import gob.dp.sid.registro.entity.Persona;
 import java.io.Serializable;
 import javax.inject.Named;
 import org.apache.log4j.Logger;
@@ -35,4 +34,30 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return null;
     }
     
+    public String accederBuscarDni() {
+        try {
+            return "buscarDni";
+        } catch (Exception e) {
+            log.error("ERROR - accederBuscarDni()" + e);
+        }
+        return null;
+    }
+    
+    public void limpiarIniciarAtencion() {
+        setAtencion(new Atencion());
+    }
+
+    /**
+     * @return the atencion
+     */
+    public Atencion getAtencion() {
+        return atencion;
+    }
+
+    /**
+     * @param atencion the atencion to set
+     */
+    public void setAtencion(Atencion atencion) {
+        this.atencion = atencion;
+    }
 }
