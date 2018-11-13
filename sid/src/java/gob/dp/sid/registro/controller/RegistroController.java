@@ -922,23 +922,6 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return null;
     }
     
-    /*Inicio - jcarrillo*/
-    public String cargarInicioAtencion() {
-        try {
-            persona = new Persona();
-            personaBusqueda = new Persona();
-            personaSeleccionada = new Persona();
-            listaPersonaGeneral = null;
-            listaExpedienteXPersona = null;
-            indSeleccion = true;
-            return "iniciarAtencion";
-        } catch (Exception e) {
-            log.error("ERROR - cargarInicioAtencion()" + e);
-        }
-        return null;
-    }
-    /*Fin - jcarrillo*/
-
     public String irOficio() {
         try {
             iniciarExpedienteNuevo();
