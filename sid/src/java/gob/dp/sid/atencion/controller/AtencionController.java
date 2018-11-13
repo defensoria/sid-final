@@ -8,6 +8,7 @@ package gob.dp.sid.atencion.controller;
 import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -24,9 +25,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     private Atencion atencion;
     
+    @PostConstruct
+    public void init() {
+        atencion = new Atencion();
+    }
+    
     public String cargarInicioAtencion() {
-        try {
-            atencion = new Atencion();
+        try {          
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
