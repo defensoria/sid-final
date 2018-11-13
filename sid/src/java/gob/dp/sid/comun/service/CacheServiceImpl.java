@@ -91,6 +91,10 @@ public class CacheServiceImpl implements CacheService{
     private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO = 4403;
     
     private static final Integer CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION = 4404;
+    
+    private static final Integer CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL = 180;//CAMBIAR POR SUS VALORES CORRECTOS
+    
+    private static final Integer CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO = 100;//CAMBIAR POR SUS VALORES CORRECTOS
     /*Fin - jcarrillo*/
             
     private volatile HashMap<Integer, Object> contenedor = null;
@@ -295,6 +299,16 @@ public class CacheServiceImpl implements CacheService{
     @Override
     public List<Parametro> listaTipoAtencionIntervencion() {
         return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION, CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION);
+    }
+    
+    @Override
+    public List<Parametro> listaTramiteIntervencionPresencial() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL, CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL);
+    }
+    
+    @Override
+    public List<Parametro> listaTramiteDocumentarioAdministrativo() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO, CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO);
     }
      /*Fin - jcarrillo*/
     

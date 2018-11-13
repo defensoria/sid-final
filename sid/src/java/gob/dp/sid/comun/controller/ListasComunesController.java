@@ -197,6 +197,14 @@ public class ListasComunesController {
     public List<Parametro> listaTipoAtencionIntervencion(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listaTipoAtencionIntervencion(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
+    
+    public List<Parametro> listaTramiteIntervencionPresencial(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTramiteIntervencionPresencial(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
+    public List<Parametro> listaTramiteDocumentarioAdministrativo(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTramiteDocumentarioAdministrativo(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
     /*Fin - jcarrillo*/
     
     public List<Parametro> buscarListaAccionCAV(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {

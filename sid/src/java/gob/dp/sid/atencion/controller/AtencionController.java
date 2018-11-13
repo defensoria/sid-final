@@ -33,6 +33,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private Atencion atencion;
     
     private List<Parametro> listaTipoAtencion; 
+    private List<Parametro> listaTipoTramite;
     
     @Autowired
     private ListasComunesController listasComunesController;
@@ -76,6 +77,22 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             log.error("ERROR - actualizarListaTipoAtencion()" + e);
         }
     }
+    
+    public void actualizarListaTipoTramite(String idAtencion,String idMotivo){
+        try {
+            if (StringUtils.equals(idAtencion, "")) {
+                listaTipoTramite.clear();
+            } else {
+                if ((StringUtils.equals(idAtencion, "01") || StringUtils.equals(idAtencion, "02")) && StringUtils.equals(idMotivo, "D")) {
+                    listaTipoTramite = listasComunesController.listaTramiteDocumentarioAdministrativo(false, false, false);
+                } else if (StringUtils.equals(idAtencion, "01") && StringUtils.equals(idMotivo, "I")) {
+                    listaTipoTramite = listasComunesController.listaTramiteIntervencionPresencial(false, false, false);
+                }
+            }
+        } catch (Exception e) {
+            log.error("ERROR - actualizarListaTipoTramite()" + e);
+        }
+    }
 
     /**
      * @return the atencion
@@ -103,5 +120,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaTipoAtencion(List<Parametro> listaTipoAtencion) {
         this.listaTipoAtencion = listaTipoAtencion;
+    }
+
+    /**
+     * @return the listaTipoTramite
+     */
+    public List<Parametro> getListaTipoTramite() {
+        return listaTipoTramite;
+    }
+
+    /**
+     * @param listaTipoTramite the listaTipoTramite to set
+     */
+    public void setListaTipoTramite(List<Parametro> listaTipoTramite) {
+        this.listaTipoTramite = listaTipoTramite;
     }
 }

@@ -106,6 +106,7 @@
                                             <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipomotivo)}" render="selTipoTramite"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -113,8 +114,10 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite</label>
-                                            <textarea class="tipotramite form-control" rows="12" jsf:value="#{atencionController.atencion.tipoTramite}"  placeholder="Tipo de Trámite"/>
+                                            <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite 2</label>
+                                            <h:selectOneListbox id="selTipoTramite" value="#{atencionController.atencion.tipoTramite}" class="tipotramite form-control" >
+                                                <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
+                                            </h:selectOneListbox>
                                         </div>
                                     </div>
                                 </div>
