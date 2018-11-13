@@ -42,6 +42,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         try {
             atencion = new Atencion();
             listaTipoAtencion = new ArrayList<>();
+            listaTipoTramite = new ArrayList<>();
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -59,11 +60,17 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public void limpiarIniciarAtencion() {
-        setAtencion(new Atencion());
+        atencion = new Atencion();
+        atencion.setTipoMotivo("");
+        atencion.setTipoAtencion("0");
+        atencion.setIndicadorDocumentos("");
+        listaTipoAtencion = new ArrayList<>();
+        listaTipoTramite = new ArrayList<>();
     }
     
     public void actualizarListaTipoAtencion(String idMotivo){
         try {
+            listaTipoTramite.clear();
             if (StringUtils.equals(idMotivo, "")) {
                 listaTipoAtencion.clear();
             } else {
@@ -73,6 +80,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     listaTipoAtencion = listasComunesController.listaTipoAtencionIntervencion(false, false, false);
                 }
             }
+            atencion.setTipoAtencion("0");
+            atencion.setIndicadorDocumentos("");
         } catch (Exception e) {
             log.error("ERROR - actualizarListaTipoAtencion()" + e);
         }

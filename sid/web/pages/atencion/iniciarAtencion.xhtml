@@ -90,10 +90,10 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputmotivo" class="control-label col-form-label">Motivo</label>
-                                            <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipomotivo}">
+                                            <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}">
                                                 <f:selectItem itemLabel="Tramite Administrativo" itemValue="D"/>
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipomotivo)}" render="cmbTipoAtencion"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="cmbTipoAtencion selTipoTramite chkDocumento"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                             <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipomotivo)}" render="selTipoTramite"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="selTipoTramite"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite 2</label>
+                                            <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite</label>
                                             <h:selectOneListbox id="selTipoTramite" value="#{atencionController.atencion.tipoTramite}" class="tipotramite form-control" >
                                                 <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
                                             </h:selectOneListbox>
@@ -125,7 +125,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputdocumento" class="control-label col-form-label">Trae Documentos</label>
-                                            <h:selectOneRadio class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
+                                            <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
                                                 <f:selectItem itemLabel="Si" itemValue="S"/>
                                                 <f:selectItem itemLabel="No" itemValue="N"/>
                                             </h:selectOneRadio>

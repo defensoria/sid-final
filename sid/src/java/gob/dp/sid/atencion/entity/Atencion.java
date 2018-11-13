@@ -14,7 +14,7 @@ public class Atencion implements Serializable{
     
     private Long id;
     
-    private String tipomotivo;
+    private String tipoMotivo;
     
     private String tipoAtencion;
     
@@ -37,17 +37,17 @@ public class Atencion implements Serializable{
     }
 
     /**
-     * @return the tipomotivo
+     * @return the tipoMotivo
      */
-    public String getTipomotivo() {
-        return tipomotivo;
+    public String getTipoMotivo() {
+        return tipoMotivo;
     }
 
     /**
-     * @param tipomotivo the tipomotivo to set
+     * @param tipoMotivo the tipomotivo to set
      */
-    public void setTipomotivo(String tipomotivo) {
-        this.tipomotivo = tipomotivo;
+    public void setTipoMotivo(String tipoMotivo) {
+        this.tipoMotivo = tipoMotivo;
     }
 
     /**
