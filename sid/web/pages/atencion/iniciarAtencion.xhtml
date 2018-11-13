@@ -32,10 +32,31 @@
                     function confirmar1() {
                         if ($('.motivo').is(':checked')) {
                             $('.motivo').focus().addClass("clasRED");
-                            alertar("Debe ingresar el sexo");
+                            alertar("Debe seleccionar el motivo");
                             return false;
                         } else {
                             $('.motivo').removeClass("clasRED");
+                        }
+                        if ($('.tipoatencion').val() === '0') {
+                            $('.tipoatencion').focus().addClass("clasRED");
+                            alertar("Debe seleccionar el tipo de atención");
+                            return false;
+                        } else {
+                            $('.tipoatencion').removeClass("clasRED");
+                        }
+                        if ($('.tipotramite').val() === '0')) {
+                            $('.tipotramite').focus().addClass("clasRED");
+                            alertar("Debe seleccionar el tipo de trámite");
+                            return false;
+                        } else {
+                            $('.tipotramite').removeClass("clasRED");
+                        }
+                        if ($('.documento').is(':checked')) {
+                            $('.documento').focus().addClass("clasRED");
+                            alertar("Debe seleccionar el tipo de trámite");
+                            return false;
+                        } else {
+                            $('.documento').removeClass("clasRED");
                         }
                         //$(".confirmacion1").modal('show');
                     }
@@ -81,7 +102,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoatencion" class="control-label col-form-label">Tipo de Atención</label>
-                                            <h:selectOneMenu value="#{atencionController.atencion.tipoAtencion}" class="form-control">
+                                            <h:selectOneMenu value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{listasComunesController.buscarListaAccionCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                             </h:selectOneMenu>
@@ -92,7 +113,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite</label>
-                                            <textarea class="form-control tipotramite" rows="6" jsf:value="#{atencionController.atencion.tipoTramite}"  placeholder="Tipo de Trámite"/>
+                                            <textarea class="tipotramite form-control" rows="6" jsf:value="#{atencionController.atencion.tipoTramite}"  placeholder="Tipo de Trámite"/>
                                         </div>
                                     </div>
                                 </div>
