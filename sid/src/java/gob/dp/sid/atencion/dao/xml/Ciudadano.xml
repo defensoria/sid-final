@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.CiudadanoDAO">
+    <resultMap id="personaMap" type="gob.dp.sid.atencion.entity.Ciudadano">
+        <result property="id" column="N_ID_PERS" jdbcType="INTEGER"/>
+        <result property="dni" column="C_DNI" jdbcType="VARCHAR"/>
+        <result property="tipoDocumento" column="C_TIPO_DOCUMENTO" jdbcType="VARCHAR"/>
+        <result property="nombre1" column="C_NOMBRE_1" jdbcType="VARCHAR"/>
+        <result property="nombre2" column="C_NOMBRE_2" jdbcType="VARCHAR"/>
+        <result property="apellidoPaterno" column="C_APELLIDO_PATERNO" jdbcType="VARCHAR"/>
+        <result property="apellidoMaterno" column="C_APELLIDO_MATERNO" jdbcType="VARCHAR"/>
+        <result property="fechaNacimiento" column="D_FECHA_NAC" jdbcType="DATE"/>
+        <result property="sexo" column="C_SEXO" jdbcType="VARCHAR"/>
+        <result property="discacidad" column="N_DISCAPACIDAD" jdbcType="INTEGER"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+        <result property="usuarioCreacion" column="C_USUARIO_CREAC" jdbcType="VARCHAR"/>
+        <result property="fechaModifica" column="D_FECHA_MODIFICA" jdbcType="DATE"/>
+        <result property="usuarioModifica" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="buscarDatosCiudadano" resultMap="personaMap" parameterType="filtroPersona">
+        SELECT 
+            N_ID_PERS,
+            C_DNI,
+            C_TIPO_DOCUMENTO,
+            C_NOMBRE_1,
+            C_NOMBRE_2,
+            C_APELLIDO_PATERNO,
+            C_APELLIDO_MATERNO,
+            D_FECHA_NAC,
+            C_SEXO,
+            N_DISCAPACIDAD
+          FROM 
+            SAC_REG_PERSONA
+          WHERE 
+            C_DNI = #{numeroDni}
+    </select>
+</mapper>

@@ -6,6 +6,9 @@
 package gob.dp.sid.atencion.controller;
 
 import gob.dp.sid.atencion.entity.Atencion;
+import gob.dp.sid.atencion.entity.Ciudadano;
+import gob.dp.sid.atencion.service.PersonaCiudadanoService;
+import gob.dp.sid.atencion.service.bean.FiltroPersona;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import gob.dp.sid.comun.controller.ListasComunesController;
 import gob.dp.sid.comun.entity.Parametro;
@@ -38,6 +41,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private ListasComunesController listasComunesController;
     
+    @Autowired
+    private PersonaCiudadanoService ciudadanoServie;
+    
     public String cargarInicioAtencion() {
         try {
             atencion = new Atencion();
@@ -52,11 +58,25 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     public String accederBuscarDni() {
         try {
+            if( atencion.getDni() != null ) {
+                FiltroPersona filtroPersona = new FiltroPersona();
+                filtroPersona.setNumeroDni(atencion.getDni());
+                Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
+                if(persona != null){
+                    atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
+                    atencion.setApellidoPaterno(persona.getApellidoPaterno());
+                    atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                }
+            }
             return "buscarDni";
         } catch (Exception e) {
             log.error("ERROR - accederBuscarDni()" + e);
         }
         return null;
+    }
+    
+    public void onBuscarDatosCiudadano() {
+        System.err.println("Hola mundo");
     }
     
     public void limpiarIniciarAtencion() {
