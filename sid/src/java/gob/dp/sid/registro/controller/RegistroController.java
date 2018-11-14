@@ -801,7 +801,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         }
     }
 
-    public void consultarReniec() throws ParseException {
+    /*public void consultarReniec() throws ParseException {
         try {
              String proxyHost = "172.30.1.250";
              String proxyPort = "8080";
@@ -844,7 +844,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             log.error("ERROR - consultarReniec()" + e);
             msg.messageError("El servicio de RENIEC no esta disponible", null);
         }
-    }
+    }*/
 
     public void cargarSegundaClasificacion(long idClasifica, int idPrimerNivel) {
         try {
