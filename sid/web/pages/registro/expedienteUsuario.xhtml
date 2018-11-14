@@ -254,12 +254,12 @@
                             $('body').removeClass('modal-open');
                             $(".modal-backdrop").removeClass("modal-backdrop");
                             $("#idModalNuevaPersona").modal('show');
-                            $('.datepicker').datetimepicker({
-                                pickTime: false
-                            });
-                            $(".datepicker").on("changeDate", function (ev) {
-                                $(this).datetimepicker("hide");
-                            });
+                            //$('.datepicker').datetimepicker({
+                            //    pickTime: false
+                            //});
+                            //$(".datepicker").on("changeDate", function (ev) {
+                             //   $(this).datetimepicker("hide");
+                            //});
                         }
                     }
                 </script>
@@ -287,8 +287,9 @@
                             </div>
                             <div class="modal-body" style="padding:5px">
                                 <div class="panel-body">
-                                    <h:panelGroup id="idPanelTipoPersona">
+                                    
                                         <div class="table-responsive">
+                                            <h:panelGroup id="idPanelTipoPersona">
                                         <table style="width: 100%">
                                             <tr>
                                                 <td>
@@ -329,9 +330,9 @@
                                                                 <input type="text" placeholder="Número documento" jsf:value="#{registroController.persona.numeroDocumento}" maxlength="8"  class="form-control"/>
                                                             </td>
                                                             <td style="text-align: left">
-                                                                <a class="btn btn-info" jsf:action="#{registroController.consultarReniec()}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-search" />Reniec
-                                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona" onevent="closeModal"/>
+                                                                <a class="btn btn-warning" >
+                                                                    <span class="far fa-share-square" /> Reniec
+                                                                    <f:ajax listener="#{registroController.consultarReniec()}" render="idPanelTipoPersona"/>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -452,8 +453,9 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                                </h:panelGroup>
                                             </div>
-                                    </h:panelGroup>
+                                    
                                 </div>
                             </div>
                         </div>

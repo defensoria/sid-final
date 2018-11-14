@@ -801,18 +801,18 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         }
     }
 
-    /*public void consultarReniec() throws ParseException {
+    public void consultarReniec() throws ParseException {
         try {
-             String proxyHost = "172.30.1.250";
+             /*String proxyHost = "172.30.1.250";
              String proxyPort = "8080";
              System.out.println("Setting up with proxy: " + proxyHost + ":" + proxyPort);
              System.setProperty("http.proxyHost", proxyHost);
              System.setProperty("http.proxyPort", proxyPort);
-             System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
+             System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");*/
             ServiceReniec reniec = new ServiceReniec();
             DateFormat format = new SimpleDateFormat("yyMMddHHmmss");
                 String cadenaReniec = usuarioSession.getCodigo()+format.format(new Date());
-            List<String> list = reniec.getConsultarServicio("DEPUWS", "MzY5MjQ5MjM=", cadenaReniec, usuarioSession.getDni(), persona.getNumeroDocumento());
+            List<String> list = reniec.getConsultarServicio(persona.getNumeroDocumento());
             if (list != null) {
                 persona.setApellidoPat(list.get(1));
                 persona.setApellidoMat(list.get(2));
@@ -844,7 +844,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             log.error("ERROR - consultarReniec()" + e);
             msg.messageError("El servicio de RENIEC no esta disponible", null);
         }
-    }*/
+    }
 
     public void cargarSegundaClasificacion(long idClasifica, int idPrimerNivel) {
         try {
