@@ -8,14 +8,113 @@
 
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
+            <script type="text/javascript" src="../../assets/extra-libs/teclado/virtual-key.js"></script>
+            <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/teclado/virtual-key.css"/>
             <h:form id="idFormBuscarDni" class="form-horizontal">
                 <div class="row" style="center">
                     <div class="col-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Búsqueda de DNI</h4>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6"  style="float: right">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">DNI</label>
+                                            <input type="text" id="campo" class="dni form-control col-md-6" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI"/>
+                                            <table class="table_teclado col-md-6">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>5</td>
+                                                    <td>6</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>7</td>
+                                                    <td>8</td>
+                                                    <td>9</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">0</td>
+                                                    <td><img class="btn_delete" src="../../assets/extra-libs/teclado/borrar.png"/></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2" style="float: left">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">&#160;&#160;&#160;</label><br/>
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.accederBuscarDni()}">
+                                                    <i class="fa fa-save"></i> Buscar
+                                                </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>                        
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Datos de la persona</h4>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">DNI</label>
+                                            <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" disabled="true"/>
+                                        </div>
+                                    </div>     
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="inputname" class="control-label col-form-label">Nombres</label>
+                                            <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" placeholder="Nombres"/>
+                                        </div>
+                                    </div>     
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">A. paterno</label>
+                                            <input type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" placeholder="Apellido Paterno"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">A. Materno</label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.apellidoMaterno}"  placeholder="Apellido Materno"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Atención Preferencial</label>
+                                            <h:selectOneRadio class="sexo" value="#{atencionController.atencion.atencionPreferencial}">
+                                                <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                <f:selectItem itemLabel="No" itemValue="N"/>
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="control-label col-form-label">Tipo de Discapacidad</label>
+                                            <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" >
+                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
                     </div>                    
                 </div>                    
             </h:form>

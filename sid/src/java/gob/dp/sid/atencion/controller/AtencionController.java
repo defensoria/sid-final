@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -32,23 +33,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private Atencion atencion;
     
     private List<Parametro> listaTipoAtencion; 
+    private List<Parametro> listaTipoTramite;
     
     @Autowired
     private ListasComunesController listasComunesController;
     
-    @PostConstruct
-    public void init() {
-        if(atencion==null){
-            atencion = new Atencion();
-        }
-        if(listaTipoAtencion==null){
-            listaTipoAtencion = new ArrayList<>();
-        }
-        System.out.println("Entro init");
-    }
-    
     public String cargarInicioAtencion() {
         try {
+            atencion = new Atencion();
+            listaTipoAtencion = new ArrayList<>();
+            listaTipoTramite = new ArrayList<>();
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -66,11 +60,17 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public void limpiarIniciarAtencion() {
-        setAtencion(new Atencion());
+        atencion = new Atencion();
+        atencion.setTipoMotivo("");
+        atencion.setTipoAtencion("0");
+        atencion.setIndicadorDocumentos("");
+        listaTipoAtencion = new ArrayList<>();
+        listaTipoTramite = new ArrayList<>();
     }
     
     public void actualizarListaTipoAtencion(String idMotivo){
         try {
+            listaTipoTramite.clear();
             if (StringUtils.equals(idMotivo, "")) {
                 listaTipoAtencion.clear();
             } else {
@@ -79,11 +79,27 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 } else if (StringUtils.equals(idMotivo, "I")) {
                     listaTipoAtencion = listasComunesController.listaTipoAtencionIntervencion(false, false, false);
                 }
-                
             }
-            
+            atencion.setTipoAtencion("0");
+            atencion.setIndicadorDocumentos("");
         } catch (Exception e) {
             log.error("ERROR - actualizarListaTipoAtencion()" + e);
+        }
+    }
+    
+    public void actualizarListaTipoTramite(String idAtencion,String idMotivo){
+        try {
+            if (StringUtils.equals(idAtencion, "")) {
+                listaTipoTramite.clear();
+            } else {
+                if ((StringUtils.equals(idAtencion, "01") || StringUtils.equals(idAtencion, "02")) && StringUtils.equals(idMotivo, "D")) {
+                    listaTipoTramite = listasComunesController.listaTramiteDocumentarioAdministrativo(false, false, false);
+                } else if (StringUtils.equals(idAtencion, "01") && StringUtils.equals(idMotivo, "I")) {
+                    listaTipoTramite = listasComunesController.listaTramiteIntervencionPresencial(false, false, false);
+                }
+            }
+        } catch (Exception e) {
+            log.error("ERROR - actualizarListaTipoTramite()" + e);
         }
     }
 
@@ -113,5 +129,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaTipoAtencion(List<Parametro> listaTipoAtencion) {
         this.listaTipoAtencion = listaTipoAtencion;
+    }
+
+    /**
+     * @return the listaTipoTramite
+     */
+    public List<Parametro> getListaTipoTramite() {
+        return listaTipoTramite;
+    }
+
+    /**
+     * @param listaTipoTramite the listaTipoTramite to set
+     */
+    public void setListaTipoTramite(List<Parametro> listaTipoTramite) {
+        this.listaTipoTramite = listaTipoTramite;
     }
 }

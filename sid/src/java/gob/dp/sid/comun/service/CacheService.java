@@ -85,5 +85,9 @@ public interface CacheService {
     public List<Parametro> listaTipoAtencionDocumentario();
     
     public List<Parametro> listaTipoAtencionIntervencion();
+    
+    public List<Parametro> listaTramiteIntervencionPresencial();
+    
+    public List<Parametro> listaTramiteDocumentarioAdministrativo();
     /*Fin - jcarrillo*/
 }

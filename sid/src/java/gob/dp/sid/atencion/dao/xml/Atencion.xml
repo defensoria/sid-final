@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="gob.dp.sid.bandeja.dao.AtencionDAO">
-
+<mapper namespace="gob.dp.sid.atencion.dao.AtencionDAO">
+    <resultMap id="atencion" type="gob.dp.sid.atencion.entity.Atencion">
+        <result property="id" column="num_parametro" jdbcType="INTEGER"/>
+        <result property="tipomotivo" column="tipo_motivo" jdbcType="VARCHAR"/>
+        <result property="tipoAtencion" column="tipo_atencion" jdbcType="VARCHAR"/>
+        <result property="tipoTramite" column="tipo_tramite" jdbcType="VARCHAR"/>
+        <result property="indicadorDocumentos" column="indicador_documentos" jdbcType="VARCHAR"/>        
+    </resultMap>
 </mapper>
