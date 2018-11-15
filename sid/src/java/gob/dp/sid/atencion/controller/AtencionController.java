@@ -9,6 +9,7 @@ import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.atencion.entity.Ciudadano;
 import gob.dp.sid.atencion.service.PersonaCiudadanoService;
 import gob.dp.sid.atencion.service.bean.FiltroPersona;
+import gob.dp.sid.comun.ConstantesUtil;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import gob.dp.sid.comun.controller.ListasComunesController;
 import gob.dp.sid.comun.entity.Parametro;
@@ -30,13 +31,15 @@ import org.springframework.context.annotation.Scope;
 @Named
 @Scope("session")
 public class AtencionController extends AbstractManagedBean implements Serializable {
-    
+
     private static final Logger log = Logger.getLogger(AtencionController.class);
     
     private Atencion atencion;
     
     private List<Parametro> listaTipoAtencion; 
     private List<Parametro> listaTipoTramite;
+    private String disableField = "false";
+    private String page;
     
     @Autowired
     private ListasComunesController listasComunesController;
@@ -66,13 +69,32 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                     atencion.setApellidoPaterno(persona.getApellidoPaterno());
                     atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                    disableField = "true";
                 }
             }
-            return "buscarDni";
+            
+            if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
+                if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
+                    page = ConstantesUtil.PAGE_RECEPCION_DOCUMENTOS_EXPEDIENTE;
+                }else if(StringUtils.equals(atencion.getTipoAtencion(), "02")){
+                    page = ConstantesUtil.PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS;
+                }
+            } else {
+                if(StringUtils.equals(atencion.getTipoMotivo(), "I")){
+                    if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
+                        page = ConstantesUtil.PAGE_ATENCION_PRESENCIAL;
+                    }
+                }
+            }
+            return page;
         } catch (Exception e) {
             log.error("ERROR - accederBuscarDni()" + e);
         }
         return null;
+    }
+    
+    public String irRecepcionDocumentosAdministrativos() {
+        return ConstantesUtil.PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS;
     }
     
     public void onBuscarDatosCiudadano() {
@@ -163,5 +185,33 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaTipoTramite(List<Parametro> listaTipoTramite) {
         this.listaTipoTramite = listaTipoTramite;
+    }
+    
+    /**
+     * @return the disableField
+     */
+    public String getDisableField() {
+        return disableField;
+    }
+
+    /**
+     * @param disableField the disableField to set
+     */
+    public void setDisableField(String disableField) {
+        this.disableField = disableField;
+    }
+    
+    /**
+     * @return the page
+     */
+    public String getPage() {
+        return page;
+    }
+
+    /**
+     * @param page the page to set
+     */
+    public void setPage(String page) {
+        this.page = page;
     }
 }

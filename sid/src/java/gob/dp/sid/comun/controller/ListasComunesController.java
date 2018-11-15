@@ -102,9 +102,9 @@ public class ListasComunesController {
         return lista;
     }
     
-    public List<Parametro> buscarTipoEntidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
-        List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoEntidad(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
-        
+    /* inciio jmatos */
+    public List<Parametro> buscarTipoDiscapacidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+         List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoDocumento(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
         Collections.sort(lista, new Comparator<Parametro>() {
 
 			@Override
@@ -113,6 +113,19 @@ public class ListasComunesController {
 			}
 
 		});
+        return lista;
+        
+    }
+    /* fin jmatos*/
+    
+    public List<Parametro> buscarTipoEntidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoDiscapacidad(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+        Collections.sort(lista, new Comparator<Parametro>() {
+            @Override
+            public int compare(Parametro o1, Parametro o2) {
+		return o1.getCodigoParametro().compareTo(o2.getCodigoParametro());
+            }
+        });
         return lista;
     } 
     

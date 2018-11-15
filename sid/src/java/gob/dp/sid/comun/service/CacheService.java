@@ -90,4 +90,8 @@ public interface CacheService {
     
     public List<Parametro> listaTramiteDocumentarioAdministrativo();
     /*Fin - jcarrillo*/
+    
+    /* Inicio - jmatos */
+    public List<Parametro> buscarTipoDiscapacidad();
+    /* Fin - jmatos */
 }

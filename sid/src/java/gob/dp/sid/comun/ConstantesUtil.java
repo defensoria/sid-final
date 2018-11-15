@@ -51,4 +51,9 @@ public class ConstantesUtil implements Serializable{
     
     //public static String FILE_DONWLOAD = "/srv/sid/filesystem";
     
+    // PAGINAS ATENCION:
+    public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";
+    public static String PAGE_RECEPCION_DOCUMENTOS_EXPEDIENTE = "";
+    public static String PAGE_ATENCION_PRESENCIAL = "";
+    
 }

@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/seguridad/usuarioDetalle.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/inicio/index.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/template/template.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteFormularioVirtual.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
+            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/Ciudadano.java</file>
+            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/Documento.java</file>
+            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/VisitaCiudadano.java</file>
         </group>
     </open-files>
 </project-private>

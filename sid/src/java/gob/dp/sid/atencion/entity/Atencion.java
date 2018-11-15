@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author jcarrillo
  */
 public class Atencion implements Serializable{
-    
+
     private Long id;
     
     private String tipoMotivo;
@@ -34,6 +34,7 @@ public class Atencion implements Serializable{
     
     private String tipoDiscapacidad;
     
+    private String observaciones;
     /**
      * @return the id
      */
@@ -186,6 +187,20 @@ public class Atencion implements Serializable{
      */
     public void setTipoDiscapacidad(String tipoDiscapacidad) {
         this.tipoDiscapacidad = tipoDiscapacidad;
+    }
+    
+    /**
+     * @return the observaciones
+     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
             
 }

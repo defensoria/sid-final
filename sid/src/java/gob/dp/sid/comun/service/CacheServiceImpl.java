@@ -96,7 +96,10 @@ public class CacheServiceImpl implements CacheService{
     
     private static final Integer CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO = 100;//CAMBIAR POR SUS VALORES CORRECTOS
     /*Fin - jcarrillo*/
-            
+    
+    /* JMATOS */
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_DISCAPACIDAD = 360;
+    /* JMATOS */
     private volatile HashMap<Integer, Object> contenedor = null;
 
     @Autowired
@@ -179,6 +182,12 @@ public class CacheServiceImpl implements CacheService{
     public List<Parametro> buscarTipoDocumento() {
         return buscarParametro(CACHE_PARAMETRO_TIPO_DOCUMENTO, CACHE_PARAMETRO_TIPO_DOCUMENTO);
     }
+    
+    /* Inicio JMATOS */
+    public List<Parametro> buscarTipoDiscapacidad() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_DISCAPACIDAD, CACHE_PARAMETRO_LISTA_TIPO_DISCAPACIDAD);
+    }
+    /* Fin JMATOS */
     
     @Override
     public List<Parametro> buscarActuacionResponsabilidad() {

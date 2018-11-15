@@ -11,6 +11,10 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${libs.poi.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.ReniecPRO.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -19,11 +23,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.com.springsource.org.aopalliance-1.0.0.jar}</file>
+                    <file>${file.reference.cglib-3.2.8.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-beanutils-1.9.3.jar}</file>
+                    <file>${file.reference.com.springsource.org.aopalliance-1.0.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -49,10 +53,6 @@
                 <library dirs="200">
                     <file>${file.reference.javax.inject-1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.lib-spring-security-3.1.0}</file>
-                    <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jcommon-1.0.8.jar}</file>
@@ -127,8 +127,8 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.poi.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.lib-spring-security-3.1.0}</file>
+                    <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
