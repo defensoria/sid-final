@@ -330,9 +330,9 @@
                                                                 <input type="text" placeholder="Número documento" jsf:value="#{registroController.persona.numeroDocumento}" maxlength="8"  class="form-control"/>
                                                             </td>
                                                             <td style="text-align: left">
-                                                                <a class="btn btn-warning" >
+                                                                <a class="btn btn-warning" jsf:action="#{registroController.consultarReniec()}">
                                                                     <span class="far fa-share-square" /> Reniec
-                                                                    <f:ajax listener="#{registroController.consultarReniec()}" render="idPanelTipoPersona"/>
+                                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
                                                                 </a>
                                                             </td>
                                                         </tr>

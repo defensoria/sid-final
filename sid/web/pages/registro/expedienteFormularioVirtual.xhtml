@@ -234,6 +234,7 @@
                                         </div>
                                     </div>     
                                 </div>
+                                <h:panelGroup id="idPanelTipoPersona">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
@@ -257,7 +258,9 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                
+                                    
+                                
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
@@ -272,6 +275,10 @@
                                         <div class="form-group">
                                             <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
                                             <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Número de documento"/>
+                                            <a class="btn btn-warning" jsf:action="#{registroController.consultarReniecCAV()}">
+                                                                    <span class="far fa-share-square" /> Reniec
+                                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
+                                                                </a>
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +335,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+</h:panelGroup>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
@@ -387,12 +394,12 @@
                                         <h:column class="colr" >
                                             <f:facet name="header"></f:facet>
                                             <a jsf:action="#{registroController.seteaFormularioVirtual(item)}" jsf:rendered="#{item.estado == 'A'}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                             &#160;&#160;&#160;
                                             <h:panelGroup rendered="#{item.estado == 'A'}">
                                                 <a onclick="confirmar0#{item.id}()" >
-                                                    <span class="glyphicon glyphicon-remove" style="color: red" />
+                                                    <span class="fas fa-times" style="color: red" />
                                                 </a>
                                             </h:panelGroup>
                                             <script>
@@ -431,14 +438,19 @@
                                         <h:column>
                                             <f:facet name="header">Doc.</f:facet>
                                             <h:panelGroup rendered="#{item.ruta != null}">
-                                                <a target="_blank" href="/filesystem/#{item.ruta}">
-                                                    <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{item.ruta}">
+                                                    <span class="far fa-file-image" />
                                                 </a>
+                                                
                                             </h:panelGroup>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Expediente</f:facet>
                                             <h:outputText value="#{item.numeroExpediente}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Usuario registro</f:facet>
+                                            <h:outputText value="#{item.usuarioRegistro}" />
                                         </h:column>
                                     </h:dataTable>
                                 </div>

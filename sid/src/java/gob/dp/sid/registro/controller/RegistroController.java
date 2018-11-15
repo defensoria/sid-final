@@ -845,6 +845,52 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             msg.messageError("El servicio de RENIEC no esta disponible", null);
         }
     }
+    
+    
+    public void consultarReniecCAV() throws ParseException {
+        try {
+             /*String proxyHost = "172.30.1.250";
+             String proxyPort = "8080";
+             System.out.println("Setting up with proxy: " + proxyHost + ":" + proxyPort);
+             System.setProperty("http.proxyHost", proxyHost);
+             System.setProperty("http.proxyPort", proxyPort);
+             System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");*/
+            ServiceReniec reniec = new ServiceReniec();
+            DateFormat format = new SimpleDateFormat("yyMMddHHmmss");
+                String cadenaReniec = usuarioSession.getCodigo()+format.format(new Date());
+            List<String> list = reniec.getConsultarServicio(expedienteFormularioVirtual.getNumeroDocumento());
+            if (list != null) {
+                expedienteFormularioVirtual.setApellidoPaterno(list.get(1));
+                expedienteFormularioVirtual.setApellidoMaterno(list.get(2));
+                expedienteFormularioVirtual.setNombre(list.get(4));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                Date date = formatter.parse(list.get(20));
+                //expedienteFormularioVirtual.setFechaNacimiento(date);
+                if (StringUtils.equals(list.get(13), "1")) {
+                    expedienteFormularioVirtual.setSexo("M");
+                } else {
+                    expedienteFormularioVirtual.setSexo("F");
+                }
+                expedienteFormularioVirtual.setDireccion(list.get(11));
+                expedienteFormularioVirtual.setDepartamento(list.get(5));
+                expedienteFormularioVirtual.setProvincia(list.get(6));
+                expedienteFormularioVirtual.setDistrito(list.get(7));
+                if (StringUtils.isNotBlank(expedienteFormularioVirtual.getDepartamento())) {
+                    comboProvinciaId(expedienteFormularioVirtual.getDepartamento());
+                }
+                if (StringUtils.isNotBlank(expedienteFormularioVirtual.getProvincia()) && StringUtils.isNotBlank(expedienteFormularioVirtual.getDepartamento())) {
+                    comboDistritoId(expedienteFormularioVirtual.getProvincia(), expedienteFormularioVirtual.getDepartamento());
+                }
+            } else {
+                msg.messageAlert("No se encontraron datos en la RENIEC con el DNI ingresado", null);
+                expedienteFormularioVirtual = new ExpedienteFormularioVirtual();
+                
+            }
+        } catch (Exception e) {
+            log.error("ERROR - consultarReniec()" + e);
+            msg.messageError("El servicio de RENIEC no esta disponible", null);
+        }
+    }
 
     public void cargarSegundaClasificacion(long idClasifica, int idPrimerNivel) {
         try {
