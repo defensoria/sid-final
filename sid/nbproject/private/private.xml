@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/Ciudadano.java</file>
-            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/Documento.java</file>
-            <file>file:/C:/Users/JMATOS/Documents/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/entity/VisitaCiudadano.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/WEB-INF/jdbc.properties</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/setup/sun-resources.xml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/controller/LoginController.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
         </group>
     </open-files>
 </project-private>
