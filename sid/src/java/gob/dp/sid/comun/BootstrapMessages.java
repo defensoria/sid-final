@@ -165,11 +165,11 @@ public class BootstrapMessages extends MessagesRenderer {
         ResponseWriter writer = facesContext.getResponseWriter();
         
         if(FacesMessage.SEVERITY_WARN.equals(severity)) {
-            writer.append("<div class=\"modal fade\" id=\"idAlertaServer\">");
+            writer.append("<div class=\"modal fade\" id=\"idAlertaServer\" style=\"text-align: left\"=>");
         } else if(FacesMessage.SEVERITY_INFO.equals(severity)) {
             writer.append("<div class=\"modal fade\" id=\"idInfoServer\" style=\"text-align: left\">");
         } else if(FacesMessage.SEVERITY_ERROR.equals(severity)) {
-            writer.append("<div class=\"modal fade\" id=\"idErrorServer\">");
+            writer.append("<div class=\"modal fade\" id=\"idErrorServer\" style=\"text-align: left\">");
         }    
         writer.append("<div class=\"modal-dialog modal-sm\" >");
         if(FacesMessage.SEVERITY_WARN.equals(severity)) {
@@ -181,7 +181,7 @@ public class BootstrapMessages extends MessagesRenderer {
         }
         writer.append("<div class=\"modal-header\" style=\"padding: 5px;\">");
         writer.append("<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span style=\"color: black; font-size: large\" ></span></button>");
-        writer.append("<h4 style=\"color: #8A6D3B\"><b>"+messages.get(0).getDetail()+"</b></h4>");
+        writer.append("<h4 style=\"color: #8A6D3B; text-align: left\"><b>"+messages.get(0).getDetail()+"</b></h4>");
         writer.append("</div>");
         writer.append("<div style=\"background: white;box-sizing: border-box;\" >");
         writer.append("<div class=\"modal-body\" style=\"padding: 7px;\">");

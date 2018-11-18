@@ -72,12 +72,30 @@
                 <table style="width: 100%">
                     <tr>
                         <td colspan="2">
+                            
+                            
+                           <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="card-title">Expediente: #{registroController.expediente.numero}</h4>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                           </div>
+                            
+                            
+                            
                             <div class="panel panel-featured-top-primary">
                                 <div class="panel-body" >
                                     <table style="width: 100%">
                                         <tr>
                                             <td>
-                                                <span style="font-size: 2em" class="text-resalt-primary">Expediente: #{registroController.expediente.numero}</span>
+                                                <span style="font-size: 2em" class="text-resalt-primary"></span>
                                                 <h:outputText value=" (CONCLUIDO)" rendered="#{registroController.expediente.general == 'C'}"  style="color: red; font-weight: bold; font-size: 1.5em" />
                                                 <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
                                             </td>
@@ -579,6 +597,20 @@
 
                                 </div>
                             </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                         </td>
                     </tr>
                 </table>
