@@ -12,28 +12,22 @@
     <script>
         $(function () {
             $('#campo').keypad({keypadOnly: false});
-        });
-        
+        });        
     </script>
             <h:form id="idFormBuscarDni" class="form-horizontal">
                 <div class="row" style="center">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Búsqueda de DNI</h4>
+                                <h4 class="card-title">Resumen de Atención</h4>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6"  style="float: right">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="inputname" class="control-label col-form-label">DNI</label>
-                                            <h:inputText id="campo" class="dni form-control col-md-6" value="#{atencionController.atencion.dni}" >
-                                                <f:ajax event="blur" listener="#{atencionController.accederBuscarDni}" />
-                                            </h:inputText>
-                                            
-                                            
-                                            
+                                            <input id="campo" type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-2 col-md-2" style="float: left">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="inputname" class="control-label col-form-label">&#160;</label><br/>
                                                 <a class="btn btn-warning" jsf:action="#{atencionController.accederBuscarDni()}">
@@ -49,54 +43,71 @@
                             <div class="card-body">
                                 <h4 class="card-title">Datos de la persona</h4>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputname" class="control-label col-form-label">DNI</label>
                                             <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" disabled="true"/>
                                         </div>
                                     </div>  
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputname" class="control-label col-form-label">Nombres</label>
                                             <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" disabled="#{atencionController.disableField}" placeholder="Nombres"/>
                                         </div>
                                     </div>    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="control-label col-form-label">A. paterno</label>
                                             <input type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" disabled="#{atencionController.disableField}" placeholder="Apellido Paterno"/>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4">
                                         <div class="form-group">
                                             <label for="inputcontact" class="control-label col-form-label">A. Materno</label>
                                             <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.apellidoMaterno}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Fec. Nacimiento</label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.fechaNacimiento}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Sexo</label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.sexo}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="row">
+                                
+                                    <h:panelGroup id="idpaneldiscapacidad" layout="block" >
+                                        <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                             <label for="inputcontact" class="control-label col-form-label">Atención Preferencial</label>
                                             <h:selectOneRadio class="sexo" value="#{atencionController.atencion.atencionPreferencial}">
                                                 <f:selectItem itemLabel="Si" itemValue="S"/>
                                                 <f:selectItem itemLabel="No" itemValue="N"/>
+                                                <f:ajax render="idpaneldiscapacidad" />
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="control-label col-form-label">Tipo de Discapacidad</label>
-                                            <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" >
-                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                            </h:selectOneMenu>
-                                        </div>
+                                            <div class="form-group">
+                                                <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label">Tipo de Discapacidad</label>
+                                                <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
+                                                    <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </div>
                                     </div>
-                                </div>
+                                            </div>
+                                  </h:panelGroup>
+                                
                                 <div class="row">
                                     <div class="col-lg-12 col-md-8">
                                         <div class="form-group">

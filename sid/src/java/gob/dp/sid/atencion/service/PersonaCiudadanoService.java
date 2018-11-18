@@ -6,7 +6,7 @@
 package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.entity.Ciudadano;
-import gob.dp.sid.atencion.service.bean.FiltroPersona;
+import gob.dp.sid.atencion.bean.FiltroPersona;
 
 /**
  *

@@ -3,42 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gob.dp.sid.atencion.entity;
+package gob.dp.sid.atencion.bean;
+
+import gob.dp.sid.comun.type.MotivoAtencionType;
 import java.io.Serializable;
 
 /**
  *
- * @author jcarrillo
+ * @author JMATOS
  */
-public class Atencion implements Serializable{
-
+public class AtencionBean implements Serializable {
+    
     private Long id;
-    
     private String tipoMotivo;
-    
     private String tipoAtencion;
-    
     private String tipoTramite;
-    
     private String indicadorDocumentos;
-    
     private String dni;
-    
     private String nombres;
-    
     private String apellidoPaterno;
-    
     private String apellidoMaterno;
-    
     private String atencionPreferencial;
-    
     private String tipoDiscapacidad;
-    
     private String observaciones;
-    
-    private String sexo;
-    
-    private String fechaNacimiento;
+    private String nameTipoMotivo;
+    private String nameTipoAtencion;
+    private String nameTipoTramite;
 
     /**
      * @return the id
@@ -62,7 +52,7 @@ public class Atencion implements Serializable{
     }
 
     /**
-     * @param tipoMotivo the tipomotivo to set
+     * @param tipoMotivo the tipoMotivo to set
      */
     public void setTipoMotivo(String tipoMotivo) {
         this.tipoMotivo = tipoMotivo;
@@ -193,7 +183,7 @@ public class Atencion implements Serializable{
     public void setTipoDiscapacidad(String tipoDiscapacidad) {
         this.tipoDiscapacidad = tipoDiscapacidad;
     }
-    
+
     /**
      * @return the observaciones
      */
@@ -207,21 +197,51 @@ public class Atencion implements Serializable{
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
+    /**
+     * @return the nameTipoMotivo
+     */
+    public String getNameTipoMotivo() {
+        if(tipoMotivo != null){
+            nameTipoMotivo = MotivoAtencionType.get(tipoMotivo).getValue();
+        }
+        return nameTipoMotivo;
+    }
+
+    /**
+     * @param nameTipoMotivo the nameTipoMotivo to set
+     */
+    public void setNameTipoMotivo(String nameTipoMotivo) {
+        this.nameTipoMotivo = nameTipoMotivo;
+    }
+
+    /**
+     * @return the nameTipoAtencion
+     */
+    public String getNameTipoAtencion() {
+        return nameTipoAtencion;
+    }
+
+    /**
+     * @param nameTipoAtencion the nameTipoAtencion to set
+     */
+    public void setNameTipoAtencion(String nameTipoAtencion) {
+        this.nameTipoAtencion = nameTipoAtencion;
+    }
+
+    /**
+     * @return the nameTipoTramite
+     */
+    public String getNameTipoTramite() {
+        return nameTipoTramite;
+    }
+
+    /**
+     * @param nameTipoTramite the nameTipoTramite to set
+     */
+    public void setNameTipoTramite(String nameTipoTramite) {
+        this.nameTipoTramite = nameTipoTramite;
+    }
     
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-            
+    
 }

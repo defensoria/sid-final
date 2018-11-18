@@ -19,8 +19,9 @@
                                             <i class="fa fa-save"></i> Guardar
                                         </a>
                                         &#160;&#160;&#160;
-                                        <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
+                                        <a class="btn btn-info" jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}">
                                             <span class="fas fa-paperclip" /> Adjuntar
+                                            <f:ajax render=":idFormAddDocumentos" onevent="openModalAdjuntarDocumentos"/>
                                         </a>
                                         &#160;&#160;&#160;
                                         <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
@@ -31,6 +32,51 @@
                         </div>
                     </div>
                 </div>
+                <!--  Modal --> 
+                <script>
+                    function openModalAdjuntarDocumentos(data) {
+                        if (data.status === 'success') {
+                            $("#loadModal").modal('hide');
+                            $('body').removeClass('modal-open');
+                            $(".modal-backdrop").removeClass("modal-backdrop");
+                            $("#idModalAdjuntarDocumentos").modal('show');
+                        }
+                    }
+                </script>
+             <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalAdjuntarDocumentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" style="text-align: left">
+                    <div class="modal-content">
+                       <div class="modal-header">
+                            <h4 class="modal-title">Adjuntar Documentos</h4>
+                       </div>    
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <label class="label-sm"><strong>Motivo Visita:</strong></label> <br />
+                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencionBean.nameTipoMotivo}" /></label>
+                              </div>
+                              
+                              <div class="col-md-4">
+                                  <label class="label-sm"><strong>Tipo Atención</strong></label> <br />
+                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencion.tipoAtencion}" /></label>
+                              </div>
+                              
+                              <div class="col-md-4">
+                                  <label class="label-sm"><strong>Tipo Tramite:</strong></label> <br />
+                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencion.tipoTramite}" /></label>
+                              </div>
+                          </div>
+                          <div class="row">
+                              
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-warning">Guardar</button>
+                      </div>
+                    </div>
+                </div>
+             </div>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -13,6 +13,10 @@
       <locale-config>
      	  <default-locale>es</default-locale>
       </locale-config>
+      <resource-bundle>
+	<base-name>gob.dp.sid.messages</base-name>
+	<var>msg</var>
+      </resource-bundle>
   </application>
   
   <render-kit>

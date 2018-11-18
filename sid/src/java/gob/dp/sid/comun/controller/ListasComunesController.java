@@ -104,7 +104,7 @@ public class ListasComunesController {
     
     /* inciio jmatos */
     public List<Parametro> buscarTipoDiscapacidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
-         List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoDocumento(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+         List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoDiscapacidad(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
         Collections.sort(lista, new Comparator<Parametro>() {
 
 			@Override
