@@ -5,13 +5,10 @@
  */
 package gob.dp.sid.atencion.dao;
 
-import gob.dp.sid.atencion.entity.Ciudadano;
-import gob.dp.sid.atencion.bean.FiltroPersona;
-
 /**
  *
  * @author JMATOS
  */
-public interface CiudadanoDAO {
-    public Ciudadano obtenerDatosPersonaByDni(FiltroPersona filtroPersona);
+public interface DocumentoDAO {
+    
 }

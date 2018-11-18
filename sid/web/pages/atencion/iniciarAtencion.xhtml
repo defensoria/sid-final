@@ -63,12 +63,12 @@
                 </script>
                 
                 <div class="row" style="center">
-                    <div class="col-6">
+                    <div class="col-lg-12 col-sm-12 col-md-6">
 
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-sm-12 col-md-12">
                                         <h4 class="card-title">Atención al Ciudadano</h4>
                                     </div>
                                     <div class="col-12" style="text-align: right">
@@ -87,10 +87,10 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12">
+                                    <div class="col-sm-4 col-md-6 col-lg-12">
                                         <div class="form-group">
                                             <label for="inputmotivo" class="control-label col-form-label">Motivo</label>
-                                            <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}">
+                                            <h:selectOneRadio required="true" requiredMessage="Debe seleccionar el motivo de la visita el ciudadano" class="motivo" value="#{atencionController.atencion.tipoMotivo}">
                                                 <f:selectItem itemLabel="Tramite Administrativo" itemValue="D"/>
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
                                                 <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="cmbTipoAtencion selTipoTramite chkDocumento"/>
@@ -103,8 +103,8 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoatencion" class="control-label col-form-label">Tipo de Atención</label>
-                                            <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
-                                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                            <h:selectOneMenu required="true" requiredMessage="Debe seleccionar el tipo de atención" id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
+                                                <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                 <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="selTipoTramite"/>
                                             </h:selectOneMenu>
@@ -115,7 +115,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipotramite" class="control-label col-form-label">Tipo de Trámite</label>
-                                            <h:selectOneListbox id="selTipoTramite" value="#{atencionController.atencion.tipoTramite}" class="tipotramite form-control" >
+                                            <h:selectOneListbox required="true" requiredMessage="Debe seleccionar un tipo de tramite" id="selTipoTramite" value="#{atencionController.atencion.tipoTramite}" class="tipotramite form-control" >
                                                 <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
                                             </h:selectOneListbox>
                                         </div>
@@ -125,7 +125,7 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputdocumento" class="control-label col-form-label">Trae Documentos</label>
-                                            <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
+                                            <h:selectOneRadio required="true" requiredMessage="Debe Indicar si cuenta con documentos" id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
                                                 <f:selectItem itemLabel="Si" itemValue="S"/>
                                                 <f:selectItem itemLabel="No" itemValue="N"/>
                                             </h:selectOneRadio>

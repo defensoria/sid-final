@@ -5,6 +5,9 @@
 
 package gob.dp.sid.comun;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 
 /**
@@ -28,6 +31,11 @@ public class ComunUtil {
             return true;
         return false;
 
+    }
+    
+    public static String getDateToString(Date date){
+        SimpleDateFormat fd = new SimpleDateFormat("dd/MM/yyyy");
+        return fd.format(date);
     }
 
 

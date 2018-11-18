@@ -62,7 +62,7 @@
         
         <typeAlias type="gob.dp.sid.bandeja.entity.Bandeja" alias="bandeja"/>
         <typeAlias type="gob.dp.sid.bandeja.entity.FiltroBusquedaMensaje" alias="filtroBusquedaMensaje"/>
-        <typeAlias type="gob.dp.sid.atencion.service.bean.FiltroPersona" alias="filtroPersona"  />
+        <typeAlias type="gob.dp.sid.atencion.bean.FiltroPersona" alias="filtroPersona"  />
     </typeAliases>
 
     <mappers>

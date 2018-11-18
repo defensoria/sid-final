@@ -184,6 +184,7 @@ public class CacheServiceImpl implements CacheService{
     }
     
     /* Inicio JMATOS */
+    @Override
     public List<Parametro> buscarTipoDiscapacidad() {
         return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_DISCAPACIDAD, CACHE_PARAMETRO_LISTA_TIPO_DISCAPACIDAD);
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gob.dp.sid.atencion.service.bean;
+package gob.dp.sid.atencion.bean;
 
 /**
  *

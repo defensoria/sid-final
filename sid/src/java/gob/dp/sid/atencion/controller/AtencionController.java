@@ -5,20 +5,22 @@
  */
 package gob.dp.sid.atencion.controller;
 
+import gob.dp.sid.atencion.bean.AtencionBean;
 import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.atencion.entity.Ciudadano;
 import gob.dp.sid.atencion.service.PersonaCiudadanoService;
-import gob.dp.sid.atencion.service.bean.FiltroPersona;
+import gob.dp.sid.atencion.bean.FiltroPersona;
+import gob.dp.sid.comun.ComunUtil;
 import gob.dp.sid.comun.ConstantesUtil;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import gob.dp.sid.comun.controller.ListasComunesController;
 import gob.dp.sid.comun.entity.Parametro;
+import gob.dp.sid.comun.type.MotivoAtencionType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +37,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private static final Logger log = Logger.getLogger(AtencionController.class);
     
     private Atencion atencion;
-    
+    private AtencionBean atencionBean;
     private List<Parametro> listaTipoAtencion; 
     private List<Parametro> listaTipoTramite;
     private String disableField = "false";
     private String page;
     
+    private boolean renderTieneDiscapacidad = false;
+            
     @Autowired
     private ListasComunesController listasComunesController;
     
@@ -50,8 +54,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public String cargarInicioAtencion() {
         try {
             atencion = new Atencion();
+            atencionBean = new AtencionBean();
             listaTipoAtencion = new ArrayList<>();
             listaTipoTramite = new ArrayList<>();
+            // atencionBean.setNameTipoMotivo(MotivoAtencionType.get(atencion.getTipoMotivo()).getValue());
+            
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -69,10 +76,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                     atencion.setApellidoPaterno(persona.getApellidoPaterno());
                     atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                    atencion.setSexo(persona.getSexo());
+                    if(persona.getFechaNacimiento() != null)
+                        atencion.setFechaNacimiento(ComunUtil.getDateToString(persona.getFechaNacimiento()));
                     disableField = "true";
                 }
             }
             
+            BeanUtils.copyProperties(atencionBean, atencion);
+            atencionBean.setTipoMotivo(atencion.getTipoMotivo());
+            atencionBean.setNameTipoMotivo(MotivoAtencionType.get(atencion.getTipoMotivo()).getValue());
             if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
                 if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
                     page = ConstantesUtil.PAGE_RECEPCION_DOCUMENTOS_EXPEDIENTE;
@@ -145,6 +158,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
     }
 
+    public void cargarModalAdjuntarDocumentos() {
+        
+    }
+    
+    
     /**
      * @return the atencion
      */
@@ -213,5 +231,33 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setPage(String page) {
         this.page = page;
+    }
+
+    /**
+     * @return the atencionBean
+     */
+    public AtencionBean getAtencionBean() {
+        return atencionBean;
+    }
+
+    /**
+     * @param atencionBean the atencionBean to set
+     */
+    public void setAtencionBean(AtencionBean atencionBean) {
+        this.atencionBean = atencionBean;
+    }
+
+    /**
+     * @return the renderTieneDiscapacidad
+     */
+    public boolean isRenderTieneDiscapacidad() {
+        return renderTieneDiscapacidad;
+    }
+
+    /**
+     * @param renderTieneDiscapacidad the renderTieneDiscapacidad to set
+     */
+    public void setRenderTieneDiscapacidad(boolean renderTieneDiscapacidad) {
+        this.renderTieneDiscapacidad = renderTieneDiscapacidad;
     }
 }
