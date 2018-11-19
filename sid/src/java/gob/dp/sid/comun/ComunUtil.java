@@ -38,6 +38,9 @@ public class ComunUtil {
         return fd.format(date);
     }
 
-
-
+    public static String generateCodigoByDate() {
+        SimpleDateFormat fd = new SimpleDateFormat("yyyyMMddHHmmss");
+        return fd.format(new Date());
+    }
+    
 }

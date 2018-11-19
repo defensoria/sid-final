@@ -63,6 +63,7 @@
         <typeAlias type="gob.dp.sid.bandeja.entity.Bandeja" alias="bandeja"/>
         <typeAlias type="gob.dp.sid.bandeja.entity.FiltroBusquedaMensaje" alias="filtroBusquedaMensaje"/>
         <typeAlias type="gob.dp.sid.atencion.bean.FiltroPersona" alias="filtroPersona"  />
+        <typeAlias type="gob.dp.sid.atencion.bean.FiltroTramite" alias="filtroTramite"  />
     </typeAliases>
 
     <mappers>
@@ -106,6 +107,7 @@
         
         <mapper resource="gob/dp/sid/bandeja/dao/xml/Bandeja.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/Ciudadano.xml" />
+        <mapper resource="gob/dp/sid/atencion/dao/xml/TipoDocumento.xml" />
     </mappers>
     
 </configuration>

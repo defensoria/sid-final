@@ -9,13 +9,19 @@
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
             <ui:include src="buscarDni.xhtml" />
-            <h:form id="idFormAddDocumentos" class="form-horizontal">
+            <h:form id="idFormAddDocumentos" class="form-horizontal" enctype="multipart/form-data"> 
                 <div class="row" style="center">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                  <div class="col-12" style="text-align: right">
-                                        <a class="btn btn-warning" jsf:action="#{atencionController.irRecepcionDocumentosAdministrativos()}"> <!--onclick="confirmar1()"-->
+                                        <script>
+                                            function confirmarGuardarAtencion() {
+                                                $(".confirmarGuardarAtencion").modal('show');
+                                            }
+                                        </script>
+                                        <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmarGuardarAtencion" mensaje="Esta realmente seguro que desea guardar el registro de la atención?" />
+                                        <a class="btn btn-warning" onclick="confirmarGuardarAtencion()"> <!--onclick="confirmar1()"-->
                                             <i class="fa fa-save"></i> Guardar
                                         </a>
                                         &#160;&#160;&#160;
@@ -27,11 +33,52 @@
                                         <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
                                             <span class="fas fa-times" /> Cancelar
                                         </a>
+                                    </div> <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h:panelGroup id="idpanelDocumentos" layout="block" >
+                                            <div class="table-responsive">
+                                                <h:dataTable value="#{atencionController.listaDocumentosAtencion}" var="exped" class="table no-wrap v-middle" binding="#{row3}">
+                                                    <h:column>
+                                                        <f:facet name="header">Nro</f:facet>
+                                                        <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row3.rowIndex+1)}" /></h5>        
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Codigo Documento</a></b></f:facet>
+                                                        <h:outputText value="#{exped.codDocumento}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Tipo Documento</a></b></f:facet>
+                                                        <h:outputText value="#{exped.descTipoDocumento}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Anexo</a></b></f:facet>
+                                                        <h:outputText value="#{exped.anexo}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Tamanio</a></b></f:facet>
+                                                        <h:outputText value="#{exped.tamanioDoc}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Estado</a></b></f:facet>
+                                                        <h:outputText value="#{exped.descEstado}" class="label label-success" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <a href="#">
+                                                            <i class="fas fa-pencil-alt" ></i>
+                                                        </a>
+                                                    </h:column>
+                                                    
+                                                </h:dataTable>
+                                            </div>
+                                        </h:panelGroup>
+                                        </div>
+                                        
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <!--  Modal --> 
                 <script>
                     function openModalAdjuntarDocumentos(data) {
@@ -50,30 +97,68 @@
                             <h4 class="modal-title">Adjuntar Documentos</h4>
                        </div>    
                       <div class="modal-body">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <label class="label-sm"><strong>Motivo Visita:</strong></label> <br />
-                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencionBean.nameTipoMotivo}" /></label>
+                          <h:form id="idFormDetailDoc" enctype="multipart/form-data">
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="label-sm"><strong>Motivo Visita:</strong></label> <br />
+                                        <label class="label-sm"><h:outputLabel value="#{atencionController.atencionBean.nameTipoMotivo}" /></label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="label-sm"><strong>Tipo Atención</strong></label> <br />
+                                        <label class="label-sm"><h:outputLabel value="#{atencionController.atencionBean.nameTipoAtencion}" /></label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="label-sm"><strong>Tipo Tramite:</strong></label> <br />
+                                        <label class="label-sm"><h:outputLabel value="#{atencionController.atencionBean.nameTipoTramite}" /></label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <label for="fileUpload" class="control-label col-form-label"><strong>Cargar Archivo </strong></label> <br />
+                                          <h:inputFile value="#{atencionController.fileUpload}" class="fileupload" id="fileUpload" >
+                                              <f:ajax listener="#{atencionController.handleFileUpload}" />
+                                          </h:inputFile>
+                                      </div>
+                                      
+                                      <div class="col-md-12" >
+                                          <label class="label-sm"><strong>Tipo Documento</strong></label> <br />
+                                          <h:selectOneMenu required="true" requiredMessage="Debe seleccionar un tipo de tramite" id="selTipoDocumento" value="#{atencionController.documento.idTipoDocumento}" class="tipotramite form-control" >
+                                              <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                              <f:selectItems value="#{atencionController.listaTipoDocumto}" var="x" itemLabel="#{x.tipoDocumento}" itemValue="#{x.id}" />
+                                              <f:selectItem itemValue="0" itemLabel="OTROS" />
+                                              <f:ajax render="idpaneladjuntarDoc" />
+                                          </h:selectOneMenu>
+                                      </div>
+                                      
+                                      <div class="col-md-12" >
+                                        <h:panelGroup id="idpaneladjuntarDoc" layout="block" >
+                                          <label for="inputmotivo" jsf:rendered="#{atencionController.documento.idTipoDocumento == 0 }" class="control-label col-form-label"><strong>Observación </strong></label>
+                                          <h:inputTextarea value="#{atencionController.documento.observaciones}" class="document form-control" id="observaciones" rendered="#{atencionController.documento.idTipoDocumento == 0 }" />
+                                        </h:panelGroup>
+                                      </div>
+                                      <h:panelGroup id="idpanelanexo" layout="block" >
+                                      <div class="col-md-12">
+                                          <label for="inputmotivo" class="control-label col-form-label"><strong>Anexo </strong></label>
+                                          <h:selectOneRadio class="anexo" value="#{atencionController.documento.anexo}">
+                                            <f:selectItem itemLabel="SI" itemValue="SI"/>
+                                            <f:selectItem itemLabel="NO" itemValue="NO"/>
+                                            <f:ajax render="idpanelanexo" />
+                                          </h:selectOneRadio>
+                                      </div>
+                                      </h:panelGroup>
+                                  </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <button type="button" jsf:actionListener="#{atencionController.onCargarDocumentosAtencion()}" class="btn btn-warning" data-dismiss="modal">
+                                    <span class="fas fa-upload" /> Cargar
+                                    <f:ajax render=":idFormAddDocumentos:idpanelDocumentos" />
+                                </button>
                               </div>
-                              
-                              <div class="col-md-4">
-                                  <label class="label-sm"><strong>Tipo Atención</strong></label> <br />
-                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencion.tipoAtencion}" /></label>
-                              </div>
-                              
-                              <div class="col-md-4">
-                                  <label class="label-sm"><strong>Tipo Tramite:</strong></label> <br />
-                                  <label class="label-sm"><h:outputLabel value="#{atencionController.atencion.tipoTramite}" /></label>
-                              </div>
-                          </div>
-                          <div class="row">
-                              
-                          </div>
+                          </h:form>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-warning">Guardar</button>
-                      </div>
+                      
                     </div>
                 </div>
              </div>

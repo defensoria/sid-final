@@ -25,7 +25,8 @@ public class ParametroServiceImpl implements ParametroService {
 
     @Override
     public Parametro consultarParametro(FiltroParametro filtro) {
-        return parametroDao.consultarParametro(filtro);
+        Parametro p = parametroDao.consultarParametro(filtro);
+        return p;
     }
 
     @Override
