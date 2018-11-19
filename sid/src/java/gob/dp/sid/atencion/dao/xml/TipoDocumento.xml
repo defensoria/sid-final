@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.TipoDocumentoDAO">
+
+    <resultMap id="tipoDocumentoMap" type="gob.dp.sid.atencion.entity.TipoDocumento">
+        <result property="id" column="N_ID_TIPO_DOCUMENTO" jdbcType="INTEGER"/>
+        <result property="tipoDocumento" column="C_TIPO_DOCUMENTO" jdbcType="VARCHAR"/>
+        <result property="definicion" column="C_DEFINICION" jdbcType="VARCHAR"/>
+        <result property="estado" column="N_ESTADO" jdbcType="INTEGER"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+        <result property="usuarioCreacion" column="C_USUARIO_CREA" jdbcType="VARCHAR"/>
+        <result property="fechaModificacion" column="D_FECHA_MODIFICA" jdbcType="DATE"/>
+        <result property="usuarioModificacion" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>
+        <result property="idTipoTramite" column="N_ID_TIPO_TRAMITE" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="listarTipoDocumentoByTramite" resultMap="tipoDocumentoMap" parameterType="filtroTramite">
+        SELECT  
+            N_ID_TIPO_DOCUMENTO,
+            C_TIPO_DOCUMENTO,
+            C_DEFINICION,
+            N_ESTADO,
+            D_FECHA_CREA,
+            C_USUARIO_CREA,
+            D_FECHA_MODIFICA,
+            C_USUARIO_MODIFICA,
+            N_ID_TIPO_TRAMITE
+          FROM SAC_TIPO_DOCUMENTO
+          WHERE N_ID_TIPO_TRAMITE = #{idTipoTramite}
+    </select>
+</mapper>

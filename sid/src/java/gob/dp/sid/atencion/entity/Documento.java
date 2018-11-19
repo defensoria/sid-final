@@ -5,6 +5,8 @@
  */
 package gob.dp.sid.atencion.entity;
 
+import gob.dp.sid.atencion.entity.type.TipoDocumentoType;
+import gob.dp.sid.comun.type.EstadoType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,42 +15,29 @@ import java.util.Date;
  * @author JMATOS
  */
 public class Documento implements Serializable {
-    
+
     private Long id;
     private String codDocumento;
     private String extensionDoc;
     private String tamanioDoc;
-    private Integer estado;
+    private String estado;
     private String rutaDoc;
-    private Integer anexo;
+    private String anexo;
     private String codDocPadre;
     private Date fechaRegistro;
     private String usuarioRegistro;
     private Date fechaModifica;
     private String usuarioModifica;
     private Integer idRegVisita;
-    private Integer idTipoVisita;
+    private Integer idTipoDocumento;
+    private String observaciones;
+    
+    // TEMPORALES
+    private String descEstado;
+    private String descTipoDocumento;
 
     public Documento() {
     }
-
-    public Documento(Long id, String codDocumento, String extensionDoc, String tamanioDoc, Integer estado, String rutaDoc, Integer anexo, String codDocPadre, Date fechaRegistro, String usuarioRegistro, Date fechaModifica, String usuarioModifica, Integer idRegVisita, Integer idTipoVisita) {
-        this.id = id;
-        this.codDocumento = codDocumento;
-        this.extensionDoc = extensionDoc;
-        this.tamanioDoc = tamanioDoc;
-        this.estado = estado;
-        this.rutaDoc = rutaDoc;
-        this.anexo = anexo;
-        this.codDocPadre = codDocPadre;
-        this.fechaRegistro = fechaRegistro;
-        this.usuarioRegistro = usuarioRegistro;
-        this.fechaModifica = fechaModifica;
-        this.usuarioModifica = usuarioModifica;
-        this.idRegVisita = idRegVisita;
-        this.idTipoVisita = idTipoVisita;
-    }
-    
     
     public Long getId() {
         return id;
@@ -82,11 +71,11 @@ public class Documento implements Serializable {
         this.tamanioDoc = tamanioDoc;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -96,14 +85,6 @@ public class Documento implements Serializable {
 
     public void setRutaDoc(String rutaDoc) {
         this.rutaDoc = rutaDoc;
-    }
-
-    public Integer getAnexo() {
-        return anexo;
-    }
-
-    public void setAnexo(Integer anexo) {
-        this.anexo = anexo;
     }
 
     public String getCodDocPadre() {
@@ -154,13 +135,65 @@ public class Documento implements Serializable {
         this.idRegVisita = idRegVisita;
     }
 
-    public Integer getIdTipoVisita() {
-        return idTipoVisita;
+        /**
+     * @return the idTipoDocumento
+     */
+    public Integer getIdTipoDocumento() {
+        return idTipoDocumento;
     }
 
-    public void setIdTipoVisita(Integer idTipoVisita) {
-        this.idTipoVisita = idTipoVisita;
+    /**
+     * @param idTipoDocumento the idTipoDocumento to set
+     */
+    public void setIdTipoDocumento(Integer idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
+    }
+
+    /**
+     * @return the observaciones
+     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    /**
+     * @return the anexo
+     */
+    public String getAnexo() {
+        return anexo;
+    }
+
+    /**
+     * @param anexo the anexo to set
+     */
+    public void setAnexo(String anexo) {
+        this.anexo = anexo;
     }
     
-    
+    public String getDescEstado() {
+        if(estado != null)
+            descEstado = EstadoType.get(estado).getValue();
+        return descEstado;
+    }
+
+    public void setDescEstado(String descEstado) {
+        this.descEstado = descEstado;
+    }
+
+    public String getDescTipoDocumento() {
+        if(idTipoDocumento != null)
+            descTipoDocumento = TipoDocumentoType.get(idTipoDocumento).getValue();
+        return descTipoDocumento;
+    }
+
+    public void setDescTipoDocumento(String descTipoDocumento) {
+        this.descTipoDocumento = descTipoDocumento;
+    }
 }
