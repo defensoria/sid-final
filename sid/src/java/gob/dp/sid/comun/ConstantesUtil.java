@@ -54,7 +54,7 @@ public class ConstantesUtil implements Serializable{
     // PAGINAS ATENCION:
     public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";
     public static String PAGE_RECEPCION_DOCUMENTOS_EXPEDIENTE = "";
-    public static String PAGE_ATENCION_PRESENCIAL = "";
+    public static String PAGE_ATENCION_PRESENCIAL = "atencionPresencial";
     
     public static final Integer PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO = 4403;
     public static final Integer PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO = 100;

@@ -39,7 +39,13 @@ public class Atencion implements Serializable{
     private String sexo;
     
     private String fechaNacimiento;
+    
+    private String discapacidad;
+    
+    private String indicadorCasoNuevo;
+    private String indicadorCita;
 
+    
     /**
      * @return the id
      */
@@ -222,6 +228,48 @@ public class Atencion implements Serializable{
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * @return the discapacidad
+     */
+    public String getDiscapacidad() {
+        return discapacidad;
+    }
+
+    /**
+     * @param discapacidad the discapacidad to set
+     */
+    public void setDiscapacidad(String discapacidad) {
+        this.discapacidad = discapacidad;
+    }
+
+    /**
+     * @return the indicadorCasoNuevo
+     */
+    public String getIndicadorCasoNuevo() {
+        return indicadorCasoNuevo;
+    }
+
+    /**
+     * @param indicadorCasoNuevo the indicadorCasoNuevo to set
+     */
+    public void setIndicadorCasoNuevo(String indicadorCasoNuevo) {
+        this.indicadorCasoNuevo = indicadorCasoNuevo;
+    }
+
+    /**
+     * @return the indicadorCita
+     */
+    public String getIndicadorCita() {
+        return indicadorCita;
+    }
+
+    /**
+     * @param indicadorCita the indicadorCita to set
+     */
+    public void setIndicadorCita(String indicadorCita) {
+        this.indicadorCita = indicadorCita;
     }
             
 }

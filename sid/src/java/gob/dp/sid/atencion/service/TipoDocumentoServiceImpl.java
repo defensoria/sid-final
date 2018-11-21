@@ -26,5 +26,10 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
     public List<TipoDocumento> listarDocumentosByTramite(FiltroTramite filtroTramite) {
         return tipoDocumentoDAO.listarTipoDocumento(filtroTramite);
     }
+
+    @Override
+    public TipoDocumento getTipoDocumentoById(FiltroTramite filtroTramite) {
+        return tipoDocumentoDAO.obtenerTipoDocumentoById(filtroTramite);
+    }
     
 }

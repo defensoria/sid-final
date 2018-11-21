@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.VisitaDAO">
+    <resultMap id="visitaMap" type="gob.dp.sid.atencion.entity.VisitaCiudadano">
+        <result property="id" column="N_ID_REG_VISITA" jdbcType="INTEGER"/>
+        <result property="fechaVisita" column="D_FECHA_VISITA" jdbcType="DATE"/>
+        <result property="motivo" column="C_MOTIVO" jdbcType="VARCHAR"/>
+        <result property="tieneDiscapacidad" column="N_IND_DISCAPACIDAD" jdbcType="INTEGER"/>
+        <result property="estado" column="N_ESTADO" jdbcType="INTEGER"/>        
+        <result property="observacion" column="C_OBSERVACION" jdbcType="VARCHAR"/>
+        <result property="tipoAtencionDiscapacidad" column="C_TIPO_ATEN_DISCA" jdbcType="VARCHAR"/>
+        <result property="tipoTramite" column="C_TIPO_TRAMITE" jdbcType="VARCHAR"/>
+        <result property="tipoAtencion" column="C_TIPO_ATENCION" jdbcType="VARCHAR"/>      
+        <result property="dni" column="C_DNI" jdbcType="VARCHAR"/>
+        <result property="usuarioCreacion" column="C_USUARIO_CREA" jdbcType="VARCHAR"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+        <result property="usuarioModifica" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>      
+        <result property="fechaModifica" column="D_FECHA_MODIFICA" jdbcType="DATE"/>    
+        <result property="indicadorTratamiento" column="N_IND_TRATAMIENTO" jdbcType="INTEGER"/>   
+    </resultMap>
+    
+    <insert id="visitaInsertar" parameterType="visita">
+        INSERT INTO 
+            SAC_REG_VISITA
+              ( N_ID_REG_VISITA, 
+                D_FECHA_VISITA,
+                C_MOTIVO,
+                N_IND_DISCAPACIDAD,
+                N_ESTADO,
+                C_OBSERVACION,
+                C_TIPO_ATEN_DISCA,
+                C_TIPO_TRAMITE,
+                C_TIPO_ATENCION,
+                C_DNI,
+                C_USUARIO_CREA,
+                D_FECHA_CREA,
+                N_IND_TRATAMIENTO)
+          VALUES (
+                SEQ_SAC_REG_VISITA.NextVal,
+                #{fechaVisita},
+                #{motivo},
+                #{tieneDiscapacidad},
+                #{estado},
+                #{observacion},
+                #{tipoAtencionDiscapacidad},   
+                #{tipoTramite},
+                #{tipoAtencion},
+                #{dni},
+                #{usuarioCreacion},
+                #{fechaCreacion},
+                #{indicadorTratamiento}        
+            )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SAC_REG_VISITA.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+</mapper>

@@ -13,6 +13,9 @@
                 <div class="row" style="center">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Recepción de Documentos Administrativos</a></h4>
+                            </div>
                             <div class="card-body">
                                  <div class="col-12" style="text-align: right">
                                         <script>
@@ -20,9 +23,10 @@
                                                 $(".confirmarGuardarAtencion").modal('show');
                                             }
                                         </script>
-                                        <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmarGuardarAtencion" mensaje="Esta realmente seguro que desea guardar el registro de la atención?" />
+                                        <gc:confirmSubmit bean="#{atencionController.onGuardarAtencionVisita()}" classGC="confirmarGuardarAtencion" mensaje="Esta realmente seguro que desea guardar el registro de la atención?" />
                                         <a class="btn btn-warning" onclick="confirmarGuardarAtencion()"> <!--onclick="confirmar1()"-->
                                             <i class="fa fa-save"></i> Guardar
+                                            
                                         </a>
                                         &#160;&#160;&#160;
                                         <a class="btn btn-info" jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}">
@@ -127,7 +131,7 @@
                                           <h:selectOneMenu required="true" requiredMessage="Debe seleccionar un tipo de tramite" id="selTipoDocumento" value="#{atencionController.documento.idTipoDocumento}" class="tipotramite form-control" >
                                               <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                               <f:selectItems value="#{atencionController.listaTipoDocumto}" var="x" itemLabel="#{x.tipoDocumento}" itemValue="#{x.id}" />
-                                              <f:selectItem itemValue="0" itemLabel="OTROS" />
+                                              <f:selectItem itemValue="10" itemLabel="OTROS" />
                                               <f:ajax render="idpaneladjuntarDoc" />
                                           </h:selectOneMenu>
                                       </div>

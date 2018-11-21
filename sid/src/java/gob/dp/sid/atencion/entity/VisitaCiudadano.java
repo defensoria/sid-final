@@ -22,7 +22,7 @@ public class VisitaCiudadano {
     private String tipoAtencionDiscapacidad;
     private String tipoTramite;
     private String tipoAtencion;
-    private Integer idPersona;
+    private String dni;
     private String usuarioCreacion;
     private Date fechaCreacion;
     private String usuarioModifica;
@@ -101,14 +101,6 @@ public class VisitaCiudadano {
         this.tipoAtencion = tipoAtencion;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
-    }
-
     public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
@@ -149,5 +141,12 @@ public class VisitaCiudadano {
         this.indicadorTratamiento = indicadorTratamiento;
     }
     
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
     
 }

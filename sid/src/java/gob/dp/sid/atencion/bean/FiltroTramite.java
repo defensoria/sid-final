@@ -12,6 +12,7 @@ package gob.dp.sid.atencion.bean;
 public class FiltroTramite {
     
     private Integer idTipoTramite;
+    private Integer idTipoDocumento;
 
     /**
      * @return the idTipoTramite
@@ -25,6 +26,20 @@ public class FiltroTramite {
      */
     public void setIdTipoTramite(Integer idTipoTramite) {
         this.idTipoTramite = idTipoTramite;
+    }
+
+    /**
+     * @return the idTipoDocumento
+     */
+    public Integer getIdTipoDocumento() {
+        return idTipoDocumento;
+    }
+
+    /**
+     * @param idTipoDocumento the idTipoDocumento to set
+     */
+    public void setIdTipoDocumento(Integer idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
     
 }

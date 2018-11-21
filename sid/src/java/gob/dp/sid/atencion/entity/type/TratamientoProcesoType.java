@@ -5,7 +5,6 @@
  */
 package gob.dp.sid.atencion.entity.type;
 
-
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -16,35 +15,26 @@ import java.util.Map;
  *
  * @author JMATOS
  */
-public enum TipoDocumentoType {
-    OTROS(0, "OTROS"),
-    ACTA(1, "DOCUMENTO ACTA"),
-    CARTA(2, "CARTA DOCUMENTO"),
-    OFICIO(3, "OFICIO"),
-    PARTIDA_NACIMIENTO(4, "PARTIDA DE NACIMIENTO"),
-    COPIA_DNI(5, "COPIA DE DNI");
+public enum TratamientoProcesoType {
+    PROCESO_SGD(1, "PROCESAMIENTO SISTEMA DE GESTION DOCUMENTAL"),
+    PROCESO_SID(2, "PROCESAMIENTO SISTEMA SID");
     
     /** La Constante list. */
-    private static final List<TipoDocumentoType> list = new ArrayList<>();
-    
+    private static final List<TratamientoProcesoType> list = new ArrayList<>();
     /** La Constante lookup. */
-    private static final Map<Integer, TipoDocumentoType> lookup = new HashMap<>();
-
+    private static final Map<Integer, TratamientoProcesoType> lookup = new HashMap<>();
     static {
-	for (TipoDocumentoType s : EnumSet.allOf(TipoDocumentoType.class)) {
+	for (TratamientoProcesoType s : EnumSet.allOf(TratamientoProcesoType.class)) {
 		list.add(s);
                 lookup.put(s.getKey(), s);
 	}
     }
-	
     /** El key. */
     private final Integer key;
-	
     /** El value. */
     private final String value;
-
-	
-    private TipoDocumentoType(Integer key, String value) {
+    
+    private TratamientoProcesoType(Integer key, String value) {
 	this.key = key;
 	this.value = value;
     }
@@ -57,7 +47,7 @@ public enum TipoDocumentoType {
     	return value;
     }
         
-    public static TipoDocumentoType get(Integer key) {
+    public static TratamientoProcesoType get(Integer key) {
 	return lookup.get(key);
     }
-   }
+}

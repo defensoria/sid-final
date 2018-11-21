@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gob.dp.sid.atencion.dao;
+package gob.dp.sid.atencion.service;
 
-import gob.dp.sid.atencion.bean.FiltroTramite;
 import gob.dp.sid.atencion.entity.Documento;
-import gob.dp.sid.atencion.entity.TipoDocumento;
+import java.util.List;
 
 /**
  *
  * @author JMATOS
  */
-public interface DocumentoDAO {
-    public void registrarDocumento(Documento documento);
+public interface DocumentoService {
     
+    public void registrarDocumento(Documento documento);
+    public void registrarDocumentosList(List<Documento> documentos);
 }

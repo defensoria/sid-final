@@ -313,12 +313,19 @@ public class CacheServiceImpl implements CacheService{
     
     @Override
     public List<Parametro> listaTramiteIntervencionPresencial() {
-        return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL, CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL);
+        return buscarParametro(4407, 4407);
     }
     
     @Override
     public List<Parametro> listaTramiteDocumentarioAdministrativo() {
-        return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO, CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO);
+        // return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO, CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO);
+        return buscarParametro(4405, 4405);
+    }
+    
+    @Override
+    public List<Parametro> listaTramiteDocumentarioCasoExistente() {
+        // return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO, CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO);
+        return buscarParametro(4406, 4406);
     }
      /*Fin - jcarrillo*/
     

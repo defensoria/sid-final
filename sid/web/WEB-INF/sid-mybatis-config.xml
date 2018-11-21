@@ -56,6 +56,9 @@
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteHistorial" alias="expedienteHistorial"/>
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteFormularioVirtual" alias="expedienteFormularioVirtual"/>
         
+        <typeAlias type="gob.dp.sid.atencion.entity.VisitaCiudadano" alias="visita"/>
+        <typeAlias type="gob.dp.sid.atencion.entity.Documento" alias="documento"/>
+        
         <typeAlias type="gob.dp.sid.reporte.entity.Reporte" alias="reporte"/>
         <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidExpediente" alias="reporteSidExpediente"/>
         <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidConteo" alias="reporteSidConteo"/>
@@ -108,6 +111,8 @@
         <mapper resource="gob/dp/sid/bandeja/dao/xml/Bandeja.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/Ciudadano.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/TipoDocumento.xml" />
+        <mapper resource="gob/dp/sid/atencion/dao/xml/Visita.xml" />
+        <mapper resource="gob/dp/sid/atencion/dao/xml/Documento.xml" />
     </mappers>
     
 </configuration>

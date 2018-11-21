@@ -16,5 +16,5 @@ import java.util.List;
 public interface TipoDocumentoDAO {
     
     public List<TipoDocumento> listarTipoDocumento(FiltroTramite filtroTramite);
-    
+    public TipoDocumento obtenerTipoDocumentoById(FiltroTramite filtro);
 }

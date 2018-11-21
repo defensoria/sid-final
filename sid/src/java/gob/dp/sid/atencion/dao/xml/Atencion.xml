@@ -8,4 +8,10 @@
         <result property="tipoTramite" column="tipo_tramite" jdbcType="VARCHAR"/>
         <result property="indicadorDocumentos" column="indicador_documentos" jdbcType="VARCHAR"/>        
     </resultMap>
+    
+    
+    <insert id="atencionInsertar" parameterType="expediente">
+        
+        
+    </insert>
 </mapper>

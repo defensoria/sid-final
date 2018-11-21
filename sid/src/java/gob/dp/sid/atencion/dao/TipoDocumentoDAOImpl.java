@@ -23,4 +23,8 @@ public class TipoDocumentoDAOImpl extends SqlSessionDaoSupport implements TipoDo
         return getSqlSession().selectList("gob.dp.sid.atencion.dao.TipoDocumentoDAO.listarTipoDocumentoByTramite", filtroTramite);
     }
     
+    @Override
+    public TipoDocumento obtenerTipoDocumentoById(FiltroTramite filtro) {
+        return getSqlSession().selectOne("gob.dp.sid.atencion.dao.TipoDocumentoDAO.obtenerTipoDocumento", filtro);
+    }
 }

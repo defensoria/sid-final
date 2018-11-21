@@ -218,6 +218,10 @@ public class ListasComunesController {
     public List<Parametro> listaTramiteDocumentarioAdministrativo(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listaTramiteDocumentarioAdministrativo(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
+    
+    public List<Parametro> listaTramiteExistenteDocumentario(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listaTramiteDocumentarioCasoExistente(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
     /*Fin - jcarrillo*/
     
     public List<Parametro> buscarListaAccionCAV(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {

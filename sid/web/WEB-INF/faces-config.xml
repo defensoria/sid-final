@@ -365,4 +365,11 @@
           <to-view-id>/pages/atencion/recepDocumentosAdm.xhtml</to-view-id>
       </navigation-case>
   </navigation-rule>
+  
+  <navigation-rule>
+      <navigation-case>
+          <from-outcome>atencionPresencial</from-outcome>
+          <to-view-id>/pages/atencion/atencionPresencial.xhtml</to-view-id>
+      </navigation-case>
+  </navigation-rule>
 </faces-config>

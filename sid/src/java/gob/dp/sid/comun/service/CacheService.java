@@ -93,5 +93,6 @@ public interface CacheService {
     
     /* Inicio - jmatos */
     public List<Parametro> buscarTipoDiscapacidad();
+    public List<Parametro> listaTramiteDocumentarioCasoExistente();
     /* Fin - jmatos */
 }

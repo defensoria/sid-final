@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="gob.dp.sid.atencion.dao.CiudadanoDAO">
+<mapper namespace="gob.dp.sid.atencion.dao.DocumentoDAO">
     <resultMap id="documentoMap" type="gob.dp.sid.atencion.entity.Documento">
         <result property="id" column="N_ID_DOC" jdbcType="INTEGER"/>
         <result property="codDocumento" column="C_COD_DOC" jdbcType="VARCHAR"/>
@@ -19,4 +19,56 @@
         <result property="observaciones" column="C_OBSERVACION" jdbcType="INTEGER"/>
         
     </resultMap>
+    
+    <insert id="documentoInsertar" parameterType="documento">
+        INSERT
+            INTO SAC_REG_DOCUMENTO
+              (
+                N_ID_DOC,
+                C_COD_DOC,
+                C_EXT_DOC,
+                C_TAMANIO_DOC,
+                N_ESTADO,
+                <if test="rutaDoc != null">
+                    C_RUTA_DOC,
+                </if>
+                C_ANEXO,
+                <if test="observaciones != null">
+                    C_OBSERVACION,
+                </if>
+                <if test="codDocPadre != null">
+                    C_COD_DOC_PADRE,
+                </if>
+                D_FECHA_REGISTRO,
+                C_USUARIO_CREACION,
+                N_ID_REG_VISITA,
+                N_ID_TIPO_DOCUMENTO
+              )
+              VALUES
+              (
+                SEQ_SAC_REG_DOCUMENTO.NextVal,
+                #{codDocumento},
+                #{extensionDoc},
+                #{tamanioDoc},
+                #{estado},
+                <if test="rutaDoc != null">
+                   #{rutaDoc},
+                </if>
+                #{anexo},
+                <if test="observaciones != null">
+                #{observaciones},
+                </if>
+                <if test="codDocPadre != null">
+                   #{codDocPadre}, 
+                </if>
+                #{fechaRegistro},
+                #{usuarioRegistro},
+                #{idRegVisita},
+                #{idTipoDocumento}
+              )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SAC_REG_DOCUMENTO.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
 </mapper>

@@ -188,8 +188,8 @@ public class Documento implements Serializable {
     }
 
     public String getDescTipoDocumento() {
-        if(idTipoDocumento != null)
-            descTipoDocumento = TipoDocumentoType.get(idTipoDocumento).getValue();
+        /*if(idTipoDocumento != null)
+            descTipoDocumento = TipoDocumentoType.get(idTipoDocumento).getValue();*/
         return descTipoDocumento;
     }
 

@@ -5,15 +5,14 @@
  */
 package gob.dp.sid.atencion.dao;
 
-import gob.dp.sid.atencion.bean.FiltroTramite;
-import gob.dp.sid.atencion.entity.Documento;
-import gob.dp.sid.atencion.entity.TipoDocumento;
+import gob.dp.sid.atencion.entity.VisitaCiudadano;
 
 /**
  *
  * @author JMATOS
  */
-public interface DocumentoDAO {
-    public void registrarDocumento(Documento documento);
+public interface VisitaDAO {
     
+    public void insertarVisita(VisitaCiudadano visita);
+    public VisitaCiudadano insertarVisitaObject(VisitaCiudadano visitaCiudadano);
 }

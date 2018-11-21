@@ -18,8 +18,10 @@
                 <div class="row" style="center">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Resumen de Atención</a></h4>
+                            </div>
                             <div class="card-body">
-                                <h4 class="card-title">Resumen de Atención</h4>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -36,28 +38,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label jsf:rendered="#{atencionController.message != null}" class="label label-success col-12"><h5> <h:outputLabel value="#{atencionController.message}" /> </h5></label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"><a href="#">Datos de la persona</a></h4>
+                            </div>
                             <div class="card-body">
-                                <h4 class="card-title">Datos de la persona</h4>
+                                
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="inputname" class="control-label col-form-label">DNI</label>
+                                            <label for="inputname" class="control-label col-form-label"><strong>DNI</strong></label>
                                             <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" disabled="true"/>
                                         </div>
                                     </div>  
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="inputname" class="control-label col-form-label">Nombres</label>
+                                            <label for="inputname" class="control-label col-form-label"><strong>NOMBRES</strong></label>
                                             <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" disabled="#{atencionController.disableField}" placeholder="Nombres"/>
                                         </div>
                                     </div>    
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="control-label col-form-label">A. paterno</label>
+                                            <label for="inputEmail3" class="control-label col-form-label"><strong>PATERNO</strong></label>
                                             <input type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" disabled="#{atencionController.disableField}" placeholder="Apellido Paterno"/>
                                         </div>
                                     </div>
@@ -65,26 +75,26 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">A. Materno</label>
+                                            <label for="inputcontact" class="control-label col-form-label"><strong>MATERNO</strong></label>
                                             <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.apellidoMaterno}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Fec. Nacimiento</label>
-                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.fechaNacimiento}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                            <label for="inputcontact" class="control-label col-form-label"><strong>FEC. NAC.</strong></label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.fechaNacimiento}"  disabled="#{atencionController.disableField}" placeholder="Fecha Nacimiento"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Sexo</label>
-                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.sexo}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                            <label for="inputcontact" class="control-label col-form-label"><strong>SEXO</strong></label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.sexo}"  disabled="#{atencionController.disableField}" placeholder="Sexo"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Discapacidad</label>
-                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.sexo}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                            <label for="inputcontact" class="control-label col-form-label"><strong>DISCAPACIDAD</strong></label>
+                                            <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.discapacidad}"  disabled="#{atencionController.disableField}" placeholder="Discapacidad"/>
                                         </div>
                                     </div>
                                 </div>
@@ -92,9 +102,9 @@
                                 
                                     <h:panelGroup id="idpaneldiscapacidad" layout="block" >
                                         <div class="row">
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-3">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Atención Preferencial</label>
+                                            <label for="inputcontact" class="control-label col-form-label"><strong>Atención Preferencial</strong></label>
                                             <h:selectOneRadio class="sexo" value="#{atencionController.atencion.atencionPreferencial}">
                                                 <f:selectItem itemLabel="Si" itemValue="S"/>
                                                 <f:selectItem itemLabel="No" itemValue="N"/>
@@ -102,9 +112,9 @@
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-6">
                                             <div class="form-group">
-                                                <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label">Tipo de Discapacidad</label>
+                                                <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label"><strong>Tipo de Discapacidad </strong></label>
                                                 <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
                                                     <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                     <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />

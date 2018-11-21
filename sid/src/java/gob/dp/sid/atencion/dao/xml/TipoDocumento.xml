@@ -27,4 +27,17 @@
           FROM SAC_TIPO_DOCUMENTO
           WHERE N_ID_TIPO_TRAMITE = #{idTipoTramite}
     </select>
+    
+    <select id="obtenerTipoDocumento" resultMap="tipoDocumentoMap" parameterType="filtroTramite">
+        SELECT N_ID_TIPO_DOCUMENTO,
+            C_TIPO_DOCUMENTO,
+            C_DEFINICION,
+            N_ESTADO,
+            D_FECHA_CREA,
+            C_USUARIO_CREA,
+            D_FECHA_MODIFICA,
+            C_USUARIO_MODIFICA,
+            N_ID_TIPO_TRAMITE
+        FROM SAC_TIPO_DOCUMENTO WHERE N_ID_TIPO_DOCUMENTO = #{idTipoDocumento}
+    </select>
 </mapper>

@@ -1,16 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+    
+    <ui:composition template="../template/template.xhtml">
+        <ui:define name="content">
+            <ui:include src="buscarDni.xhtml" />
+            <h:form id="idFormAddDocumentos" class="form-horizontal" enctype="multipart/form-data"> 
+                <div class="row" style="center">
+                    
+                    
+                    
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Atención Presencial</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <h:panelGrid id="idPanelCita" class="col-12" columns="2">
+                                            <h:column>
+                                                <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>Caso Nuevo </strong></label>
+                                                    <h:selectOneRadio required="true" requiredMessage="Debe Indicar si cuenta con documentos" id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}">
+                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                        <f:selectItem itemLabel="No" itemValue="N"/>
+                                                        <f:ajax render="idPanelCita" ></f:ajax>
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div>
+                                            </h:column>
+                                            <h:column>
+                                                <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputdocumento" jsf:rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N'}" class="control-label col-form-label"><strong>Cuenta con Cita </strong></label>
+                                                    <h:selectOneRadio rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N'}" required="true" requiredMessage="Debe Indicar si cuenta con documentos" id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}">
+                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                        <f:selectItem itemLabel="No" itemValue="N"/>
+                                                        <f:ajax render="idPanelBotonera" />
+                                                    </h:selectOneRadio>
+                                                </div>
+                                                </div>
+                                            </h:column>
+
+                                                
+                                            </h:panelGrid>
+                                    
+                                </div>
+                                <h:panelGrid id="idPanelBotonera" columns="12" >
+                                    <div class="col-lg-12" style="margin-right: 560px">
+                                        <script>
+                                            function confirmarGuardarAtencion() {
+                                                $(".confirmarGuardarAtencion").modal('show');
+                                            }
+                                        </script>
+                                        <a class="btn btn-orange" jsf:rendered="#{atencionController.atencion.indicadorCita == 'S'}" jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}" >
+                                            <span class="fas fa-phone" /> Notificar Comisionado
+                                        </a> 
+                                        <gc:confirmSubmit bean="#{atencionController.onGuardarAtencionVisita()}" classGC="confirmarGuardarAtencion" mensaje="Esta realmente seguro que desea guardar el registro de la atención?" />
+                                        <a class="btn btn-warning" onclick="confirmarGuardarAtencion()" > <!--onclick="confirmar1()"-->
+                                            <i class="fa fa-save"></i> Guardar
+                                        </a>
+                                        
+                                        <a class="btn btn-warning" jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}" >
+                                            <span class="fas fa-ticket-alt" /> Generar Ticket
+                                        </a>
+                                        <a class="btn btn-info" jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}" jsf:rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}">
+                                            <span class="fas fa-paperclip" /> Adjuntar
+                                            <f:ajax render=":idFormAddDocumentos" onevent="openModalAdjuntarDocumentos"/>
+                                        </a>
+                                        <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
+                                            <span class="fas fa-times" /> Cancelar
+                                        </a>
+                                        
+                                        </div>
+                                        
+                                    </h:panelGrid>
+                                        
+                                     <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </html>
