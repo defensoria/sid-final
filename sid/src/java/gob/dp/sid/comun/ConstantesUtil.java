@@ -59,4 +59,8 @@ public class ConstantesUtil implements Serializable{
     public static final Integer PARAMETRO_LISTA_TIPO_ATENCION_DOCUMENTARIO = 4403;
     public static final Integer PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO = 100;
     public static final Integer PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION = 4404;
+    
+    
+    
+    public static final String SERVER_PATH_DOCUMENTOS = "D:/server/20181125";
 }

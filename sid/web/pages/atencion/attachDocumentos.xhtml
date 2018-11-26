@@ -1,0 +1,155 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+    <script type="text/javascript" src="//cdn.asprise.com/scannerjs/scanner.js"></script>
+                <!--  Modal -->
+                <script>
+                    
+                    function openModalAdjuntarDocumentos(data) {
+                        if (data.status === 'success') {
+                            $("#loadModal").modal('hide');
+                            $('body').removeClass('modal-open');
+                            $(".modal-backdrop").removeClass("modal-backdrop");
+                            $("#idModalAdjuntarDocumentos").modal('show');
+                        }
+                    }
+                    
+                    function scanToJpg() {
+                        scanner.scan(displayImagesOnPage,
+                        {
+                           "output_settings" :
+                           [
+                              {
+                                 "type" : "return-base64",
+                                 "format" : "jpg"
+                              }
+                           ]
+                        }
+                        );
+                     }
+                     
+                    function displayImagesOnPage(successful, mesg, response) {
+                        if(!successful) { // On error
+                            console.error('Failed: ' + mesg);
+                            return;
+                        }
+                        if(successful &amp;&amp; mesg != null &amp;&amp; mesg.toLowerCase().indexOf('user cancel') >= 0) { // User canceled.
+                            console.info('User canceled');
+                            return;
+                         }
+                         var scannedImages = scanner.getScannedImage(response, true, false); // returns an array of ScannedImage
+                         for(var i = 0; (scannedImages instanceof Array) &amp;&amp; i &lt; scannedImages.length; i++) {
+                            var scannedImage = scannedImages[i];
+                            processScannedImage(scannedImage);
+                         }
+                    }
+                    
+                    /** Images scanned so far. */
+                    var imagesScanned = [];
+
+                    /** Processes a ScannedImage */
+                    function processScannedImage(scannedImage) {
+                       imagesScanned.push(scannedImage);
+                       var elementImg = createDomElementFromModel( {
+                           'name': 'img',
+                           'attributes': {
+                               'class': 'scanned',
+                               'src': scannedImage.src
+                           }
+                       });
+                       document.getElementById('images').appendChild(elementImg);
+                    }
+                </script>
+                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalAdjuntarDocumentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog modal-lg" style="text-align: left">
+                       <div class="modal-content">
+                          <div class="modal-header">
+                               <h4 class="modal-title">Adjuntar Documentos</h4>
+                          </div>    
+                         <div class="modal-body">
+                            <h:form id="idFormDetailDoc" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-form-label">
+                                                <strong>Directorio </strong>
+                                            </label>
+                                            <input type="text" 
+                                                    class="directorio form-control" 
+                                                    placeholder="Directorio"
+                                                    jsf:value="#{atencionController.serverPathDocument}" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-form-label">&#160;</label> <br />
+                                                <a class="btn btn-warning" >
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="label-sm">
+                                                <strong>Documento </strong>
+                                            </label> <br />
+                                            <h:selectOneListbox id="idcodfile" 
+                                                                value="#{atencionController.documento.rutaDoc}"
+                                                                class="tipotramite form-control">
+                                                <f:selectItems value="#{atencionController.listaDocumentoServer}" var="x" itemLabel="#{x.filename}" itemValue="#{x.filename}" />
+                                                <f:ajax render="idFormDetailDoc" />
+                                            </h:selectOneListbox>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="control-label col-form-label"><strong>Digitalizar </strong></label> <br />
+                                        <button type="button" class="btn btn-warning" onclick="scanToJpg();">Escanear</button>
+                                        <div id="images"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <label class="label-sm"><strong>Tipo Documento</strong></label> <br />
+                                        <h:selectOneMenu id="selTipoDocumento" value="#{atencionController.documento.idTipoDocumento}" class="tipotramite form-control" >
+                                            <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                            <f:selectItems value="#{atencionController.listaTipoDocumto}" var="x" itemLabel="#{x.tipoDocumento}" itemValue="#{x.id}" />
+                                            <f:selectItem itemValue="10" itemLabel="OTROS" />
+                                            <f:ajax render="idpaneladjuntarDoc" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                         
+                                         <div class="col-md-12" >
+                                           <h:panelGroup id="idpaneladjuntarDoc" layout="block" >
+                                             <label for="inputmotivo" jsf:rendered="#{atencionController.documento.idTipoDocumento == 0 }" class="control-label col-form-label"><strong>Observación </strong></label>
+                                             <h:inputTextarea value="#{atencionController.documento.observaciones}" class="document form-control" id="observaciones" rendered="#{atencionController.documento.idTipoDocumento == 0 }" />
+                                           </h:panelGroup>
+                                         </div>
+                                         <h:panelGroup id="idpanelanexo" layout="block" >
+                                         <div class="col-md-12">
+                                             <label for="inputmotivo" class="control-label col-form-label"><strong>Anexo </strong></label>
+                                             <h:selectOneRadio class="anexo" value="#{atencionController.documento.anexo}">
+                                               <f:selectItem itemLabel="SI" itemValue="SI"/>
+                                               <f:selectItem itemLabel="NO" itemValue="NO"/>
+                                               <f:ajax render="idFormDetailDoc" />
+                                             </h:selectOneRadio>
+                                         </div>
+                                         </h:panelGroup>
+                                     </div>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                   <button type="button" jsf:actionListener="#{atencionController.onCargarDocumentosAtencion()}" class="btn btn-warning" data-dismiss="modal">
+                                       <span class="fas fa-upload" /> Cargar
+                                       <f:ajax  render=":idForm:idPanelDocumentosAttach" />
+                                   </button>
+                                 </div>
+                             </h:form>
+                         </div>
+
+                       </div>
+                   </div>
+                </div>
+</html>

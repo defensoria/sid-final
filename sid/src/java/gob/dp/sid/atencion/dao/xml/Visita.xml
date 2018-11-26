@@ -17,6 +17,9 @@
         <result property="usuarioModifica" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>      
         <result property="fechaModifica" column="D_FECHA_MODIFICA" jdbcType="DATE"/>    
         <result property="indicadorTratamiento" column="N_IND_TRATAMIENTO" jdbcType="INTEGER"/>   
+        <result property="atencionPreferencial" column="C_ATENCION_PREF" jdbcType="VARCHAR"/>
+        <result property="casoNuevo" column="C_CASO_NUEVO" jdbcType="VARCHAR"/>
+        <result property="tieneCita" column="N_CON_CITA" jdbcType="INTEGER"/>
     </resultMap>
     
     <insert id="visitaInsertar" parameterType="visita">
@@ -27,28 +30,48 @@
                 C_MOTIVO,
                 N_IND_DISCAPACIDAD,
                 N_ESTADO,
-                C_OBSERVACION,
-                C_TIPO_ATEN_DISCA,
-                C_TIPO_TRAMITE,
+                <if test="tipoAtencionDiscapacidad != null">
+                    C_TIPO_ATEN_DISCA,
+                </if>
+                <if test="tipoTramite != null">
+                    C_TIPO_TRAMITE,
+                </if>
                 C_TIPO_ATENCION,
                 C_DNI,
                 C_USUARIO_CREA,
                 D_FECHA_CREA,
-                N_IND_TRATAMIENTO)
+                N_IND_TRATAMIENTO,
+                <if test="casoNuevo != null">
+                    C_CASO_NUEVO,
+                </if>
+                <if test="tieneCita != null">
+                    N_CON_CITA,
+                </if>
+                C_ATENCION_PREF)
           VALUES (
                 SEQ_SAC_REG_VISITA.NextVal,
                 #{fechaVisita},
                 #{motivo},
                 #{tieneDiscapacidad},
                 #{estado},
-                #{observacion},
-                #{tipoAtencionDiscapacidad},   
-                #{tipoTramite},
+                <if test="tipoAtencionDiscapacidad != null">
+                   #{tipoAtencionDiscapacidad},
+                </if>
+                <if test="tipoTramite != null">
+                   #{tipoTramite}, 
+                </if>
                 #{tipoAtencion},
                 #{dni},
                 #{usuarioCreacion},
                 #{fechaCreacion},
-                #{indicadorTratamiento}        
+                #{indicadorTratamiento},
+                <if test="casoNuevo != null">
+                    #{casoNuevo},
+                </if>
+                <if test="tieneCita != null">
+                    #{tieneCita},
+                </if>
+                #{atencionPreferencial}       
             )
         <selectKey keyProperty="id" resultType="Long">
             SELECT SEQ_SAC_REG_VISITA.CURRVAL FROM DUAL

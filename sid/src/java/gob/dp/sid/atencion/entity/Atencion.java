@@ -44,7 +44,7 @@ public class Atencion implements Serializable{
     
     private String indicadorCasoNuevo;
     private String indicadorCita;
-
+    private String tipoDigitaliza;
     
     /**
      * @return the id
@@ -270,6 +270,20 @@ public class Atencion implements Serializable{
      */
     public void setIndicadorCita(String indicadorCita) {
         this.indicadorCita = indicadorCita;
+    }
+
+    /**
+     * @return the tipoDigitaliza
+     */
+    public String getTipoDigitaliza() {
+        return tipoDigitaliza;
+    }
+
+    /**
+     * @param tipoDigitaliza the tipoDigitaliza to set
+     */
+    public void setTipoDigitaliza(String tipoDigitaliza) {
+        this.tipoDigitaliza = tipoDigitaliza;
     }
             
 }
