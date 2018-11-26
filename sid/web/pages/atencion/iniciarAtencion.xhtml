@@ -8,7 +8,15 @@
 
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
-            <h:form id="idForm" class="form-horizontal">
+            <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
+            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
+            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
+            <script>
+                $(function () {
+                    $('#campo').keypad({keypadOnly: false});
+                });        
+            </script>
+            <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
                 <style>
                     .trPadding{
                         padding-bottom: 10px;
@@ -63,80 +71,276 @@
                 </script>
                 
                 <div class="row" style="center">
-                    <div class="col-lg-12 col-sm-12 col-md-6">
-
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Datos Ciudadano</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <h:panelGroup id="idPanelGroupDatosCiudadano">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputname" class="control-label col-form-label"><strong>DNI</strong></label>
+                                                <h:inputText id="campo" class="dni form-control" value="#{atencionController.atencion.dni}">
+                                                    <f:ajax listener="#{atencionController.onChangeDniField}" render="idPanelGroupDatosCiudadano" />
+                                                </h:inputText>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="inputname" class="control-label col-form-label">&#160;</label><br/>
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                                    <i class="fa fa-search"></i> Buscar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="inputname" class="control-label col-form-label"><strong>DNI</strong></label>
+                                                <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" disabled="true" />
+                                            </div>
+                                        </div>  
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="inputname" class="control-label col-form-label"><strong>NOMBRES</strong></label>
+                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" disabled="#{atencionController.disableField}" placeholder="Nombres"/>
+                                            </div>
+                                        </div>    
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="control-label col-form-label"><strong>PATERNO</strong></label>
+                                                <input type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" disabled="#{atencionController.disableField}" placeholder="Apellido Paterno"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="inputcontact" class="control-label col-form-label"><strong>MATERNO</strong></label>
+                                                <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.apellidoMaterno}"  disabled="#{atencionController.disableField}" placeholder="Apellido Materno"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputcontact" class="control-label col-form-label"><strong>FEC. NAC.</strong></label>
+                                                <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.fechaNacimiento}"  disabled="#{atencionController.disableField}" placeholder="Fecha Nacimiento"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputcontact" class="control-label col-form-label"><strong>GENERO</strong></label>
+                                                <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.sexo}"  disabled="#{atencionController.disableField}" placeholder="Sexo"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputcontact" class="control-label col-form-label"><strong>DISCAPACIDAD</strong></label>
+                                                <input type="text" class="apellidoMaterno form-control" value="#{atencionController.atencion.discapacidad}"  disabled="#{atencionController.disableField}" placeholder="Discapacidad"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
                         <div class="card">
                             <div class="card-header header-dark">
                                 <h4 class="card-title"><a href="#">Atención al Ciudadano</a></h4>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <h:panelGroup id="idPanelFormAtencion">
+                                    <div class="row">
                                     <div class="col-12" style="text-align: right">
-                                        <a class="btn btn-warning" jsf:action="#{atencionController.irRecepcionDocumentosAdministrativos()}"> <!--onclick="confirmar1()"-->
-                                            <i class="fa fa-save"></i> Siguiente
+                                        <a class="btn btn-warning" jsf:action="#{atencionController.guardarAtencionCiudadano()}"  > <!--onclick="confirmar1()"-->
+                                            <i class="fa fa-save"></i> Guardar
                                         </a>
-                                        &#160;&#160;&#160;
+                                        &#160;
                                         <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
                                             <span class="fas fa-trash" /> Limpiar
-                                        </a>
-                                        &#160;&#160;&#160;
-                                        <a class="btn btn-info" jsf:action="#{atencionController.limpiarIniciarAtencion()}">
-                                            <span class="fas fa-times" /> Cancelar
                                         </a>
                                     </div>
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-sm-4 col-md-6 col-lg-12">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="inputmotivo" class="control-label col-form-label"><strong>MOTIVO</strong></label>
-                                            <h:selectOneRadio required="true" requiredMessage="Debe seleccionar el motivo de la visita el ciudadano" class="motivo" value="#{atencionController.atencion.tipoMotivo}">
-                                                <f:selectItem itemLabel="Tramite Administrativo" itemValue="D"/>
+                                            <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}">
+                                                <f:selectItem itemLabel="Postulaciones" itemValue="P"/>&#160;&#160;
+                                                <f:selectItem itemLabel="Tramite Documentario" itemValue="D"/>&#160;&#160;
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="cmbTipoAtencion selTipoTramite chkDocumento"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
                                 </div>
+                                    <h:panelGroup id="idSolicitudIntervencionChk" rendered="#{atencionController.atencion.tipoMotivo == 'I'}" >
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>CASO NUEVO </strong></label>
+                                                    <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}">
+                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                        <f:selectItem itemLabel="No" itemValue="N"/>
+                                                        <f:ajax render="idPanelFormAtencion" />
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="inputdocumento" jsf:rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N' and atencionController.atencion.tipoMotivo == 'I'}" class="control-label col-form-label"><strong>CON CITA </strong></label>
+                                                <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}" rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N' and atencionController.atencion.tipoMotivo == 'I'}">
+                                                    <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                    <f:selectItem itemLabel="No" itemValue="N"/>
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+                                
 
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
-                                            <h:selectOneMenu required="true" requiredMessage="Debe seleccionar el tipo de atención" id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
+                                            <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="selTipoTramite"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                 </div>
+                                    <h:panelGroup id="idpaneldiscapacidad" layout="block" >
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputcontact" class="control-label col-form-label"><strong>ATENCIÓN PREFERENCIAL</strong></label>
+                                                    <h:selectOneRadio class="sexo" value="#{atencionController.atencion.atencionPreferencial}">
+                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                        <f:selectItem itemLabel="No" itemValue="N"/>
+                                                        <f:ajax render="idpaneldiscapacidad" />
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label"><strong>TIPO</strong></label>
+                                                        <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
+                                                            <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                            <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                  </h:panelGroup>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="inputtipotramite" class="control-label col-form-label"><strong>TIPO DE TRAMITE</strong></label>
-                                            <h:selectOneListbox required="true" requiredMessage="Debe seleccionar un tipo de tramite" id="selTipoTramite" value="#{atencionController.atencion.tipoTramite}" class="tipotramite form-control" >
+                                            <label for="inputtipotramite" class="control-label col-form-label" jsf:rendered="#{atencionController.onChangeTipoTramite()}"><strong>TIPO DE TRAMITE</strong></label>
+                                            <h:selectOneListbox id="selTipoTramite" 
+                                                                value="#{atencionController.atencion.tipoTramite}" 
+                                                                class="tipotramite form-control"
+                                                                rendered="#{atencionController.onChangeTipoTramite()}"
+                                                                >
                                                 <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
                                             </h:selectOneListbox>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="inputdocumento" class="control-label col-form-label"><strong>CUENTA CON DOCUMENTOS</strong></label>
-                                            <h:selectOneRadio required="true" requiredMessage="Debe Indicar si cuenta con documentos" id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
-                                                <f:selectItem itemLabel="Si" itemValue="S"/>
-                                                <f:selectItem itemLabel="No" itemValue="N"/>
-                                            </h:selectOneRadio>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-form-label"
+                                                           jsf:rendered="#{atencionController.onChangeBuscarTramite()}">
+                                                        <strong>N° TRAMITE</strong>
+                                                    </label>
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           jsf:rendered="#{atencionController.onChangeBuscarTramite()}" 
+                                                           placeholder="N° de  Tramite"/>
+                                                </div> 
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <label for="inputdocumento" class="control-label col-form-label"><strong>CUENTA CON DOCUMENTOS</strong></label>
+                                                <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
+                                                    <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                    <f:selectItem itemLabel="No" itemValue="N"/>
+                                                    <f:ajax render="idPanelButtonAttach idPanelDocumentosAttach" ></f:ajax>
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                        <h:panelGroup id="idPanelButtonAttach">
+                                            <div class="col-4" style="text-align: right;">
+                                                <label for="inputdocumento" jsf:rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}" class="control-label col-form-label"><strong>&#160;</strong></label>
+                                                <a class="btn btn-info"  
+                                                    jsf:rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}"
+                                                    jsf:action="#{atencionController.cargarModalAdjuntarDocumentos()}">
+                                                    <span class="fas fa-paperclip" /> Adjuntar
+                                                    <f:ajax onevent="openModalAdjuntarDocumentos"/>
+                                                </a>
+                                            </div>
+                                        </h:panelGroup>
+                                    </div><br />
+                                    <h:panelGroup id="idPanelDocumentosAttach">
+                                       <div class="row">
+                                            <div class="col-12">
+                                                <h:dataTable    value="#{atencionController.listaDocumentosAtencion}" 
+                                                                rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}"
+                                                                var="docs" 
+                                                                class="table no-wrap v-middle table-hover" 
+                                                                binding="#{row5}">
+                                                    <h:column>
+                                                        <f:facet name="header">Nro</f:facet>
+                                                        <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row5.rowIndex+1)}" /></h5>        
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Codigo Documento</a></b></f:facet>
+                                                        <h:outputText value="#{docs.codDocumento}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a href="#">Tipo Documento</a></b></f:facet>
+                                                        <h:outputText value="#{docs.descTipoDocumento}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <a onclick="confirmar4#{row5.rowIndex+1}()">
+                                                            <i class="fas fa-trash"  ></i>
+                                                        </a>
+                                                        <script>
+                                                            function confirmar4#{row5.rowIndex+1}() {
+                                                                $(".confirmacion4#{row5.rowIndex+1}").modal('show');
+                                                            }
+                                                        </script>
+                                                        <gc:confirmSubmit bean="#{registroController.inactivarExpediente(docs)}" classGC="confirmacion4#{row5.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </div>
+                                        </div> 
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Tramites del Ciudadano</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <ui:include src="attachDocumentos.xhtml" />
             </h:form>
         </ui:define>
     </ui:composition>

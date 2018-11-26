@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.controller;
 
 import gob.dp.sid.administracion.parametro.constantes.Constantes;
+import gob.dp.sid.atencion.bean.ArchivoDocumentoBean;
 import gob.dp.sid.atencion.bean.AtencionBean;
 import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.atencion.entity.Ciudadano;
@@ -62,11 +63,17 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<Parametro> listaTipoTramite;
     private List<TipoDocumento> listaTipoDocumto;
     private List<Documento> listaDocumentosAtencion;
+    private List<ArchivoDocumentoBean> listaDocumentoServer;
+    
+    
+    private String serverPathDocument;
     private String disableField = "false";
     private String page;
     private Part fileUpload;
     private String message;
     private boolean success;
+    
+    private String strDocumento;
     
     private boolean renderTieneDiscapacidad = false;
             
@@ -96,15 +103,84 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             listaTipoAtencion = new ArrayList<>();
             listaTipoTramite = new ArrayList<>();
             listaTipoDocumto = new ArrayList<>();
+            listaDocumentoServer = new ArrayList<>();
             message = null;
+            listaDocumentosAtencion = new ArrayList<>();
+            serverPathDocument = ConstantesUtil.SERVER_PATH_DOCUMENTOS;
+            loadDocumentos();
             
-            // atencionBean.setNameTipoMotivo(MotivoAtencionType.get(atencion.getTipoMotivo()).getValue());
-            setListaDocumentosAtencion(new ArrayList<>());
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
         }
         return null;
+    }
+    
+    // Buscar
+    public void onChangeDniField() {
+        System.out.println("INICIANDO BUSQUEDA DE DATOS");
+        if( atencion.getDni() != null ) {
+            if(!consultarDatosReniec()) {
+                FiltroPersona filtroPersona = new FiltroPersona();
+                filtroPersona.setNumeroDni(atencion.getDni());
+                Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
+                if(persona != null){
+                    atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
+                    atencion.setApellidoPaterno(persona.getApellidoPaterno());
+                    atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                    atencion.setSexo(persona.getSexo());
+                    if(persona.getFechaNacimiento() != null)
+                        atencion.setFechaNacimiento(ComunUtil.getDateToString(persona.getFechaNacimiento()));
+                        disableField = "true";
+                }
+            }
+        }
+        atencion.setDiscapacidad("NO");
+    }
+    
+    public String onBuscarDatosCiudadano() {
+        try {    
+            if( atencion.getDni() != null ) {
+                if(!consultarDatosReniec()) {
+                    FiltroPersona filtroPersona = new FiltroPersona();
+                    filtroPersona.setNumeroDni(atencion.getDni());
+                    Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
+                    if(persona != null){
+                        atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
+                        atencion.setApellidoPaterno(persona.getApellidoPaterno());
+                        atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                        atencion.setSexo(persona.getSexo());
+                        if(persona.getFechaNacimiento() != null)
+                            atencion.setFechaNacimiento(ComunUtil.getDateToString(persona.getFechaNacimiento()));
+                        disableField = "true";
+                    }
+                }
+            }
+            atencion.setDiscapacidad("NO");
+            atencionBean.setNameTipoMotivo(MotivoAtencionType.get(atencion.getTipoMotivo()).getValue());
+        } catch (Exception e) {
+            log.error("ERROR - accederBuscarDni()" + e);
+        }
+        return "iniciarAtencion";
+    }
+    
+    public boolean onChangeTipoTramite() {
+        boolean result = false;
+        if(StringUtils.equalsIgnoreCase(atencion.getTipoMotivo(), "D")){
+            result = true;
+        } else if(StringUtils.equalsIgnoreCase(atencion.getTipoMotivo(), "I")){
+            result = StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "S");
+        }
+        return result;
+    }
+    
+    public boolean onChangeBuscarTramite() {
+        boolean result = false;
+        if(StringUtils.equalsIgnoreCase(atencion.getTipoMotivo(), "I")){
+            result = StringUtils.equalsIgnoreCase(atencion.getTipoAtencion(), "02") && 
+                    StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "N");
+        }
+        return result;
     }
     
     public String accederBuscarDni() {
@@ -164,6 +240,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return null;
     }
     
+    public void loadDocumentos() {
+        listaDocumentoServer = documentoService.listarDocumentosServer();
+    }
+    
     public boolean consultarDatosReniec() {
         try {
             ServiceReniec reniec = new ServiceReniec();
@@ -214,30 +294,45 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return page;
     }
     
-    public void onBuscarDatosCiudadano() {
-        System.err.println("Hola mundo");
+    public boolean validarCargarDocumentos() {
+        if(StringUtils.isBlank(documento.getRutaDoc())){
+            msg.messageAlert("Debe indicar la ruta del documento", null);
+            return false;
+        }
+        if(documento.getIdTipoDocumento() == null){
+            msg.messageAlert("Debe indicar el tipo de documento", null);
+            return false;
+        }
+        if(StringUtils.isBlank(documento.getAnexo())){
+            msg.messageAlert("Debe indicar si el documento es un anexo o no", null);
+            return false;
+        }
+        return true;
     }
     
     public void onCargarDocumentosAtencion() {
-        Documento oDocumento = new Documento();
-        oDocumento.setCodDocumento(ComunUtil.generateCodigoByDate());
-        oDocumento.setEstado(Constantes.ESTADO_ACTIVO);
-        oDocumento.setDescEstado(documento.getDescEstado());
-        oDocumento.setTamanioDoc(String.valueOf(fileUpload.getSize()/1024L));
-        oDocumento.setExtensionDoc(fileUpload.getContentType());
-        oDocumento.setAnexo(documento.getAnexo());
-        oDocumento.setIdTipoDocumento(documento.getIdTipoDocumento());
-        oDocumento.setUsuarioRegistro("JMATOS");
-        oDocumento.setFechaRegistro(new Date());
-    
-        FiltroTramite oFiltroTramite = new FiltroTramite();
-        oFiltroTramite.setIdTipoDocumento(documento.getIdTipoDocumento());
-        TipoDocumento tipoDocumento = tipoDocumentoService.getTipoDocumentoById(oFiltroTramite);
-        if(tipoDocumento != null)
-            oDocumento.setDescTipoDocumento(tipoDocumento.getTipoDocumento());
-        else
-            oDocumento.setDescTipoDocumento(TipoDocumentoType.OTROS.getValue());
-        listaDocumentosAtencion.add(oDocumento);
+        ///if(validarCargarDocumentos()){
+            Documento oDocumento = new Documento();
+            oDocumento.setCodDocumento(ComunUtil.generateCodigoByDate());
+            oDocumento.setEstado(Constantes.ESTADO_ACTIVO);
+            oDocumento.setDescEstado(documento.getDescEstado());
+
+            oDocumento.setRutaDoc(documento.getRutaDoc());
+            oDocumento.setExtensionDoc("PDF");  
+            oDocumento.setAnexo(documento.getAnexo());
+            oDocumento.setIdTipoDocumento(documento.getIdTipoDocumento());
+            oDocumento.setUsuarioRegistro("JMATOS");
+            oDocumento.setFechaRegistro(new Date());
+
+            FiltroTramite oFiltroTramite = new FiltroTramite();
+            oFiltroTramite.setIdTipoDocumento(documento.getIdTipoDocumento());
+            TipoDocumento tipoDocumento = tipoDocumentoService.getTipoDocumentoById(oFiltroTramite);
+            if(tipoDocumento != null)
+                oDocumento.setDescTipoDocumento(tipoDocumento.getTipoDocumento());
+            else
+                oDocumento.setDescTipoDocumento(TipoDocumentoType.OTROS.getValue());
+            listaDocumentosAtencion.add(oDocumento);
+        // }
     }
     
     public void handleFileUpload(AjaxBehaviorEvent event) {
@@ -255,7 +350,104 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         listaTipoAtencion = new ArrayList<>();
         listaTipoTramite = new ArrayList<>();
         listaTipoDocumto = new ArrayList<>();
-        setListaDocumentosAtencion((List<Documento>) new ArrayList());
+        atencion.setAtencionPreferencial("");
+        listaDocumentosAtencion = new ArrayList<>();
+        
+        documento = new Documento();
+        // listaDocumentosAtencion = new ArrayList<>();
+        // fileUpload = null;
+        // documento.setAnexo("");
+        // documento.setIdTipoDocumento(null);
+    }
+    
+    public void openDocumentDialog() {
+        fileUpload = null;
+        documento.setAnexo("");
+        documento.setIdTipoDocumento(null);
+    }
+    
+    public void guardarAtencionCiudadano() {
+       if(validarFormularioAtencion()){
+            VisitaCiudadano visita = new VisitaCiudadano();
+            visita.setFechaVisita(new Date());
+            visita.setMotivo(atencion.getTipoMotivo());
+            visita.setEstado(EstadoNumberType.ACTIVO.getKey());
+            visita.setTieneDiscapacidad(0);
+            visita.setObservacion(atencion.getObservaciones());
+            
+            visita.setTipoAtencionDiscapacidad(atencion.getTipoDiscapacidad());
+            visita.setAtencionPreferencial(atencion.getAtencionPreferencial());
+            
+            
+            visita.setTipoTramite(atencion.getTipoTramite());
+            visita.setTipoAtencion(atencion.getTipoAtencion());
+            visita.setDni(atencion.getDni());
+            visita.setUsuarioCreacion("JMATOS");
+            visita.setFechaCreacion(new Date());
+            if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
+                if((StringUtils.equals(atencion.getTipoAtencion(), "01")) || (StringUtils.equals(atencion.getTipoAtencion(), "02"))){
+                    visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
+                } 
+            } else if(StringUtils.equals(atencion.getTipoMotivo(), "I")){
+                visita.setCasoNuevo(atencion.getIndicadorCasoNuevo());
+                if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "N")){
+                   if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCita(), "S")){
+                       visita.setTieneCita(1);
+                   } else {
+                       visita.setTieneCita(0);
+                   }
+                }
+                if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
+                    visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SID.getKey());
+                }
+            }
+            visitaService.registrarVisita(visita);
+            guardarDocumentoAtencion(visita);
+            message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
+            msg.messageInfo(message, "Registro de Atención");
+            limpiarIniciarAtencion();
+       } 
+       
+    }
+    
+    public boolean validarFormularioAtencion() {
+        if (StringUtils.isBlank(atencion.getDni())) {
+            msg.messageAlert("Debe Ingresar el DNI del Ciudadano", null);
+            return false;
+        }
+        if(StringUtils.isBlank(atencion.getTipoMotivo())){
+            msg.messageAlert("Debe indicar el motivo de la atención", null);
+            return false;
+        }
+        if(StringUtils.isBlank(atencion.getTipoAtencion())){
+            msg.messageAlert("Debe indicar el tipo de atención", null);
+            return false;
+        }
+        if(StringUtils.isBlank(atencion.getIndicadorDocumentos())){
+            msg.messageAlert("Debe indicar si trae o no documentos", null);
+            return false;
+        }
+        if(atencion.getIndicadorDocumentos() != null && atencion.getIndicadorDocumentos().equals("S")){
+            if(listaDocumentosAtencion == null || listaDocumentosAtencion.size() <= 0){
+                msg.messageAlert("Debe adjuntar al menos un documento", "Documentos");
+                return false;
+            }
+        }
+        
+        if(StringUtils.equals(atencion.getTipoMotivo(), "I")){
+            if(StringUtils.isBlank(atencion.getIndicadorCasoNuevo())){
+                msg.messageAlert("Debe indicar si se trata de un caso nuevo o no", null);
+                return false;
+            }else{
+                if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "N")){
+                    if(StringUtils.isBlank(atencion.getIndicadorCita())){
+                        msg.messageAlert("Debe inidcar si el ciudadano cuenta con cita o no", null);
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     
     public String onGuardarAtencionVisita() {
@@ -530,5 +722,47 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    /**
+     * @return the serverPathDocument
+     */
+    public String getServerPathDocument() {
+        return serverPathDocument;
+    }
+
+    /**
+     * @param serverPathDocument the serverPathDocument to set
+     */
+    public void setServerPathDocument(String serverPathDocument) {
+        this.serverPathDocument = serverPathDocument;
+    }
+
+    /**
+     * @return the strDocumento
+     */
+    public String getStrDocumento() {
+        return strDocumento;
+    }
+
+    /**
+     * @param strDocumento the strDocumento to set
+     */
+    public void setStrDocumento(String strDocumento) {
+        this.strDocumento = strDocumento;
+    }
+
+    /**
+     * @return the listaDocumentoServer
+     */
+    public List<ArchivoDocumentoBean> getListaDocumentoServer() {
+        return listaDocumentoServer;
+    }
+
+    /**
+     * @param listaDocumentoServer the listaDocumentoServer to set
+     */
+    public void setListaDocumentoServer(List<ArchivoDocumentoBean> listaDocumentoServer) {
+        this.listaDocumentoServer = listaDocumentoServer;
     }
 }

@@ -17,7 +17,6 @@
         <result property="idRegVisita" column="N_ID_REG_VISITA" jdbcType="INTEGER"/>
         <result property="idTipoDocumento" column="N_ID_TIPO_DOCUMENTO" jdbcType="INTEGER"/>
         <result property="observaciones" column="C_OBSERVACION" jdbcType="INTEGER"/>
-        
     </resultMap>
     
     <insert id="documentoInsertar" parameterType="documento">
@@ -27,7 +26,9 @@
                 N_ID_DOC,
                 C_COD_DOC,
                 C_EXT_DOC,
-                C_TAMANIO_DOC,
+                <if test="tamanioDoc != null" >
+                    C_TAMANIO_DOC,
+                </if>
                 N_ESTADO,
                 <if test="rutaDoc != null">
                     C_RUTA_DOC,
@@ -49,7 +50,9 @@
                 SEQ_SAC_REG_DOCUMENTO.NextVal,
                 #{codDocumento},
                 #{extensionDoc},
+                <if test="tamanioDoc != null">
                 #{tamanioDoc},
+                </if>
                 #{estado},
                 <if test="rutaDoc != null">
                    #{rutaDoc},

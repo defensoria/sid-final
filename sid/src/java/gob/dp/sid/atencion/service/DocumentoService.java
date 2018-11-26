@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.atencion.service;
 
+import gob.dp.sid.atencion.bean.ArchivoDocumentoBean;
 import gob.dp.sid.atencion.entity.Documento;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface DocumentoService {
     
     public void registrarDocumento(Documento documento);
     public void registrarDocumentosList(List<Documento> documentos);
+    
+    public List<ArchivoDocumentoBean> listarDocumentosServer();
 }

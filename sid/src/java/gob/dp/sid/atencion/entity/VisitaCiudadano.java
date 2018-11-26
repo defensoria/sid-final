@@ -28,6 +28,9 @@ public class VisitaCiudadano {
     private String usuarioModifica;
     private Date fechaModifica;
     private Integer indicadorTratamiento;
+    private String atencionPreferencial;
+    private String casoNuevo;
+    private Integer tieneCita;
 
     public Long getId() {
         return id;
@@ -147,6 +150,48 @@ public class VisitaCiudadano {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    /**
+     * @return the atencionPreferencial
+     */
+    public String getAtencionPreferencial() {
+        return atencionPreferencial;
+    }
+
+    /**
+     * @param atencionPreferencial the atencionPreferencial to set
+     */
+    public void setAtencionPreferencial(String atencionPreferencial) {
+        this.atencionPreferencial = atencionPreferencial;
+    }
+
+    /**
+     * @return the casoNuevo
+     */
+    public String getCasoNuevo() {
+        return casoNuevo;
+    }
+
+    /**
+     * @param casoNuevo the casoNuevo to set
+     */
+    public void setCasoNuevo(String casoNuevo) {
+        this.casoNuevo = casoNuevo;
+    }
+
+    /**
+     * @return the tieneCita
+     */
+    public Integer getTieneCita() {
+        return tieneCita;
+    }
+
+    /**
+     * @param tieneCita the tieneCita to set
+     */
+    public void setTieneCita(Integer tieneCita) {
+        this.tieneCita = tieneCita;
     }
     
 }
