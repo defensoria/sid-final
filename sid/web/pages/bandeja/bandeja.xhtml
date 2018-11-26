@@ -24,18 +24,14 @@
                                     <small class="p-15 grey-text text-lighten-1 db">Opciones</small>
                                 </li>
                                 <li class="list-group-item">
-                                    <a jsf:action="#{bandejaController.cargarTotalInternos(1)}" class="active list-group-item-action"><i class="mdi mdi-inbox"></i>Alertas Internas <span class="label label-success float-right">6</span></a>
+                                    <a jsf:action="#{bandejaController.cargarTotalInternos(1)}" class="active list-group-item-action"><i class="mdi mdi-inbox"></i>Alertas Internas <span class="label label-success float-right">#{bandejaController.nroMensajesInternos}</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a jsf:action="#{bandejaController.cargarTotalAutomaticos(1)}" class="list-group-item-action"> <i class="mdi mdi-star"></i> Alertas Automaticas </a>
+                                    <a jsf:action="#{bandejaController.cargarTotalAutomaticos(1)}" class="list-group-item-action"> <i class="mdi mdi-star"></i> Alertas Automaticas <span class="label label-success float-right">#{bandejaController.nroMensajesAutomaticos}</span></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a jsf:action="#{bandejaController.cargarTotalProgramados(1)}" class="list-group-item-action"> <i class="mdi mdi-send"></i> Alertas Programadas <span class="label label-danger float-right">3</span></a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{bandejaController.cargarTotalInternos(1)}">Prueba</a>
-                                </li>
-                                
+                                    <a jsf:action="#{bandejaController.cargarTotalProgramados(1)}" class="list-group-item-action"> <i class="mdi mdi-send"></i> Alertas Programadas <span class="label label-danger float-right">#{bandejaController.nroMensajesProgramados}</span></a>
+                                </li>                               
                             </ul>
                         </div>
                     </div>
@@ -53,19 +49,18 @@
                         <!-- Mail list-->
                         <div class="table-responsive">
                             <table class="table email-table no-wrap table-hover v-middle">
-                                <!--<tbody>-->
+                                <tbody>
                                     <c:forEach var="x" items="#{bandejaController.listaMensajes}">
                                         <!-- row -->
-                                        <tr class="unread">
-                                            
-                                            <td class="check-mail">
-                                                <h:selectBooleanCheckbox value="#{x.indicador}"  class="i-checks" />
-                                            </td>
-                                            <td class="user-name">
+                                        <tr class="unread" >                                            
+                                            <td class="check-mail" style="width: 10px;">                                               
+                                                <h:selectBooleanCheckbox value="#{x.indicador}"  class="i-checks" />                                                
+                                            </td>                                            
+                                            <td style="width: 350px;">                                                
                                                 <a jsf:action="#{bandejaController.verMensajeBandeja(x)}" style="color: #{x.estado == 'VIS'? '#787878' : 'red'} ; font-weight:  #{x.estado == 'VIS'? '' : 'bold'}">
                                                     <span>#{x.nombreRemitente}</span>
-                                                </a>
-                                            </td>
+                                                </a>                                                
+                                            </td>                                            
                                             <td class="max-texts">
                                                 <span class="label" style="color: white; background-color: #{x.colorTipo}">
                                                     <span>#{x.detalleTipo}</span>
@@ -83,7 +78,7 @@
                                             </td>
                                         </tr>   
                                      </c:forEach>
-                                <!--</tbody>-->
+                                </tbody>
                             </table>
                         </div>
                         <div class="p-15 m-t-30">
