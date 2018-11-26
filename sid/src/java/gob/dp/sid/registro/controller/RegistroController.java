@@ -5005,7 +5005,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 p.setTelefono1(p.getPersona().getTelefono1());
                 p.setDireccionNotifica(p.getPersona().getDireccionNotifica());
                 p.setTipoLengua(p.getPersona().getTipoLengua());
-                p.setTipoPueblo(p.getPersona().getTipoPueblo());
+                //p.setTipoPueblo(p.getPersona().getTipoPueblo());
                 expedientePersonaService.expedientePersonaInsertar(p);
             }
             for (ExpedienteEntidad e : entidadSeleccionadas) {

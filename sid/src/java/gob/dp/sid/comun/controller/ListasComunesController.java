@@ -119,7 +119,7 @@ public class ListasComunesController {
     /* fin jmatos*/
     
     public List<Parametro> buscarTipoEntidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
-        List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoDiscapacidad(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+        List<Parametro> lista = insertarValoresDefectoParametro(cacheService.buscarTipoEntidad(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
         Collections.sort(lista, new Comparator<Parametro>() {
             @Override
             public int compare(Parametro o1, Parametro o2) {

@@ -4,13 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/inicio/index.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/atencion/atencionPresencial.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/seguridad/usuarioList.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/template/template.xhtml</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/atencion/service/PersonaCiudadanoServiceImpl.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/dist/css/style.css</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/template/templateOld.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/atencion/buscarDni.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/template/template1.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
         </group>
     </open-files>
 </project-private>

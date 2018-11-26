@@ -66,9 +66,9 @@
         <if test="indicadorDiscapacitado != null">
             C_INDDISCAPACITADO,
         </if>
-        <if test="tipoPueblo != null">
+        <!--<if test="tipoPueblo != null">
             C_TIPOPUEBLO,
-        </if>
+        </if>-->
         N_IDEXPEDIENTE,
         N_IDPERSONA,
         N_IDEXPEDPERSONA
@@ -111,9 +111,9 @@
         <if test="indicadorDiscapacitado != null">
             #{indicadorDiscapacitado},
         </if>
-        <if test="tipoPueblo != null">
+        <!--<if test="tipoPueblo != null">
             #{tipoPueblo},
-        </if>
+        </if>-->
         #{expediente.id},
         #{persona.id},
         SEQ_SID_REG_EXPEDE_PERSONA.NextVal

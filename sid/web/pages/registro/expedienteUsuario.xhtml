@@ -73,7 +73,6 @@
                                         </div>
                                     </div>
                                     <br/>
-                                    <h:messages />
                                     <div class="table-responsive row">
                                         <h:dataTable value="#{registroController.listaPersonaGeneral}" var="per" binding="#{row}" class="table table-hover" rendered="#{registroController.listaPersonaGeneral.size() > 0}">
                                             <h:column>
@@ -254,219 +253,232 @@
                             $('body').removeClass('modal-open');
                             $(".modal-backdrop").removeClass("modal-backdrop");
                             $("#idModalNuevaPersona").modal('show');
-                            //$('.datepicker').datetimepicker({
-                            //    pickTime: false
-                            //});
-                            //$(".datepicker").on("changeDate", function (ev) {
-                             //   $(this).datetimepicker("hide");
-                            //});
                         }
                     }
                 </script>
-                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalNuevaPersona" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" style="text-align: left">
+                <div id="idModalNuevaPersona" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td>
-                                            <span class="text-resalt-primary">Registro de Persona</span>
-                                        </td>
-                                        <td style="text-align: right">
-                                            <a  class="btn btn-danger" data-dismiss="modal">
-                                                <span class="glyphicon glyphicon-remove"/>Cerrar
-                                            </a>
-                                            <a jsf:action="#{registroController.guardarVincularPersona()}" class="btn btn-primary">
-                                                <span class="glyphicon glyphicon-floppy-disk" />Guardar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-
-
-                            </div>
-                            <div class="modal-body" style="padding:5px">
-                                <div class="panel-body">
-                                    
-                                        <div class="table-responsive">
-                                            <h:panelGroup id="idPanelTipoPersona">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td>
-                                                    <span>Tipo:</span>
-                                                </td>
-                                                <td>
-                                                    <h:selectOneRadio value="#{registroController.persona.tipo}">
-                                                        <f:selectItem itemLabel="Persona" itemValue="PER"/>
-                                                        <f:selectItem itemLabel="Organización" itemValue="ORG"/>
-                                                        <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona" />
-                                                    </h:selectOneRadio>
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td style="width: 20%">Tipo de documento:</td>
-                                                <td style="padding-bottom: 5px;">
-                                                    <h:selectOneMenu value="#{registroController.persona.tipoDocumento}" class="form-control">
-                                                        <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td >Nacionalidad:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
-                                                        <f:selectItem itemLabel="Seleccione" itemValue="0"/>
-                                                        <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td style="width: 20%">Número documento:</td>
-                                                <td style="padding-bottom: 5px;">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <input type="text" placeholder="Número documento" jsf:value="#{registroController.persona.numeroDocumento}" maxlength="8"  class="form-control"/>
-                                                            </td>
-                                                            <td style="text-align: left">
-                                                                <a class="btn btn-warning" jsf:action="#{registroController.consultarReniec()}">
-                                                                    <span class="far fa-share-square" /> Reniec
-                                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 20%">Nombre:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Nombre" jsf:value="#{registroController.persona.nombre}" maxlength="200"  class="form-control"/>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'ORG'}">
-                                                <td>Contacto:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Contacto" jsf:value="#{registroController.persona.contacto}" maxlength="50" class="form-control"/>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td>Apellido paterno:</td>
-                                                <td style="padding-bottom: 5px;">
-                                                    <input type="text" placeholder="Apellido Paterno" jsf:value="#{registroController.persona.apellidoPat}" maxlength="100" class="form-control"/>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td>Apellido Materno:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Apellido Materno" jsf:value="#{registroController.persona.apellidoMat}" maxlength="100" class="form-control"/>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td>Fecha de nacimiento:</td>
-                                                <td style="padding-bottom: 5px; padding-right: 200px;" >
-                                                    <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
-                                                </td>
-                                            </tr>
-                                            <tr jsf:rendered="#{registroController.persona.tipo == 'PER'}">
-                                                <td >Sexo:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <h:selectOneRadio value="#{registroController.persona.sexo}">
-                                                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                                                    </h:selectOneRadio>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dirección:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Dirección" jsf:value="#{registroController.persona.direccion}"  class="form-control" maxlength="300"/><br/>
-                                                    <h:panelGroup id="idUbigeoPersona">
-                                                        <table style="width:100%">
-                                                            <tr>
-                                                                <td style="width:33%">
-                                                                    <h:selectOneMenu value="#{registroController.persona.idDepartamento}"  class="form-control">
-                                                                        <f:selectItem itemLabel="Departamento" itemValue="0"/>
-                                                                        <f:selectItems value="#{listasComunesController.listaDepartamentos(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                        <f:ajax listener="#{registroController.comboProvincia()}" render="cmbProvincia1" onevent="closeModal"/>
-                                                                    </h:selectOneMenu>
-                                                                </td>
-                                                                <td style="width:33%">
-                                                                    <h:selectOneMenu id="cmbProvincia1" value="#{registroController.persona.idProvincia}"  class="form-control">
-                                                                        <f:selectItem itemLabel="Provincia" itemValue="0"/>
-                                                                        <f:selectItems value="#{registroController.listaProvincia}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
-                                                                        <f:ajax listener="#{registroController.comboDistrito()}" render="cmbDistrito1" onevent="closeModal"/>
-                                                                    </h:selectOneMenu>
-                                                                </td>
-                                                                <td style="width:34%">
-                                                                    <h:selectOneMenu id="cmbDistrito1" value="#{registroController.persona.idDistrito}"  class="form-control">
-                                                                        <f:selectItem itemLabel="Distrito" itemValue="0"/>
-                                                                        <f:selectItems value="#{registroController.listaDistrito}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
-                                                                    </h:selectOneMenu>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </h:panelGroup>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lengua materna:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <h:selectOneMenu value="#{registroController.persona.tipoLengua}"  class="form-control">
-                                                        <f:selectItem itemLabel="Seleccione" itemValue="0"/>
-                                                        <f:selectItems value="#{listasComunesController.listaLenguaMaterna(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-top: 5px">Población indígena u originarios:</td>
-                                                <td style="padding-bottom: 5px; padding-top: 10px" colspan="2">
-                                                    <h:selectOneMenu value="#{registroController.persona.tipoPueblo}"  class="form-control">
-                                                        <f:selectItem itemLabel="Seleccione" itemValue="0"/>
-                                                        <f:selectItems value="#{listasComunesController.listaPuebloIndigena(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>¿es persona con discapacidad?</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <h:selectBooleanCheckbox value="#{registroController.persona.indicadorDiscapacitado}" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Correo:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.persona.email}"  class="form-control" maxlength="100"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Teléfono:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Telefono 1" jsf:value="#{registroController.persona.telefono1}" maxlength="50"  class="form-control" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lugar de notificación:</td>
-                                                <td style="padding-bottom: 5px">
-                                                    <input type="text" placeholder="Lugar de notificación" jsf:value="#{registroController.persona.direccionNotifica}" maxlength="500"  class="form-control" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                                </h:panelGroup>
-                                            </div>
-                                    
+                                <h4 class="modal-title">Registro de Persona</h4>
+                                <div>
+                                    <a class="btn btn-danger" data-dismiss="modal">
+                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                </a>&#160;&#160;&#160;
+                                <a jsf:action="#{registroController.guardarVincularPersona()}" class="btn btn-primary">
+                                    <span class="fas fa-save" /> Guardar
+                                </a>
                                 </div>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <h:panelGroup id="idPanelTipoPersona">
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tipo</label>
+                                        <div class="col-sm-8">
+                                            <h:selectOneRadio value="#{registroController.persona.tipo}">
+                                                <f:selectItem itemLabel="Persona" itemValue="PER"/>
+                                                <f:selectItem itemLabel="Organización" itemValue="ORG"/>
+                                                <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona" />
+                                            </h:selectOneRadio>
+                                        </div>
+                                    </div>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tipo de documento</label>
+                                            <div class="col-sm-8">
+                                                <h:selectOneMenu value="#{registroController.persona.tipoDocumento}" class="form-control">
+                                                    <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacionalidad</label>
+                                            <div class="col-sm-8">
+                                                <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
+                                                    <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                    <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Número documento</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" placeholder="Número documento" jsf:value="#{registroController.persona.numeroDocumento}" maxlength="8"  class="form-control"/>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-warning" jsf:action="#{registroController.consultarReniec()}">
+                                                    <span class="far fa-share-square" /> Reniec
+                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacionalidad</label>
+                                        <div class="col-sm-8">
+                                            <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" placeholder="Nombre" jsf:value="#{registroController.persona.nombre}" maxlength="200"  class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'ORG'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Contacto</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" placeholder="Contacto" jsf:value="#{registroController.persona.contacto}" maxlength="50" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido paterno</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" placeholder="Apellido Paterno" jsf:value="#{registroController.persona.apellidoPat}" maxlength="100" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido Materno</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" placeholder="Apellido Materno" jsf:value="#{registroController.persona.apellidoMat}" maxlength="100" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de nacimiento</label>
+                                            <div class="col-sm-8">
+                                                <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
+                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Sexo</label>
+                                            <div class="col-sm-8">
+                                                <h:selectOneRadio value="#{registroController.persona.sexo}">
+                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>    
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Dirección</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" placeholder="Dirección" jsf:value="#{registroController.persona.direccion}"  class="form-control" maxlength="300"/><br/>
+                                        </div>
+                                    </div>
+
+                                    <h:panelGroup id="idUbigeoPersona">
+                                        <div class="form-group row">
+
+                                            <div class="col-sm-4">
+                                                <h:selectOneMenu value="#{registroController.persona.idDepartamento}"  class="form-control">
+                                                    <f:selectItem itemLabel="Departamento" itemValue="0"/>
+                                                    <f:selectItems value="#{listasComunesController.listaDepartamentos(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    <f:ajax listener="#{registroController.comboProvincia()}" render="cmbProvincia1"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <h:selectOneMenu id="cmbProvincia1" value="#{registroController.persona.idProvincia}"  class="form-control">
+                                                    <f:selectItem itemLabel="Provincia" itemValue="0"/>
+                                                    <f:selectItems value="#{registroController.listaProvincia}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                                    <f:ajax listener="#{registroController.comboDistrito()}" render="cmbDistrito1"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <h:selectOneMenu id="cmbDistrito1" value="#{registroController.persona.idDistrito}"  class="form-control">
+                                                    <f:selectItem itemLabel="Distrito" itemValue="0"/>
+                                                    <f:selectItems value="#{registroController.listaDistrito}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup> 
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Lengua materna</label>
+                                        <div class="col-sm-8">
+                                            <h:selectOneMenu value="#{registroController.persona.tipoLengua}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                <f:selectItems value="#{listasComunesController.listaLenguaMaterna(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Población indígena u originarios</label>
+                                        <div class="col-sm-8">
+                                            <h:selectOneMenu value="#{registroController.persona.tipoPueblo}"  class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                <f:selectItems value="#{listasComunesController.listaPuebloIndigena(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">¿es persona con discapacidad?</label>
+                                        <div class="col-sm-8">
+                                            <h:selectBooleanCheckbox value="#{registroController.persona.indicadorDiscapacitado}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.persona.email}"  class="form-control" maxlength="100"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Teléfono</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" placeholder="Telefono 1" jsf:value="#{registroController.persona.telefono1}" maxlength="50"  class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Lugar de notificación</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" placeholder="Lugar de notificación" jsf:value="#{registroController.persona.direccionNotifica}" maxlength="500"  class="form-control" />
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                            <div class="modal-footer">
+
+                                <a class="btn btn-danger" data-dismiss="modal">
+                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
             </h:form>
         </ui:define>
     </ui:composition>
