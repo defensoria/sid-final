@@ -95,6 +95,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private DocumentoService documentoService;
 
+    public String atenderTicket() {
+        return "iniciarTicket";
+    }
+    
     public String cargarInicioAtencion() {
         try {
             atencion = new Atencion();

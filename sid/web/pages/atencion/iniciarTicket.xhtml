@@ -1,0 +1,269 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
+
+    <ui:composition template="../template/template.xhtml">
+        <ui:define name="content">
+            <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
+            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
+            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
+            <script>
+                $(function () {
+                    $('#campo').keypad({keypadOnly: false});
+                });
+            </script>
+            <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
+                <style>
+                    .trPadding{
+                        padding-bottom: 10px;
+                    }
+                    .trPaddingRight{
+                        padding-right: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .trPaddingLeft{
+                        padding-left: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .clasRED{
+                        background: #F2DEDE;
+                        border: solid #A94442;
+                    }
+                </style>
+                <div class="row" style="center">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Monitoreo de Atención</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <h:panelGroup id="idPanelGroupMonitoreoAtencion">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputsesion" class="control-label col-form-label"><strong>Inicio de Sesión</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <input type="text" class="sesion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputpausas" class="control-label col-form-label"><strong>Cantidad de Pausas</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <input type="text" class="pausas form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputtiempopausa" class="control-label col-form-label"><strong>Tiempo total pausado</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <input type="text" class="tiempopausa form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputtotalatencion" class="control-label col-form-label"><strong>Total de Atenciones</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <input type="text" class="totalatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Ticket</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <h:panelGroup id="idPanelGroupTicket">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group" style="text-align: center">
+                                                <label for="inputticket" class="control-label col-form-label"><strong>CV07</strong></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputtiempoatencion" class="control-label col-form-label"><strong>Tiempo de atención</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <input type="text" class="tiempoatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="center">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Datos del Ciudadano</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <h:panelGroup id="idPanelGroupDatosCiudadano">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputdni" class="control-label col-form-label"><strong>DNI</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputnombres" class="control-label col-form-label"><strong>Nombres</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputapepaterno" class="control-label col-form-label"><strong>Ape. Paterno</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="apepaterno form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputapematerno" class="control-label col-form-label"><strong>Ape. Materno</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="apematerno form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header header-dark">
+                                <h4 class="card-title"><a href="#">Datos del Trámite</a></h4>
+                            </div>
+                            <div class="card-body">
+                                <h:panelGroup id="idPanelGroupDatosTramite">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputmotivo" class="control-label col-form-label"><strong>Motivo</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="motivo form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputtipotramite" class="control-label col-form-label"><strong>Tipo de Trámite</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="tipotramite form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inputtipoatencion" class="control-label col-form-label"><strong>Tipo de Atención</strong></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="tipoatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group" style="text-align: center">
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                                    <i class="fa fa-save"></i> Generar Caso
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" style="text-align: center">
+                                    <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                        <i class="fa fa-save"></i> Finalizar Atención y suspender
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="text-align: center">
+                                    <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                        <i class="fa fa-save"></i> Finalizar Atención y continuar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>            
