@@ -15,6 +15,23 @@
         <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
     </resultMap>
     
+    <resultMap id="atencionTicketMap" type="gob.dp.sid.atencion.entity.AtencionTicket">
+        <result property="idTicket" column="N_ID_TICKET" jdbcType="INTEGER"/>
+        <result property="nroTicket" column="C_NRO_TICKET" jdbcType="VARCHAR"/>
+        <result property="estadoTicket" column="N_ESTADO_TICKET" jdbcType="INTEGER"/>
+        <result property="idPersona" column="N_ID_PERS" jdbcType="INTEGER"/>
+        <result property="dniPersona" column="C_DNI" jdbcType="VARCHAR"/>        
+        <result property="nombrePersona" column="C_NOMBRES" jdbcType="VARCHAR"/>
+        <result property="apePatPersona" column="C_APELLIDO_PATERNO" jdbcType="VARCHAR"/>
+        <result property="apeMatPersona" column="C_APELLIDO_MATERNO" jdbcType="VARCHAR"/>
+        <result property="codMotivo" column="C_MOTIVO" jdbcType="VARCHAR"/>
+        <result property="descMotivo" column="C_DESC_MOTIVO" jdbcType="VARCHAR"/>
+        <result property="codAtencion" column="C_TIPO_ATENCION" jdbcType="VARCHAR"/>
+        <result property="descAtencion" column="C_DESC_ATENCION" jdbcType="VARCHAR"/>
+        <result property="codTramite" column="C_TIPO_TRAMITE" jdbcType="VARCHAR"/>
+        <result property="descTramite" column="C_DESC_TRAMITE" jdbcType="VARCHAR"/>
+    </resultMap>
+    
     <insert id="ticketInsertar" parameterType="ticket">
         INSERT INTO 
             SAC_REG_TICKET
@@ -84,5 +101,31 @@
             N_ESTADO_TICKET = #{estadoTicket} AND
             N_ID_SEDE = #{idSede} AND
             ROWNUM = 1
+    </select>
+    
+    <select id="obtenerDatosAtencionTicket" resultMap="atencionTicketMap"  parameterType="long">
+        SELECT T.N_ID_TICKET,T.C_NRO_TICKET,T.N_ESTADO_TICKET,P.N_ID_PERS,
+	P.C_DNI,(P.C_NOMBRE_1 ||' '|| P.C_NOMBRE_1) C_NOMBRES,P.C_APELLIDO_PATERNO,P.C_APELLIDO_MATERNO,
+	V.C_MOTIVO,
+	CASE V.C_MOTIVO 
+	WHEN 'I' THEN 'SOLICITUD DE INTERVENCIÓN'
+	WHEN 'D' THEN 'TRAMITE DOCUMENTARIO'
+	WHEN 'P' THEN 'POSTULACIONES'
+	END AS C_DESC_MOTIVO,
+	V.C_TIPO_ATENCION,
+	CASE V.C_MOTIVO 
+	WHEN 'I' THEN (SELECT UPPER(NOMBRE_PARAMETRO) FROM sid_parametro WHERE padre_parametro=4404 AND VALOR_PARAMETRO=V.C_TIPO_ATENCION)
+	WHEN 'D' THEN (SELECT UPPER(NOMBRE_PARAMETRO) FROM sid_parametro WHERE padre_parametro=4403 AND VALOR_PARAMETRO=V.C_TIPO_ATENCION)
+	END AS C_DESC_ATENCION,
+	V.C_TIPO_TRAMITE,
+	CASE V.C_MOTIVO
+	WHEN 'I' THEN (SELECT UPPER(NOMBRE_PARAMETRO) FROM sid_parametro WHERE padre_parametro=4407 AND VALOR_PARAMETRO=V.C_TIPO_TRAMITE)
+	WHEN 'D' THEN (SELECT UPPER(NOMBRE_PARAMETRO) FROM sid_parametro WHERE padre_parametro IN (4405,4406) AND VALOR_PARAMETRO=V.C_TIPO_TRAMITE)
+	END AS C_DESC_TRAMITE
+	FROM SAC_REG_TICKET T
+	INNER JOIN SAC_REG_PERSONA P ON T.N_ID_PERSONA=P.N_ID_PERS
+	INNER JOIN SAC_REG_VISITA V ON T.N_ID_VISITA=V.N_ID_REG_VISITA
+	WHERE N_ID_TICKET= #{idTicket} AND
+        ROWNUM = 1
     </select>
 </mapper>

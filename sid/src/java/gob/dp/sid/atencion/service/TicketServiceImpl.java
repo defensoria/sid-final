@@ -7,6 +7,7 @@ package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.bean.FiltroTicket;
 import gob.dp.sid.atencion.dao.TicketDAO;
+import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Ticket;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket) {
         return ticketDAO.obtenerTicketAtencion(filtroTicket);
+    }
+    
+    @Override
+    public AtencionTicket obtenerDatosAtencionTicket(Long idTicket) {
+        return ticketDAO.obtenerDatosAtencionTicket(idTicket);
     }
 }

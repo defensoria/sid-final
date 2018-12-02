@@ -14,6 +14,7 @@ import gob.dp.sid.atencion.service.PersonaCiudadanoService;
 import gob.dp.sid.atencion.bean.FiltroPersona;
 import gob.dp.sid.atencion.bean.FiltroTicket;
 import gob.dp.sid.atencion.bean.FiltroTramite;
+import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Documento;
 import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
@@ -62,6 +63,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private static final Logger log = Logger.getLogger(AtencionController.class);
     
     private Atencion atencion;
+    private AtencionTicket atencionTicket;
     private Documento documento;
     private AtencionBean atencionBean;
     private List<Parametro> listaTipoAtencion; 
@@ -104,13 +106,15 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private TicketService ticketService;
     
     public String atenderTicket() {
-        atencion = new Atencion();
+        atencion =new Atencion();
+        atencionTicket =new AtencionTicket();
         Ticket ticket = new Ticket();
         FiltroTicket filtroTicket = new FiltroTicket();
         filtroTicket.setEstadoRegistro(1);
         filtroTicket.setEstadoTicket(1);
         filtroTicket.setIdSede(1L);
         ticket = ticketService.obtenerTicketAtencion(filtroTicket);
+        atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
         return "iniciarTicket";
     }
     public void generarCaso(){
@@ -813,5 +817,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaDocumentoServer(List<ArchivoDocumentoBean> listaDocumentoServer) {
         this.listaDocumentoServer = listaDocumentoServer;
+    }
+
+    /**
+     * @return the atencionTicket
+     */
+    public AtencionTicket getAtencionTicket() {
+        return atencionTicket;
+    }
+
+    /**
+     * @param atencionTicket the atencionTicket to set
+     */
+    public void setAtencionTicket(AtencionTicket atencionTicket) {
+        this.atencionTicket = atencionTicket;
     }
 }

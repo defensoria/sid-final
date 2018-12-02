@@ -59,6 +59,7 @@
         <typeAlias type="gob.dp.sid.atencion.entity.VisitaCiudadano" alias="visita"/>
         <typeAlias type="gob.dp.sid.atencion.entity.Documento" alias="documento"/>
         <typeAlias type="gob.dp.sid.atencion.entity.Ticket" alias="ticket"/>
+        <typeAlias type="gob.dp.sid.atencion.entity.AtencionTicket" alias="atencionTicket"/>
         
         <typeAlias type="gob.dp.sid.reporte.entity.Reporte" alias="reporte"/>
         <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidExpediente" alias="reporteSidExpediente"/>

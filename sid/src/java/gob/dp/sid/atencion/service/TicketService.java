@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.bean.FiltroTicket;
+import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Ticket;
 import java.util.Map;
 
@@ -20,4 +21,6 @@ public interface TicketService {
     public String obtenerCodigoTicket(Map<String,Object> params);
     
     public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket);
+    
+    public AtencionTicket obtenerDatosAtencionTicket(Long idTicket);
 }

@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.dao;
 
 import gob.dp.sid.atencion.bean.FiltroTicket;
+import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Ticket;
 import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -34,5 +35,11 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO {
     public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket) {
         Ticket t = getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerTicketAtencion", filtroTicket);
         return t;
+    }
+    
+    @Override
+    public AtencionTicket obtenerDatosAtencionTicket(Long idTicket) {
+        AtencionTicket at = getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerDatosAtencionTicket", idTicket);
+        return at;
     }
 }
