@@ -418,11 +418,30 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             }
             visitaService.registrarVisita(visita);
             guardarDocumentoAtencion(visita);
+            guardarDatosTicket(visita);//Registro del ticket
             message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
             msg.messageInfo(message, "Registro de Atención");
             limpiarIniciarAtencion();
        } 
        
+    }
+    
+    public void guardarDatosTicket(VisitaCiudadano visita){
+        ticket = new Ticket();
+        ticket.setIdVisita(visita.getId());
+        ticket.setIdPersona(atencion.getIdPersona());
+        ticket.setIdSede(1L);
+        ticket.setNroTicket("CP001");
+        if(visita.getAtencionPreferencial().equals("S")){
+            ticket.setAtencionPreferente(1);
+        }else{
+            ticket.setAtencionPreferente(2);
+        }
+        ticket.setEstadoTicket(1);//1:En Cola
+        ticket.setEstadoRegistro(1);//1:Activo
+        ticket.setUsuarioCreacion("JCARRILLO");
+        ticket.setFechaCreacion(new Date());
+        ticketService.registrarTicket(ticket);
     }
     
     public boolean validarFormularioAtencion() {
