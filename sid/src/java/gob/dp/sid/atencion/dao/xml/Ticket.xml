@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.TicketDAO">
+    <resultMap id="visitaMap" type="gob.dp.sid.atencion.entity.Ticket">
+        <result property="idTicket" column="N_ID_TICKET" jdbcType="INTEGER"/>
+        <result property="idVisita" column="N_ID_VISITA" jdbcType="INTEGER"/>
+        <result property="idPersona" column="N_ID_PERSONA" jdbcType="INTEGER"/>
+        <result property="idTramite" column="N_ID_TRAMITE" jdbcType="INTEGER"/>
+        <result property="idSede" column="N_ID_SEDE" jdbcType="INTEGER"/>        
+        <result property="nroTicket" column="C_NRO_TICKET" jdbcType="VARCHAR"/>
+        <result property="atencionPreferente" column="N_IND_PREFERENTE" jdbcType="INTEGER"/>
+        <result property="estadoTicket" column="N_ESTADO_TICKET" jdbcType="INTEGER"/>
+        <result property="estadoRegistro" column="N_ESTADO_REGISTRO" jdbcType="INTEGER"/>      
+        <result property="usuarioCreacion" column="C_USUARIO_CREA" jdbcType="VARCHAR"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+    </resultMap>
+    
+    <insert id="ticketInsertar" parameterType="ticket">
+        INSERT INTO 
+            SAC_REG_TICKET
+              ( N_ID_TICKET,
+                N_ID_VISITA,
+                <if test="idPersona != null">
+                N_ID_PERSONA,
+                </if>
+                <if test="idTramite != null">
+                N_ID_TRAMITE,
+                </if>
+                <if test="idSede != null">
+                N_ID_SEDE,
+                </if>
+                C_NRO_TICKET,
+                N_IND_PREFERENTE,
+                N_ESTADO_TICKET,
+                N_ESTADO_REGISTRO,
+                C_USUARIO_CREA,
+                D_FECHA_CREA)
+          VALUES (
+                SQ_SAC_REG_TICKET.NextVal,
+                #{idVisita},
+                <if test="idPersona != null">
+                #{idPersona},
+                </if>
+                <if test="idTramite != null">
+                #{idTramite},
+                </if>
+                <if test="idSede != null">
+                #{idSede},
+                </if>
+                #{nroTicket},
+                #{atencionPreferente},
+                #{estadoTicket},
+                #{estadoRegistro},
+                #{usuarioCreacion},
+                #{fechaCreacion}       
+            )
+        <selectKey keyProperty="idTicket" resultType="Long">
+            SELECT SQ_SAC_REG_TICKET.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+</mapper>
