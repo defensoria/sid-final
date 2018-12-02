@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.dao;
 
 import gob.dp.sid.atencion.entity.Ticket;
+import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +25,7 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO {
     }
     
     @Override
-    public String obtenerCodigoTicket(Ticket ticket) {
-        return getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerCodigoTicket", ticket);
+    public String obtenerCodigoTicket(Map<String,Object> params) {
+        return getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerCodigoTicket", params);
     }
 }

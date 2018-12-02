@@ -7,6 +7,7 @@ package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.dao.TicketDAO;
 import gob.dp.sid.atencion.entity.Ticket;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class TicketServiceImpl implements TicketService {
     }
     
     @Override
-    public String obtenerCodigoTicket(Ticket ticket) {
-        return ticketDAO.obtenerCodigoTicket(ticket);
+    public String obtenerCodigoTicket(Map<String,Object> params) {
+        return ticketDAO.obtenerCodigoTicket(params);
     }
 }

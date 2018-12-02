@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.entity.Ticket;
+import java.util.Map;
 
 /**
  *
@@ -15,5 +16,5 @@ public interface TicketService {
     
     public void registrarTicket(Ticket ticket);
     
-    public String obtenerCodigoTicket(Ticket ticket);
+    public String obtenerCodigoTicket(Map<String,Object> params);
 }

@@ -59,10 +59,10 @@
         </selectKey>
     </insert>
     
-    <select id="obtenerCodigoTicket" resultType="String" statementType="CALLABLE">
+    <select id="obtenerCodigoTicket" parameterType="java.util.HashMap" resultType="String" statementType="CALLABLE">
       { call sp_generarCodigoTicket( 
-            #{atencionPreferente,javaType=Integer,jdbcType=INTEGER, mode=IN},
-            #{idSede,javaType=Long,jdbcType=INTEGER, mode=IN},
-            #{nroTicket,javaType=String,jdbcType=VARCHAR,mode=OUT} ) } 
+            #{inPreferente,javaType=Integer,jdbcType=INTEGER, mode=IN},
+            #{inSede,javaType=Long,jdbcType=INTEGER, mode=IN},
+            #{outNroTicket,javaType=String,jdbcType=VARCHAR,mode=OUT} ) } 
     </select>
 </mapper>

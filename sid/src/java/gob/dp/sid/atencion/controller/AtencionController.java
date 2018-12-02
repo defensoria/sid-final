@@ -38,7 +38,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
@@ -427,6 +429,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public void guardarDatosTicket(VisitaCiudadano visita){
+        Map<String, Object> params = new HashMap<String, Object>();
         ticket = new Ticket();
         ticket.setIdVisita(visita.getId());
         ticket.setIdPersona(atencion.getIdPersona());
@@ -436,8 +439,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }else{
             ticket.setAtencionPreferente(2);
         }
-        String nroTicket = ticketService.obtenerCodigoTicket(ticket);
-        ticket.setNroTicket(nroTicket);
+        params.put("inPreferente", ticket.getAtencionPreferente());
+        params.put("inSede", ticket.getIdSede());
+        params.put("outNroTicket", null);
+        ticketService.obtenerCodigoTicket(params);
+        ticket.setNroTicket(params.get("outNroTicket").toString());
         ticket.setEstadoTicket(1);//1:En Cola
         ticket.setEstadoRegistro(1);//1:Activo
         ticket.setUsuarioCreacion("JCARRILLO");
