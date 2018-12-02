@@ -14,11 +14,13 @@ import gob.dp.sid.atencion.service.PersonaCiudadanoService;
 import gob.dp.sid.atencion.bean.FiltroPersona;
 import gob.dp.sid.atencion.bean.FiltroTramite;
 import gob.dp.sid.atencion.entity.Documento;
+import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
 import gob.dp.sid.atencion.entity.VisitaCiudadano;
 import gob.dp.sid.atencion.entity.type.TipoDocumentoType;
 import gob.dp.sid.atencion.entity.type.TratamientoProcesoType;
 import gob.dp.sid.atencion.service.DocumentoService;
+import gob.dp.sid.atencion.service.TicketService;
 import gob.dp.sid.atencion.service.TipoDocumentoService;
 import gob.dp.sid.atencion.service.VisitaService;
 import gob.dp.sid.comun.ComunUtil;
@@ -64,7 +66,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<TipoDocumento> listaTipoDocumto;
     private List<Documento> listaDocumentosAtencion;
     private List<ArchivoDocumentoBean> listaDocumentoServer;
-    
+    private Ticket ticket;
     
     private String serverPathDocument;
     private String disableField = "false";
@@ -95,12 +97,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private DocumentoService documentoService;
 
+    @Autowired
+    private TicketService ticketService;
+    
     public String atenderTicket() {
         return "iniciarTicket";
     }
     
     public String cargarInicioAtencion() {
         try {
+            ticket =new Ticket();
             atencion = new Atencion();
             atencionBean = new AtencionBean();
             documento = new Documento();
@@ -129,6 +135,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 filtroPersona.setNumeroDni(atencion.getDni());
                 Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
                 if(persona != null){
+                    atencion.setIdPersona(persona.getIdPersona());
                     atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                     atencion.setApellidoPaterno(persona.getApellidoPaterno());
                     atencion.setApellidoMaterno(persona.getApellidoMaterno());
@@ -150,6 +157,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     filtroPersona.setNumeroDni(atencion.getDni());
                     Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
                     if(persona != null){
+                        atencion.setIdPersona(persona.getIdPersona());
                         atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                         atencion.setApellidoPaterno(persona.getApellidoPaterno());
                         atencion.setApellidoMaterno(persona.getApellidoMaterno());

@@ -22,6 +22,8 @@ public class Atencion implements Serializable{
     
     private String indicadorDocumentos;
     
+    private Long idPersona;
+    
     private String dni;
     
     private String nombres;
@@ -284,6 +286,20 @@ public class Atencion implements Serializable{
      */
     public void setTipoDigitaliza(String tipoDigitaliza) {
         this.tipoDigitaliza = tipoDigitaliza;
+    }
+
+    /**
+     * @return the idPersona
+     */
+    public Long getIdPersona() {
+        return idPersona;
+    }
+
+    /**
+     * @param idPersona the idPersona to set
+     */
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
     }
             
 }
