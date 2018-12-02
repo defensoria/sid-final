@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.atencion.service;
 
+import gob.dp.sid.atencion.bean.FiltroTicket;
 import gob.dp.sid.atencion.dao.TicketDAO;
 import gob.dp.sid.atencion.entity.Ticket;
 import java.util.Map;
@@ -24,11 +25,16 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void registrarTicket(Ticket ticket) {
-        ticketDAO.insertarVisita(ticket);
+        ticketDAO.insertarTicket(ticket);
     }
     
     @Override
     public String obtenerCodigoTicket(Map<String,Object> params) {
         return ticketDAO.obtenerCodigoTicket(params);
+    }
+    
+    @Override
+    public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket) {
+        return ticketDAO.obtenerTicketAtencion(filtroTicket);
     }
 }

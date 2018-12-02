@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.atencion.dao;
 
+import gob.dp.sid.atencion.bean.FiltroTicket;
 import gob.dp.sid.atencion.entity.Ticket;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ import java.util.Map;
  */
 public interface TicketDAO {
     
-    public void insertarVisita(Ticket ticket);
+    public void insertarTicket(Ticket ticket);
     
     public String obtenerCodigoTicket(Map<String,Object> params);
+    
+    public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket);
 }

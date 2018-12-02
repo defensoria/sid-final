@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="gob.dp.sid.atencion.dao.TicketDAO">
-    <resultMap id="visitaMap" type="gob.dp.sid.atencion.entity.Ticket">
+    <resultMap id="ticketMap" type="gob.dp.sid.atencion.entity.Ticket">
         <result property="idTicket" column="N_ID_TICKET" jdbcType="INTEGER"/>
         <result property="idVisita" column="N_ID_VISITA" jdbcType="INTEGER"/>
         <result property="idPersona" column="N_ID_PERSONA" jdbcType="INTEGER"/>
@@ -29,7 +29,9 @@
                 <if test="idSede != null">
                 N_ID_SEDE,
                 </if>
+                <if test="nroTicket != null">
                 C_NRO_TICKET,
+                </if>    
                 N_IND_PREFERENTE,
                 N_ESTADO_TICKET,
                 N_ESTADO_REGISTRO,
@@ -47,7 +49,9 @@
                 <if test="idSede != null">
                 #{idSede},
                 </if>
+                <if test="nroTicket != null">
                 #{nroTicket},
+                </if>
                 #{atencionPreferente},
                 #{estadoTicket},
                 #{estadoRegistro},
@@ -64,5 +68,21 @@
             #{inPreferente,javaType=Integer,jdbcType=INTEGER, mode=IN},
             #{inSede,javaType=Long,jdbcType=INTEGER, mode=IN},
             #{outNroTicket,javaType=String,jdbcType=VARCHAR,mode=OUT} ) } 
+    </select>
+    
+    <select id="obtenerTicketAtencion" resultMap="ticketMap" parameterType="filtroTicket">
+        SELECT
+            N_ID_TICKET,
+            N_ID_VISITA,
+            N_ID_PERSONA,
+            C_NRO_TICKET
+          FROM
+            SAC_REG_TICKET
+          WHERE
+            TRUNC(D_FECHA_CREA)>=TRUNC(SYSDATE) AND
+            N_ESTADO_REGISTRO = #{estadoRegistro} AND
+            N_ESTADO_TICKET = #{estadoTicket} AND
+            N_ID_SEDE = #{idSede} AND
+            ROWNUM = 1
     </select>
 </mapper>
