@@ -103,6 +103,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public String atenderTicket() {
         return "iniciarTicket";
     }
+    public void generarCaso(){
+        
+    }
     
     public String cargarInicioAtencion() {
         try {

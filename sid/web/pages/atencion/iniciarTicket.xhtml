@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="apepaterno form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="apepaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="apematerno form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="apematerno form-control" jsf:value="#{atencionController.atencion.apellidoMaterno}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +202,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="motivo form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="motivo form-control" jsf:value="#{atencionController.atencion.descMotivo}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="tipotramite form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="tipotramite form-control" jsf:value="#{atencionController.atencion.descTramite}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -226,14 +226,14 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="text" class="tipoatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true"/>
+                                                <input type="text" class="tipoatencion form-control" jsf:value="#{atencionController.atencion.descAtencion}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group" style="text-align: center">
-                                                <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.generarCaso()}" >
                                                     <i class="fa fa-save"></i> Generar Caso
                                                 </a>
                                             </div>
