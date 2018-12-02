@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author JMATOS
+ * @author JCARRILLO
  */
 
 @Service
@@ -42,5 +42,10 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public AtencionTicket obtenerDatosAtencionTicket(Long idTicket) {
         return ticketDAO.obtenerDatosAtencionTicket(idTicket);
+    }
+    
+    @Override
+    public void actualizarEstadoTicket(Ticket ticket) {
+        ticketDAO.actualizarEstadoTicket(ticket);
     }
 }

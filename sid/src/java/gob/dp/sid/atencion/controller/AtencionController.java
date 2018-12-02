@@ -114,7 +114,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         filtroTicket.setEstadoTicket(1);
         filtroTicket.setIdSede(1L);
         ticket = ticketService.obtenerTicketAtencion(filtroTicket);
-        atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
+        if(ticket != null && ticket.getIdTicket() != null){
+            atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
+            ticketService.actualizarEstadoTicket(ticket);    
+        }else{
+            message = "No existen Ticket pendientes.";
+            msg.messageInfo(message, "Atención de Tickets");
+        }
+        
         return "iniciarTicket";
     }
     public void generarCaso(){

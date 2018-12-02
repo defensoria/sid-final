@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  *
- * @author JMATOS
+ * @author JCARRILLO
  */
 public interface TicketService {
     
@@ -23,4 +23,6 @@ public interface TicketService {
     public Ticket obtenerTicketAtencion(FiltroTicket filtroTicket);
     
     public AtencionTicket obtenerDatosAtencionTicket(Long idTicket);
+    
+    public void actualizarEstadoTicket(Ticket ticket);
 }

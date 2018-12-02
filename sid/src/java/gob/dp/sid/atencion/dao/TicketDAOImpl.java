@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author JMATOS
+ * @author JCARRILLO
  */
 
 @Repository
@@ -41,5 +41,11 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO {
     public AtencionTicket obtenerDatosAtencionTicket(Long idTicket) {
         AtencionTicket at = getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerDatosAtencionTicket", idTicket);
         return at;
+    }
+    
+    @Override
+    public void actualizarEstadoTicket(Ticket ticket) {
+        getSqlSession().insert("gob.dp.sid.atencion.dao.TicketDAO.actualizarEstadoTicket", ticket);
+        System.out.println("ESTADO ACTUALIZADO: " + ticket.getIdTicket());
     }
 }

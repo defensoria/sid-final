@@ -92,7 +92,8 @@
             N_ID_TICKET,
             N_ID_VISITA,
             N_ID_PERSONA,
-            C_NRO_TICKET
+            C_NRO_TICKET,
+            N_ESTADO_TICKET
           FROM
             SAC_REG_TICKET
           WHERE
@@ -127,5 +128,11 @@
 	INNER JOIN SAC_REG_VISITA V ON T.N_ID_VISITA=V.N_ID_REG_VISITA
 	WHERE N_ID_TICKET= #{idTicket} AND
         ROWNUM = 1
+    </select>
+    
+    <select id="actualizarEstadoTicket" parameterType="ticket" statementType="CALLABLE">
+      { call sp_actualizaEstadoTicket (
+            #{idTicket,javaType=Long,jdbcType=INTEGER, mode=IN},
+            #{estadoTicket,javaType=Integer,jdbcType=INTEGER, mode=IN} ) } 
     </select>
 </mapper>
