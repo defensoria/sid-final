@@ -26,4 +26,8 @@ public class TicketServiceImpl implements TicketService {
         ticketDAO.insertarVisita(ticket);
     }
     
+    @Override
+    public String obtenerCodigoTicket(Ticket ticket) {
+        return ticketDAO.obtenerCodigoTicket(ticket);
+    }
 }

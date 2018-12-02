@@ -23,4 +23,8 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO {
         System.out.println("ID INSERTADO: " + ticket.getIdTicket());
     }
     
+    @Override
+    public String obtenerCodigoTicket(Ticket ticket) {
+        return getSqlSession().selectOne("gob.dp.sid.atencion.dao.TicketDAO.obtenerCodigoTicket", ticket);
+    }
 }

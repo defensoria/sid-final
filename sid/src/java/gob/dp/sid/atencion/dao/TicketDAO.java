@@ -14,4 +14,6 @@ import gob.dp.sid.atencion.entity.Ticket;
 public interface TicketDAO {
     
     public void insertarVisita(Ticket ticket);
+    
+    public String obtenerCodigoTicket(Ticket ticket);
 }

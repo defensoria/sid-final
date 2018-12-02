@@ -14,4 +14,6 @@ import gob.dp.sid.atencion.entity.Ticket;
 public interface TicketService {
     
     public void registrarTicket(Ticket ticket);
+    
+    public String obtenerCodigoTicket(Ticket ticket);
 }

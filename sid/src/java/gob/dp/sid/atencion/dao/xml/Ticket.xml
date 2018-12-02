@@ -58,4 +58,11 @@
             SELECT SQ_SAC_REG_TICKET.CURRVAL FROM DUAL
         </selectKey>
     </insert>
+    
+    <select id="obtenerCodigoTicket" resultType="String" statementType="CALLABLE">
+      { call sp_generarCodigoTicket( 
+            #{atencionPreferente,javaType=Integer,jdbcType=INTEGER, mode=IN},
+            #{idSede,javaType=Long,jdbcType=INTEGER, mode=IN},
+            #{nroTicket,javaType=String,jdbcType=VARCHAR,mode=OUT} ) } 
+    </select>
 </mapper>

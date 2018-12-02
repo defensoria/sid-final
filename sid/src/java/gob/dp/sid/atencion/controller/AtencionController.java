@@ -431,12 +431,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         ticket.setIdVisita(visita.getId());
         ticket.setIdPersona(atencion.getIdPersona());
         ticket.setIdSede(1L);
-        ticket.setNroTicket("CP001");
         if(visita.getAtencionPreferencial().equals("S")){
             ticket.setAtencionPreferente(1);
         }else{
             ticket.setAtencionPreferente(2);
         }
+        String nroTicket = ticketService.obtenerCodigoTicket(ticket);
+        ticket.setNroTicket(nroTicket);
         ticket.setEstadoTicket(1);//1:En Cola
         ticket.setEstadoRegistro(1);//1:Activo
         ticket.setUsuarioCreacion("JCARRILLO");
