@@ -16,9 +16,15 @@ public class Atencion implements Serializable{
     
     private String tipoMotivo;
     
+    private String descMotivo;
+    
     private String tipoAtencion;
     
+    private String descAtencion;
+    
     private String tipoTramite;
+    
+    private String descTramite;
     
     private String indicadorDocumentos;
     
@@ -300,6 +306,48 @@ public class Atencion implements Serializable{
      */
     public void setIdPersona(Long idPersona) {
         this.idPersona = idPersona;
+    }
+
+    /**
+     * @return the descMotivo
+     */
+    public String getDescMotivo() {
+        return descMotivo;
+    }
+
+    /**
+     * @param descMotivo the descMotivo to set
+     */
+    public void setDescMotivo(String descMotivo) {
+        this.descMotivo = descMotivo;
+    }
+
+    /**
+     * @return the descAtencion
+     */
+    public String getDescAtencion() {
+        return descAtencion;
+    }
+
+    /**
+     * @param descAtencion the descAtencion to set
+     */
+    public void setDescAtencion(String descAtencion) {
+        this.descAtencion = descAtencion;
+    }
+
+    /**
+     * @return the descTramite
+     */
+    public String getDescTramite() {
+        return descTramite;
+    }
+
+    /**
+     * @param descTramite the descTramite to set
+     */
+    public void setDescTramite(String descTramite) {
+        this.descTramite = descTramite;
     }
             
 }
