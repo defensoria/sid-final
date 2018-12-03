@@ -90,7 +90,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private boolean success;
     private boolean disabledGuardar;
     private String strDocumento;
-    
+    private VisitaCiudadano visitaCiudadano;
     private boolean renderTieneDiscapacidad = false;
             
     @Autowired
@@ -156,6 +156,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             listaExpedienteXDNIPaginado = new ArrayList<>();
             disabledGuardar = false;
             // loadDocumentos();
+            visitaCiudadano = new VisitaCiudadano();
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -348,10 +349,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public boolean validarCargarDocumentos() {
-        if(StringUtils.isBlank(documento.getRutaDoc())){
-            msg.messageAlert("Debe indicar la ruta del documento", null);
-            return false;
-        }
         if(documento.getIdTipoDocumento() == null){
             msg.messageAlert("Debe indicar el tipo de documento", null);
             return false;
@@ -447,6 +444,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         listaExpedienteXDNIPaginado = new ArrayList<>();
         documento = new Documento();
         disabledGuardar = false;
+        visitaCiudadano = new VisitaCiudadano();
         // listaDocumentosAtencion = new ArrayList<>();
         // fileUpload = null;
         // documento.setAnexo("");
@@ -500,6 +498,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 visitaService.registrarVisita(visita);
                 guardarDocumentoAtencion(visita);
                 guardarDatosTicket(visita);
+                //visitaCiudadano = visita;
                 message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
                 msg.messageInfo(message, "Registro de Atención");
                 // limpiarIniciarAtencion();
@@ -1037,5 +1036,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setAtencionTicket(AtencionTicket atencionTicket) {
         this.atencionTicket = atencionTicket;
+    }
+
+    /**
+     * @return the visitaCiudadano
+     */
+    public VisitaCiudadano getVisitaCiudadano() {
+        return visitaCiudadano;
+    }
+
+    /**
+     * @param visitaCiudadano the visitaCiudadano to set
+     */
+    public void setVisitaCiudadano(VisitaCiudadano visitaCiudadano) {
+        this.visitaCiudadano = visitaCiudadano;
     }
 }
