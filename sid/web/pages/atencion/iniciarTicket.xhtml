@@ -9,11 +9,22 @@
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
             <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
+            <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/cronometro/cronometro.css" />
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
+            <script type="text/javascript" src="../../assets/extra-libs/cronometro/cronometro.js"></script> 
             <script>
                 $(function () {
                     $('#campo').keypad({keypadOnly: false});
+                    //alert($('#nroTicket2').text());
+                    //alert($('#nroTicket').val());
+                    if ($('#nroTicket').text() == '') {
+                        //alert("sin valor");    
+                    } else {
+                        //alert("con valor");
+                        inicio();
+                    }
+
                 });
             </script>
             <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
@@ -106,21 +117,31 @@
                                             <div class="form-group" style="text-align: center">
                                                 <label for="inputticket" class="control-label col-form-label">
                                                     <strong>
-                                                        <label style="font-size: 50px;background-color: #d4e0ff;color: red; font-weight: bold;" jsf:value="#{atencionController.atencionTicket.nroTicket}"></label>
+                                                        <label id="nroTicket"  style="font-size: 50px;background-color: #d4e0ff;color: red; font-weight: bold;" jsf:value="#{atencionController.atencionTicket.nroTicket}"></label>
                                                     </strong>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <!--
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputtiempoatencion" class="control-label col-form-label"><strong>Tiempo de atención</strong></label>
                                             </div>
                                         </div>
-                                        <div class="col-8">
+                                        -->
+                                        <div class="col-12">
                                             <div class="form-group">
-                                                <input type="text" class="tiempoatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
+
+                                                <div id="contenedor" class="tiempoatencion form-control" disabled="true">
+                                                    <div class="reloj" id="Horas">00</div>
+                                                    <div class="reloj" id="Minutos">:00</div>
+                                                    <div class="reloj" id="Segundos">:00</div>
+                                                    <div style="display:none;" class="reloj" id="Centesimas">:00</div>                                                  
+                                                </div>
+
+<!--<input type="text" class="tiempoatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />-->
                                             </div>
                                         </div>
                                     </div>

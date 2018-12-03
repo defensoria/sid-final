@@ -88,7 +88,8 @@
     </select>
     
     <select id="obtenerTicketAtencion" resultMap="ticketMap" parameterType="filtroTicket">
-        SELECT
+        SELECT * FROM (
+            SELECT
             N_ID_TICKET,
             N_ID_VISITA,
             N_ID_PERSONA,
@@ -100,8 +101,9 @@
             TRUNC(D_FECHA_CREA)>=TRUNC(SYSDATE) AND
             N_ESTADO_REGISTRO = #{estadoRegistro} AND
             N_ESTADO_TICKET = #{estadoTicket} AND
-            N_ID_SEDE = #{idSede} AND
-            ROWNUM = 1
+            N_ID_SEDE = #{idSede}
+            ORDER BY N_IND_PREFERENTE ASC)
+        WHERE ROWNUM = 1
     </select>
     
     <select id="obtenerDatosAtencionTicket" resultMap="atencionTicketMap"  parameterType="long">
