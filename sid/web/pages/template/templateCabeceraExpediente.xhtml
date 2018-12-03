@@ -10,9 +10,7 @@
 
         <ui:define name="content">
             <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
-                <h:messages />
                 <script>
-
                     function confirmar3() {
                         if ($("#idTipoClasificacion").val() === "0") {
                             alertar("Debe de ingresar el tipo de expediente!");
@@ -30,14 +28,13 @@
                     function confirmar0() {
                         $(".confirmacion0").modal('show');
                     }
-                    
                     function confirmar6() {
                         $(".confirmacion6").modal('show');
                     }
-
                     $(document).ready(function () {
                         $("#idModalCulminar").modal('show');
                     });
+
                 </script>
                 <gc:confirmSubmit rendered="#{registroController.etapaEstado.verEtapa != 2}" classGC="confirmacion3" bean="#{registroController.concluir()}" mensaje="Está seguro que desea concluir la etapa?"/>
                 <gc:confirmSubmit rendered="#{registroController.etapaEstado.verEtapa == 2}" classGC="confirmacion3" bean="#{registroController.concluir()}" mensaje="Está seguro de haber completado la clasificación temática?      Está seguro que desea concluir la etapa?"/>
@@ -60,10 +57,10 @@
                                     <textarea rows="5" jsf:rendered="#{registroController.expediente.tipoClasificion == '02'}" jsf:value="#{registroController.expediente.conclusion}" style="width: 100%;" placeholder="Orientación" maxlength="1950"/>
                                     <textarea rows="5" jsf:rendered="#{registroController.expediente.tipoClasificion != '02'}" jsf:value="#{registroController.expediente.conclusion}" style="width: 100%;" placeholder="Detalle de la conclusión" maxlength="1950"/>
                                     <div class="modal-footer">
-                                        <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarConclusionFinExpediente()}" jsf:onclick="loadingModal()">
+                                        <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarConclusionFinExpediente()}">
                                             <span class="glyphicon glyphicon-floppy-disk"/>Guardar
                                         </a>
-                                        <a class="btn btn-danger" data-dismiss="modal" jsf:action="#{registroController.cancelarConclusion()}" jsf:onclick="loadingModal()">
+                                        <a class="btn btn-danger" data-dismiss="modal" jsf:action="#{registroController.cancelarConclusion()}">
                                             <span class="glyphicon glyphicon-remove"/>Cerrar
                                         </a>
                                     </div>
@@ -72,511 +69,383 @@
                         </div>
                     </div>
                 </h:panelGroup>
-
-
-                <table style="width: 100%">
-                    <tr>
-                        <td colspan="2">
-                            <div class="panel panel-featured-top-primary">
-                                <div class="panel-body" >
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                <span style="font-size: 2em" class="text-resalt-primary">Expediente: #{registroController.expediente.numero}</span>
-                                                <h:outputText value=" (CONCLUIDO)" rendered="#{registroController.expediente.general == 'C'}"  style="color: red; font-weight: bold; font-size: 1.5em" />
-                                                <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
-                                            </td>
-                                            <td style="text-align: right">
-                                                <a jsf:rendered="#{registroController.expediente.version >= 1}" jsf:action="#{registroController.pdf()}">
-                                                    <img src="../../bootstrap/img/pdf.png" height="30" width="30"/>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <h4 class="card-title">Expediente: #{registroController.expediente.numero}</h4>
+                                        <h:outputText value=" (CONCLUIDO)" rendered="#{registroController.expediente.general == 'C'}"  style="color: red; font-weight: bold; font-size: 1.5em" />
+                                        <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
+                                    </div> 
+                                    <div class="col-6" style="text-align: right">
+                                        <a jsf:rendered="#{registroController.expediente.version >= 1}" jsf:action="#{registroController.pdf()}">
+                                            <img src="../../bootstrap/img/pdf.png" height="30" width="30"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="idModalReconsideracion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Reconsideración</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="control-label">Reconsideración</label>
+                                                    <h:selectBooleanCheckbox value="#{registroController.expediente.indiceReconsideracion}"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="control-label">Detalle</label>
+                                                    <textarea rows="5" jsf:value="#{registroController.expediente.detalleReconsideracion}" placeholder="Detalle" maxlength="1900" class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.guardarReconsideracion()}">
+                                                    <span class="fa fa-save"/> Guardar
                                                 </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h:outputText rendered="#{registroController.etapaEstado.ultimoEstado != null}" value="Estado: #{registroController.etapaEstado.ultimoEstado}" style="font-size: 2em" class="text-resalt-primary"/>
-                                            </td>
-                                            <td>
-                                                <script>
-                                                    function modalReconsideracion() {
-                                                        $("#loadModal").modal('hide');
-                                                        $('body').removeClass('modal-open');
-                                                        $(".modal-backdrop").removeClass("modal-backdrop");
-                                                        $("#idModalReconsideracion").modal('show');
-                                                    }
-                                                </script>
-                                                <h:panelGroup rendered="#{!registroController.expediente.indiceReconsideracion and registroController.expediente.version >= 1 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
-                                                    <a onclick="modalReconsideracion()">
-                                                        <span class="glyphicon glyphicon-pencil" /> registrar reconsideración
+                                                <a class="btn btn-danger" data-dismiss="modal">
+                                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <h4 class="card-title" rendered="#{registroController.etapaEstado.ultimoEstado != null}" >Estado: #{registroController.etapaEstado.ultimoEstado} </h4>         
+                                    </div>
+                                    <div class="col-6" style="text-align: right">
+                                        <script>
+                                            function modalReconsideracion() {
+                                                $("#loadModal").modal('hide');
+                                                $('body').removeClass('modal-open');
+                                                $(".modal-backdrop").removeClass("modal-backdrop");
+                                                $("#idModalReconsideracion").modal('show');
+                                            }
+                                        </script>
+                                        <h:panelGroup rendered="#{!registroController.expediente.indiceReconsideracion and registroController.expediente.version >= 1 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            <a class="btn btn-cyan" onclick="modalReconsideracion()">
+                                                <span class="fas fa-pencil-alt"  style="color: white"/> <span style="color: white">registrar reconsideración</span>
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{registroController.expediente.indiceReconsideracion and registroController.expediente.version >= 1 and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            <a class="btn btn-cyan" onclick="modalReconsideracion()">
+                                                <span class="fa fa-search" style="color: white"/> <span style="color: white">ver / modificar reconsideración</span>
+                                            </a>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                                <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
+                                    <div class="form-group row">
+                                        <div class="col-4">
+                                            <h4 class="card-title">Etapa</h4>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="btn-group btn-group-justified" role="group">
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 1? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 1}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Calificación
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Calificación
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </a>
-                                                </h:panelGroup>
-                                                <h:panelGroup rendered="#{registroController.expediente.indiceReconsideracion and registroController.expediente.version >= 1 and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
-                                                    <a onclick="modalReconsideracion()">
-                                                        <span class="glyphicon glyphicon-eye-open" /> ver / modificar reconsideración
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 2}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Investigación
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Investigación
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </a>
-                                                </h:panelGroup>
-                                                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalReconsideracion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" style="text-align: left">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <a type="button" class="close" data-dismiss="modal">
-                                                                    <span style="color:red" class="glyphicon glyphicon-remove"></span>
-                                                                </a>
-                                                                <span class="text-resalt-primary">Reconsideración</span>
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 3}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Persuasión
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </a>
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 4}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Seguimiento
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Seguimiento
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 1}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                    <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 2}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                    <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 3}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                    <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 4}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '03'}">
+                                    <div class="form-group row">
+                                        <div class="col-4">
+                                            <h4 class="card-title">Etapa</h4>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="btn-group btn-group-justified" role="group">
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 5? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 5}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Calificación
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Calificación
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </a>
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 6? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 6}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Gestión
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Gestión
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </a>
+                                                </div>
+                                                <div class="btn-group" role="group">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 7? 'btn-warning' : 'btn-default'}">
+                                                        <c:choose>
+                                                            <c:when test="${registroController.etapaEstado.verEtapa == 7}">
+                                                                <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Persuasión
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 5}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 6}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                                <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 7}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
+                                            </div>
+                                        </div>
+                                    </div>      
+                                </h:panelGroup>
+
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <h4  class="card-title"><h:outputText rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null}" value="Asignar estado:"/></h4>
+                                    </div>
+                                    <div class="col-8">
+                                        <h:panelGroup id="idPanelEstado">
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 1}"  value="#{registroController.expediente.estadoCalificacion}">
+                                                <f:selectItems value="#{registroController.listaEstadoCalificacionQueja}"  />
+                                            </h:selectOneRadio>
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 2}"  value="#{registroController.expediente.estadoInvestigacion}">
+                                                <f:selectItems value="#{registroController.listaEstadoInvestigacionQueja}"  />
+                                            </h:selectOneRadio>
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 3}"  value="#{registroController.expediente.estadoPersuacion}">
+                                                <f:selectItems value="#{registroController.listaEstadoPersuacionQueja}"  />
+                                            </h:selectOneRadio>
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 4}"  value="#{registroController.expediente.estadoSeguimiento}">
+                                                <f:selectItems value="#{registroController.listaEstadoSeguimientoQueja}"  />
+                                            </h:selectOneRadio>
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 5}"  value="#{registroController.expediente.estadoCalificacion}">
+                                                <f:selectItems value="#{registroController.listaEstadoCalificacionPetitorio}"  />
+                                            </h:selectOneRadio>
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 6}"  value="#{registroController.expediente.estadoGestion}">
+                                                <f:selectItems value="#{registroController.listaEstadoGestionPetitorio}"  />
+                                            </h:selectOneRadio>            
+                                            <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 7}"  value="#{registroController.expediente.estadoPersuacion}">
+                                                <f:selectItems value="#{registroController.listaEstadoPersuacionPetitorio}"  />
+                                            </h:selectOneRadio>
+                                        </h:panelGroup>
+                                    </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <script>
+                                            function modalAsignar(data) {
+                                                if (data.status === 'success') {
+                                                    $("#loadModal").modal('hide');
+                                                    $('body').removeClass('modal-open');
+                                                    $(".modal-backdrop").removeClass("modal-backdrop");
+                                                    $("#idModalAsignar").modal('show');
+                                                }
+                                            }
+                                        </script> 
+                                        <h:panelGroup rendered="#{registroController.usuarioSession.codigoOD == '20000' and registroController.expediente.general != 'C' and registroController.etapaEstado.verEtapa > 0}">
+                                            <a class="btn btn-info" jsf:action="#{registroController.extenderPlazo()}">
+                                                <span class="fas fa-user" /> Extender plazo
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{((registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP015') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C') or   (registroController.expediente.tipoClasificion == '02' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C')}">
+                                            <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}">
+                                                <span class="fas fa-user" /> Asignar Expediente
+                                                <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C' and (registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
+                                            <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}">
+                                                <span class="fas fa-user" /> Asignar Expediente
+                                                <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="idPanelAsignar">
+                                            <div id="idModalAsignar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Asignar expediente</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="control-label">Seleccione Comisionado</label>
+                                                                <h:selectOneMenu value="#{registroController.expediente.usuarioAsignado}" class="form-control">
+                                                                    <f:selectItems value="#{registroController.listaUsuarioOD}" var="item" itemLabel="#{item.nombre} #{item.apellidoPaterno} #{item.apellidoMaterno}" itemValue="#{item.codigo}" />
+                                                                </h:selectOneMenu>
                                                             </div>
-                                                            <div class="modal-body" style="padding:5px">
-                                                                <table style="width: 100%">
-                                                                    <tr>
-                                                                        <td style="width: 20%; padding-bottom: 5px">
-                                                                            <label style="font-size: 1.5em">Reconsideración</label>
-                                                                        </td>
-                                                                        <td style="vertical-align: top">
-                                                                            <h:selectBooleanCheckbox value="#{registroController.expediente.indiceReconsideracion}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <label style="font-size: 1.5em">Detalle</label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <textarea rows="5" jsf:value="#{registroController.expediente.detalleReconsideracion}" style="width: 100%;" placeholder="Detalle" maxlength="1900"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                                <br/>
-                                                                <div class="modal-footer">
-                                                                    <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarReconsideracion()}">
-                                                                        <span class="glyphicon glyphicon-floppy-disk"/>Guardar
-                                                                    </a>
-                                                                </div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
+                                                                <span class="fa fa-save"/> Guardar
+                                                            </a>
+                                                            <a class="btn btn-danger" data-dismiss="modal">
+                                                                <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>    
-                                        <tr>
-                                            <td colspan="2">
-                                                <br/>
-                                                <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
-                                                    <table style="width: 90%">
-                                                        <tr>
-                                                            <td style="width: 10%">
-                                                                <span style="font-size: 2em" class="text-resalt-primary">Etapa:</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group btn-group-justified" role="group" style="width: 80%">
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 1? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 1}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Calificación
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Calificación
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 2}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Investigación
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Investigación
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 3}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Persuasión
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 4}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Seguimiento
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Seguimiento
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <table style="width: 80%">
-                                                                    <tr>
-                                                                        <td style="width: 25%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 1}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                        <td style="width: 25%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 2}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                        <td style="width: 25%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 3}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                        <td style="width: 25%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 4}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '03'}">
-                                                    <table style="width: 90%">
-                                                        <tr>
-                                                            <td style="width: 10%">
-                                                                <span style="font-size: 2em" class="text-resalt-primary">Etapa:</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group btn-group-justified" role="group" style="width: 80%">
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 5? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 1}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Calificación
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Calificación
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 6? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 2}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Gestión
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Gestión
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group">
-                                                                        <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 7? 'btn-warning' : 'btn-default'}">
-                                                                            <c:choose>
-                                                                                <c:when test="${registroController.etapaEstado.verEtapa == 3}">
-                                                                                    <span class="glyphicon glyphicon-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    Persuasión
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <table style="width: 80%">
-                                                                    <tr>
-                                                                        <td style="width: 33%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 5}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                        <td style="width: 33%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 6}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                        <td style="width: 33%">
-                                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa == 7}" style="color: #878787" value="quedan #{registroController.expedienteTiempo.diasRestante} días"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </h:panelGroup>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <table style="width: 90%">
-                                                    <tr>
-                                                        <td style="width: 25%; ">
-                                                            <h:outputText rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null}" value="Asignar estado:" class="text-primary" style="font-size: 1.5em"/>
-                                                        </td>
-                                                        <td>
-                                                            <div class="panel-body">
-                                                                <h:panelGroup id="idPanelEstado">
-                                                                    <table style="width: 90%">
-                                                                        <tr>
-                                                                            <td style="padding-right: 10px; width: 70%;">
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 1}"  value="#{registroController.expediente.estadoCalificacion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoCalificacionQueja}"  />
-                                                                                </h:selectOneRadio>
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 2}"  value="#{registroController.expediente.estadoInvestigacion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoInvestigacionQueja}"  />
-                                                                                </h:selectOneRadio>
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 3}"  value="#{registroController.expediente.estadoPersuacion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoPersuacionQueja}"  />
-                                                                                </h:selectOneRadio>
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 4}"  value="#{registroController.expediente.estadoSeguimiento}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoSeguimientoQueja}"  />
-                                                                                </h:selectOneRadio>
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 5}"  value="#{registroController.expediente.estadoCalificacion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoCalificacionPetitorio}"  />
-                                                                                </h:selectOneRadio>
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 6}"  value="#{registroController.expediente.estadoGestion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoGestionPetitorio}"  />
-                                                                                </h:selectOneRadio>            
-
-                                                                                <h:selectOneRadio rendered="#{registroController.etapaEstado.verEtapa == 7}"  value="#{registroController.expediente.estadoPersuacion}">
-                                                                                    <f:selectItems value="#{registroController.listaEstadoPersuacionPetitorio}"  />
-                                                                                </h:selectOneRadio>
-                                                                            </td>
-                                                                            <td style="vertical-align: top">
-
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </h:panelGroup>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <script>
-                                                                function modalAsignar(data) {
-                                                                    if (data.status === 'success') {
-                                                                        $("#loadModal").modal('hide');
-                                                                        $('body').removeClass('modal-open');
-                                                                        $(".modal-backdrop").removeClass("modal-backdrop");
-                                                                        $("#idModalAsignar").modal('show');
-                                                                    }
-                                                                }
-                                                            </script>
-                                                            <h:panelGroup rendered="#{registroController.usuarioSession.codigoOD == '20000' and registroController.expediente.general != 'C' and registroController.etapaEstado.verEtapa > 0}">
-                                                                <a class="btn btn-info" jsf:action="#{registroController.extenderPlazo()}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-user" />Extender plazo
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP015') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C'}">
-                                                                <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-user" />Asignar Expediente
-                                                                    <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C'}">
-                                                                <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-user" />Asignar Expediente
-                                                                    <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
-                                                                </a>
-                                                            </h:panelGroup>
-
-                                                            <h:panelGroup id="idPanelAsignar">
-                                                                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalAsignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" style="text-align: left">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <a type="button" class="close" data-dismiss="modal">
-                                                                                    <span style="color:red" class="glyphicon glyphicon-remove"></span>
-                                                                                </a>
-                                                                                <span class="text-resalt-primary">Asignar expediente</span>
-                                                                            </div>
-                                                                            <div class="modal-body" style="padding:5px">
-
-                                                                                <span class="text-bold">Seleccione Comisionado:</span>
-                                                                                <h:selectOneMenu value="#{registroController.expediente.usuarioAsignado}">
-                                                                                    <f:selectItems value="#{registroController.listaUsuarioOD}" var="item" itemLabel="#{item.nombre} #{item.apellidoPaterno} #{item.apellidoMaterno}" itemValue="#{item.codigo}" />
-                                                                                </h:selectOneMenu>
-                                                                                <div class="modal-footer">
-                                                                                    <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
-                                                                                        <span class="glyphicon glyphicon-floppy-disk"/>Guardar
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <table style="width: 90%">
-                                                    <tr>
-                                                        <td style="width: 50%">
-
-                                                            <div  class="alert fade in" role="alert" style="width: 50%;text-align:right;border:solid silver 1px;background:white;color:silver;padding-bottom:5px;padding-top:5px;margin-bottom:3px">
-                                                                <input type="hidden" id="idTipoClasificacion" jsf:value="#{registroController.expediente.tipoClasificion}" />
-                                                                <span id="idTextTipoClasificacion" class="text-primary" style="float: left; font-weight: bold;">Seleccione</span>
-                                                                <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
-                                                                    <a href="#" class="trigger2">
-                                                                        <span style="color:#3183b9;font-size:large;vertical-align: top" class="glyphicon glyphicon-chevron-down trigger2"></span>
-                                                                    </a>
-                                                                </h:panelGroup>
-                                                                <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
-                                                                    <a href="#" class="trigger2">
-                                                                        <span style="color:#3183b9;font-size:large;vertical-align: top" class="glyphicon glyphicon-chevron-down trigger2"></span>
-                                                                    </a>
-                                                                </h:panelGroup>
-                                                                <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null and !seguridadUtilController.tieneRecurso('REC_EXP017')}">
-                                                                    <a class="trigger2">
-                                                                        <span style="color:#3183b9;font-size:large;vertical-align: top" class="glyphicon glyphicon-chevron-down trigger2"></span>
-                                                                    </a>
-                                                                </h:panelGroup>
-                                                                <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa != 1 and registroController.etapaEstado.verEtapa != 5 and registroController.expediente.version != 0 and registroController.expediente.version != null) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
-                                                                    <a class="trigger2">
-                                                                        <span style="color:#3183b9;font-size:large;vertical-align: top" class="glyphicon glyphicon-chevron-down trigger2"></span>
-                                                                    </a>
-                                                                </h:panelGroup>
-
-                                                                <div class="popover-markup" style="float:left">
-                                                                    <div class="head hide">
-                                                                        <b class="text-primary">Seleccione</b>
-                                                                    </div>
-                                                                    <div class="content hide">
-                                                                        <div style="width:100%">
-                                                                            <c:forEach var="x" items="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}">
-                                                                                <a class="alink" onclick="asignarTipo('${x.valorParametro}')">
-                                                                                    <div class="alert fade in alert-warning" role="alert" style="padding-bottom:5px;padding-top:5px;margin-bottom:3px">
-                                                                                        <h:outputText value="${x.nombreParametro}" style="cursor:pointer"/>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </c:forEach>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <style>.alink:hover{text-decoration:none}.alink:link{text-decoration:none}.alink:active{text-decoration:none}</style>
-                                                                <script>$('.trigger2').popover({html: true, placement: 'bottom', tabindex: '0', trigger: 'focus', title: function () {
-                                                                            return $(this).parent().find('.head').html();
-                                                                        }, content: function () {
-                                                                            return $(this).parent().find('.content').html();
-                                                                        }});
-                                                                    function asignarTipo(tipo) {
-                                                                        $("#idTipoClasificacion").val(tipo);
-                                                                        $("#idTextTipoClasificacion").css("color", "#3071A9");
-                                                                        if (tipo === "01") {
-                                                                            $("#idTextTipoClasificacion").text("QUEJA");
-
-                                                                        }
-                                                                        if (tipo === "02") {
-                                                                            $("#idTextTipoClasificacion").text("CONSULTA");
-
-                                                                        }
-                                                                        if (tipo === "03") {
-                                                                            $("#idTextTipoClasificacion").text("PETITORIO");
-
-                                                                        }
-                                                                        if (tipo === "04") {
-                                                                            $("#idTextTipoClasificacion").text("SIN CLASIFICACION");
-
-                                                                        }
-                                                                    }
-                                                                    if ($("#idTipoRegistro").val() !== "") {
-                                                                        if ($("#idTipoClasificacion").val() === "01") {
-                                                                            $("#idTextTipoClasificacion").text("QUEJA");
-
-                                                                        }
-                                                                        if ($("#idTipoClasificacion").val() === "02") {
-                                                                            $("#idTextTipoClasificacion").text("CONSULTA");
-
-                                                                        }
-                                                                        if ($("#idTipoClasificacion").val() === "03") {
-                                                                            $("#idTextTipoClasificacion").text("PETITORIO");
-
-                                                                        }
-                                                                        if ($("#idTipoClasificacion").val() === "04") {
-                                                                            $("#idTextTipoClasificacion").text("SIN CLASIFICACION");
-
-                                                                        }
-                                                                        $("#idTextTipoClasificacion").css("color", "#3071A9");
-                                                                    }
-                                                                    $(document).ready(function () {
-                                                                        if ($("#idTipoRegistro").val() !== "") {
-                                                                            if ($("#idTipoClasificacion").val() === "01") {
-                                                                                $("#idTextTipoClasificacion").text("QUEJA");
-
-                                                                            }
-                                                                            if ($("#idTipoClasificacion").val() === "02") {
-                                                                                $("#idTextTipoClasificacion").text("CONSULTA");
-
-                                                                            }
-                                                                            if ($("#idTipoClasificacion").val() === "03") {
-                                                                                $("#idTextTipoClasificacion").text("PETITORIO");
-
-                                                                            }
-                                                                            if ($("#idTipoClasificacion").val() === "04") {
-                                                                                $("#idTextTipoClasificacion").text("SIN CLASIFICACION");
-
-                                                                            }
-                                                                            $("#idTextTipoClasificacion").css("color", "#3071A9");
-                                                                        }
-                                                                    });</script>
-                                                            </div>
-                                                            <h:panelGroup  rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017') and registroController.esSupervisor and registroController.expediente.general != 'C'}">
-                                                                <a class="btn btn-warning" jsf:action="#{registroController.guardarVersionSupervisor(0)}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-floppy-disk"/>Cambiar tipo
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup  rendered="#{seguridadUtilController.tieneRecurso('REC_EXP018') and registroController.expediente.general == 'C'}">
-                                                                <a class="btn btn-danger" jsf:action="#{registroController.guardarVersionSupervisor(1)}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-floppy-disk"/>Levantar conclusión
-                                                                </a>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                        <td style="text-align: right">
-                                                            <h:panelGroup  id="idPanel3" rendered="#{registroController.expediente.id == null || registroController.expediente.version == 0}">
-                                                                <a class="btn btn-info" jsf:action="#{registroController.guardarBorrador()}" jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-floppy-disk" />Borrador
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            &#160;&#160;
-                                                            <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
-                                                                <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}"  jsf:onclick="loadingModal()">
-                                                                    <span class="glyphicon glyphicon-floppy-disk" />Guardar
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            &#160;&#160;
-                                                            <h:panelGroup id="idPanel2" rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.verBotonRegistrarExpediente and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
-                                                                <a class="btn btn-warning" onclick="confirmar3()">
-                                                                    <span class="glyphicon glyphicon-floppy-save" />Concluir Etapa
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            &#160;&#160;
-                                                            <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.verBotonRegistrarExpediente and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and !registroController.expediente.indicadorOficio}">
-                                                                <a class="btn btn-danger" onclick="confirmar0()" >
-                                                                    <span class="glyphicon glyphicon-remove" />Desistir
-                                                                </a>
-                                                            </h:panelGroup>
-                                                            &#160;&#160;
-                                                            <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
-                                                                <a class="btn btn-info" onclick="confirmar6()" >
-                                                                    <span class="glyphicon glyphicon-floppy-save" />Conclusión manual
-                                                                </a>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-
+                                            </div>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
+                                            <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
+                                            <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null and !seguridadUtilController.tieneRecurso('REC_EXP017')}">
+                                            <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa != 1 and registroController.etapaEstado.verEtapa != 5 and registroController.expediente.version != 0 and registroController.expediente.version != null) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
+                                            <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
+                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                    </div>
+                                    <div class="col-3">    
+                                        <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017') and registroController.esSupervisor and registroController.expediente.general != 'C'}">
+                                            <a class="btn btn-warning" jsf:action="#{registroController.guardarVersionSupervisor(0)}">
+                                                <span class="fa fa-save"/> Cambiar tipo
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP018') and registroController.expediente.general == 'C'}">
+                                            <a class="btn btn-danger" jsf:action="#{registroController.guardarVersionSupervisor(1)}">
+                                                <span class="fa fa-save"/>Levantar conclusión
+                                            </a>
+                                        </h:panelGroup>
+                                    </div>
+                                    <div class="col-6" style="text-align: right">
+                                        <h:panelGroup  id="idPanel3" rendered="#{registroController.expediente.id == null || registroController.expediente.version == 0}">
+                                            <a class="btn btn-warning" jsf:action="#{registroController.guardarBorrador()}">
+                                                <span class="fas fa-eraser" /> Borrador
+                                            </a>
+                                        </h:panelGroup>
+                                        &#160;&#160;        
+                                        <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
+                                            <a class="btn btn-info" jsf:action="#{registroController.guardarVersion()}">
+                                                <span class="fas fa-save" /> Guardar
+                                            </a>
+                                        </h:panelGroup>
+                                        &#160;&#160;
+                                        <h:panelGroup id="idPanel2" rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.verBotonRegistrarExpediente and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.tipoClasificion != '02'}">
+                                            <a class="btn btn-warning" onclick="confirmar3()">
+                                                <span class="fas fa-save" style="color: white" /> <span style="color: white">Concluir Etapa</span>
+                                            </a>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.verBotonRegistrarExpediente and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.tipoClasificion == '02'}">
+                                            <a class="btn btn-warning" onclick="confirmar3()">
+                                                <span class="fas fa-save" style="color: white"/> <span style="color: white">Concluir Consulta</span>
+                                            </a>
+                                        </h:panelGroup>
+                                        &#160;&#160;
+                                        <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.verBotonRegistrarExpediente and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and !registroController.expediente.indicadorOficio}">
+                                            <a class="btn btn-danger" onclick="confirmar0()" >
+                                                <span class="fas fa-save" style="color: white"/> <span style="color: white">Desistir</span>
+                                            </a>
+                                        </h:panelGroup>
+                                        &#160;&#160;
+                                        <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            <a class="btn btn-info" onclick="confirmar6()" >
+                                                <span class="fas fa-save" style="color: white"/> <span style="color: white">Conclusión manual</span>
+                                            </a>
+                                        </h:panelGroup>
+                                    </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title m-b-40">Secciones del expediente</h4>
+                                
+                                
+                                        
 
                 
                     <ui:insert name="content2">
                 
                     </ui:insert>
-               
+               </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                
             </h:form>
         </ui:define>
     </ui:composition>

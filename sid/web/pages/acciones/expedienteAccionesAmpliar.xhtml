@@ -7,7 +7,6 @@
       xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
 
     <ui:composition template="../template/templateCabeceraExpediente.xhtml">
-
         <ui:define name="content2">
             <gc:confirmSubmit bean="#{registroController.enviarAmpliacion()}" classGC="confirmacion7" mensaje="Esta seguro de crear la solicitud de ampliación?" />
             <gc:confirmSubmit bean="#{registroController.aprobarAmpliacion()}" classGC="confirmacion5" mensaje="Esta seguro de aprobar / desaprobar la solicitud de ampliación?" />
@@ -16,219 +15,204 @@
                 function confirmar5() {
                     $(".confirmacion5").modal('show');
                 }
-
                 function confirmar6() {
                     $(".confirmacion18").modal('show');
                 }
-
                 function confirmar7() {
                     $(".confirmacion7").modal('show');
                 }
             </script>
-            <ul class="nav nav-tabs">
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Datos generales</span>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-home"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Datos generales</span>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones externas</span>
                     </a>
                 </li>
-                <li role="presentation"><a style="cursor: pointer" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones internas</span>
                     </a>
                 </li>
-                <li role="presentation"  class="active">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
-                        <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:action="#{registroController.cargarHistorial()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Historial</span>
                     </a>
                 </li>
-                <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarHistorial()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Historial</span>
-                        </a>
-                    </li>
-                <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Compartir</span>
-                        </a>
-                    </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"  jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Compartir</span>
+                    </a>
+                </li>
             </ul>
-
-            <div class="panel panel-default">
-
-                <div class="panel-body">
-                    <h:panelGroup>
-                        <div class="btn-group" role="group" style="float: right; width: 10%">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-th-list" /> Acciones
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
-                                        <span class="glyphicon glyphicon-export" />Derivar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}">
-                                        <span class="glyphicon glyphicon-question-sign" />Consultar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}">
-                                        <span class="glyphicon glyphicon-time" />Suspender
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}">
-                                        <span class="glyphicon glyphicon-plus" />Ampliar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </h:panelGroup>
-                    <h:panelGroup rendered="#{(seguridadUtilController.tieneRecurso('REC_EXP012') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and !registroController.esSupervisor) or (seguridadUtilController.tieneRecurso('REC_EXP012') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.esSupervisor and registroController.expedienteAmpliacionEnvia.etapa == null)}">
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2" ><br/>
-                                    <br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Crear solicitud de Ampliación</h3>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteAmpliacionEnvia.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-
-                                </td>
-                                <td style="vertical-align: top">
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
+            <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h:panelGroup rendered="#{(seguridadUtilController.tieneRecurso('REC_EXP012') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and !registroController.esSupervisor) or (seguridadUtilController.tieneRecurso('REC_EXP012') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.esSupervisor and registroController.expedienteAmpliacionEnvia.etapa == null)}">
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <h4 class="card-title">Crear solicitud de Ampliación</h4>
+                                            </div>
+                                            <div class="col-2" style="text-align: right">
                                                 <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.id == null and seguridadUtilController.tieneRecurso('REC_EXP012')}">
-                                                    <a class="btn btn-primary" onclick="confirmar7()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
+                                                    <a class="btn btn-default" onclick="confirmar7()">
+                                                        <span style="color: white" class="fas fa-share"> Enviar </span>
                                                     </a>
                                                 </h:panelGroup>
-                                                <br/>
                                             </div>
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 60%" rowspan="2">
-                                                        <label>Descripción de la ampliación:</label>
-                                                        <h:outputText value="(max: 4000 carateres)" style="color: red" rendered="#{registroController.expedienteAmpliacionEnvia.id == null}"/>
-                                                        <textarea jsf:value="#{registroController.expedienteAmpliacionEnvia.detalle}" jsf:rendered="#{registroController.expedienteAmpliacionEnvia.id == null}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
-                                                        <br/><h:outputText value="#{registroController.expedienteAmpliacionEnvia.detalle}" style="font-size: 1.3em" rendered="#{registroController.expedienteAmpliacionEnvia.id != null}"/>
-                                                    </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Adjuntía Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteAmpliacionEnvia.idAdjuntiaDefensorial}" disabled="#{registroController.expedienteAmpliacionEnvia.id == null? 'false' : 'true'}" >
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">fecha de envio</label>
+                                                    <div class="col-sm-8" style="text-align: right">
+                                                        <h:outputText value="#{registroController.expedienteAmpliacionEnvia.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputText>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descripción de la ampliación</label>
+                                                    <div class="col-sm-8" style="text-align: right">
+                                                        <h:outputLabel value="(max: 4000 carateres)" style="color: red" rendered="#{registroController.expedienteAmpliacionEnvia.id == null}"/>
+                                                        <textarea jsf:value="#{registroController.expedienteAmpliacionEnvia.detalle}" jsf:rendered="#{registroController.expedienteAmpliacionEnvia.id == null}" rows="6" maxlength="4000" placeholder="Motivo" class="form-control"/>
+                                                        <br/><h:outputLabel value="#{registroController.expedienteAmpliacionEnvia.detalle}" rendered="#{registroController.expedienteAmpliacionEnvia.id != null}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Adjuntía Defensorial</label>
+                                                    <div class="col-sm-8">
+                                                        <h:selectOneMenu value="#{registroController.expedienteAmpliacionEnvia.idAdjuntiaDefensorial}" disabled="#{registroController.expedienteAmpliacionEnvia.id == null? 'false' : 'true'}" class="form-control">
                                                             <f:selectItem itemLabel="PRIMERA ADJUNTÍA" itemValue="20000" />
                                                         </h:selectOneMenu>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label jsf:rendered="#{registroController.expedienteAmpliacionEnvia.ruta == null}"><span style="font-size: large" class="glyphicon glyphicon-paperclip" />Adjuntar archivo:</label>
-                                                        <h:inputFile rendered="#{registroController.expedienteAmpliacionEnvia.id == null}" class="cMedio" value="#{registroController.file4}"/>
-                                                        <br/>
-                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.ruta != null}">
-                                                            Descargar archivo: <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionEnvia.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.ruta == null}">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Adjuntar archivo</label>
+                                                        <div class="col-sm-8" style="text-align: right">
+                                                            <h:inputFile rendered="#{registroController.expedienteAmpliacionEnvia.id == null}" class="cMedio form-control" value="#{registroController.file4}" />
+                                                        </div>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.ruta != null}">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descargar archivo</label>
+                                                        <div class="col-sm-8" style="text-align: right">
+                                                            <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionEnvia.ruta}">
+                                                                <span style="font-size: large" class="fas fa-link" />#{registroController.expedienteAmpliacionEnvia.ruta}
                                                             </a>
-                                                        </h:panelGroup>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                                        </div>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP013') and registroController.listaExpedienteAmpliacion.size() > 0 and registroController.usuarioSession.codigo == registroController.expedienteAmpliacionAprueba.codigoUsuario and registroController.esSupervisor}">
-                        <br/>
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2"><br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aprobar solicitud de ampliación</h3>
-                                    <span style="color: gray; font-weight: bold">#{registroController.expedienteAmpliacionEnvia.nombreUsuario}</span>
-                                    <br/><br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteAmpliacionEnvia.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <br/>
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 60%" rowspan="2">
-                                                        <label>Descripción de la ampliación:</label>
-                                                        <br/>
-                                                        <h:outputText style="font-size: 1.3em" value="#{registroController.expedienteAmpliacionEnvia.detalle}" />
-                                                    </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Adjuntía Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteAmpliacionEnvia.idAdjuntiaDefensorial}" disabled="#{registroController.expedienteAmpliacionEnvia.id == null? 'false':'true'}">
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP013') and registroController.listaExpedienteAmpliacion.size() > 0 and registroController.usuarioSession.codigo == registroController.expedienteAmpliacionAprueba.codigoUsuario and registroController.esSupervisor}">
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h4 class="card-title">Datos de solicitud de amplicación</h4>
+                                                <br/>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Comisionado que envía</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="text-right control-label col-form-label">#{registroController.expedienteAmpliacionEnvia.nombreUsuario}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de envío</label>
+                                                    <div class="col-sm-8">
+                                                        <h:outputLabel class="text-right control-label col-form-label" value="#{registroController.expedienteAmpliacionEnvia.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputLabel>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descargar archivo</label>
+                                                    <div class="col-sm-8">
+                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.id != null and seguridadUtilController.tieneRecurso('REC_EXP012')}">
+                                                            <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.ruta != null}">
+                                                                <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionEnvia.ruta}">
+                                                                    <span style="font-size: large" class="fas fa-link" />#{registroController.expedienteAmpliacionEnvia.ruta}
+                                                                </a>
+                                                            </h:panelGroup>
+                                                        </h:panelGroup>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descripción de la ampliación</label>
+                                                    <div class="col-sm-8">
+                                                        <p style="text-align: justify">
+                                                            <h:outputLabel class="text-right control-label col-form-label" value="#{registroController.expedienteAmpliacionEnvia.detalle}" />
+                                                        </p>
+                                                    </div>
+                                                </div>   
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Adjuntía Defensorial</label>
+                                                    <div class="col-sm-8">
+                                                        <h:selectOneMenu value="#{registroController.expedienteAmpliacionEnvia.idAdjuntiaDefensorial}" disabled="#{registroController.expedienteAmpliacionEnvia.id == null? 'false':'true'}" class="form-control">
                                                             <f:selectItem itemLabel="PRIMERA ADJUNTÍA" itemValue="20000" />
                                                         </h:selectOneMenu>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <br/>
-                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionEnvia.ruta != null}">
-                                                            Descargar archivo :<a target="_blank" href="/filesystem/#{registroController.expedienteAmpliacionEnvia.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
-                                                            </a>
-                                                        </h:panelGroup>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aprobar Ampliación</h3>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteAmpliacionAprueba.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
-                                                <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.id == null}">
-                                                    <a class="btn btn-primary" onclick="confirmar5()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
-                                                    </a>
-                                                </h:panelGroup>    
-                                                <br/>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <h:panelGroup id="idpanelGroupAPO">
-                                                <table style="width: 100%">
-                                                    <tr>
-                                                        <td style="padding-right: 30px; width: 60%">
-                                                            <label>Descripción de la ampliación</label>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h4 class="card-title">Aceptación de la solicitud</h4>  
+                                                    </div>
+                                                    <div class="col-6" style="text-align: right">
+                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.id == null}">
+                                                            <a class="btn btn-primary" onclick="confirmar5()">
+                                                                <span class="fas fa-share" style="color: white"> Enviar</span>
+                                                            </a>
+                                                        </h:panelGroup> 
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de aprobación</label>
+                                                    <div class="col-sm-8">
+                                                        <h:outputLabel value="#{registroController.expedienteAmpliacionAprueba.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputLabel>
+                                                    </div>
+                                                </div>
+                                                <h:panelGroup id="idpanelGroupAPO">
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descripción de la ampliación</label>
+                                                        <div class="col-sm-8">
                                                             <h:outputText value="(max: 4000 carateres)" style="color: red" rendered="#{registroController.expedienteAmpliacionAprueba.id == null}"/>
-                                                            <textarea jsf:rendered="#{registroController.expedienteAmpliacionAprueba.id == null}" jsf:value="#{registroController.expedienteAmpliacionAprueba.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
-                                                            <br/><h:outputText rendered="#{registroController.expedienteAmpliacionAprueba.id != null}" style="font-size: 1.3em" value="#{registroController.expedienteAmpliacionAprueba.detalle}" />
-                                                        </td>
-                                                        <td style="vertical-align: top">
+                                                            <textarea jsf:rendered="#{registroController.expedienteAmpliacionAprueba.id == null}" jsf:value="#{registroController.expedienteAmpliacionAprueba.detalle}" rows="6" maxlength="4000" placeholder="Motivo" class="form-control"/>
+                                                            <br/><h:outputText rendered="#{registroController.expedienteAmpliacionAprueba.id != null}" value="#{registroController.expedienteAmpliacionAprueba.detalle}" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Respuesta</label>
+                                                        <div class="col-sm-8">
                                                             <h:panelGroup id="idPanelapob">
                                                                 <h:selectOneRadio value="#{registroController.expedienteAmpliacionAprueba.aprueba}" disabled="#{registroController.expedienteAmpliacionAprueba.id == null? 'false': 'true'}">
                                                                     <f:selectItem itemLabel="Aprobar" itemValue="SI" />
@@ -236,148 +220,112 @@
                                                                     <f:ajax render="idPanelapob" />
                                                                 </h:selectOneRadio>
                                                                 <br/>
-                                                                <label jsf:rendered="#{registroController.expedienteAmpliacionAprueba.aprueba == 'SI'}">Adjuntía Defensorial:</label>
-                                                                <h:selectOneMenu value="#{registroController.expedienteAmpliacionAprueba.idAdjuntiaDefensorial}" rendered="#{registroController.expedienteAmpliacionAprueba.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" >
+                                                                <h:selectOneMenu value="#{registroController.expedienteAmpliacionAprueba.idAdjuntiaDefensorial}" rendered="#{registroController.expedienteAmpliacionAprueba.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" class="form-control" >
                                                                     <f:selectItem itemLabel="PRIMERA ADJUNTÍA" itemValue="20000" />
                                                                 </h:selectOneMenu>
                                                             </h:panelGroup>
-                                                            <br/>
-                                                            <label jsf:rendered="#{registroController.expedienteAmpliacionAprueba.ruta == null}"><span style="font-size: large" class="glyphicon glyphicon-paperclip" />Adjuntar archivo:</label>
-                                                        <h:inputFile rendered="#{registroController.expedienteAmpliacionAprueba.id == null}" class="cMedio" value="#{registroController.file4}"/>
-                                                        <br/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.ruta == null}">
+                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Adjuntar archivo</label>
+                                                            <div class="col-sm-8">
+                                                                <h:inputFile class="cMedio form-control" value="#{registroController.file4}" />
+                                                            </div>
+                                                        </h:panelGroup>   
                                                         <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.ruta != null}">
-                                                            Descargar archivo: <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionAprueba.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descargar</label>
+                                                            <div class="col-sm-8">
+                                                                <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionAprueba.ruta}">
+                                                                    <span  class="fas fa-link" /> #{registroController.expedienteAmpliacionAprueba.ruta}
+                                                                </a>
+                                                            </div>
+                                                        </h:panelGroup>   
+                                                    </div>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP014') and registroController.usuarioSession.codigo == registroController.expedienteAmpliacionAcepta.codigoUsuario}">
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h4 class="card-title">Solicitud de aprobación de ampliacion</h4>
+                                                <br/>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Envía</label>
+                                                    <div class="col-sm-8">
+                                                        <label class="text-right control-label col-form-label">#{registroController.expedienteAmpliacionAprueba.nombreUsuario}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de Envio</label>
+                                                    <div class="col-sm-8">
+                                                        <h:outputLabel class="control-label col-form-label" value="#{registroController.expedienteAmpliacionAprueba.fecha}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputLabel>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Detalle</label>
+                                                    <div class="col-sm-8">
+                                                        <h:outputLabel value="#{registroController.expedienteAmpliacionAprueba.detalle}" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descargar archivo</label>
+                                                    <div class="col-sm-8">
+                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.ruta != null}">
+                                                            <a target="_blank"  href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteAmpliacionAprueba.ruta}">
+                                                                <span  class="fas fa-link" /> #{registroController.expedienteAmpliacionAprueba.ruta}
                                                             </a>
                                                         </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </h:panelGroup>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
-                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP014') and registroController.usuarioSession.codigo == registroController.expedienteAmpliacionAcepta.codigoUsuario}">
-                        <br/>
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2"><br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aprobar la ampliación</h3>
-                                    <span style="color: gray; font-weight: bold">#{registroController.expedienteAmpliacionAprueba.nombreUsuario}</span>
-                                    <br/><br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteAmpliacionAprueba.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 50%">
-                                                        <label>Motivo de la aprobación / desaprobación</label>
-                                                        <h:selectOneRadio value="#{registroController.expedienteAmpliacionAprueba.aprueba}" disabled="true">
-                                                            <f:selectItem itemLabel="Aprobar" itemValue="SI" />
-                                                            <f:selectItem itemLabel="Desaprobar" itemValue="NO" />
-                                                        </h:selectOneRadio>
-                                                        <br/>
-                                                        <h:outputText value="#{registroController.expedienteAmpliacionAprueba.detalle}" />
-                                                    </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Adjuntía Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteAmpliacionAprueba.idAdjuntiaDefensorial}" disabled="true">
-                                                            <f:selectItem itemLabel="PRIMERA ADJUNTÍA" itemValue="20000" />
-                                                        </h:selectOneMenu>
-                                                        <br/>
-                                                        <br/>
-                                                        <br/>
-                                                        Descargar archivo: <h:panelGroup rendered="#{registroController.expedienteAmpliacionAprueba.ruta != null}">
-                                                            <a target="_blank" href="/filesystem/#{registroController.expedienteAmpliacionAprueba.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <h4 class="card-title">Datos de la aceptación / rechazo</h4>  
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h:panelGroup rendered="#{registroController.expedienteAmpliacionAcepta.id == null}">
+                                                            <a class="btn btn-primary" onclick="confirmar6()">
+                                                                <span class="fas fa-share" style="color: white"> Enviar</span>
                                                             </a>
+                                                        </h:panelGroup>  
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Acepta / rechaza</label>
+                                                    <div class="col-sm-8">
+                                                        <h:panelGroup id="idPanelrech">
+                                                            <h:selectOneRadio value="#{registroController.expedienteAmpliacionAcepta.aprueba}" disabled="#{registroController.expedienteAmpliacionAcepta.id == null? 'false' : 'true'}">
+                                                                <f:selectItem itemLabel="Aceptar ampliación" itemValue="SI" />
+                                                                <f:selectItem itemLabel="Rechazar ampliación" itemValue="NO" />
+                                                                <f:ajax render="idPanelrech" />
+                                                            </h:selectOneRadio>
                                                         </h:panelGroup>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aceptar ampliación</h3>
-                                    <br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteAmpliacionAcepta.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
-                                                <h:panelGroup rendered="#{registroController.expedienteAmpliacionAcepta.id == null}">
-                                                    <a class="btn btn-primary" onclick="confirmar6()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
-                                                    </a>
-                                                </h:panelGroup>    
-                                                <br/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Motivo</label>
+                                                    <div class="col-sm-8">    
+                                                        <h:outputText value="(max: 4000 carateres)" style="color: red" rendered="#{registroController.expedienteAmpliacionAcepta.id == null}" />
+                                                        <textarea jsf:rendered="#{registroController.expedienteAmpliacionAcepta.id == null}" jsf:value="#{registroController.expedienteAmpliacionAcepta.detalle}" rows="6" maxlength="4000" placeholder="Motivo" class="form-control"/>
+                                                        <br/><h:outputLabel rendered="#{registroController.expedienteAmpliacionAcepta.id != null}" value="#{registroController.expedienteAmpliacionAcepta.detalle}" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <h:panelGroup id="idpanelGroupREA">
-                                                <table style="width: 100%">
-                                                    <tr>
-                                                        <td style="padding-right: 30px; width: 50%">
-                                                            <label>Motivo de aceptar / rechazar</label>
-                                                            <h:outputText value="(max: 4000 carateres)" style="color: red" rendered="#{registroController.expedienteAmpliacionAcepta.id == null}"/>
-                                                            <textarea jsf:rendered="#{registroController.expedienteAmpliacionAcepta.id == null}" jsf:value="#{registroController.expedienteAmpliacionAcepta.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
-                                                            <br/><h:outputText rendered="#{registroController.expedienteAmpliacionAcepta.id != null}" style="font-size: 1.3em" value="#{registroController.expedienteAmpliacionAcepta.detalle}" />
-                                                        </td>
-                                                        <td style="vertical-align: top">
-                                                            <h:panelGroup id="idPanelrech">
-                                                                <h:selectOneRadio value="#{registroController.expedienteAmpliacionAcepta.aprueba}" disabled="#{registroController.expedienteAmpliacionAcepta.id == null? 'false' : 'true'}">
-                                                                    <f:selectItem itemLabel="Aceptar ampliación" itemValue="SI" />
-                                                                    <f:selectItem itemLabel="Rechazar ampliación" itemValue="NO" />
-                                                                    <f:ajax render="idPanelrech" />
-                                                                </h:selectOneRadio>
-                                                                <br/>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </h:panelGroup>
-
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 50%">
-
-                                                    </td>
-                                                    <td style="vertical-align: top">
-
-                                                    </td>
-                                                </tr>
-                                            </table>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </ui:define>
     </ui:composition>
-</html>            
+</html>

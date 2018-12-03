@@ -6,73 +6,66 @@
 
     <ui:composition template="../template/templateCabeceraExpediente.xhtml">
         <ui:define name="content2">
-            <gc:confirmSubmit bean="#{registroController.registarExpedienteGestion()}" mensaje="Esta seguro de registrar la gestión?" />
-            
-            <ul class="nav nav-tabs">
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Datos generales</span>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-home"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Datos generales</span>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones externas</span>
                     </a>
                 </li>
-                <li role="presentation"><a style="cursor: pointer" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones internas</span>
                     </a>
                 </li>
-                <li role="presentation"  class="active">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
-                        <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:action="#{registroController.cargarHistorial()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Historial</span>
                     </a>
                 </li>
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarHistorial()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Historial</span>
-                    </a>
-                </li>
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Compartir</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"  jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Compartir</span>
                     </a>
                 </li>
             </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="btn-group" role="group" style="float: right; width: 10%">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-th-list" /> Acciones
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
-                                    <span class="glyphicon glyphicon-export" />Derivar
-                                </a>
-                            </li>
-                            <li>
-                                <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}">
-                                    <span class="glyphicon glyphicon-question-sign" />Consultar
-                                </a>
-                            </li>
-                            <li>
-                                <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}">
-                                    <span class="glyphicon glyphicon-time" />Suspender
-                                </a>
-                            </li>
-                            <li>
-                                <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}">
-                                    <span class="glyphicon glyphicon-plus" />Ampliar
-                                </a>
-                            </li>
-                        </ul>
+            <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <br/>
+                                    <h4 class="card-title">Listados de gestiones internas</h4>
+                                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                        <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}" class="btn btn-secondary btn-default" style="color: white">Derivar</a>
+                                        <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}" class="btn btn-secondary btn-default" style="color: white">Consultar</a>
+                                        <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}" class="btn btn-secondary btn-default" style="color: white">Suspender</a>
+                                        <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}" class="btn btn-secondary btn-default" style="color: white">Ampliar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <table style="width: 100%">
-                        <td style="width: 20%; vertical-align: top">
-
-                        </td>
-                        <td style="vertical-align: top">
-
-                        </td>
-                    </table>
                 </div>
             </div>
         </ui:define>

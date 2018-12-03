@@ -4,7 +4,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
-
     <ui:composition template="../template/templateCabeceraExpediente.xhtml">
         <ui:define name="content2">
             <gc:confirmSubmit bean="#{registroController.enviarDerivacion()}" classGC="confirmacion7" mensaje="Esta seguro de crear la derivación de el expediente?" />
@@ -14,16 +13,13 @@
                 function confirmar5() {
                     $(".confirmacion5").modal('show');
                 }
-
                 function confirmar16() {
                     $(".confirmacion16").modal('show');
                 }
-
                 function confirmar7() {
                     $(".confirmacion7").modal('show');
                 }
             </script>
-
             <ul class="nav nav-tabs">
                 <li role="presentation">
                     <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
@@ -50,9 +46,7 @@
                         </a>
                     </li>
             </ul>
-
             <div class="panel panel-default">
-
                 <div class="panel-body">
                     <h:panelGroup>
                         <div class="btn-group" role="group" style="float: right; width: 10%">
