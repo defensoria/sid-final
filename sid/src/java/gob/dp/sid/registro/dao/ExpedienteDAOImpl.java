@@ -136,5 +136,11 @@ public class ExpedienteDAOImpl extends SqlSessionDaoSupport implements Expedient
     public void expedienteEliminarArchivo(long idExpediente) {
         getSqlSession().update("gob.dp.sid.registro.dao.ExpedienteDAO.expedienteEliminarArchivo", idExpediente);
     }
-    
+
+    // ADD JMATOS
+    @Override
+    public List<Expediente> expedienteBuscarPersonaByDNIPaginado(Expediente expediente) {
+        return getSqlSession().selectList("gob.dp.sid.registro.dao.ExpedienteDAO.expedienteBuscarUsuarioPaginado", expediente);
+    }
+    // END ADD JMATOS
 }
