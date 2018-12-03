@@ -3281,7 +3281,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return true;
     }
 
-    private String devolverEtapa(Expediente e) {
+    public String devolverEtapa(Expediente e) {
         try {
             String detalleEtapa = null;
             if (e.getIdEtapa() != null) {
