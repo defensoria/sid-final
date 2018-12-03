@@ -11,6 +11,7 @@ import gob.dp.sid.administracion.seguridad.controller.SeguridadUtilController;
 import gob.dp.sid.administracion.seguridad.entity.Usuario;
 import gob.dp.sid.administracion.seguridad.service.UsuarioService;
 import gob.dp.sid.atencion.controller.AtencionController;
+import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.bandeja.entity.Bandeja;
 import gob.dp.sid.bandeja.service.BandejaService;
@@ -561,6 +562,68 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             log.error("ERROR - cargarObjetoExpediente()" + e);
         }
         return null;
+    }
+    
+    public String iniciarExpedienteSAC() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            AtencionController  atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
+            AtencionTicket at = atencionController.getAtencionTicket();
+            guardarVincularPersonaSAC(at);
+            expediente = new Expediente();
+            personaSeleccionada.setTipoExpediente("0");
+            persona = new Persona();
+            expedientepersonaModalEdit = new ExpedientePersona();
+            entidad = new Entidad();
+            cargarNuevoExpediente();
+            ExpedientePersona ep = new ExpedientePersona();
+            expediente.setTipoClasificion(personaSeleccionada.getTipoExpediente());
+            ep.setPersona(personaSeleccionada);
+            personasSeleccionadas.add(ep);
+            inicializarEtapaEstado(0);
+            setVerBotonRegistrarExpediente(true);
+            expedienteClasificacionBusqueda = new ExpedienteClasificacion();
+            setearSumilla();
+            return "expedienteNuevo";
+        } catch (Exception e) {
+            log.error("ERROR - cargarObjetoExpediente()" + e);
+        }
+        return null;
+    }
+    
+    public boolean guardarVincularPersonaSAC(AtencionTicket at) {
+        try {
+            persona = new Persona();
+            persona.setTipo("PER");
+            persona.setNombre(at.getNombrePersona());
+            persona.setApellidoPat(at.getApePatPersona());
+            persona.setApellidoMat(at.getApeMatPersona());
+            persona.setTipoDocumento("01");
+            persona.setNumeroDocumento(at.getDniPersona());
+            if (StringUtils.isBlank(persona.getTipo())) {
+                msg.messageAlert("Debe ingresar si es persona u organización", null);
+                return false;
+            } else {
+                if (StringUtils.isBlank(persona.getNombre().trim())) {
+                    msg.messageAlert("Debe ingresar el nombre", null);
+                    return false;
+                }
+            }
+            persona.setUsuRegistro(usuarioSession.getCodigo());
+            persona.setFechaRegistro(new Date());
+            persona.setFechaModificacion(new Date());
+            persona.setUsuModificacion(usuarioSession.getCodigo());
+            boolean valid = personaService.personaInsertar(persona);
+            if (!valid) {
+                msg.messageAlert("El DNI ya se encuentra registrado", null);
+                persona = personaService.personaXDNI(persona.getNumeroDocumento());
+            }
+            setearPersonaSeleccionada(persona);
+            return true;
+        } catch (Exception e) {
+            log.error("ERROR - guardarVincularPersona()" + e);
+        }
+        return false;
     }
     
     public void inicializaEntidad(){
