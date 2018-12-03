@@ -211,6 +211,10 @@ public class ListasComunesController {
         return insertarValoresDefectoParametro(cacheService.listaTipoAtencionIntervencion(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
     
+    public List<Parametro> listaTipoAtencionPostulacionCAS(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listarTramitePostulacionesCAS(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
     public List<Parametro> listaTramiteIntervencionPresencial(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listaTramiteIntervencionPresencial(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }

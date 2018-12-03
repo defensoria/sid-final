@@ -756,6 +756,9 @@
         LEFT JOIN SID_REG_EXPEDE_PERSONA G ON G.N_IDEXPEDIENTE = A.N_IDEXPEDIENTE
         LEFT JOIN SID_REG_PERSONA H ON G.N_IDPERSONA = H.N_IDPERSONA
         WHERE A.C_ESTADO = 'A' 
+        <if test="filtroNroDNI != null">
+            AND H.C_NUMERODOCUMENTO = #{filtroNroDNI}
+        </if>
         <if test="filtroSumilla != null">
             AND UPPER(A.C_SUMILLA) LIKE '%'||UPPER(#{filtroSumilla})||'%' 
         </if>

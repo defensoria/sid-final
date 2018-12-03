@@ -61,4 +61,8 @@ public interface ExpedienteDAO {
     public void expedienteUpdateArchivo(Expediente expediente);
     
     public void expedienteEliminarArchivo(long idExpediente);
+    
+    // ADD JMATOS
+    public List<Expediente> expedienteBuscarPersonaByDNIPaginado(Expediente expediente);
+    // END JMATOS
 }

@@ -176,6 +176,9 @@ public class Expediente implements Serializable{
     
     private String filtroNroExpediente;
     
+    // ADD JMATOS
+    private String filtroNroDNI;
+    
     public Long getId() {
         return id;
     }
@@ -818,4 +821,19 @@ public class Expediente implements Serializable{
         this.filtroNroExpediente = filtroNroExpediente;
     }
 
+    // ADD JMATOS
+    /**
+     * @return the filtroNroDNI
+     */
+    public String getFiltroNroDNI() {
+        return filtroNroDNI;
+    }
+
+    /**
+     * @param filtroNroDNI the filtroNroDNI to set
+     */
+    public void setFiltroNroDNI(String filtroNroDNI) {
+        this.filtroNroDNI = filtroNroDNI;
+    }
+    // END ADD JMATOS
 }

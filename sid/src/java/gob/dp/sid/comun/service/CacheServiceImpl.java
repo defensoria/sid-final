@@ -310,6 +310,11 @@ public class CacheServiceImpl implements CacheService{
     public List<Parametro> listaTipoAtencionIntervencion() {
         return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION, CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION);
     }
+
+    @Override
+    public List<Parametro> listarTramitePostulacionesCAS() {
+        return buscarParametro(4411, 4411);
+    }
     
     @Override
     public List<Parametro> listaTramiteIntervencionPresencial() {

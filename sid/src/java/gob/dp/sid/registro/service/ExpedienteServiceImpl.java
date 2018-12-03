@@ -169,5 +169,11 @@ public class ExpedienteServiceImpl implements ExpedienteService{
     public void expedienteEliminarArchivo(long idExpediente) {
         expedienteDAO.expedienteEliminarArchivo(idExpediente);
     }
-    
+
+    // ADD JMATOS
+    @Override
+    public List<Expediente> expedienteBuscarPersonaByDNIPaginado(Expediente expediente) {
+        return expedienteDAO.expedienteBuscarPersonaByDNIPaginado(expediente);
+    }
+    // END JMATOS
 }

@@ -12,17 +12,13 @@ import gob.dp.sid.atencion.entity.Atencion;
 import gob.dp.sid.atencion.entity.Ciudadano;
 import gob.dp.sid.atencion.service.PersonaCiudadanoService;
 import gob.dp.sid.atencion.bean.FiltroPersona;
-import gob.dp.sid.atencion.bean.FiltroTicket;
 import gob.dp.sid.atencion.bean.FiltroTramite;
-import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Documento;
-import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
 import gob.dp.sid.atencion.entity.VisitaCiudadano;
 import gob.dp.sid.atencion.entity.type.TipoDocumentoType;
 import gob.dp.sid.atencion.entity.type.TratamientoProcesoType;
 import gob.dp.sid.atencion.service.DocumentoService;
-import gob.dp.sid.atencion.service.TicketService;
 import gob.dp.sid.atencion.service.TipoDocumentoService;
 import gob.dp.sid.atencion.service.VisitaService;
 import gob.dp.sid.comun.ComunUtil;
@@ -46,10 +42,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import javax.faces.context.FacesContext;
 import java.util.List;
-import java.util.Map;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +65,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private static final Logger log = Logger.getLogger(AtencionController.class);
     
     private Atencion atencion;
-    private AtencionTicket atencionTicket;
     private Documento documento;
     private AtencionBean atencionBean;
     private List<Parametro> listaTipoAtencion; 
@@ -79,7 +72,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<TipoDocumento> listaTipoDocumto;
     private List<Documento> listaDocumentosAtencion;
     private List<ArchivoDocumentoBean> listaDocumentoServer;
-    private Ticket ticket;
     private List<Expediente> listaExpedienteXDNIPaginado;
     private Integer nroPagina = 1;
     private String serverPathDocument;
@@ -112,37 +104,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private DocumentoService documentoService;
 
     @Autowired
-    private TicketService ticketService;
-    
-    @Autowired
     private ExpedienteService expedienteService;
-
-    public String atenderTicket() {
-        atencion =new Atencion();
-        atencionTicket =new AtencionTicket();
-        Ticket ticket = new Ticket();
-        FiltroTicket filtroTicket = new FiltroTicket();
-        filtroTicket.setEstadoRegistro(1);
-        filtroTicket.setEstadoTicket(1);
-        filtroTicket.setIdSede(1L);
-        ticket = ticketService.obtenerTicketAtencion(filtroTicket);
-        if(ticket != null && ticket.getIdTicket() != null){
-            atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
-            ticketService.actualizarEstadoTicket(ticket);    
-        }else{
-            message = "No existen Ticket pendientes.";
-            msg.messageInfo(message, "Atención de Tickets");
-        }
-        
-        return "iniciarTicket";
-    }
-    public void generarCaso(){
-        
-    }
+    
     
     public String cargarInicioAtencion() {
         try {
-            ticket =new Ticket();
             atencion = new Atencion();
             atencionBean = new AtencionBean();
             documento = new Documento();
@@ -172,7 +138,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 filtroPersona.setNumeroDni(atencion.getDni());
                 Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
                 if(persona != null){
-                    atencion.setIdPersona(persona.getIdPersona());
                     atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                     atencion.setApellidoPaterno(persona.getApellidoPaterno());
                     atencion.setApellidoMaterno(persona.getApellidoMaterno());
@@ -198,7 +163,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     filtroPersona.setNumeroDni(atencion.getDni());
                     Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
                     if(persona != null){
-                        atencion.setIdPersona(persona.getIdPersona());
                         atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
                         atencion.setApellidoPaterno(persona.getApellidoPaterno());
                         atencion.setApellidoMaterno(persona.getApellidoMaterno());
@@ -348,10 +312,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public boolean validarCargarDocumentos() {
-        if(StringUtils.isBlank(documento.getRutaDoc())){
-            msg.messageAlert("Debe indicar la ruta del documento", null);
-            return false;
-        }
         if(documento.getIdTipoDocumento() == null){
             msg.messageAlert("Debe indicar el tipo de documento", null);
             return false;
@@ -462,48 +422,47 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void guardarAtencionCiudadano() {
         try {
             if(validarFormularioAtencion()){
-                VisitaCiudadano visita = new VisitaCiudadano();
-                visita.setFechaVisita(new Date());
-                visita.setMotivo(atencion.getTipoMotivo());
-                visita.setEstado(EstadoNumberType.ACTIVO.getKey());
-                visita.setTieneDiscapacidad(0);
-                visita.setObservacion(atencion.getObservaciones());
+             VisitaCiudadano visita = new VisitaCiudadano();
+             visita.setFechaVisita(new Date());
+             visita.setMotivo(atencion.getTipoMotivo());
+             visita.setEstado(EstadoNumberType.ACTIVO.getKey());
+             visita.setTieneDiscapacidad(0);
+             visita.setObservacion(atencion.getObservaciones());
 
-                visita.setTipoAtencionDiscapacidad(atencion.getTipoDiscapacidad());
-                visita.setAtencionPreferencial(atencion.getAtencionPreferencial());
+             visita.setTipoAtencionDiscapacidad(atencion.getTipoDiscapacidad());
+             visita.setAtencionPreferencial(atencion.getAtencionPreferencial());
 
 
-                visita.setTipoTramite(atencion.getTipoTramite());
-                visita.setTipoAtencion(atencion.getTipoAtencion());
-                visita.setDni(atencion.getDni());
-                visita.setUsuarioCreacion("JMATOS");
-                visita.setFechaCreacion(new Date());
-                if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
-                    if((StringUtils.equals(atencion.getTipoAtencion(), "01")) || (StringUtils.equals(atencion.getTipoAtencion(), "02"))){
-                        visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
-                    } 
-                } else if(StringUtils.equals(atencion.getTipoMotivo(), "I")){
-                    visita.setCasoNuevo(atencion.getIndicadorCasoNuevo());
-                    if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "N")){
-                       if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCita(), "S")){
-                           visita.setTieneCita(1);
-                       } else {
-                           visita.setTieneCita(0);
-                       }
+             visita.setTipoTramite(atencion.getTipoTramite());
+             visita.setTipoAtencion(atencion.getTipoAtencion());
+             visita.setDni(atencion.getDni());
+             visita.setUsuarioCreacion("JMATOS");
+             visita.setFechaCreacion(new Date());
+             if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
+                 if((StringUtils.equals(atencion.getTipoAtencion(), "01")) || (StringUtils.equals(atencion.getTipoAtencion(), "02"))){
+                     visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
+                 } 
+             } else if(StringUtils.equals(atencion.getTipoMotivo(), "I")){
+                 visita.setCasoNuevo(atencion.getIndicadorCasoNuevo());
+                 if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCasoNuevo(), "N")){
+                    if(StringUtils.equalsIgnoreCase(atencion.getIndicadorCita(), "S")){
+                        visita.setTieneCita(1);
+                    } else {
+                        visita.setTieneCita(0);
                     }
-                    if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
-                        visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SID.getKey());
-                    }
-                } else if(StringUtils.equals(atencion.getTipoMotivo(), "P")){
-                    visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
-                }
-                visitaService.registrarVisita(visita);
-                guardarDocumentoAtencion(visita);
-                guardarDatosTicket(visita);
-                message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
-                msg.messageInfo(message, "Registro de Atención");
-                // limpiarIniciarAtencion();
-                disabledGuardar = true;
+                 }
+                 if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
+                     visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SID.getKey());
+                 }
+             } else if(StringUtils.equals(atencion.getTipoMotivo(), "P")){
+                 visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
+             }
+             visitaService.registrarVisita(visita);
+             guardarDocumentoAtencion(visita);
+             message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
+             msg.messageInfo(message, "Registro de Atención");
+             // limpiarIniciarAtencion();
+             disabledGuardar = true;
         }  
             //FacesContext.getCurrentInstance().getExternalContext().redirect("iniciarAtencion.xhtml");
         } catch (Exception e) {
@@ -511,29 +470,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
        
        // return "iniciarAtencion";
-    }
-    
-    public void guardarDatosTicket(VisitaCiudadano visita){
-        Map<String, Object> params = new HashMap<String, Object>();
-        ticket = new Ticket();
-        ticket.setIdVisita(visita.getId());
-        ticket.setIdPersona(atencion.getIdPersona());
-        ticket.setIdSede(1L);
-        if(visita.getAtencionPreferencial().equals("S")){
-            ticket.setAtencionPreferente(1);
-        }else{
-            ticket.setAtencionPreferente(2);
-        }
-        params.put("inPreferente", ticket.getAtencionPreferente());
-        params.put("inSede", ticket.getIdSede());
-        params.put("outNroTicket", null);
-        ticketService.obtenerCodigoTicket(params);
-        ticket.setNroTicket(params.get("outNroTicket").toString());
-        ticket.setEstadoTicket(1);//1:En Cola
-        ticket.setEstadoRegistro(1);//1:Activo
-        ticket.setUsuarioCreacion("JCARRILLO");
-        ticket.setFechaCreacion(new Date());
-        ticketService.registrarTicket(ticket);
     }
     
     public boolean validarFormularioAtencion() {
@@ -1025,17 +961,5 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void setDisabledGuardar(boolean disabledGuardar) {
         this.disabledGuardar = disabledGuardar;
     }
-    /**
-     * @return the atencionTicket
-     */
-    public AtencionTicket getAtencionTicket() {
-        return atencionTicket;
-    }
 
-    /**
-     * @param atencionTicket the atencionTicket to set
-     */
-    public void setAtencionTicket(AtencionTicket atencionTicket) {
-        this.atencionTicket = atencionTicket;
-    }
 }

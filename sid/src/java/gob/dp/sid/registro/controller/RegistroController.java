@@ -3003,7 +3003,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos	
     }
 
-    private String detalleUltimoEstado(String numeroExpediente) {
+    public String detalleUltimoEstado(String numeroExpediente) {
         try {
             String retornaDetalle = etapaEstadoService.etapaEstadoUltimoEstado(numeroExpediente);
             return retornaDetalle;
