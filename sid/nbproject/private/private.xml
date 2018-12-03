@@ -3,11 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/acciones/expedienteAcciones.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/acciones/expedienteAccionesConsulta.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/acciones/expedienteAccionesSuspender.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/acciones/expedienteAccionesAmpliar.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/comun/ConstantesUtil.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/atencion/controller/AtencionController.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/atencion/entity/AtencionTicket.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/template/template.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/atencion/iniciarTicket.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/comun/controller/AbstractManagedBean.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/atencion/service/TicketServiceImpl.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/registro/entity/Persona.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/web/pages/acciones/expedienteAccionesDerivacion.xhtml</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/defensores/sid-final/sid/src/java/gob/dp/sid/atencion/dao/xml/Ticket.xml</file>
         </group>
     </open-files>
 </project-private>
