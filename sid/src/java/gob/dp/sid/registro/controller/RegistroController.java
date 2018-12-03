@@ -53,6 +53,7 @@ import gob.dp.sid.registro.entity.ExpedienteONP;
 import gob.dp.sid.registro.entity.ExpedientePersona;
 import gob.dp.sid.registro.entity.ExpedienteSuspencion;
 import gob.dp.sid.registro.entity.ExpedienteTiempo;
+import gob.dp.sid.registro.entity.ExpedienteVisita;
 import gob.dp.sid.registro.entity.GestionEtapa;
 import gob.dp.sid.registro.entity.OficinaDefensorial;
 import gob.dp.sid.registro.entity.Persona;
@@ -75,6 +76,7 @@ import gob.dp.sid.registro.service.ExpedientePersonaService;
 import gob.dp.sid.registro.service.ExpedienteService;
 import gob.dp.sid.registro.service.ExpedienteSuspencionService;
 import gob.dp.sid.registro.service.ExpedienteTiempoService;
+import gob.dp.sid.registro.service.ExpedienteVisitaService;
 import gob.dp.sid.registro.service.GestionEtapaService;
 import gob.dp.sid.registro.service.OficinaDefensorialService;
 import gob.dp.sid.registro.service.PersonaService;
@@ -358,6 +360,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private ExpedienteFormularioVirtual filtroFormularioVirtual;
     
     private List<ExpedienteFormularioVirtual> listaExpedienteFormularioVirtual;
+    
+    private List<ExpedienteVisita> listaDocumentosPorVisita;
 
     @Autowired
     private ExpedienteService expedienteService;
@@ -436,6 +440,11 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     
     @Autowired
     private ExpedienteFormularioVirtualService  expedienteFormularioVirtualService;
+    
+    @Autowired
+    private ExpedienteVisitaService expedienteVisitaService;
+    
+    
 
     public String cargarNuevoExpediente() {
         try {
@@ -568,8 +577,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             AtencionController  atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
-            AtencionTicket at = atencionController.getAtencionTicket();
-            guardarVincularPersonaSAC(at);
+            guardarVincularPersonaSAC(atencionController.getAtencionTicket());
             expediente = new Expediente();
             personaSeleccionada.setTipoExpediente("0");
             persona = new Persona();
@@ -584,11 +592,48 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             setVerBotonRegistrarExpediente(true);
             expedienteClasificacionBusqueda = new ExpedienteClasificacion();
             setearSumilla();
+            guardarVersionSAC();
+            ExpedienteVisita ev = new ExpedienteVisita();
+            ev.setIdVisita(atencionController.getTicket().getIdVisita());
+            ev.setCodigoExpediente(expediente.getNumero());
+            expedienteVisitaService.expedienteVisitaInsertar(ev);
+            listaDocumentosPorVisita = expedienteVisitaService.expedienteVisitaBuscarByCodigoExpediente(expediente.getNumero());
             return "expedienteNuevo";
         } catch (Exception e) {
             log.error("ERROR - cargarObjetoExpediente()" + e);
         }
         return null;
+    }
+    
+    public boolean guardarVersionSAC() {
+            try {
+            Long idExpedienteOld = null;
+            if (expediente.getId() != null) {
+                idExpedienteOld = expediente.getId();
+            }
+            guardar();
+            guardarEtapaEstado(idExpedienteOld);
+            inicializarEtapaEstado(1);
+            insertarActualizarTiempos();
+            cargarFichaONP();
+            esSupervisor();
+            if (expediente.getIndiceMayorInformacion() != null) {
+                if (expediente.getIndiceMayorInformacion()) {
+                    if (etapaEstado.getVerEtapa() == 1 || etapaEstado.getVerEtapa() == 5) {
+                        Integer contador = expedienteService.expedienteMayorInformacionCount(expediente.getNumero());
+                        if (contador == 1) {
+                            setearTiempoEtapa(15);
+                        }
+                    }
+                }
+            }
+            historial = new ExpedienteHistorial(HistorialType.HISTORIAL_GUARDAR_VERSION.getKey(), HistorialType.HISTORIAL_GUARDAR_VERSION.getValue());
+            guardarHistorial(historial);
+            msg.messageInfo("Se genero una nueva version del Expediente", null);
+        } catch (Exception e) {
+            log.error("ERROR - guardarVersion()" + e);
+        }
+        return true;
     }
     
     public boolean guardarVincularPersonaSAC(AtencionTicket at) {
@@ -600,15 +645,6 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             persona.setApellidoMat(at.getApeMatPersona());
             persona.setTipoDocumento("01");
             persona.setNumeroDocumento(at.getDniPersona());
-            if (StringUtils.isBlank(persona.getTipo())) {
-                msg.messageAlert("Debe ingresar si es persona u organización", null);
-                return false;
-            } else {
-                if (StringUtils.isBlank(persona.getNombre().trim())) {
-                    msg.messageAlert("Debe ingresar el nombre", null);
-                    return false;
-                }
-            }
             persona.setUsuRegistro(usuarioSession.getCodigo());
             persona.setFechaRegistro(new Date());
             persona.setFechaModificacion(new Date());
@@ -6372,4 +6408,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         this.listaClasificacionPrimerLevel = listaClasificacionPrimerLevel;
     }
 
+    public List<ExpedienteVisita> getListaDocumentosPorVisita() {
+        return listaDocumentosPorVisita;
+    }
+
+    public void setListaDocumentosPorVisita(List<ExpedienteVisita> listaDocumentosPorVisita) {
+        this.listaDocumentosPorVisita = listaDocumentosPorVisita;
+    }
+
+    
 }

@@ -1051,4 +1051,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void setVisitaCiudadano(VisitaCiudadano visitaCiudadano) {
         this.visitaCiudadano = visitaCiudadano;
     }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+    
+    
 }

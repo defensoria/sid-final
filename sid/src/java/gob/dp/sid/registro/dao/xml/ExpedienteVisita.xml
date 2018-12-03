@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.ExpedienteVisitaDAO">
+    
+    <resultMap id="expedienteVisitaMap" type="expedienteVisita">
+        <id property="id" column="N_ID_EXPEDIENTEVISITA" />
+        <result property="codigoExpediente" column="C_COD_EXPEDIENTE"/>
+        <result property="idVisita" column="N_ID_VISITA"/>
+        <result property="rutaDocumento" column="c_ruta_doc"/>
+        <result property="codigoDocumento" column="c_cod_doc"/>
+          
+    </resultMap> 
+    
+    
+    <insert id="expedienteVisitaInsertar" parameterType="expedienteVisita">
+        INSERT INTO SID_REG_EXPEDIENTEVISITA
+        (
+            N_ID_EXPEDIENTEVISITA,
+            C_COD_EXPEDIENTE,
+            N_ID_VISITA
+        )
+        VALUES 
+        (
+            SEQ_SID_REG_EXPEDIENTEVISITA.NextVal,
+            #{codigoExpediente},
+            #{idVisita}
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT SEQ_SID_REG_EXPEDIENTEVISITA.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    <select id="expedienteVisitaBuscarByCodigoExpediente" resultMap="expedienteVisitaMap"  parameterType="String">
+        SELECT A.*, b.c_ruta_doc, b.c_cod_doc FROM SID_REG_EXPEDIENTEVISITA A
+        INNER JOIN sac_reg_documento B ON b.n_id_reg_visita = a.n_id_visita
+        WHERE A.C_COD_EXPEDIENTE = #{value}
+        ORDER BY A.n_id_visita
+        
+    </select>
+    
+</mapper>
