@@ -11,9 +11,14 @@
             <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
+            
+            <!-- COMPONENTE OCR -->
+            <script type="text/javascript" src="../../assets/ocr/AbrirVisorArchivo.js"></script>
+
             <script>
                 $(function () {
                     $('#campo').keypad({keypadOnly: false});
+                    
                 });        
             </script>
             <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
@@ -69,6 +74,8 @@
                         }
                         //$(".confirmacion1").modal('show');
                     }
+                    
+                    
                 </script>
                 
                 <div class="row" style="center">
@@ -305,9 +312,28 @@
                                                             <span class="fas fa-paperclip" /> Adjuntar
                                                         </a>
                                                         &#160;
-                                                        <a class="btn btn-danger">
-                                                            <span class="fas fa-server" /> OCR
-                                                        </a>
+                                                        <h:panelGroup rendered="#{atencionController.disabledGuardar}">
+                                                            <a class="btn btn-danger" onclick="callOCR()">
+                                                                <span class="fas fa-server" /> OCR
+                                                            </a>
+                                                            <script>
+                                                                function callOCR(){
+                                                                    console.log('Llamando componente OCR');
+                                                                    var tipoVisor = $('#cboTipoVisor').val();
+                                                                    console.log('Tipo de Visor: ' + tipoVisor);
+                                                                    switch (tipoVisor) {
+                                                                        case "1": 
+                                                                            abrirVisorArchivo({
+                                                                                "idAplicacion": 1,"idArchivo": '2'});
+                                                                            break;
+                                                                        default: 
+                                                                            abrirVisorArchivoExterno({"idAplicacion": 1
+                                                                            });
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            </script>
+                                                        </h:panelGroup>
                                             </h:panelGroup>
                                         </div>
                                     </div>
@@ -337,14 +363,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="cboTipoVisor" 
-                                                   class="control-label col-form-label"><strong>Tipo de Visor </strong></label> <br />
-                                                   <h:selectOneMenu id="cboTipoVisor" class="tipoatencion form-control">
-                                                       <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
-                                                       <f:selectItem itemValue="1" itemLabel="INTERNO" />
-                                                       <f:selectItem itemValue="2" itemLabel="EXTERNO" />
-                                                   </h:selectOneMenu>
-                                                
+                                            <h:panelGroup id="idpanelOCR" rendered="#{atencionController.disabledGuardar}">
+                                                <label for="cboTipoVisor" 
+                                                       class="control-label col-form-label"><strong>Tipo de Visor </strong></label> <br />
+                                                <select id="cboTipoVisor"
+                                                        class="form-control"
+                                                        name="cboTipoVisor">
+                                                        <option value="1">INTERNO</option>
+                                                        <option value="2">EXTERNO</option>
+                                                </select>
+                                            </h:panelGroup>
                                         </div>
                                     </div>
                                     <div style="margin-top: 50px;"></div>
