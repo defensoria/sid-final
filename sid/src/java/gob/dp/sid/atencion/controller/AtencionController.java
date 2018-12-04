@@ -506,7 +506,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 visita.setTipoTramite(atencion.getTipoTramite());
                 visita.setTipoAtencion(atencion.getTipoAtencion());
                 visita.setDni(atencion.getDni());
-                visita.setUsuarioCreacion("JMATOS");
+                visita.setUsuarioCreacion(usuarioSession.getCodigo());
                 visita.setFechaCreacion(new Date());
                 if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
                     if((StringUtils.equals(atencion.getTipoAtencion(), "01")) || (StringUtils.equals(atencion.getTipoAtencion(), "02"))){
@@ -586,7 +586,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             msg.messageAlert("Debe indicar si trae o no documentos", null);
             return false;
         }
-        if(atencion.getIndicadorDocumentos() != null && atencion.getIndicadorDocumentos().equals("S")){
+        if(atencion.getIndicadorDocumentos() != null 
+                && atencion.getIndicadorDocumentos().equals("S")){
             if(listaDocumentosAtencion == null || listaDocumentosAtencion.size() <= 0){
                 msg.messageAlert("Debe adjuntar al menos un documento", "Documentos");
                 return false;
@@ -721,8 +722,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      public boolean verificarTramiteDocumentario() {
         if(atencion.getTipoMotivo() != null && atencion.getTipoAtencion() != null){
             boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
-              atencion.getIndicadorCasoNuevo()!= null && (atencion.getTipoAtencion().equalsIgnoreCase("02") 
-                    && atencion.getIndicadorCasoNuevo().equals("S"));     
+              atencion.getIndicadorCasoNuevo()!= null && (/*atencion.getTipoAtencion().equalsIgnoreCase("02")
+                    && */ atencion.getIndicadorCasoNuevo().equals("S"));     
+            
             if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
                     ( atencion.getTipoMotivo().equalsIgnoreCase("D") &&
                         atencion.getTipoAtencion().equalsIgnoreCase("01"))
@@ -769,8 +771,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             
             
             if(atencion.getTipoMotivo() != null && atencion.getTipoAtencion() != null){
-                boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
-                    atencion.getTipoAtencion().equalsIgnoreCase("02");            if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
+                boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I");         
+                
+                if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
                         ( atencion.getTipoMotivo().equalsIgnoreCase("D") &&
                             atencion.getTipoAtencion().equalsIgnoreCase("01"))
                         || isIntervencionDocumental){
