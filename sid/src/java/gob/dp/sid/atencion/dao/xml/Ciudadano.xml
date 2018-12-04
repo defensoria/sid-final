@@ -18,6 +18,51 @@
         <result property="usuarioModifica" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>
     </resultMap>
     
+    <insert id="ciudadanoInsertar" parameterType="ciudadano">
+        INSERT
+            INTO SAC_REG_PERSONA
+              (
+                N_ID_PERS,
+                C_DNI,
+                C_TIPO_DOCUMENTO,
+                C_NOMBRE_1,
+            <if test="nombre2 != null">
+                C_NOMBRE_2,
+            </if>
+                C_APELLIDO_PATERNO,
+                C_APELLIDO_MATERNO,
+                D_FECHA_NAC,
+                C_SEXO,
+            <if test="discacidad != null">
+                N_DISCAPACIDAD,
+            </if>
+                D_FECHA_CREA,
+                C_USUARIO_CREAC
+              )
+              VALUES
+              (
+                SEQ_SAC_CIUDADANO.NextVal,
+                #{dni},
+                #{tipoDocumento},
+                #{nombre1},
+            <if test="nombre2 != null">
+                #{nombre2},
+            </if>
+                #{apellidoPaterno},
+                #{apellidoMaterno},
+                #{fechaNacimiento},
+                #{sexo},
+            <if test="discacidad != null">
+                #{discacidad},
+            </if>
+                #{fechaCreacion},
+                #{usuarioCreacion}
+              )
+            <selectKey keyProperty="id" resultType="Long">
+                SELECT SEQ_SAC_CIUDADANO.CURRVAL FROM DUAL
+            </selectKey>
+    </insert>
+    
     <select id="buscarDatosCiudadano" resultMap="personaMap" parameterType="filtroPersona">
         SELECT 
             N_ID_PERS,

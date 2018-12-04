@@ -24,5 +24,11 @@ public class CiudadanoDAOImpl extends SqlSessionDaoSupport implements CiudadanoD
         return c;
         //return getSqlSession().selectOne("gob.dp.sid.atencion.dao.CiudadanoDAO.buscarDatosCiudadano", filtroPersona);
     }
+
+    @Override
+    public Ciudadano insertarDatosCiudadano(Ciudadano ciudadano) {
+        getSqlSession().insert("gob.dp.sid.atencion.dao.CiudadanoDAO.ciudadanoInsertar", ciudadano);
+        return ciudadano;
+    }
     
 }

@@ -9,6 +9,7 @@ import gob.dp.sid.atencion.entity.type.TipoDocumentoType;
 import gob.dp.sid.comun.type.EstadoType;
 import java.io.Serializable;
 import java.util.Date;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -35,6 +36,8 @@ public class Documento implements Serializable {
     // TEMPORALES
     private String descEstado;
     private String descTipoDocumento;
+    private Part documento;
+    private String fileName;
 
     public Documento() {
     }
@@ -195,5 +198,33 @@ public class Documento implements Serializable {
 
     public void setDescTipoDocumento(String descTipoDocumento) {
         this.descTipoDocumento = descTipoDocumento;
+    }
+
+    /**
+     * @return the documento
+     */
+    public Part getDocumento() {
+        return documento;
+    }
+
+    /**
+     * @param documento the documento to set
+     */
+    public void setDocumento(Part documento) {
+        this.documento = documento;
+    }
+
+    /**
+     * @return the fileName
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
+     * @param fileName the fileName to set
+     */
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

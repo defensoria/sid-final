@@ -62,5 +62,6 @@ public class ConstantesUtil implements Serializable{
     
     
     
-    public static final String SERVER_PATH_DOCUMENTOS = "D:/server/20181125";
+    public static final String SERVER_PATH_DOCUMENTOS = "C:/server/sid/mac/documentos";
+    // public static final String SERVER_PATH_DOCUMENTOS = "/var/sid/mac/documentos";
 }

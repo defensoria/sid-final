@@ -295,6 +295,22 @@
                                     <h4 class="card-title"><a href="#">Digitalización de Documentos</a></h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row" style="text-align: right;">
+                                        <div class="col-12" >
+                                            <h:panelGroup id="idPanelButtonAttach">
+
+                                                        <label for="inputdocumento" class="control-label col-form-label"><strong>&#160;</strong></label>
+                                                        <a class="btn btn-info" 
+                                                            jsf:action="#{atencionController.onCargarDocumentosAtencion()}">
+                                                            <span class="fas fa-paperclip" /> Adjuntar
+                                                        </a>
+                                                        &#160;
+                                                        <a class="btn btn-danger">
+                                                            <span class="fas fa-server" /> OCR
+                                                        </a>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="fileUpload" 
@@ -318,15 +334,18 @@
                                                 <f:selectItem itemLabel="NO" itemValue="NO"/>
                                             </h:selectOneRadio>
                                         </div>
-                                        <h:panelGroup id="idPanelButtonAttach">
-                                                <div class="col-4" style="text-align: right;">
-                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>&#160;</strong></label>
-                                                    <a class="btn btn-info" 
-                                                        jsf:action="#{atencionController.onCargarDocumentosAtencion()}">
-                                                    <span class="fas fa-paperclip" /> Adjuntar
-                                                </a>
-                                            </div>
-                                        </h:panelGroup>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="cboTipoVisor" 
+                                                   class="control-label col-form-label"><strong>Tipo de Visor </strong></label> <br />
+                                                   <h:selectOneMenu id="cboTipoVisor" class="tipoatencion form-control">
+                                                       <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                       <f:selectItem itemValue="1" itemLabel="INTERNO" />
+                                                       <f:selectItem itemValue="2" itemLabel="EXTERNO" />
+                                                   </h:selectOneMenu>
+                                                
+                                        </div>
                                     </div>
                                     <div style="margin-top: 50px;"></div>
                                         <h:panelGroup id="idPanelDocumentosAttach">
