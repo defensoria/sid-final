@@ -64,7 +64,7 @@
     </insert>
     
     <select id="buscarDatosCiudadano" resultMap="personaMap" parameterType="filtroPersona">
-        SELECT 
+        SELECT * FROM (SELECT 
             N_ID_PERS,
             C_DNI,
             C_TIPO_DOCUMENTO,
@@ -78,6 +78,7 @@
           FROM 
             SAC_REG_PERSONA
           WHERE 
-            C_DNI = #{numeroDni}
+            C_DNI = #{numeroDni} ORDER BY N_ID_PERS DESC) WHERE ROWNUM = 1
+        
     </select>
 </mapper>

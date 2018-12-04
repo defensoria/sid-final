@@ -579,7 +579,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             AtencionController  atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
             guardarVincularPersonaSAC(atencionController.getAtencionTicket());
             expediente = new Expediente();
-            personaSeleccionada.setTipoExpediente("0");
+            personaSeleccionada.setTipoExpediente("01");
             persona = new Persona();
             expedientepersonaModalEdit = new ExpedientePersona();
             entidad = new Entidad();
@@ -651,7 +651,6 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             persona.setUsuModificacion(usuarioSession.getCodigo());
             boolean valid = personaService.personaInsertar(persona);
             if (!valid) {
-                msg.messageAlert("El DNI ya se encuentra registrado", null);
                 persona = personaService.personaXDNI(persona.getNumeroDocumento());
             }
             setearPersonaSeleccionada(persona);

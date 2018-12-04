@@ -36,7 +36,6 @@ import gob.dp.sid.comun.entity.Parametro;
 import gob.dp.sid.comun.service.ParametroService;
 import gob.dp.sid.comun.service.UbigeoService;
 import gob.dp.sid.comun.type.EstadoNumberType;
-import gob.dp.sid.comun.type.EstadoType;
 import gob.dp.sid.comun.type.MotivoAtencionType;
 import gob.dp.sid.comun.type.TipoDocumentoIdentidadType;
 import gob.dp.sid.registro.controller.RegistroController;
@@ -46,7 +45,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +54,6 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -524,7 +521,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                            visita.setTieneCita(0);
                        }
                     }
-                    if(StringUtils.equals(atencion.getTipoAtencion(), "01")){
+                    /**revisar cleonv*/
+                    if(StringUtils.equals(atencion.getTipoAtencion(), "01") || StringUtils.equals(atencion.getTipoAtencion(), "02")){
                         visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SID.getKey());
                     }
                 } else if(StringUtils.equals(atencion.getTipoMotivo(), "P")){
@@ -533,7 +531,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 visita.setIdPersona(Integer.valueOf(String.valueOf(atencion.getIdPersona())));
                 visitaService.registrarVisita(visita);
                 guardarDocumentoAtencion(visita);
-                // guardarDatosTicket(visita);
+                guardarDatosTicket(visita);
                 //visitaCiudadano = visita;
                 message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
                 msg.messageInfo(message, "Registro de Atención");
