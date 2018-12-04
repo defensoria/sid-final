@@ -9,38 +9,58 @@
     <ui:composition template="../template/templateCabeceraExpediente.xhtml">
 
         <ui:define name="content2">
-            <ul class="nav nav-tabs">
-                <li role="presentation" >
-                    <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Datos generales</span>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-home"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Datos generales</span>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones externas</span>
                     </a>
                 </li>
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones internas</span>
                     </a>
                 </li>
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:action="#{registroController.cargarHistorial()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Historial</span>
                     </a>
                 </li>
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:action="#{registroController.cargarHistorial()}">
-                        <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Historial</span>
-                    </a>
-                </li>
-                <li role="presentation" class="active">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
-                        <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt"> Compartir</span>
+                <li class="nav-item"> 
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"  jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Compartir</span>
                     </a>
                 </li>
             </ul>
-            
-                <br/>
-                <h:panelGroup rendered="#{registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
-                    <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}" jsf:onclick="loadingModal()">
-                    <span class="glyphicon glyphicon-user" />Compartir Expediente
+            <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <br/>
+                                    <h:panelGroup rendered="#{registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                    <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}" >
+                        <span class="fa fa-search" style="color: white"> Compartir Expediente </span>
                     <f:ajax render="@form" onevent="modalAsignar" />
                 </a>
                 </h:panelGroup>
@@ -55,30 +75,40 @@
                         }
                     }
                 </script>
-                <div class="modal fade" data-backdrop="static" data-keyboard="false" id="idModalCompartir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" style="text-align: left">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <a type="button" class="close" data-dismiss="modal">
-                                    <span style="color:red" class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <span class="text-resalt-primary">Compartir expediente</span>
-                            </div>
-                            <div class="modal-body" style="padding:5px">
-
-                                <span class="text-bold">Seleccione Comisionado:</span>
-                                <h:selectOneMenu value="#{registroController.usuarioCompartir}">
+                                    <div id="idModalCompartir" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Compartir expediente</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Seleccione Comisionado</label>
+                                                    <div class="col-sm-8">
+                                                        <h:selectOneMenu value="#{registroController.usuarioCompartir}" class="form-control">
                                     <f:selectItems value="#{registroController.listaUsuarioOD}" var="item" itemLabel="#{item.nombre} #{item.apellidoPaterno} #{item.apellidoMaterno}" itemValue="#{item.codigo}" />
                                 </h:selectOneMenu>
-                                <div class="modal-footer">
-                                    <h:commandLink class="btn btn-primary" action="#{registroController.enviarCompartir()}">
-                                        <span class="glyphicon glyphicon-floppy-disk"/>Guardar
-                                    </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.enviarCompartir()}">
+                                                    <span class="fa fa-save"/> Guardar
+                                                </a>
+                                                <a class="btn btn-danger" data-dismiss="modal">
+                                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>    
         </ui:define>
     </ui:composition>
 </html>

@@ -20,362 +20,293 @@
                     $(".confirmacion7").modal('show');
                 }
             </script>
-            <ul class="nav nav-tabs">
-                <li role="presentation">
-                    <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Datos generales</span>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-home"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Datos generales</span>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones externas</span>
                     </a>
                 </li>
-                <li role="presentation"><a style="cursor: pointer" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
-                        <span style="font-size: medium; color: purple;" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones internas</span>
                     </a>
                 </li>
-                <li role="presentation"  class="active">
-                    <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
-                        <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:action="#{registroController.cargarHistorial()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Historial</span>
                     </a>
                 </li>
-                <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarHistorial()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Historial</span>
-                        </a>
-                    </li>
-                <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Compartir</span>
-                        </a>
-                    </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"  jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Compartir</span>
+                    </a>
+                </li>
             </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h:panelGroup>
-                        <div class="btn-group" role="group" style="float: right; width: 10%">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-th-list" /> Acciones
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
-                                        <span class="glyphicon glyphicon-export" />Derivar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}">
-                                        <span class="glyphicon glyphicon-question-sign" />Consultar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}">
-                                        <span class="glyphicon glyphicon-time" />Suspender
-                                    </a>
-                                </li>
-                                <li>
-                                    <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}">
-                                        <span class="glyphicon glyphicon-plus" />Ampliar
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </h:panelGroup>
-                    <!--ETAPA 1 -->
-                    <h:panelGroup>
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2" ><br/>
-                                    <br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Derivar Expediente</h3>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteDerivacionEnvia.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-
-                                </td>
-                                <td style="vertical-align: top">
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
+            <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h:panelGroup>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <h4 class="card-title">Derivar Expediente</h4>
+                                            </div>
+                                            <div class="col-2" style="text-align: right">
                                                 <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.id == null and seguridadUtilController.tieneRecurso('REC_EXP001')}">
                                                     <a class="btn btn-primary" onclick="confirmar7()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
+                                                        <span style="color: white" class="fas fa-share"> Enviar </span>
                                                     </a>
                                                 </h:panelGroup>
-                                                <br/>
                                             </div>
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 60%" rowspan="2">
-                                                        <label>Descripción de la derivación:</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de envío</label>
+                                                    <div class="col-sm-8">
+                                                        <h:outputLabel value="#{registroController.expedienteDerivacionEnvia.fecha}" class="control-label col-form-label">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputLabel>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descripción de la derivación</label>
+                                                    <div class="col-sm-8">
                                                         <h:outputText value="(max: 4000 carateres)" rendered="#{registroController.expedienteDerivacionEnvia.id == null}" style="color: red" />
-                                                        <textarea jsf:value="#{registroController.expedienteDerivacionEnvia.detalle}" jsf:rendered="#{registroController.expedienteDerivacionEnvia.id == null}" rows="6" style="width: 100%" maxlength="4000" placeholder="Descripción"/>
-                                                        <br/><h:outputText style="font-size: 1.3em;" value="#{registroController.expedienteDerivacionEnvia.detalle}" rendered="#{registroController.expedienteDerivacionEnvia.id != null}"/>
-                                                    </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Oficina Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteDerivacionEnvia.idOficinaDefensorial}" disabled="#{registroController.expedienteDerivacionEnvia.id == null? 'false' : 'true'}" >
+                                                        <textarea jsf:value="#{registroController.expedienteDerivacionEnvia.detalle}" jsf:rendered="#{registroController.expedienteDerivacionEnvia.id == null}" rows="6" class="form-control" maxlength="4000" placeholder="Descripción"/>
+                                                        <br/><h:outputText value="#{registroController.expedienteDerivacionEnvia.detalle}" rendered="#{registroController.expedienteDerivacionEnvia.id != null}"/>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                            <div class="col-6">
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Oficina Defensorial</label>
+                                                    <div class="col-sm-8">
+                                                        <h:selectOneMenu value="#{registroController.expedienteDerivacionEnvia.idOficinaDefensorial}" disabled="#{registroController.expedienteDerivacionEnvia.id == null? 'false' : 'true'}" class="form-control">
                                                             <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                             <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                             <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                         </h:selectOneMenu>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label jsf:rendered="#{registroController.expedienteDerivacionEnvia.ruta == null}"><span style="font-size: large" class="glyphicon glyphicon-paperclip" />Adjuntar archivo:</label>
-                                                        <h:inputFile rendered="#{registroController.expedienteDerivacionEnvia.id == null}" class="cMedio" value="#{registroController.file4}"/>
-                                                        <br/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Adjuntar archivo</label>
+                                                    <div class="col-sm-8" style="text-align: right">
+                                                        <h:inputFile rendered="#{registroController.expedienteDerivacionEnvia.id == null}" class="cMedio form-control" value="#{registroController.file4}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descargar archivo</label>
+                                                    <div class="col-sm-8">
                                                         <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
                                                             <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteDerivacionEnvia.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                                <span class="fas fa-link" /> #{registroController.expedienteDerivacionEnvia.ruta}
                                                             </a>
                                                         </h:panelGroup>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
-                    <!--ETAPA 2 -->
-                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP002') and registroController.usuarioSession.codigo == registroController.expedienteDerivacionAprueba.codigoUsuario and registroController.listaExpedienteDerivacion.size() > 0 and registroController.expedienteDerivacionEnvia.etapa == 1 and registroController.esSupervisor}">
-                        <br/>
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2"><br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Derivar Expediente</h3>
-                                    <span style="color: gray; font-weight: bold">#{registroController.expedienteDerivacionEnvia.nombreUsuario}</span>
-                                    <br/><br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteDerivacionEnvia.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                    
+
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP002') and registroController.usuarioSession.codigo == registroController.expedienteDerivacionAprueba.codigoUsuario and registroController.listaExpedienteDerivacion.size() > 0 and registroController.expedienteDerivacionEnvia.etapa == 1 and registroController.esSupervisor}">
+                                        <br/>
+                                        <h:panelGroup>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h4 class="card-title">Aprobar Derivación</h4>
+                                                </div>
+                                                <div class="col-2" style="text-align: right">
+                                                    <h:panelGroup rendered="#{registroController.expedienteDerivacionAprueba.id == null}">
+                                                        <a class="btn btn-primary" onclick="confirmar5()">
+                                                            <span style="color: white" class="fas fa-share"> Enviar </span>
+                                                        </a>
+                                                    </h:panelGroup>    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de envío</label>
+                                                        <div class="col-sm-8">
+                                                            <h:outputLabel value="#{registroController.expedienteDerivacionAprueba.fecha}" class="control-label col-form-label">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                            </h:outputLabel>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Descripción de la derivación</label>
+                                                        <div class="col-sm-8">
+                                                            <h:outputText rendered="#{registroController.expedienteDerivacionAprueba.id == null}" style="color: red;" value="(max: 4000 carateres)" />
+                                                            <textarea jsf:rendered="#{registroController.expedienteDerivacionAprueba.id == null}" jsf:value="#{registroController.expedienteDerivacionAprueba.detalle}" rows="6" class="form-control" maxlength="4000" placeholder="Motivo"/>
+                                                            <br/><h:outputText rendered="#{registroController.expedienteDerivacionAprueba.id != null}" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                                <div class="col-6">
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Respuesta</label>
+                                                        <div class="col-sm-8">
+                                                            <h:selectOneRadio value="#{registroController.expedienteDerivacionAprueba.aprueba}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false' : 'true'}">
+                                                                <f:selectItem itemLabel="Aprobar" itemValue="SI" />
+                                                                <f:selectItem itemLabel="Desaprobar" itemValue="NO" />
+                                                            </h:selectOneRadio>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Oficina Defensorial</label>
+                                                        <div class="col-sm-8">
+                                                            <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" rendered="#{registroController.expedienteDerivacionAprueba.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" >
+                                                                <f:selectItem itemLabel="Seleccione" itemValue="0" />
+                                                                <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                            </h:selectOneMenu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP003') and registroController.usuarioSession.codigo == registroController.expedienteDerivacionReasigna.codigoUsuario}">
                                             <br/>
                                             <table style="width: 100%">
                                                 <tr>
-                                                    <td style="padding-right: 30px; width: 60%" rowspan="2">
-                                                        <label>Descripción de la derivación:</label>
-                                                        <br/><h:outputText style="font-size: 1.3em" rendered="#{registroController.expedienteDerivacionEnvia.id != null}" value="#{registroController.expedienteDerivacionEnvia.detalle}" />
-                                                    </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Oficina Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteDerivacionEnvia.idOficinaDefensorial}" disabled="#{registroController.expedienteDerivacionEnvia.id == null? 'false':'true'}">
-                                                            <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                                                            <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                            <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                        </h:selectOneMenu>
-                                                    </td>
+                                                    <td colspan="2"><br/><br/></td>
                                                 </tr>
                                                 <tr>
+                                                    <td style="width: 20%; vertical-align: top">
+                                                        <h3>Aprobar Derivación</h3>
+                                                        <span style="color: gray; font-weight: bold">#{registroController.expedienteDerivacionAprueba.nombreUsuario}</span>
+                                                        <br/><br/>
+                                                        <span class="text-bold">fecha de envio: 
+                                                            <h:outputText value="#{registroController.expedienteDerivacionAprueba.fecha}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                            </h:outputText>
+                                                        </span>
+                                                    </td>
                                                     <td>
-                                                        <br/>
-                                                        <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
-                                                            Descargar archivo :<a target="_blank" href="/filesystem/#{registroController.expedienteDerivacionEnvia.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
-                                                            </a>
-                                                        </h:panelGroup>
+                                                        <div class="panel panel-featured-top-primary">
+                                                            <div class="body">
+                                                                <div style="text-align: right">
+                                                                    <br/>
+                                                                </div>
+
+                                                                <table style="width: 100%">
+                                                                    <tr>
+                                                                        <td style="padding-right: 30px; width: 50%">
+                                                                            <label>Descripción de la derivación:</label>
+                                                                            <h:selectOneRadio value="#{registroController.expedienteDerivacionAprueba.aprueba}" disabled="true">
+                                                                                <f:selectItem itemLabel="Aprobar" itemValue="SI" />
+                                                                                <f:selectItem itemLabel="Desaprobar" itemValue="NO" />
+                                                                            </h:selectOneRadio>
+                                                                            <br/>
+                                                                            <h:outputText style="font-size: 1.3em" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
+                                                                        </td>
+                                                                        <td style="vertical-align: top">
+                                                                            <label>Oficina Defensorial:</label>
+                                                                            <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" disabled="true">
+                                                                                <f:selectItem itemLabel="Seleccione" itemValue="0" />
+                                                                                <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                                <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                            </h:selectOneMenu>
+                                                                            <br/>
+                                                                            <br/>
+                                                                            <br/>
+                                                                            Descargar archivo: <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
+                                                                                <a target="_blank" href="/filesystem/#{registroController.expedienteDerivacionEnvia.ruta}">
+                                                                                    <span style="font-size: large" class="glyphicon glyphicon-link" />
+                                                                                </a>
+                                                                            </h:panelGroup>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aprobar Derivación</h3>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteDerivacionAprueba.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
-                                                <h:panelGroup rendered="#{registroController.expedienteDerivacionAprueba.id == null}">
-                                                    <a class="btn btn-primary" onclick="confirmar5()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
-                                                    </a>
-                                                </h:panelGroup>    
-                                                <br/>
-                                            </div>
-                                            <h:panelGroup id="idpanelGroupAPO">
-                                                <table style="width: 100%">
-                                                    <tr>
-                                                        <td style="padding-right: 30px; width: 60%">
-                                                            <label>Descripción de la derivación:</label>
-                                                            <h:outputText rendered="#{registroController.expedienteDerivacionAprueba.id == null}" style="color: red;" value="(max: 4000 carateres)" />
-                                                            <textarea jsf:rendered="#{registroController.expedienteDerivacionAprueba.id == null}" jsf:value="#{registroController.expedienteDerivacionAprueba.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
-                                                            <br/><h:outputText rendered="#{registroController.expedienteDerivacionAprueba.id != null}" value="#{registroController.expedienteDerivacionAprueba.detalle}" style="font-size: 1.3em"/>
-                                                        </td>
-                                                        <td style="vertical-align: top">
-                                                            <h:panelGroup id="idPanelapob">
-                                                                <h:selectOneRadio value="#{registroController.expedienteDerivacionAprueba.aprueba}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false' : 'true'}">
-                                                                    <f:selectItem itemLabel="Aprobar" itemValue="SI" />
-                                                                    <f:selectItem itemLabel="Desaprobar" itemValue="NO" />
-                                                                    <f:ajax render="idPanelapob" />
-                                                                </h:selectOneRadio>
-                                                                <br/>
-                                                                <label jsf:rendered="#{registroController.expedienteDerivacionAprueba.aprueba == 'SI'}">Oficina Defensorial:</label>
-                                                                <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" rendered="#{registroController.expedienteDerivacionAprueba.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" >
-                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                                                                    <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                    <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                </h:selectOneMenu>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </h:panelGroup>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP003') and registroController.usuarioSession.codigo == registroController.expedienteDerivacionReasigna.codigoUsuario}">
-                        <br/>
-                        <table style="width: 100%">
-                            <tr>
-                                <td colspan="2"><br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Aprobar Derivación</h3>
-                                    <span style="color: gray; font-weight: bold">#{registroController.expedienteDerivacionAprueba.nombreUsuario}</span>
-                                    <br/><br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteDerivacionAprueba.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
-                                            </div>
-
-                                            <table style="width: 100%">
                                                 <tr>
-                                                    <td style="padding-right: 30px; width: 50%">
-                                                        <label>Descripción de la derivación:</label>
-                                                        <h:selectOneRadio value="#{registroController.expedienteDerivacionAprueba.aprueba}" disabled="true">
-                                                            <f:selectItem itemLabel="Aprobar" itemValue="SI" />
-                                                            <f:selectItem itemLabel="Desaprobar" itemValue="NO" />
-                                                        </h:selectOneRadio>
+                                                    <td style="width: 20%; vertical-align: top">
+                                                        <h3>Reasignar Derivación</h3>
                                                         <br/>
-                                                        <h:outputText style="font-size: 1.3em" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
+                                                        <span class="text-bold">fecha de envio: 
+                                                            <h:outputText value="#{registroController.expedienteDerivacionReasigna.fecha}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                            </h:outputText>
+                                                        </span>
                                                     </td>
-                                                    <td style="vertical-align: top">
-                                                        <label>Oficina Defensorial:</label>
-                                                        <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" disabled="true">
-                                                            <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                                                            <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                            <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                        </h:selectOneMenu>
-                                                        <br/>
-                                                        <br/>
-                                                        <br/>
-                                                        Descargar archivo: <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
-                                                            <a target="_blank" href="/filesystem/#{registroController.expedienteDerivacionEnvia.ruta}">
-                                                                <span style="font-size: large" class="glyphicon glyphicon-link" />
-                                                            </a>
-                                                        </h:panelGroup>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%; vertical-align: top">
-                                    <h3>Reasignar Derivación</h3>
-                                    <br/>
-                                    <span class="text-bold">fecha de envio: 
-                                        <h:outputText value="#{registroController.expedienteDerivacionReasigna.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                        </h:outputText>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="panel panel-featured-top-primary">
-                                        <div class="body">
-                                            <div style="text-align: right">
-                                                <br/>
-                                                <h:panelGroup rendered="#{registroController.expedienteDerivacionReasigna.id == null}">
-                                                    <a class="btn btn-primary" onclick="confirmar16()">
-                                                        <span class="glyphicon glyphicon-share-alt"/>Enviar
-                                                    </a>
-                                                </h:panelGroup>    
-                                                <br/>
-                                            </div>
-                                            <h:panelGroup id="idpanelGroupREA">
-                                                <table style="width: 100%">
-                                                    <tr>
-                                                        <td style="padding-right: 30px; width: 50%">
-                                                            <label>Motivo de aceptar / rechazar</label>
-                                                            <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id == null}" style="color: red" value="(max: 4000 carateres)" />
-                                                            <textarea jsf:rendered="#{registroController.expedienteDerivacionReasigna.id == null}" jsf:value="#{registroController.expedienteDerivacionReasigna.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
-                                                            <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id != null}" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
-                                                        </td>
-                                                        <td style="vertical-align: top">
-                                                            <h:panelGroup id="idPanelrech">
-                                                                <h:selectOneRadio value="#{registroController.expedienteDerivacionReasigna.aprueba}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
-                                                                    <f:selectItem itemLabel="Aceptar Derivación" itemValue="SI" />
-                                                                    <f:selectItem itemLabel="Rechazar Derivación" itemValue="NO" />
-                                                                    <f:ajax render="idPanelrech" />
-                                                                </h:selectOneRadio>
-                                                                <br/>
-                                                                <label jsf:rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}">Comisionado:</label>
-                                                                <h:selectOneMenu value="#{registroController.expedienteDerivacionReasigna.codigoUsuarioDerivado}" rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
-                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                                                                    <f:selectItems value="#{registroController.listaUsuariosComisionadosPorOD}" />
-                                                                </h:selectOneMenu>
-                                                            </h:panelGroup>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </h:panelGroup>
-
-                                            <table style="width: 100%">
-                                                <tr>
-                                                    <td style="padding-right: 30px; width: 50%">
-
-                                                    </td>
-                                                    <td style="vertical-align: top">
-
+                                                    <td>
+                                                        <div class="panel panel-featured-top-primary">
+                                                            <div class="body">
+                                                                <div style="text-align: right">
+                                                                    <br/>
+                                                                    <h:panelGroup rendered="#{registroController.expedienteDerivacionReasigna.id == null}">
+                                                                        <a class="btn btn-primary" onclick="confirmar16()">
+                                                                            <span class="glyphicon glyphicon-share-alt"/>Enviar
+                                                                        </a>
+                                                                    </h:panelGroup>    
+                                                                    <br/>
+                                                                </div>
+                                                                <h:panelGroup id="idpanelGroupREA">
+                                                                    <table style="width: 100%">
+                                                                        <tr>
+                                                                            <td style="padding-right: 30px; width: 50%">
+                                                                                <label>Motivo de aceptar / rechazar</label>
+                                                                                <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id == null}" style="color: red" value="(max: 4000 carateres)" />
+                                                                                <textarea jsf:rendered="#{registroController.expedienteDerivacionReasigna.id == null}" jsf:value="#{registroController.expedienteDerivacionReasigna.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
+                                                                                <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id != null}" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
+                                                                            </td>
+                                                                            <td style="vertical-align: top">
+                                                                                <h:panelGroup id="idPanelrech">
+                                                                                    <h:selectOneRadio value="#{registroController.expedienteDerivacionReasigna.aprueba}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
+                                                                                        <f:selectItem itemLabel="Aceptar Derivación" itemValue="SI" />
+                                                                                        <f:selectItem itemLabel="Rechazar Derivación" itemValue="NO" />
+                                                                                        <f:ajax render="idPanelrech" />
+                                                                                    </h:selectOneRadio>
+                                                                                    <br/>
+                                                                                    <label jsf:rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}">Comisionado:</label>
+                                                                                    <h:selectOneMenu value="#{registroController.expedienteDerivacionReasigna.codigoUsuarioDerivado}" rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
+                                                                                        <f:selectItem itemLabel="Seleccione" itemValue="0" />
+                                                                                        <f:selectItems value="#{registroController.listaUsuariosComisionadosPorOD}" />
+                                                                                    </h:selectOneMenu>
+                                                                                </h:panelGroup>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </h:panelGroup>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </h:panelGroup>
+                                        </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </ui:define>
     </ui:composition>
 </html>

@@ -9,68 +9,91 @@
     <ui:composition template="../template/templateCabeceraExpediente.xhtml">
 
         <ui:define name="content2">
-            <ul class="nav nav-tabs">
-                    <li role="presentation" >
-                        <a style="cursor: pointer" jsf:action="#{registroController.datosGeneralesExpediente()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Datos generales</span>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Gestiones externas</span>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Gestiones internas</span>
-                        </a>
-                    </li>
-                    <li role="presentation" class="active">
-                        <a style="cursor: pointer" jsf:action="#{registroController.cargarHistorial()}">
-                            <span style="font-size: large; color: #007ACC; font-weight: bold" class="glyphicon glyphicon-list-alt"> Historial</span>
-                        </a>
-                    </li>
-                <li role="presentation">
-                        <a style="cursor: pointer" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
-                            <span style="font-size: medium; color: purple" class="glyphicon glyphicon-list-alt" > Compartir</span>
-                        </a>
-                    </li>
-                </ul>
-            <h:form id="idForm" class="form-horizontal">
-                <div class="panel panel-featured-top-primary">
-                    <div class="panel-body">
-                        <h:dataTable value="#{registroController.listaHistorialExpediente}" var="historial" class="table table-hover" binding="#{row}">
-                            <h:column>
-                                <f:facet name="header">Nro.</f:facet>
-                                <h:outputText value="#{rowx.rowIndex+1}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Expediente</f:facet>
-                                <h:outputText value="#{historial.numero}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Tipo</f:facet>
-                                <h:outputText value="#{historial.tipo}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Descripcion</f:facet>
-                                <h:outputText value="#{historial.descripcion}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Fecha</f:facet>
-                                <h:outputText value="#{historial.fecha}" >
-                                    <f:convertDateTime pattern="dd/MM/yyyy h:mm a" timeZone="America/Lima" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Usuario</f:facet>
-                                <h:outputText value="#{historial.usuario}" />
-                            </h:column>
-
-                        </h:dataTable>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true" jsf:action="#{registroController.datosGeneralesExpediente()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-home"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Datos generales</span>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarExpedienteGestionLista()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones externas</span>
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.inicioAcciones()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Gestiones internas</span>
+                    </a>
+                </li>
+                <li class="nav-item "> 
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile" jsf:action="#{registroController.cargarHistorial()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Historial</span>
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"  jsf:rendered="#{registroController.etapaEstado.idEtapa > 0}" jsf:action="#{registroController.cargarCompartir()}">
+                        <span class="hidden-sm-up">
+                            <i class="ti-user"></i>
+                        </span> 
+                        <span class="hidden-xs-down">Compartir</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <br/>
+                                    <div class="table-responsive">
+                                        <h:dataTable value="#{registroController.listaHistorialExpediente}" var="historial" class="table table-hover" binding="#{row}">
+                                            <h:column>
+                                                <f:facet name="header">Nro.</f:facet>
+                                                <h:outputText value="#{row.rowIndex+1}" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Expediente</f:facet>
+                                                <h:outputText value="#{historial.numero}" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Tipo</f:facet>
+                                                <h:outputText value="#{historial.tipo}" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Descripcion</f:facet>
+                                                <h:outputText value="#{historial.descripcion}" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Fecha</f:facet>
+                                                <h:outputText value="#{historial.fecha}" >
+                                                    <f:convertDateTime pattern="dd/MM/yyyy h:mm a" timeZone="America/Lima" />
+                                                </h:outputText>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Usuario</f:facet>
+                                                <h:outputText value="#{historial.usuario}" />
+                                            </h:column>
+                                        </h:dataTable>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </html>
