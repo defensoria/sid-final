@@ -25,5 +25,10 @@ public class PersonaCiudadanoServiceImpl implements  PersonaCiudadanoService {
     public Ciudadano buscarDatosCiudadanoByDNI(FiltroPersona filtroPersona) {
         return ciudadanoDAO.obtenerDatosPersonaByDni(filtroPersona);
     }
+
+    @Override
+    public Ciudadano registrarCiudadano(Ciudadano ciudadano) {
+        return ciudadanoDAO.insertarDatosCiudadano(ciudadano);
+    }
     
 }

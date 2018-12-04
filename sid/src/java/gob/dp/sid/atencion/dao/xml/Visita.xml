@@ -20,6 +20,7 @@
         <result property="atencionPreferencial" column="C_ATENCION_PREF" jdbcType="VARCHAR"/>
         <result property="casoNuevo" column="C_CASO_NUEVO" jdbcType="VARCHAR"/>
         <result property="tieneCita" column="N_CON_CITA" jdbcType="INTEGER"/>
+        <result property="idPersona" column="N_ID_PERS" jdbcType="INTEGER" />
     </resultMap>
     
     <insert id="visitaInsertar" parameterType="visita">
@@ -47,7 +48,8 @@
                 <if test="tieneCita != null">
                     N_CON_CITA,
                 </if>
-                C_ATENCION_PREF)
+                C_ATENCION_PREF,
+                N_ID_PERS)
           VALUES (
                 SEQ_SAC_REG_VISITA.NextVal,
                 #{fechaVisita},
@@ -71,7 +73,8 @@
                 <if test="tieneCita != null">
                     #{tieneCita},
                 </if>
-                #{atencionPreferencial}       
+                #{atencionPreferencial},
+                #{idPersona}     
             )
         <selectKey keyProperty="id" resultType="Long">
             SELECT SEQ_SAC_REG_VISITA.CURRVAL FROM DUAL

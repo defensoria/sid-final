@@ -6,6 +6,8 @@
 package gob.dp.sid.atencion.controller;
 
 import gob.dp.sid.administracion.parametro.constantes.Constantes;
+import gob.dp.sid.administracion.seguridad.controller.LoginController;
+import gob.dp.sid.administracion.seguridad.entity.Usuario;
 import gob.dp.sid.atencion.bean.ArchivoDocumentoBean;
 import gob.dp.sid.atencion.bean.AtencionBean;
 import gob.dp.sid.atencion.entity.Atencion;
@@ -32,9 +34,11 @@ import gob.dp.sid.comun.controller.ListasComunesController;
 import gob.dp.sid.comun.entity.FiltroParametro;
 import gob.dp.sid.comun.entity.Parametro;
 import gob.dp.sid.comun.service.ParametroService;
+import gob.dp.sid.comun.service.UbigeoService;
 import gob.dp.sid.comun.type.EstadoNumberType;
 import gob.dp.sid.comun.type.EstadoType;
 import gob.dp.sid.comun.type.MotivoAtencionType;
+import gob.dp.sid.comun.type.TipoDocumentoIdentidadType;
 import gob.dp.sid.registro.controller.RegistroController;
 import gob.dp.sid.registro.entity.Expediente;
 import gob.dp.sid.registro.service.ExpedienteService;
@@ -54,6 +58,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +74,7 @@ import pe.gob.defensoria.wsdl.service.ServiceReniec;
 public class AtencionController extends AbstractManagedBean implements Serializable {
 
     private static final Logger log = Logger.getLogger(AtencionController.class);
-    
+    private Usuario usuarioSession;
     private Atencion atencion;
     private AtencionTicket atencionTicket;
     private Documento documento;
@@ -117,6 +122,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private ExpedienteService expedienteService;
 
+    @Autowired
+    private UbigeoService ubigeoService;
+    
     public String atenderTicket() {
         atencion =new Atencion();
         atencionTicket =new AtencionTicket();
@@ -140,6 +148,19 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         
     }
     
+    private void usuarioSession() {
+        try {
+            usuarioSession = new Usuario();
+            FacesContext context = FacesContext.getCurrentInstance();
+            LoginController loginController = (LoginController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "loginController");
+            usuarioSession = loginController.getUsuarioSesion();
+            usuarioSession.setNombreDepartamento(ubigeoService.departamentoOne(usuarioSession.getIdDepartamento()).getDescripcion());
+        } catch (Exception e) {
+            log.error("ERROR - usuarioSession()" + e);
+        }
+    }
+
+    
     public String cargarInicioAtencion() {
         try {
             ticket =new Ticket();
@@ -157,6 +178,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             disabledGuardar = false;
             // loadDocumentos();
             visitaCiudadano = new VisitaCiudadano();
+            
+            usuarioSession();
+            
             return "iniciarAtencion";
         } catch (Exception e) {
             log.error("ERROR - cargarInicioAtencion()" + e);
@@ -168,22 +192,21 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void onChangeDniField() {
         System.out.println("INICIANDO BUSQUEDA DE DATOS");
         if( atencion.getDni() != null ) {
-            if(!consultarDatosReniec()) {
-                FiltroPersona filtroPersona = new FiltroPersona();
-                filtroPersona.setNumeroDni(atencion.getDni());
-                Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
-                if(persona != null){
-                    atencion.setIdPersona(persona.getIdPersona());
-                    atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
-                    atencion.setApellidoPaterno(persona.getApellidoPaterno());
-                    atencion.setApellidoMaterno(persona.getApellidoMaterno());
-                    atencion.setSexo(persona.getSexo());
-                    if(persona.getFechaNacimiento() != null)
-                        atencion.setFechaNacimiento(ComunUtil.getDateToString(persona.getFechaNacimiento()));
-                        disableField = "true";
-                }
-            }
-            
+            FiltroPersona filtroPersona = new FiltroPersona();
+            filtroPersona.setNumeroDni(atencion.getDni());
+            Ciudadano persona = ciudadanoServie.buscarDatosCiudadanoByDNI(filtroPersona);
+            if(persona != null){
+                atencion.setIdPersona(persona.getIdPersona());
+                atencion.setNombres(persona.getNombre1() + " " + persona.getNombre2());
+                atencion.setApellidoPaterno(persona.getApellidoPaterno());
+                atencion.setApellidoMaterno(persona.getApellidoMaterno());
+                atencion.setSexo(persona.getSexo());
+                if(persona.getFechaNacimiento() != null)
+                    atencion.setFechaNacimiento(ComunUtil.getDateToString(persona.getFechaNacimiento()));
+                    disableField = "true";
+            } else {
+                consultarDatosReniec();
+            }        
             // Buscar Tramites:
             buscarListaExpedienteByDNI(1, atencion.getDni());
         }
@@ -299,6 +322,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public boolean consultarDatosReniec() {
+        Ciudadano ciudadano = new Ciudadano();
         try {
             ServiceReniec reniec = new ServiceReniec();
             List<String> list = reniec.getConsultarServicio(atencion.getDni());
@@ -316,6 +340,18 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 } else {
                     atencion.setSexo("F");
                 }
+                ciudadano.setDni(atencion.getDni());
+                ciudadano.setNombre1(atencion.getNombres());
+                ciudadano.setApellidoPaterno(atencion.getApellidoPaterno());
+                ciudadano.setApellidoMaterno(atencion.getApellidoMaterno());
+                ciudadano.setTipoDocumento(TipoDocumentoIdentidadType.DNI.getKey());
+                ciudadano.setFechaNacimiento(date);
+                ciudadano.setSexo(atencion.getSexo());
+                ciudadano.setDiscacidad(0);
+                ciudadano.setFechaCreacion(new Date());
+                ciudadano.setUsuarioCreacion(usuarioSession.getCodigo());
+                ciudadano = ciudadanoServie.registrarCiudadano(ciudadano);
+                atencion.setIdPersona(ciudadano.getIdPersona());
             } else {
                 return false;
             }  
@@ -365,19 +401,24 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     }
     
     public void onCargarDocumentosAtencion() {
+        String folderServer = ConstantesUtil.SERVER_PATH_DOCUMENTOS;
         if(validarCargarDocumentos()){
             Documento oDocumento = new Documento();
             oDocumento.setCodDocumento(ComunUtil.generateCodigoByDate());
             oDocumento.setEstado(Constantes.ESTADO_ACTIVO);
             oDocumento.setDescEstado(documento.getDescEstado());
-            oDocumento.setRutaDoc(fileUpload.getSubmittedFileName());
+            String ext = FilenameUtils.getExtension(fileUpload.getSubmittedFileName());
+            String filename = ComunUtil.generateCodigoByDate() + "_" + usuarioSession.getCodigoOD() + "." + ext;
+            oDocumento.setRutaDoc(folderServer+"/"+filename);
+            oDocumento.setFileName(filename);
             oDocumento.setExtensionDoc(fileUpload.getContentType());
             oDocumento.setTamanioDoc(String.valueOf(fileUpload.getSize()));
             oDocumento.setAnexo(documento.getAnexo());
             oDocumento.setIdTipoDocumento(documento.getIdTipoDocumento());
-            oDocumento.setUsuarioRegistro("JMATOS");
+            oDocumento.setUsuarioRegistro(usuarioSession.getCodigo());
             oDocumento.setFechaRegistro(new Date());
-
+            oDocumento.setDocumento(fileUpload);
+            
             FiltroTramite oFiltroTramite = new FiltroTramite();
             oFiltroTramite.setIdTipoDocumento(documento.getIdTipoDocumento());
             TipoDocumento tipoDocumento = tipoDocumentoService.getTipoDocumentoById(oFiltroTramite);
@@ -386,8 +427,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             else
                 oDocumento.setDescTipoDocumento(TipoDocumentoType.OTROS.getValue());
             listaDocumentosAtencion.add(oDocumento);
-        documento.setIdTipoDocumento(null);
-        documento.setAnexo(null);
+            documento.setIdTipoDocumento(null);
+            documento.setAnexo(null);
         
         for(Documento d: listaDocumentosAtencion) {
             System.out.println("cod: " + d.getCodDocumento());
@@ -406,18 +447,12 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         //uploadFileTemporal();
     }
 
-    public void uploadFileTemporal() {
+    public void uploadFileTemporal(Documento doc) {
         // Obtener Ruta Temporal:
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
-        String folder = request.getServletContext().getRealPath("pages/temp");
+        String folderServer = ConstantesUtil.SERVER_PATH_DOCUMENTOS;
         try {
-            InputStream input = fileUpload.getInputStream();
-            String filename = fileUpload.getSubmittedFileName();
-            File f = new File(folder + "/" + filename);
-            if(!f.exists()){
-                Files.copy(input, new File(folder, filename).toPath());
-            }
+            InputStream input = doc.getDocumento().getInputStream();
+            Files.copy(input, new File(folderServer, doc.getFileName()).toPath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -495,9 +530,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 } else if(StringUtils.equals(atencion.getTipoMotivo(), "P")){
                     visita.setIndicadorTratamiento(TratamientoProcesoType.PROCESO_SGD.getKey());
                 }
+                visita.setIdPersona(Integer.valueOf(String.valueOf(atencion.getIdPersona())));
                 visitaService.registrarVisita(visita);
                 guardarDocumentoAtencion(visita);
-                guardarDatosTicket(visita);
+                // guardarDatosTicket(visita);
                 //visitaCiudadano = visita;
                 message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
                 msg.messageInfo(message, "Registro de Atención");
@@ -589,7 +625,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             visita.setTipoTramite(atencion.getTipoTramite());
             visita.setTipoAtencion(atencion.getTipoAtencion());
             visita.setDni(atencion.getDni());
-            visita.setUsuarioCreacion("JMATOS");
+            visita.setUsuarioCreacion(usuarioSession.getCodigo());
             visita.setFechaCreacion(new Date());
 
             if (StringUtils.equals(atencion.getTipoMotivo(), "D")){
@@ -655,6 +691,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         for(Documento d : listaDocumentosAtencion) {
             d.setIdRegVisita(Integer.parseInt(String.valueOf(oVisita.getId())));
             documentoService.registrarDocumento(d);
+            uploadFileTemporal(d);
+            
         }
     }
     
@@ -682,14 +720,15 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
     }
     
-    public boolean verificarTramiteDocumentario() {
+     public boolean verificarTramiteDocumentario() {
         if(atencion.getTipoMotivo() != null && atencion.getTipoAtencion() != null){
             boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
-                atencion.getTipoAtencion().equalsIgnoreCase("02");            if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
+              atencion.getIndicadorCasoNuevo()!= null && (atencion.getTipoAtencion().equalsIgnoreCase("02") 
+                    && atencion.getIndicadorCasoNuevo().equals("S"));     
+            if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
                     ( atencion.getTipoMotivo().equalsIgnoreCase("D") &&
                         atencion.getTipoAtencion().equalsIgnoreCase("01"))
                     || isIntervencionDocumental){
-                // atencion.setIndicadorDocumentos("S");
                 return true;
             }
         }
@@ -702,7 +741,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 atencion.getTipoAtencion().equalsIgnoreCase("02");
             boolean isExpedienteSolIntervencion = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
                     atencion.getIndicadorCasoNuevo() != null && (
-                    atencion.getIndicadorCasoNuevo().equalsIgnoreCase("S") && atencion.getTipoAtencion().equals("02") );
+                    atencion.getIndicadorCasoNuevo().equalsIgnoreCase("N") && atencion.getTipoAtencion().equals("02") );
             if(isExisteExpedienteTramiteDoc || isExpedienteSolIntervencion){
                 return true;
             } 
@@ -1058,6 +1097,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    /**
+     * @return the usuarioSession
+     */
+    public Usuario getUsuarioSession() {
+        return usuarioSession;
+    }
+
+    /**
+     * @param usuarioSession the usuarioSession to set
+     */
+    public void setUsuarioSession(Usuario usuarioSession) {
+        this.usuarioSession = usuarioSession;
     }
     
     

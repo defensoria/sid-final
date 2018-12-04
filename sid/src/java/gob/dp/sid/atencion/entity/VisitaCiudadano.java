@@ -31,7 +31,8 @@ public class VisitaCiudadano {
     private String atencionPreferencial;
     private String casoNuevo;
     private Integer tieneCita;
-
+    private Integer idPersona;
+    
     public Long getId() {
         return id;
     }
@@ -192,6 +193,20 @@ public class VisitaCiudadano {
      */
     public void setTieneCita(Integer tieneCita) {
         this.tieneCita = tieneCita;
+    }
+
+    /**
+     * @return the idPersona
+     */
+    public Integer getIdPersona() {
+        return idPersona;
+    }
+
+    /**
+     * @param idPersona the idPersona to set
+     */
+    public void setIdPersona(Integer idPersona) {
+        this.idPersona = idPersona;
     }
     
 }

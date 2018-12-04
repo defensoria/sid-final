@@ -14,4 +14,5 @@ import gob.dp.sid.atencion.bean.FiltroPersona;
  */
 public interface CiudadanoDAO {
     public Ciudadano obtenerDatosPersonaByDni(FiltroPersona filtroPersona);
+    public Ciudadano insertarDatosCiudadano(Ciudadano ciudadano);
 }
