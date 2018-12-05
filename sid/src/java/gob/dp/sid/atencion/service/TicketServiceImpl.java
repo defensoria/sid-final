@@ -53,4 +53,9 @@ public class TicketServiceImpl implements TicketService {
     public void registrarAtencionTicket(AtencionTicket atencionTicket) {
         ticketDAO.insertarAtencionTicket(atencionTicket);
     }
+    
+    @Override
+    public void actualizarFechaFinAtencionTicket(AtencionTicket atencionTicket) {
+        ticketDAO.actualizarFechaFinAtencionTicket(atencionTicket);
+    }
 }

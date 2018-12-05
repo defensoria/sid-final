@@ -187,4 +187,14 @@
             SELECT SQ_SAC_REG_ATENCION_TICKET.CURRVAL FROM DUAL
         </selectKey>
     </insert>
+    
+    <update id="atencionTicketFechaFinUpdate" parameterType="atencionTicket">
+        UPDATE SAC_REG_ATENCION_TICKET
+        <set>
+            D_FECHA_FIN_ATE = #{fechaFinAtencionTicket}
+        </set>
+        <where>
+            N_ID_DET_TICKET = #{idAtencionTicket}
+        </where>
+    </update>
 </mapper>

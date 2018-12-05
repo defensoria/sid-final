@@ -27,4 +27,6 @@ public interface TicketDAO {
     public void actualizarEstadoTicket(Ticket ticket);
     
     public void insertarAtencionTicket(AtencionTicket atencionTicket);
+    
+    public void actualizarFechaFinAtencionTicket(AtencionTicket atencionTicket);
 }

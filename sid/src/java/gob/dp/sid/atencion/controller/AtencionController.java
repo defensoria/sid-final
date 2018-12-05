@@ -169,6 +169,15 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
     }
     
+    public void actualizarFechaFinAtencionTicket(){
+        try {
+            atencionTicket.setFechaFinAtencionTicket(new Date());
+            ticketService.actualizarFechaFinAtencionTicket(atencionTicket);
+        } catch (Exception e) {
+            log.error("ERROR - registrarAtencionTicket()" + e);
+        }
+    }
+    
     public void generarTicket(){
         try {
             guardarDatosTicket(visitaCiudadano);

@@ -598,6 +598,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             ev.setCodigoExpediente(expediente.getNumero());
             expedienteVisitaService.expedienteVisitaInsertar(ev);
             listaDocumentosPorVisita = expedienteVisitaService.expedienteVisitaBuscarByCodigoExpediente(expediente.getNumero());
+            atencionController.actualizarFechaFinAtencionTicket();//Para actualizar la Fecha Fin
             return "expedienteNuevo";
         } catch (Exception e) {
             log.error("ERROR - cargarObjetoExpediente()" + e);

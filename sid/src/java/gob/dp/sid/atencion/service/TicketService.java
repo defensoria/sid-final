@@ -27,4 +27,6 @@ public interface TicketService {
     public void actualizarEstadoTicket(Ticket ticket);
     
     public void registrarAtencionTicket(AtencionTicket atencionTicket);
+    
+    public void actualizarFechaFinAtencionTicket(AtencionTicket atencionTicket);
 }
