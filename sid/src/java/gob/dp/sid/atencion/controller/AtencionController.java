@@ -21,6 +21,8 @@ import gob.dp.sid.atencion.entity.Documento;
 import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
 import gob.dp.sid.atencion.entity.VisitaCiudadano;
+import gob.dp.sid.atencion.entity.type.EstadoRegistroType;
+import gob.dp.sid.atencion.entity.type.EstadoTicketType;
 import gob.dp.sid.atencion.entity.type.TipoDocumentoType;
 import gob.dp.sid.atencion.entity.type.TratamientoProcesoType;
 import gob.dp.sid.atencion.service.DocumentoService;
@@ -137,9 +139,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         atencionTicket =new AtencionTicket();
         ticket = new Ticket();
         FiltroTicket filtroTicket = new FiltroTicket();
-        filtroTicket.setEstadoRegistro(1);
-        filtroTicket.setEstadoTicket(1);
-        filtroTicket.setIdSede(1L);
+        filtroTicket.setEstadoRegistro(EstadoRegistroType.ACTIVO.getKey());
+        filtroTicket.setEstadoTicket(EstadoTicketType.TICKET_EN_COLA.getKey());
+        filtroTicket.setIdSede(usuarioSession.getCodigoOD().longValue());
         ticket = ticketService.obtenerTicketAtencion(filtroTicket);
         if(ticket != null && ticket.getIdTicket() != null){
             atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
@@ -584,7 +586,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         ticket = new Ticket();
         ticket.setIdVisita(visita.getId());
         ticket.setIdPersona(atencion.getIdPersona());
-        ticket.setIdSede(1L);
+        ticket.setIdSede(usuarioSession.getCodigoOD().longValue());
         if(visita.getAtencionPreferencial().equals("S")){
             ticket.setAtencionPreferente(1);
         }else{
@@ -595,9 +597,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         params.put("outNroTicket", null);
         ticketService.obtenerCodigoTicket(params);
         ticket.setNroTicket(params.get("outNroTicket").toString());
-        ticket.setEstadoTicket(1);//1:En Cola
-        ticket.setEstadoRegistro(1);//1:Activo
-        ticket.setUsuarioCreacion("JCARRILLO");
+        ticket.setEstadoTicket(EstadoTicketType.TICKET_EN_COLA.getKey());
+        ticket.setEstadoRegistro(EstadoRegistroType.ACTIVO.getKey());
+        ticket.setUsuarioCreacion(usuarioSession.getCodigo());
         ticket.setFechaCreacion(new Date());
         ticketService.registrarTicket(ticket);
     }
