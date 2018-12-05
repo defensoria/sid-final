@@ -135,6 +135,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private ExpedienteVisitaService expedienteVisitaService;
     
     public String atenderTicket() {
+        usuarioSession();
         atencion =new Atencion();
         atencionTicket =new AtencionTicket();
         ticket = new Ticket();
