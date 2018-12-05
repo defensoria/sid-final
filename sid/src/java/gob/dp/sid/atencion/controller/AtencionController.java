@@ -420,7 +420,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             oDocumento.setDescEstado(documento.getDescEstado());
             String ext = FilenameUtils.getExtension(fileUpload.getSubmittedFileName());
             String filename = ComunUtil.generateCodigoByDate() + "_" + usuarioSession.getCodigoOD() + "." + ext;
-            oDocumento.setRutaDoc(folderServer+"/"+filename);
+            //oDocumento.setRutaDoc(folderServer+"/"+filename);
+            oDocumento.setRutaDoc(filename);
             oDocumento.setFileName(filename);
             oDocumento.setExtensionDoc(fileUpload.getContentType());
             oDocumento.setTamanioDoc(String.valueOf(fileUpload.getSize()));
