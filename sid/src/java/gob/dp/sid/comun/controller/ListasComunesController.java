@@ -219,6 +219,11 @@ public class ListasComunesController {
         return insertarValoresDefectoParametro(cacheService.listaTramiteIntervencionPresencial(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
     
+    /* ini jmatos */
+    public List<Parametro> listaTramiteIntervencionDocumental(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listarTramiteIntervencionDocumental(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
     public List<Parametro> listaTramiteDocumentarioAdministrativo(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listaTramiteDocumentarioAdministrativo(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
@@ -226,6 +231,9 @@ public class ListasComunesController {
     public List<Parametro> listaTramiteExistenteDocumentario(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listaTramiteDocumentarioCasoExistente(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
+    
+    /* fin jmatos */
+   
     /*Fin - jcarrillo*/
     
     public List<Parametro> buscarListaAccionCAV(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {

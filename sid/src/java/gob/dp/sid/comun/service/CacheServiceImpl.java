@@ -322,6 +322,11 @@ public class CacheServiceImpl implements CacheService{
     }
     
     @Override
+    public List<Parametro> listarTramiteIntervencionDocumental() {
+        return buscarParametro(4410, 4410);
+    }
+    
+    @Override
     public List<Parametro> listaTramiteDocumentarioAdministrativo() {
         // return buscarParametro(CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO, CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO);
         return buscarParametro(4405, 4405);

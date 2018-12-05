@@ -193,7 +193,7 @@
                                                 <f:selectItem itemLabel="Postulaciones" itemValue="P"/>&#160;&#160;
                                                 <f:selectItem itemLabel="Tramite Documentario" itemValue="D"/>&#160;&#160;
                                                 <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion"/>
+                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                                                     <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax render="idPanelFormAtencion" />
+                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idPanelFormAtencion idpanelDigitaDoc" />
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
@@ -225,7 +225,10 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
-                                            <h:selectOneMenu id="cmbTipoAtencion" value="#{atencionController.atencion.tipoAtencion}" class="tipoatencion form-control">
+                                            <h:selectOneMenu id="cmbTipoAtencion" 
+                                                             disabled="#{atencionController.disableTipoAtencion}"
+                                                             value="#{atencionController.atencion.tipoAtencion}" 
+                                                             class="tipoatencion form-control">
                                                 <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                                 <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                 <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
@@ -259,14 +262,14 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="inputtipotramite" class="control-label col-form-label" jsf:rendered="#{atencionController.onChangeTipoTramite()}"><strong>TIPO DE TRAMITE</strong></label>
+                                            <label for="inputtipotramite" class="control-label col-form-label" ><strong>TIPO DE TRAMITE</strong></label>
                                             <h:selectOneListbox id="selTipoTramite" 
                                                                 value="#{atencionController.atencion.tipoTramite}" 
                                                                 class="tipotramite form-control"
-                                                                style="height: 120px; "
-                                                                rendered="#{atencionController.onChangeTipoTramite()}"
-                                                                >
+                                                                valueChangeListener="#{atencionController.valueChangeMethod(e)}"
+                                                                style="height: 120px; ">
                                                 <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
+                                                <f:ajax render="idpanelexpedientesSID idpanelDigitaDoc" />
                                             </h:selectOneListbox>
                                         </div>
                                     </div>
@@ -337,6 +340,39 @@
                                             </h:panelGroup>
                                         </div>
                                     </div>
+                                    <h:panelGroup id="idpanelExpediente" rendered="#{atencionController.adjuntarArchivosExpedExiste}">
+                                        <div class="row">
+
+                                                <div class="col-md-4">
+                                                    <label for="fileUpload" 
+                                                           class="control-label col-form-label"><strong>N° Expediente: </strong></label> <br />       
+                                                    <input type="text" 
+                                                           class="form-control" 
+                                                           jsf:value="#{atencionController.expediente.numero}"
+                                                           disabled="disabled"
+                                                           placeholder="N° Expediente" id="numExpediente" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="fileUpload" 
+                                                           class="control-label col-form-label"><strong>Tipo: </strong></label> <br />       
+                                                    <input type="text" 
+                                                           jsf:value="#{atencionController.expediente.clasificacionTipoNombre}"
+                                                           class="form-control" 
+                                                           disabled="disabled"
+                                                           placeholder="Tipo Expediente" id="tipoExpediente" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="fileUpload" 
+                                                           class="control-label col-form-label"><strong>Fecha Registro: </strong></label> <br />       
+                                                    <input type="text" 
+                                                           jsf:value="#{atencionController.expediente.fechaRegistro}"
+                                                           class="form-control" 
+                                                           disabled="disabled"
+                                                           placeholder="Fecha Expediente" id="fechaRegistro" />
+                                                </div>
+                                        </div>
+                                    </h:panelGroup>
+                                    
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="fileUpload" 
@@ -483,7 +519,7 @@
                                                             <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
                                                         </h:column>
                                                         <h:column>
-                                                            <a jsf:action="#{registroController.cargarExpedienteEdit(exped)}">
+                                                            <a jsf:actionListener="#{atencionController.abrirVentanaAdjuntarDocumentos(row6.rowIndex)}">
                                                                 <i class="fas fa-upload" ></i>
                                                             </a>
                                                         </h:column>

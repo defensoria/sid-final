@@ -32,9 +32,9 @@ public class ConstantesUtil implements Serializable{
     /**LINUX*/
     //public String BASE_URL_REPORT = "/usr/local/recursos/reportes/";
     
-    //public static final String BASE_URL_IMAGEPATH = "C:\\recursos\\images\\";
+    public static final String BASE_URL_IMAGEPATH = "C:\\recursos\\images\\";
     /**LINUX*/
-    public String BASE_URL_IMAGEPATH = "/usr/local/recursos/images/";
+    // public String BASE_URL_IMAGEPATH = "/usr/local/recursos/images/";
     public String BASE_URL_PRODUCCION_IMAGE = "http://localhost/filesystem/";
     
     public static final String LISTA_VALOR_TODOS_CODIGO = "-1000";
@@ -47,9 +47,9 @@ public class ConstantesUtil implements Serializable{
     public static final String LISTA_VALOR_SELECCIONE_NOMBRE = "SELECCIONE";
     
     
-    public static String FILE_DONWLOAD = "C:/filesystem";
+    //public static String FILE_DONWLOAD = "C:/filesystem";
     
-    //public static String FILE_DONWLOAD = "/srv/sid/filesystem";
+    public static String FILE_DONWLOAD = "/srv/sid/filesystem";
     
     // PAGINAS ATENCION:
     public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";
@@ -64,4 +64,7 @@ public class ConstantesUtil implements Serializable{
     
     public static final String SERVER_PATH_DOCUMENTOS = "C:/server/sid/mac/documentos";
     // public static final String SERVER_PATH_DOCUMENTOS = "/var/sid/mac/documentos";
+    
+    public static final String PARAMETRO_SOLICITUD_INTERVENCION_CONSULTA_CASO_EXISTENTE = "6";
+    
 }

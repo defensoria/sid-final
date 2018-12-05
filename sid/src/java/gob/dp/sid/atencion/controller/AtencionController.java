@@ -40,7 +40,9 @@ import gob.dp.sid.comun.type.MotivoAtencionType;
 import gob.dp.sid.comun.type.TipoDocumentoIdentidadType;
 import gob.dp.sid.registro.controller.RegistroController;
 import gob.dp.sid.registro.entity.Expediente;
+import gob.dp.sid.registro.entity.ExpedienteVisita;
 import gob.dp.sid.registro.service.ExpedienteService;
+import gob.dp.sid.registro.service.ExpedienteVisitaService;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -53,6 +55,7 @@ import javax.faces.context.FacesContext;
 import java.util.List;
 import java.util.Map;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
@@ -94,6 +97,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private String strDocumento;
     private VisitaCiudadano visitaCiudadano;
     private boolean renderTieneDiscapacidad = false;
+    private boolean renderTicketAtencion = false;
+    private boolean disableTipoAtencion = false;
+    private boolean adjuntarArchivosExpedExiste = false;
+    private Expediente expediente;
             
     @Autowired
     private ListasComunesController listasComunesController;
@@ -121,6 +128,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
 
     @Autowired
     private UbigeoService ubigeoService;
+    
+    @Autowired
+    private ExpedienteVisitaService expedienteVisitaService;
     
     public String atenderTicket() {
         atencion =new Atencion();
@@ -170,12 +180,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             listaDocumentoServer = new ArrayList<>();
             message = null;
             listaDocumentosAtencion = new ArrayList<>();
-            serverPathDocument = ConstantesUtil.SERVER_PATH_DOCUMENTOS;
+            serverPathDocument = ConstantesUtil.FILE_DONWLOAD;
             listaExpedienteXDNIPaginado = new ArrayList<>();
             disabledGuardar = false;
             // loadDocumentos();
             visitaCiudadano = new VisitaCiudadano();
-            
+            disableTipoAtencion = false;
+            adjuntarArchivosExpedExiste = false;
+            expediente = new Expediente();
             usuarioSession();
             
             return "iniciarAtencion";
@@ -446,7 +458,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
 
     public void uploadFileTemporal(Documento doc) {
         // Obtener Ruta Temporal:
-        String folderServer = ConstantesUtil.SERVER_PATH_DOCUMENTOS;
+        String folderServer = ConstantesUtil.FILE_DONWLOAD;
         try {
             InputStream input = doc.getDocumento().getInputStream();
             Files.copy(input, new File(folderServer, doc.getFileName()).toPath());
@@ -477,6 +489,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         documento = new Documento();
         disabledGuardar = false;
         visitaCiudadano = new VisitaCiudadano();
+        disableTipoAtencion = false;
+        adjuntarArchivosExpedExiste = false;
+        expediente = new Expediente();
         // listaDocumentosAtencion = new ArrayList<>();
         // fileUpload = null;
         // documento.setAnexo("");
@@ -544,6 +559,24 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
        
        // return "iniciarAtencion";
+    }
+    
+    public void onVerificarAtencionTicket() {
+        
+        boolean tramiteDocRecepcionDocAdmin = StringUtils.equalsIgnoreCase(atencion.getTipoMotivo(), "D") 
+                    && StringUtils.equalsIgnoreCase(atencion.getTipoAtencion(), "01");
+        
+        boolean tramiteDocRecepDocExped = StringUtils.equalsIgnoreCase(atencion.getTipoMotivo(), "D")
+                        && StringUtils.equalsIgnoreCase(atencion.getTipoAtencion(), "02");
+        if(tramiteDocRecepcionDocAdmin){
+            renderTicketAtencion = true;
+        } else if(tramiteDocRecepDocExped){
+            renderTicketAtencion = false;
+        }
+        renderTicketAtencion = true;
+        
+        
+        
     }
     
     public void guardarDatosTicket(VisitaCiudadano visita){
@@ -691,8 +724,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             d.setIdRegVisita(Integer.parseInt(String.valueOf(oVisita.getId())));
             documentoService.registrarDocumento(d);
             uploadFileTemporal(d);
-            
         }
+            
+        if(oVisita.getIndicadorTratamiento().equals(TratamientoProcesoType.PROCESO_SID.getKey())){
+            // Integrar Documentos al SID 
+            if(adjuntarArchivosExpedExiste){
+                ExpedienteVisita expedienteVisita = new ExpedienteVisita();
+                expedienteVisita.setCodigoExpediente(expediente.getNumero());
+                expedienteVisita.setIdVisita(oVisita.getId());
+                expedienteVisitaService.expedienteVisitaInsertar(expedienteVisita);
+        }
+        } else if(oVisita.getIndicadorTratamiento().equals(TratamientoProcesoType.PROCESO_SGD.getKey())){
+            // Proceso de integración al SGD.
+    }
+    
     }
     
     public void actualizarListaTipoAtencion(String idMotivo){
@@ -714,6 +759,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             }
             atencion.setTipoAtencion("0");
             atencion.setIndicadorDocumentos("");
+            casoNuevoSolicitudIntervencion();
+            adjuntarArchivosExpedExiste = false;
         } catch (Exception e) {
             log.error("ERROR - actualizarListaTipoAtencion()" + e);
         }
@@ -722,8 +769,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      public boolean verificarTramiteDocumentario() {
         if(atencion.getTipoMotivo() != null && atencion.getTipoAtencion() != null){
             boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
-              atencion.getIndicadorCasoNuevo()!= null && (/*atencion.getTipoAtencion().equalsIgnoreCase("02")
-                    && */ atencion.getIndicadorCasoNuevo().equals("S"));     
+                    atencion.getIndicadorCasoNuevo() != null && (atencion.getIndicadorCasoNuevo().equals("S"));
             
             if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
                     ( atencion.getTipoMotivo().equalsIgnoreCase("D") &&
@@ -731,17 +777,27 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     || isIntervencionDocumental){
                 return true;
             }
+            
+            if(atencion.getTipoMotivo().equalsIgnoreCase("I") && 
+                    atencion.getIndicadorCasoNuevo() != null && atencion.getIndicadorCasoNuevo().equals("N") && atencion.getTipoTramite() != null 
+                    && !atencion.getTipoTramite().equals("6")) {
+                return true;
+        }
+            
+            if(adjuntarArchivosExpedExiste)
+            {
+                return true;
+            }
         }
         return false;
     }
     
     public boolean verificaTieneExpediente() {
-        if(atencion.getTipoMotivo() != null){
+        if(atencion.getTipoMotivo() != null && atencion.getTipoAtencion() != null && atencion.getTipoTramite() != null){
             boolean isExisteExpedienteTramiteDoc = atencion.getTipoMotivo().equalsIgnoreCase("D") && 
                 atencion.getTipoAtencion().equalsIgnoreCase("02");
             boolean isExpedienteSolIntervencion = atencion.getTipoMotivo().equalsIgnoreCase("I") && 
-                    atencion.getIndicadorCasoNuevo() != null && (
-                    atencion.getIndicadorCasoNuevo().equalsIgnoreCase("N") && atencion.getTipoAtencion().equals("02") );
+                    atencion.getTipoTramite().equals("6");
             if(isExisteExpedienteTramiteDoc || isExpedienteSolIntervencion){
                 return true;
             } 
@@ -749,11 +805,36 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return false;
     }
     
+    public void valueChangeMethod(ValueChangeEvent e){
+        System.out.println("Verificar:....");
+        verificaTieneExpediente();
+        verificarTramiteDocumentario();
+    }
+
+    public void abrirVentanaAdjuntarDocumentos(int indexExpediente){
+        adjuntarArchivosExpedExiste = true; 
+        verificarTramiteDocumentario();
+        expediente = listaExpedienteXDNIPaginado.get(indexExpediente);
+    }
+    
     public void eliminarDocumento(int i) {
         listaDocumentosAtencion.remove(i);
         msg.messageInfo("El documento ha sido eliminado con éxito.", null);
     }
     
+    public void casoNuevoSolicitudIntervencion() {
+        if(StringUtils.equals(atencion.getTipoMotivo(), "I") && atencion.getIndicadorCasoNuevo() != null){
+            if(StringUtils.equals(atencion.getIndicadorCasoNuevo(), "S")){
+                atencion.setTipoAtencion("01");
+            }else {
+                atencion.setTipoAtencion("02");
+            }
+            actualizarListaTipoTramite(atencion.getTipoAtencion(), atencion.getTipoMotivo());
+            disableTipoAtencion = true;
+        } else {
+            disableTipoAtencion = false;
+        }
+    }
     
     public void actualizarListaTipoTramite(String idAtencion,String idMotivo){
         try {
@@ -766,6 +847,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     listaTipoTramite = listasComunesController.listaTramiteExistenteDocumentario(false, false, false);
                 } else if (StringUtils.equals(idAtencion, "01") && StringUtils.equals(idMotivo, "I")) {
                     listaTipoTramite = listasComunesController.listaTramiteIntervencionPresencial(false, false, false);
+                } else if (StringUtils.equals(idAtencion, "02") && StringUtils.equals(idMotivo, "I")) {
+                    listaTipoTramite = listasComunesController.listaTramiteIntervencionDocumental(false, false, false);
                 }
             }
             
@@ -774,8 +857,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 boolean isIntervencionDocumental = atencion.getTipoMotivo().equalsIgnoreCase("I");         
                 
                 if(atencion.getTipoMotivo().equalsIgnoreCase("P") || 
-                        ( atencion.getTipoMotivo().equalsIgnoreCase("D") &&
-                            atencion.getTipoAtencion().equalsIgnoreCase("01"))
+                        ( atencion.getTipoMotivo().equalsIgnoreCase("D") )
                         || isIntervencionDocumental){
                     atencion.setIndicadorDocumentos("S");
                 } else {
@@ -792,10 +874,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     public void iniciarListaTipoDocumento(FiltroTramite filtroTramite) {
         listaTipoDocumto = tipoDocumentoService.listarDocumentosByTramite(filtroTramite);
-    }
-
-    public void cargarModalAdjuntarDocumentos() {
-        
     }
     
     
@@ -1112,6 +1190,62 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setUsuarioSession(Usuario usuarioSession) {
         this.usuarioSession = usuarioSession;
+    }
+    
+    /**
+     * @return the renderTicketAtencion
+     */
+    public boolean isRenderTicketAtencion() {
+        return renderTicketAtencion;
+    }
+    
+    /**
+     * @param renderTicketAtencion the renderTicketAtencion to set
+     */
+    public void setRenderTicketAtencion(boolean renderTicketAtencion) {
+        this.renderTicketAtencion = renderTicketAtencion;
+}
+
+    /**
+     * @return the disableTipoAtencion
+     */
+    public boolean isDisableTipoAtencion() {
+        return disableTipoAtencion;
+    }
+
+    /**
+     * @param disableTipoAtencion the disableTipoAtencion to set
+     */
+    public void setDisableTipoAtencion(boolean disableTipoAtencion) {
+        this.disableTipoAtencion = disableTipoAtencion;
+    }
+
+    /**
+     * @return the adjuntarArchivosExpedExiste
+     */
+    public boolean isAdjuntarArchivosExpedExiste() {
+        return adjuntarArchivosExpedExiste;
+    }
+
+    /**
+     * @param adjuntarArchivosExpedExiste the adjuntarArchivosExpedExiste to set
+     */
+    public void setAdjuntarArchivosExpedExiste(boolean adjuntarArchivosExpedExiste) {
+        this.adjuntarArchivosExpedExiste = adjuntarArchivosExpedExiste;
+    }
+
+    /**
+     * @return the expediente
+     */
+    public Expediente getExpediente() {
+        return expediente;
+    }
+
+    /**
+     * @param expediente the expediente to set
+     */
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
     }
     
     
