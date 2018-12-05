@@ -159,6 +159,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             guardarDatosTicket(visitaCiudadano);
             message = "Se ha generado el Ticket " + ticket.getNroTicket() + " correctamente.";
             msg.messageInfo(message, "Generación de Ticket");
+            cargarInicioAtencion();
         } catch (Exception e) {
             log.error("ERROR - generarTicket()" + e);
         }
