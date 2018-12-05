@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class AtencionTicket {
     
+    private Long idAtencionTicket;
     private Long idTicket;
     private String nroTicket;
     private Integer estadoTicket;
@@ -27,7 +28,12 @@ public class AtencionTicket {
     private String descAtencion;
     private String codTramite;
     private String descTramite;
-
+    private Long idSede;
+    private String codigoUsuarioAtencionTicket;
+    private Date fechaInicioAtencionTicket;
+    private Date fechaFinAtencionTicket;
+    private Integer estadoAtencionTicket;
+    
     /**
      * @return the idTicket
      */
@@ -223,5 +229,90 @@ public class AtencionTicket {
     public void setDescTramite(String descTramite) {
         this.descTramite = descTramite;
     }
+
+    /**
+     * @return the idAtencionTicket
+     */
+    public Long getIdAtencionTicket() {
+        return idAtencionTicket;
+    }
+
+    /**
+     * @param idAtencionTicket the idAtencionTicket to set
+     */
+    public void setIdAtencionTicket(Long idAtencionTicket) {
+        this.idAtencionTicket = idAtencionTicket;
+    }
+
+    /**
+     * @return the fechaInicioAtencionTicket
+     */
+    public Date getFechaInicioAtencionTicket() {
+        return fechaInicioAtencionTicket;
+    }
+
+    /**
+     * @param fechaInicioAtencionTicket the fechaInicioAtencionTicket to set
+     */
+    public void setFechaInicioAtencionTicket(Date fechaInicioAtencionTicket) {
+        this.fechaInicioAtencionTicket = fechaInicioAtencionTicket;
+    }
+
+    /**
+     * @return the fechaFinAtencionTicket
+     */
+    public Date getFechaFinAtencionTicket() {
+        return fechaFinAtencionTicket;
+    }
+
+    /**
+     * @param fechaFinAtencionTicket the fechaFinAtencionTicket to set
+     */
+    public void setFechaFinAtencionTicket(Date fechaFinAtencionTicket) {
+        this.fechaFinAtencionTicket = fechaFinAtencionTicket;
+    }
+
+    /**
+     * @return the estadoAtencionTicket
+     */
+    public Integer getEstadoAtencionTicket() {
+        return estadoAtencionTicket;
+    }
+
+    /**
+     * @param estadoAtencionTicket the estadoAtencionTicket to set
+     */
+    public void setEstadoAtencionTicket(Integer estadoAtencionTicket) {
+        this.estadoAtencionTicket = estadoAtencionTicket;
+    }
+
+    /**
+     * @return the codigoUsuarioAtencionTicket
+     */
+    public String getCodigoUsuarioAtencionTicket() {
+        return codigoUsuarioAtencionTicket;
+    }
+
+    /**
+     * @param codigoUsuarioAtencionTicket the codigoUsuarioAtencionTicket to set
+     */
+    public void setCodigoUsuarioAtencionTicket(String codigoUsuarioAtencionTicket) {
+        this.codigoUsuarioAtencionTicket = codigoUsuarioAtencionTicket;
+    }
+
+    /**
+     * @return the idSede
+     */
+    public Long getIdSede() {
+        return idSede;
+    }
+
+    /**
+     * @param idSede the idSede to set
+     */
+    public void setIdSede(Long idSede) {
+        this.idSede = idSede;
+    }
+
     
 }

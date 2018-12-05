@@ -16,6 +16,7 @@
     </resultMap>
     
     <resultMap id="atencionTicketMap" type="gob.dp.sid.atencion.entity.AtencionTicket">
+        <result property="idAtencionTicket" column="N_ID_DET_TICKET" jdbcType="INTEGER"/>
         <result property="idTicket" column="N_ID_TICKET" jdbcType="INTEGER"/>
         <result property="nroTicket" column="C_NRO_TICKET" jdbcType="VARCHAR"/>
         <result property="estadoTicket" column="N_ESTADO_TICKET" jdbcType="INTEGER"/>
@@ -30,6 +31,11 @@
         <result property="descAtencion" column="C_DESC_ATENCION" jdbcType="VARCHAR"/>
         <result property="codTramite" column="C_TIPO_TRAMITE" jdbcType="VARCHAR"/>
         <result property="descTramite" column="C_DESC_TRAMITE" jdbcType="VARCHAR"/>
+        <result property="idSede" column="N_ID_SEDE" jdbcType="INTEGER"/>
+        <result property="codigoUsuarioAtencionTicket" column="CODIGO_USUARIO" jdbcType="VARCHAR"/>
+        <result property="fechaInicioAtencionTicket" column="D_FECHA_INI_ATE" jdbcType="DATE"/>
+        <result property="fechaFinAtencionTicket" column="D_FECHA_FIN_ATE" jdbcType="DATE"/>
+        <result property="estadoAtencionTicket" column="N_ESTADO_REGISTRO" jdbcType="INTEGER"/>
     </resultMap>
     
     <insert id="ticketInsertar" parameterType="ticket">
@@ -137,4 +143,48 @@
             #{idTicket,javaType=Long,jdbcType=INTEGER, mode=IN},
             #{estadoTicket,javaType=Integer,jdbcType=INTEGER, mode=IN} ) } 
     </select>
+    
+    <insert id="atencionTicketInsertar" parameterType="atencionTicket">
+        INSERT INTO 
+            SAC_REG_ATENCION_TICKET
+              ( N_ID_DET_TICKET,
+                <if test="idTicket != null">
+                N_ID_TICKET,
+                </if>
+                <if test="codigoUsuarioAtencionTicket != null">
+                CODIGO_USUARIO,
+                </if>
+                <if test="idSede != null">
+                N_ID_SEDE,
+                </if>
+                <if test="fechaInicioAtencionTicket != null">
+                D_FECHA_INI_ATE,
+                </if>
+                <if test="fechaFinAtencionTicket != null">
+                D_FECHA_FIN_ATE,
+                </if>
+                N_ESTADO_REGISTRO)
+          VALUES (
+                SQ_SAC_REG_ATENCION_TICKET.NextVal,
+                <if test="idTicket != null">
+                #{idTicket},
+                </if>
+                <if test="codigoUsuarioAtencionTicket != null">
+                #{codigoUsuarioAtencionTicket},
+                </if>
+                <if test="idSede != null">
+                #{idSede},
+                </if>
+                <if test="fechaInicioAtencionTicket != null">
+                #{fechaInicioAtencionTicket},
+                </if>
+                <if test="fechaFinAtencionTicket != null">
+                #{fechaFinAtencionTicket},
+                </if>
+                #{estadoAtencionTicket}    
+            )
+        <selectKey keyProperty="idAtencionTicket" resultType="Long">
+            SELECT SQ_SAC_REG_ATENCION_TICKET.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
 </mapper>

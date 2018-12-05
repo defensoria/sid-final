@@ -146,7 +146,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         ticket = ticketService.obtenerTicketAtencion(filtroTicket);
         if(ticket != null && ticket.getIdTicket() != null){
             atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
-            ticketService.actualizarEstadoTicket(ticket);    
+            atencionTicket.setIdTicket(ticket.getIdTicket());
+            atencionTicket.setIdSede(usuarioSession.getCodigoOD().longValue());
+            atencionTicket.setCodigoUsuarioAtencionTicket(usuarioSession.getCodigo());
+            atencionTicket.setFechaInicioAtencionTicket(new Date());
+            atencionTicket.setEstadoAtencionTicket(EstadoRegistroType.ACTIVO.getKey());
+            ticketService.actualizarEstadoTicket(ticket);
+            registrarAtencionTicket();
         }else{
             message = "No existen Ticket pendientes.";
             msg.messageInfo(message, "Atención de Tickets");
@@ -154,6 +160,15 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         
         return "iniciarTicket";
     }
+    
+    public void registrarAtencionTicket(){
+        try {
+            ticketService.registrarAtencionTicket(atencionTicket);
+        } catch (Exception e) {
+            log.error("ERROR - registrarAtencionTicket()" + e);
+        }
+    }
+    
     public void generarTicket(){
         try {
             guardarDatosTicket(visitaCiudadano);

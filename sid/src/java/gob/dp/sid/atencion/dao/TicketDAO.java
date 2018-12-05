@@ -25,4 +25,6 @@ public interface TicketDAO {
     public AtencionTicket obtenerDatosAtencionTicket(Long idTicket);
     
     public void actualizarEstadoTicket(Ticket ticket);
+    
+    public void insertarAtencionTicket(AtencionTicket atencionTicket);
 }

@@ -48,4 +48,11 @@ public class TicketDAOImpl extends SqlSessionDaoSupport implements TicketDAO {
         getSqlSession().insert("gob.dp.sid.atencion.dao.TicketDAO.actualizarEstadoTicket", ticket);
         System.out.println("ESTADO ACTUALIZADO: " + ticket.getIdTicket());
     }
+    
+    @Override
+    public void insertarAtencionTicket(AtencionTicket atencionTicket) {
+        getSqlSession().insert("gob.dp.sid.atencion.dao.TicketDAO.atencionTicketInsertar", atencionTicket);
+        System.out.println("ID INSERTADO: " + atencionTicket.getIdAtencionTicket());
+    }
+    
 }

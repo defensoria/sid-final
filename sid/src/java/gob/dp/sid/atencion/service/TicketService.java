@@ -25,4 +25,6 @@ public interface TicketService {
     public AtencionTicket obtenerDatosAtencionTicket(Long idTicket);
     
     public void actualizarEstadoTicket(Ticket ticket);
+    
+    public void registrarAtencionTicket(AtencionTicket atencionTicket);
 }
