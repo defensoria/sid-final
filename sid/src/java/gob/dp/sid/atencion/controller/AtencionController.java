@@ -154,8 +154,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         
         return "iniciarTicket";
     }
-    public void generarCaso(){
-        
+    public void generarTicket(){
+        try {
+            guardarDatosTicket(visitaCiudadano);
+            message = "Se ha generado el Ticket " + ticket.getNroTicket() + " correctamente.";
+            msg.messageInfo(message, "Generación de Ticket");
+        } catch (Exception e) {
+            log.error("ERROR - generarTicket()" + e);
+        }
     }
     
     private void usuarioSession() {
@@ -550,8 +556,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 visita.setIdPersona(Integer.valueOf(String.valueOf(atencion.getIdPersona())));
                 visitaService.registrarVisita(visita);
                 guardarDocumentoAtencion(visita);
-                guardarDatosTicket(visita);
-                //visitaCiudadano = visita;
+                //guardarDatosTicket(visita);
+                visitaCiudadano = visita;
                 message = "La Atención del Ciudadano " + visita.getDni() + " ha sido registrada correctamente.";
                 msg.messageInfo(message, "Registro de Atención");
                 // limpiarIniciarAtencion();
