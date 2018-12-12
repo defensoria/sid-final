@@ -15,6 +15,8 @@ import java.util.List;
 public interface UsuarioVentanillaService {
     
     public void registrarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
+    
+    public void actualizarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
 
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
     

@@ -28,6 +28,11 @@ public class UsuarioVentanillaServiceImpl implements UsuarioVentanillaService {
     }
     
     @Override
+    public void actualizarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        usuarioVentanillaDAO.actualizarUsuarioVentanilla(usuarioVentanilla);
+    }
+    
+    @Override
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
         return usuarioVentanillaDAO.buscarUsuarioVentanilla(usuarioVentanilla);
     }

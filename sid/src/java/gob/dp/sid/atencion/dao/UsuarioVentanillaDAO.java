@@ -16,6 +16,8 @@ public interface UsuarioVentanillaDAO {
     
     public void insertarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
     
+    public void actualizarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
+            
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
     
     public List<UsuarioVentanilla> listarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);

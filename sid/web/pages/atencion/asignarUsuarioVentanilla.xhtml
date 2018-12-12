@@ -67,9 +67,16 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group" style="text-align: center">
-                                                <a class="btn btn-warning" jsf:action="#{atencionController.asignarUsuarioVentanilla()}" >
-                                                    <i class="fa fa-save"></i> Agregar Usuario-Ventanilla
-                                                </a>
+                                                <h:panelGroup rendered="#{atencionController.disabledAgregarUsuVen}">
+                                                    <a class="btn btn-warning" jsf:action="#{atencionController.asignarUsuarioVentanilla()}" >
+                                                        <i class="fa fa-save"></i> Agregar Usuario-Ventanilla
+                                                    </a>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{!atencionController.disabledAgregarUsuVen}">
+                                                    <a class="btn btn-warning" jsf:action="#{atencionController.modificarUsuarioVentanilla()}" >
+                                                        <i class="fa fa-save"></i> Modificar Usuario-Ventanilla
+                                                    </a>
+                                                </h:panelGroup>
                                             </div>
                                         </div>
                                     </div>

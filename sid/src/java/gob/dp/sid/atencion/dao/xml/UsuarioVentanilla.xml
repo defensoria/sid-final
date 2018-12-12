@@ -119,4 +119,25 @@
         AND N_ID_SEDE = #{idSede}
         </if>
     </select>
+    
+    <update id="actualizarUsuarioVentanilla" parameterType="usuarioVentanilla">
+        UPDATE SAC_REG_USUARIO_VENTANILLA
+        <set>
+            <if test="codigoUsuario != null">
+                CODIGO_USUARIO = #{codigoUsuario},
+            </if>
+            <if test="idVentanilla != null">
+                N_ID_VENTANILLA = #{idVentanilla},
+            </if>
+            <if test="usuarioModificacion != null">
+                C_USUARIO_MODIFICA = #{usuarioModificacion},
+            </if>
+            <if test="fechaModificacion != null">
+                D_FECHA_MODIFICA = #{fechaModificacion}
+            </if>
+        </set>
+        <where>
+            N_ID_USU_VENT = #{idUsuVent}
+        </where>
+    </update>
 </mapper>

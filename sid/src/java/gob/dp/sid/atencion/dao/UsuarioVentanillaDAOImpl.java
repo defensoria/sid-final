@@ -25,6 +25,12 @@ public class UsuarioVentanillaDAOImpl extends SqlSessionDaoSupport implements Us
     }
     
     @Override
+    public void actualizarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        getSqlSession().insert("gob.dp.sid.atencion.dao.UsuarioVentanillaDAO.actualizarUsuarioVentanilla", usuarioVentanilla);
+        System.out.println("ID ACTUALIZADO: " + usuarioVentanilla.getIdUsuVent());
+    }
+    
+    @Override
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
         
         UsuarioVentanilla u = getSqlSession().selectOne("gob.dp.sid.atencion.dao.UsuarioVentanillaDAO.buscarUsuarioVentanilla", usuarioVentanilla);

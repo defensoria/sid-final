@@ -112,6 +112,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private boolean renderTicketAtencion = false;
     private boolean disableTipoAtencion = false;
     private boolean adjuntarArchivosExpedExiste = false;
+    private boolean disabledAgregarUsuVen;
     private Expediente expediente;
             
     @Autowired
@@ -176,13 +177,23 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 }
             }
         }
+        disabledAgregarUsuVen=true;
         return "asignarUsuarioVentanilla";
     }
     
     public String editarUsuarioVentanilla(UsuarioVentanilla usuVen) {
-        usuarioVentanilla =new UsuarioVentanilla();
-        usuarioVentanilla.setCodigoUsuario(usuVen.getCodigoUsuario());
-        usuarioVentanilla.setIdVentanilla(usuVen.getIdVentanilla());
+        disabledAgregarUsuVen=false;
+        //usuarioVentanilla.setCodigoUsuario(usuVen.getCodigoUsuario());
+        //usuarioVentanilla.setIdVentanilla(usuVen.getIdVentanilla());
+        usuarioVentanilla=usuVen;
+        return "asignarUsuarioVentanilla";
+    }
+    
+    public String modificarUsuarioVentanilla(){
+        usuarioVentanilla.setUsuarioModificacion(usuarioSession.getCodigo());
+        usuarioVentanilla.setFechaModificacion(new Date());
+        usuarioVentanillaService.actualizarUsuarioVentanilla(usuarioVentanilla);
+        cargarUsuarioVentanilla();
         return "asignarUsuarioVentanilla";
     }
     
@@ -195,7 +206,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             usuarioVentanillaService.registrarUsuarioVentanilla(usuarioVentanilla);
             cargarUsuarioVentanilla();
         } catch (Exception e) {
-            log.error("ERROR - registrarAtencionTicket()" + e);
+            log.error("ERROR - asignarUsuarioVentanilla()" + e);
         }
         return "asignarUsuarioVentanilla";
     }
@@ -1415,6 +1426,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaUsuarioVentanilla(List<UsuarioVentanilla> listaUsuarioVentanilla) {
         this.listaUsuarioVentanilla = listaUsuarioVentanilla;
+    }
+
+    /**
+     * @return the disabledAgregarUsuVen
+     */
+    public boolean isDisabledAgregarUsuVen() {
+        return disabledAgregarUsuVen;
+    }
+
+    /**
+     * @param disabledAgregarUsuVen the disabledAgregarUsuVen to set
+     */
+    public void setDisabledAgregarUsuVen(boolean disabledAgregarUsuVen) {
+        this.disabledAgregarUsuVen = disabledAgregarUsuVen;
     }
     
     
