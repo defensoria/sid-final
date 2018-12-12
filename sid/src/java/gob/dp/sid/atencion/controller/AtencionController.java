@@ -8,6 +8,7 @@ package gob.dp.sid.atencion.controller;
 import gob.dp.sid.administracion.parametro.constantes.Constantes;
 import gob.dp.sid.administracion.seguridad.controller.LoginController;
 import gob.dp.sid.administracion.seguridad.entity.Usuario;
+import gob.dp.sid.administracion.seguridad.service.UsuarioService;
 import gob.dp.sid.atencion.bean.ArchivoDocumentoBean;
 import gob.dp.sid.atencion.bean.AtencionBean;
 import gob.dp.sid.atencion.entity.Atencion;
@@ -20,6 +21,8 @@ import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Documento;
 import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
+import gob.dp.sid.atencion.entity.UsuarioVentanilla;
+import gob.dp.sid.atencion.entity.Ventanilla;
 import gob.dp.sid.atencion.entity.VisitaCiudadano;
 import gob.dp.sid.atencion.entity.type.EstadoRegistroType;
 import gob.dp.sid.atencion.entity.type.EstadoTicketType;
@@ -28,6 +31,8 @@ import gob.dp.sid.atencion.entity.type.TratamientoProcesoType;
 import gob.dp.sid.atencion.service.DocumentoService;
 import gob.dp.sid.atencion.service.TicketService;
 import gob.dp.sid.atencion.service.TipoDocumentoService;
+import gob.dp.sid.atencion.service.UsuarioVentanillaService;
+import gob.dp.sid.atencion.service.VentanillaService;
 import gob.dp.sid.atencion.service.VisitaService;
 import gob.dp.sid.comun.ComunUtil;
 import gob.dp.sid.comun.ConstantesUtil;
@@ -79,6 +84,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private Usuario usuarioSession;
     private Atencion atencion;
     private AtencionTicket atencionTicket;
+    private UsuarioVentanilla usuarioVentanilla;
+    private Ventanilla ventanilla;
     private Documento documento;
     private AtencionBean atencionBean;
     private List<Parametro> listaTipoAtencion; 
@@ -88,6 +95,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<ArchivoDocumentoBean> listaDocumentoServer;
     private Ticket ticket;
     private List<Expediente> listaExpedienteXDNIPaginado;
+    private List<Usuario> listaUsuarios;
+    private List<Ventanilla> listaVentanilla;
     private Integer nroPagina = 1;
     private String serverPathDocument;
     private String disableField = "false";
@@ -134,10 +143,51 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     @Autowired
     private ExpedienteVisitaService expedienteVisitaService;
     
+    @Autowired
+    private UsuarioVentanillaService usuarioVentanillaService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    @Autowired
+    private VentanillaService ventanillaService;
+    
+    public String cargarUsuarioVentanilla() {
+        usuarioSession();
+        usuarioVentanilla =new UsuarioVentanilla();
+        ventanilla =new Ventanilla();
+        atencionTicket =new AtencionTicket();
+        listaUsuarios = new ArrayList<>();
+        listaVentanilla = new ArrayList<>();
+        listaVentanilla = ventanillaService.listarVentanillas(ventanilla);
+        List<Usuario> listaUsuarioTmp = usuarioService.buscarUsuarioTotal();
+        for(Usuario u : listaUsuarioTmp){
+            if(u.getCodigoOD().equals(usuarioSession.getCodigoOD())){
+                listaUsuarios.add(u);
+            }
+        }
+        return "asignarUsuarioVentanilla";
+    }
+    
+    public String asignarUsuarioVentanilla() {
+        try {
+            usuarioVentanilla.setIdSede(usuarioSession.getCodigoOD().longValue());
+            usuarioVentanilla.setEstadoAsignacion(EstadoRegistroType.ACTIVO.getKey());
+            usuarioVentanilla.setUsuarioCreacion(usuarioSession.getCodigo());
+            usuarioVentanilla.setFechaCreacion(new Date());
+            usuarioVentanillaService.registrarUsuarioVentanilla(usuarioVentanilla);
+        } catch (Exception e) {
+            log.error("ERROR - registrarAtencionTicket()" + e);
+        }
+        return "asignarUsuarioVentanilla";
+    }
+    
     public String atenderTicket() {
         usuarioSession();
         atencion =new Atencion();
         atencionTicket =new AtencionTicket();
+        UsuarioVentanilla usuarioParam =new UsuarioVentanilla();
+        UsuarioVentanilla usuarioVentanilla =new UsuarioVentanilla();
         ticket = new Ticket();
         FiltroTicket filtroTicket = new FiltroTicket();
         filtroTicket.setEstadoRegistro(EstadoRegistroType.ACTIVO.getKey());
@@ -151,6 +201,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             atencionTicket.setCodigoUsuarioAtencionTicket(usuarioSession.getCodigo());
             atencionTicket.setFechaInicioAtencionTicket(new Date());
             atencionTicket.setEstadoAtencionTicket(EstadoRegistroType.ACTIVO.getKey());
+            
+            usuarioParam.setCodigoUsuario(usuarioSession.getCodigo());
+            usuarioVentanilla = usuarioVentanillaService.buscarUsuarioVentanilla(usuarioParam);
+            atencionTicket.setIdVentanilla(usuarioVentanilla.getIdVentanilla());
+            
             ticketService.actualizarEstadoTicket(ticket);
             registrarAtencionTicket();
         }else{
@@ -1281,6 +1336,48 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
+    }
+
+    /**
+     * @return the usuarioVentanilla
+     */
+    public UsuarioVentanilla getUsuarioVentanilla() {
+        return usuarioVentanilla;
+    }
+
+    /**
+     * @param usuarioVentanilla the usuarioVentanilla to set
+     */
+    public void setUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        this.usuarioVentanilla = usuarioVentanilla;
+    }
+
+    /**
+     * @return the listaUsuarios
+     */
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    /**
+     * @param listaUsuarios the listaUsuarios to set
+     */
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
+
+    /**
+     * @return the listaVentanilla
+     */
+    public List<Ventanilla> getListaVentanilla() {
+        return listaVentanilla;
+    }
+
+    /**
+     * @param listaVentanilla the listaVentanilla to set
+     */
+    public void setListaVentanilla(List<Ventanilla> listaVentanilla) {
+        this.listaVentanilla = listaVentanilla;
     }
     
     

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.UsuarioVentanillaDAO">
+    <resultMap id="usuarioVentanillaMap" type="gob.dp.sid.atencion.entity.UsuarioVentanilla">
+        <result property="idUsuVent" column="N_ID_USU_VENT" jdbcType="INTEGER"/>
+        <result property="codigoUsuario" column="CODIGO_USUARIO" jdbcType="VARCHAR"/>
+        <result property="idVentanilla" column="N_ID_VENTANILLA" jdbcType="INTEGER"/>
+        <result property="idSede" column="N_ID_SEDE" jdbcType="INTEGER"/>
+        <result property="descObservacion" column="C_DESC_OBERVACION" jdbcType="VARCHAR"/>        
+        <result property="estadoAsignacion" column="N_ESTADO_ASIGNACION" jdbcType="INTEGER"/>
+        <result property="usuarioModificacion" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>
+        <result property="fechaModificacion" column="D_FECHA_MODIFICA" jdbcType="DATE"/>
+        <result property="usuarioCreacion" column="C_USUARIO_CREA" jdbcType="VARCHAR"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+    </resultMap>
+    
+    <insert id="insertarUsuarioVentanilla" parameterType="usuarioVentanilla">
+        INSERT INTO 
+            SAC_REG_USUARIO_VENTANILLA
+              ( N_ID_USU_VENT,
+                <if test="codigoUsuario != null">
+                CODIGO_USUARIO,
+                </if>
+                <if test="idVentanilla != null">
+                N_ID_VENTANILLA,
+                </if>
+                <if test="idSede != null">
+                N_ID_SEDE,
+                </if>
+                <if test="descObservacion != null">
+                C_DESC_OBERVACION,
+                </if>
+                <if test="usuarioModificacion != null">
+                C_USUARIO_MODIFICA,
+                </if>
+                <if test="fechaModificacion != null">
+                D_FECHA_MODIFICA,
+                </if>
+                <if test="usuarioCreacion != null">
+                C_USUARIO_CREA,
+                </if>
+                <if test="fechaCreacion != null">
+                D_FECHA_CREA,
+                </if>
+                N_ESTADO_ASIGNACION)
+          VALUES (
+                SEQ_SAC_REG_USUARIO_VENTANILLA.NextVal,
+                <if test="codigoUsuario != null">
+                #{codigoUsuario},    
+                </if>
+                <if test="idVentanilla != null">
+                #{idVentanilla},
+                </if>
+                <if test="idSede != null">
+                #{idSede},
+                </if>
+                <if test="descObservacion != null">
+                #{descObservacion},
+                </if>
+                <if test="usuarioModificacion != null">
+                #{usuarioModificacion},
+                </if>
+                <if test="fechaModificacion != null">
+                #{fechaModificacion},    
+                </if>
+                <if test="usuarioCreacion != null">
+                #{usuarioCreacion},
+                </if>
+                <if test="fechaCreacion != null">
+                #{fechaCreacion},
+                </if>
+                #{estadoAsignacion}       
+            )
+        <selectKey keyProperty="idUsuVent" resultType="Long">
+            SELECT SEQ_SAC_REG_USUARIO_VENTANILLA.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+    
+    <select id="buscarUsuarioVentanilla" resultMap="usuarioVentanillaMap" parameterType="usuarioVentanilla">
+        SELECT 
+            N_ID_USU_VENT,
+            CODIGO_USUARIO,
+            N_ID_VENTANILLA,
+            N_ID_SEDE,
+            C_DESC_OBERVACION,
+            N_ESTADO_ASIGNACION,
+            C_USUARIO_MODIFICA,
+            D_FECHA_MODIFICA,
+            C_USUARIO_CREA,
+            D_FECHA_CREA
+        FROM SAC_REG_USUARIO_VENTANILLA
+        WHERE 1=1  
+        <if test="codigoUsuario != null">
+        AND CODIGO_USUARIO = #{codigoUsuario}
+        </if>
+    </select>
+</mapper>

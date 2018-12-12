@@ -62,6 +62,8 @@
         <typeAlias type="gob.dp.sid.atencion.entity.Ticket" alias="ticket"/>
         <typeAlias type="gob.dp.sid.atencion.entity.AtencionTicket" alias="atencionTicket"/>
         <typeAlias type="gob.dp.sid.atencion.entity.Ciudadano" alias="ciudadano"/>
+        <typeAlias type="gob.dp.sid.atencion.entity.UsuarioVentanilla" alias="usuarioVentanilla"/>
+        <typeAlias type="gob.dp.sid.atencion.entity.Ventanilla" alias="ventanilla"/>
         
         <typeAlias type="gob.dp.sid.reporte.entity.Reporte" alias="reporte"/>
         <typeAlias type="gob.dp.sid.reporte.entity.ReporteSidExpediente" alias="reporteSidExpediente"/>
@@ -121,6 +123,8 @@
         <mapper resource="gob/dp/sid/atencion/dao/xml/Visita.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/Documento.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/Ticket.xml" />
+        <mapper resource="gob/dp/sid/atencion/dao/xml/UsuarioVentanilla.xml" />
+        <mapper resource="gob/dp/sid/atencion/dao/xml/Ventanilla.xml" />
     </mappers>
     
 </configuration>
