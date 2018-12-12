@@ -193,26 +193,31 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         filtroTicket.setEstadoRegistro(EstadoRegistroType.ACTIVO.getKey());
         filtroTicket.setEstadoTicket(EstadoTicketType.TICKET_EN_COLA.getKey());
         filtroTicket.setIdSede(usuarioSession.getCodigoOD().longValue());
-        ticket = ticketService.obtenerTicketAtencion(filtroTicket);
-        if(ticket != null && ticket.getIdTicket() != null){
-            atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
-            atencionTicket.setIdTicket(ticket.getIdTicket());
-            atencionTicket.setIdSede(usuarioSession.getCodigoOD().longValue());
-            atencionTicket.setCodigoUsuarioAtencionTicket(usuarioSession.getCodigo());
-            atencionTicket.setFechaInicioAtencionTicket(new Date());
-            atencionTicket.setEstadoAtencionTicket(EstadoRegistroType.ACTIVO.getKey());
-            
-            usuarioParam.setCodigoUsuario(usuarioSession.getCodigo());
-            usuarioVentanilla = usuarioVentanillaService.buscarUsuarioVentanilla(usuarioParam);
-            atencionTicket.setIdVentanilla(usuarioVentanilla.getIdVentanilla());
-            
-            ticketService.actualizarEstadoTicket(ticket);
-            registrarAtencionTicket();
+        
+        usuarioParam.setCodigoUsuario(usuarioSession.getCodigo());
+        usuarioVentanilla = usuarioVentanillaService.buscarUsuarioVentanilla(usuarioParam);
+        
+        if(usuarioVentanilla != null){
+            ticket = ticketService.obtenerTicketAtencion(filtroTicket);
+            if(ticket != null && ticket.getIdTicket() != null){
+                atencionTicket =ticketService.obtenerDatosAtencionTicket(ticket.getIdTicket());
+                atencionTicket.setIdTicket(ticket.getIdTicket());
+                atencionTicket.setIdSede(usuarioSession.getCodigoOD().longValue());
+                atencionTicket.setCodigoUsuarioAtencionTicket(usuarioSession.getCodigo());
+                atencionTicket.setFechaInicioAtencionTicket(new Date());
+                atencionTicket.setEstadoAtencionTicket(EstadoRegistroType.ACTIVO.getKey());
+                atencionTicket.setIdVentanilla(usuarioVentanilla.getIdVentanilla());
+                ticketService.actualizarEstadoTicket(ticket);
+                registrarAtencionTicket();
+            }else{
+                message = "No existen Ticket pendientes.";
+                msg.messageInfo(message, "Atención de Tickets");
+            }    
         }else{
-            message = "No existen Ticket pendientes.";
+            message = "Usted no tiene asignado una ventanilla de atención de tickets.";
             msg.messageInfo(message, "Atención de Tickets");
         }
-        
+
         return "iniciarTicket";
     }
     
