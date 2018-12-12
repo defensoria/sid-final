@@ -34,9 +34,9 @@ public class ConstantesUtil implements Serializable{
     public static final String LISTA_VALOR_SELECCIONE_NOMBRE = "SELECCIONE";
     
     
-    public static String FILE_DONWLOAD = "C:/filesystem";
+    //public static String FILE_DONWLOAD = "C:/filesystem";
     
-    //public static String FILE_DONWLOAD = "/srv/sid/filesystem";
+    public static String FILE_DONWLOAD = "/srv/sid/filesystem";
     
     // PAGINAS ATENCION:
     public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";

@@ -1,4 +1,4 @@
-urlServicioBase="http://34.198.218.135:8080/verifica/";
+urlServicioBase="http://172.30.1.82:8080/Validador/";
 urlServicioRestBase = urlServicioBase + 'ValidarDocumento_Rest/';
 
 var abrirVisorArchivo = function (requesAbrirVisorArchivo) {

@@ -168,7 +168,7 @@
                                             }
                                         </script>
                                         <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                            <a class="btn btn-warning" jsf:actionListener="#{atencionController.generarTicket()}"> <!--onclick="confirmar1()"-->
+                                            <a class="btn btn-warning" jsf:rendered="" > <!--onclick="confirmar1()"-->
                                                 <i class="fa fa-ticket-alt"></i> Generar Ticket
                                             </a>
                                         </h:panelGroup>
@@ -316,9 +316,7 @@
                                                         </a>
                                                         &#160;
                                                         <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                                            <a class="btn btn-danger" onclick="callOCR()">
-                                                                <span class="fas fa-server" /> OCR
-                                                            </a>
+                                                            
                                                             <script>
                                                                 function callOCR(){
                                                                     console.log('Llamando componente OCR');
@@ -406,7 +404,6 @@
                                                         class="form-control"
                                                         name="cboTipoVisor">
                                                         <option value="1">INTERNO</option>
-                                                        <option value="2">EXTERNO</option>
                                                 </select>
                                             </h:panelGroup>
                                         </div>
@@ -450,6 +447,19 @@
                                                                 }
                                                             </script>
                                                             <gc:confirmSubmit bean="#{atencionController.eliminarDocumento(row5.rowIndex)}" classGC="confirmacion4#{row5.rowIndex+1}" mensaje="¿Esta seguro que desea eliminar el registro?" />
+                                                            <h:panelGroup rendered="#{atencionController.disabledGuardar}">
+                                                                <a onclick="invocarOCR4#{row5.rowIndex+1}(#{docs.id})">
+                                                                    <i class="fas fa-server"  ></i>
+                                                                </a>
+                                                                <script>
+                                                                    function invocarOCR4#{row5.rowIndex+1}(id) {
+                                                                        // alert('id documento: ' + id);
+                                                                        console.log('Llamando componente OCR');
+                                                                        abrirVisorArchivo({
+                                                                                    "idAplicacion": 1,"idArchivo": id});
+                                                                    }
+                                                                </script>
+                                                            </h:panelGroup>
                                                         </h:column>
                                                     </h:dataTable>
                                                 </div>
