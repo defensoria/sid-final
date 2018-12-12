@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.atencion.dao.VentanillaDAO">
+
+    <resultMap id="ventanillaMap" type="gob.dp.sid.atencion.entity.Ventanilla">
+        <result property="idVentanilla" column="N_ID_VENTANILLA" jdbcType="INTEGER"/>
+        <result property="codVentanilla" column="C_COD_VENTANILLA" jdbcType="VARCHAR"/>
+        <result property="descVentanilla" column="C_DESC_VENTANILLA" jdbcType="VARCHAR"/>
+        <result property="estadoRegistro" column="N_ESTADO_REGISTRO" jdbcType="INTEGER"/>
+        <result property="usuarioCreacion" column="C_USUARIO_CREA" jdbcType="VARCHAR"/>
+        <result property="fechaCreacion" column="D_FECHA_CREA" jdbcType="DATE"/>
+    </resultMap>
+    
+    <select id="listarVentanillas" resultMap="ventanillaMap" parameterType="ventanilla">
+        SELECT 
+            N_ID_VENTANILLA,
+            C_COD_VENTANILLA,
+            C_DESC_VENTANILLA,
+            N_ESTADO_REGISTRO,
+            C_USUARIO_CREA,
+            D_FECHA_CREA 
+        FROM SID1.SAC_REG_VENTANILLA
+        WHERE N_ESTADO_REGISTRO = 1
+    </select>
+    
+</mapper>

@@ -34,10 +34,36 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header header-dark">
-                                <h4 class="card-title"><a href="#">Datos del Ciudadano</a></h4>
+                                <h4 class="card-title"><a href="#">Asignar Usuario Ventanilla</a></h4>
                             </div>
                             <div class="card-body">
                                 <h:panelGroup id="idPanelGroupDatosCiudadano">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputUsuario" class="control-label col-form-label"><strong>USUARIO</strong></label>
+                                                <h:selectOneMenu id="cmbUsuario" 
+                                                                 value="#{atencionController.usuarioVentanilla.codigoUsuario}" 
+                                                                 class="usuario form-control">
+                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{atencionController.listaUsuarios}" var="y" itemLabel="#{y.nombre} #{y.apellidoPaterno} #{y.apellidoMaterno}" itemValue="#{y.codigo}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputVentanilla" class="control-label col-form-label"><strong>VENTANILLA</strong></label>
+                                                <h:selectOneMenu id="cmbVentanilla" 
+                                                                 value="#{atencionController.usuarioVentanilla.idVentanilla}" 
+                                                                 class="ventanilla form-control">
+                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{atencionController.listaVentanilla}" var="y" itemLabel="#{y.codVentanilla}" itemValue="#{y.idVentanilla}" />
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -53,36 +79,21 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="inputnombres" class="control-label col-form-label"><strong>Nombres</strong></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencionTicket.nombrePersona}" disabled="true"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="inputapepaterno" class="control-label col-form-label"><strong>Ape. Paterno</strong></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <input type="text" class="apepaterno form-control" jsf:value="#{atencionController.atencionTicket.apePatPersona}" disabled="true"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
                                                 <label for="inputapematerno" class="control-label col-form-label"><strong>Ape. Materno</strong></label>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <input type="text" class="apematerno form-control" jsf:value="#{atencionController.atencionTicket.apeMatPersona}" disabled="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group" style="text-align: center">
+                                                <a class="btn btn-warning" jsf:action="#{registroController.iniciarExpedienteSAC()}" >
+                                                    <i class="fa fa-save"></i> Agregar Usuario-Ventanilla
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +104,7 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header header-dark">
-                                <h4 class="card-title"><a href="#">Datos del Trámite</a></h4>
+                                <h4 class="card-title"><a href="#">Lista de Usuarios-Ventanilla</a></h4>
                             </div>
                             <div class="card-body">
                                 <h:panelGroup id="idPanelGroupDatosTramite">
