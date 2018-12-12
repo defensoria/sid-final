@@ -93,5 +93,30 @@
         <if test="codigoUsuario != null">
         AND CODIGO_USUARIO = #{codigoUsuario}
         </if>
+        <if test="idSede != null">
+        AND N_ID_SEDE = #{idSede}
+        </if>
+    </select>
+    
+    <select id="listarUsuarioVentanilla" resultMap="usuarioVentanillaMap" parameterType="usuarioVentanilla">
+        SELECT 
+            N_ID_USU_VENT,
+            CODIGO_USUARIO,
+            N_ID_VENTANILLA,
+            N_ID_SEDE,
+            C_DESC_OBERVACION,
+            N_ESTADO_ASIGNACION,
+            C_USUARIO_MODIFICA,
+            D_FECHA_MODIFICA,
+            C_USUARIO_CREA,
+            D_FECHA_CREA
+        FROM SAC_REG_USUARIO_VENTANILLA
+        WHERE 1=1  
+        <if test="codigoUsuario != null">
+        AND CODIGO_USUARIO = #{codigoUsuario}
+        </if>
+        <if test="idSede != null">
+        AND N_ID_SEDE = #{idSede}
+        </if>
     </select>
 </mapper>

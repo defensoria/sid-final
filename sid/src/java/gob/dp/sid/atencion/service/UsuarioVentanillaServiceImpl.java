@@ -7,6 +7,7 @@ package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.dao.UsuarioVentanillaDAO;
 import gob.dp.sid.atencion.entity.UsuarioVentanilla;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,10 @@ public class UsuarioVentanillaServiceImpl implements UsuarioVentanillaService {
     @Override
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
         return usuarioVentanillaDAO.buscarUsuarioVentanilla(usuarioVentanilla);
+    }
+    
+    @Override
+    public List<UsuarioVentanilla> listarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        return usuarioVentanillaDAO.listarUsuarioVentanilla(usuarioVentanilla);
     }
 }

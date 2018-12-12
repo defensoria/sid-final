@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.dao;
 
 import gob.dp.sid.atencion.entity.UsuarioVentanilla;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface UsuarioVentanillaDAO {
     public void insertarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
     
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
+    
+    public List<UsuarioVentanilla> listarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
 }

@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.dao;
 
 import gob.dp.sid.atencion.entity.UsuarioVentanilla;
+import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +31,8 @@ public class UsuarioVentanillaDAOImpl extends SqlSessionDaoSupport implements Us
         return u;
     }
     
+    @Override
+    public List<UsuarioVentanilla> listarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        return getSqlSession().selectList("gob.dp.sid.atencion.dao.UsuarioVentanillaDAO.listarUsuarioVentanilla", usuarioVentanilla);
+    }
 }

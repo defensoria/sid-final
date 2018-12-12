@@ -97,6 +97,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<Expediente> listaExpedienteXDNIPaginado;
     private List<Usuario> listaUsuarios;
     private List<Ventanilla> listaVentanilla;
+    private List<UsuarioVentanilla> listaUsuarioVentanilla;
     private Integer nroPagina = 1;
     private String serverPathDocument;
     private String disableField = "false";
@@ -154,6 +155,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     public String cargarUsuarioVentanilla() {
         usuarioSession();
+        UsuarioVentanilla usuarioParam =new UsuarioVentanilla();
         usuarioVentanilla =new UsuarioVentanilla();
         ventanilla =new Ventanilla();
         atencionTicket =new AtencionTicket();
@@ -166,7 +168,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 listaUsuarios.add(u);
             }
         }
+        usuarioParam.setIdSede(usuarioSession.getCodigoOD().longValue());
+        listaUsuarioVentanilla = usuarioVentanillaService.listarUsuarioVentanilla(usuarioParam);
         return "asignarUsuarioVentanilla";
+    }
+    
+    public void editarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        
     }
     
     public String asignarUsuarioVentanilla() {
@@ -1383,6 +1391,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setListaVentanilla(List<Ventanilla> listaVentanilla) {
         this.listaVentanilla = listaVentanilla;
+    }
+
+    /**
+     * @return the listaUsuarioVentanilla
+     */
+    public List<UsuarioVentanilla> getListaUsuarioVentanilla() {
+        return listaUsuarioVentanilla;
+    }
+
+    /**
+     * @param listaUsuarioVentanilla the listaUsuarioVentanilla to set
+     */
+    public void setListaUsuarioVentanilla(List<UsuarioVentanilla> listaUsuarioVentanilla) {
+        this.listaUsuarioVentanilla = listaUsuarioVentanilla;
     }
     
     

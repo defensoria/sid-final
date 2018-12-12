@@ -6,6 +6,7 @@
 package gob.dp.sid.atencion.service;
 
 import gob.dp.sid.atencion.entity.UsuarioVentanilla;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface UsuarioVentanillaService {
     public void registrarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
 
     public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
+    
+    public List<UsuarioVentanilla> listarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
 }
