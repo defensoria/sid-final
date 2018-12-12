@@ -31,6 +31,7 @@ import gob.dp.sid.atencion.entity.type.TratamientoProcesoType;
 import gob.dp.sid.atencion.service.DocumentoService;
 import gob.dp.sid.atencion.service.TicketService;
 import gob.dp.sid.atencion.service.TipoDocumentoService;
+import gob.dp.sid.atencion.service.UsuarioVentanillaService;
 import gob.dp.sid.atencion.service.VentanillaService;
 import gob.dp.sid.atencion.service.VisitaService;
 import gob.dp.sid.comun.ComunUtil;
@@ -143,12 +144,15 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private ExpedienteVisitaService expedienteVisitaService;
     
     @Autowired
+    private UsuarioVentanillaService usuarioVentanillaService;
+    
+    @Autowired
     private UsuarioService usuarioService;
     
     @Autowired
     private VentanillaService ventanillaService;
     
-    public String asignarUsuarioVentanilla() {
+    public String cargarUsuarioVentanilla() {
         usuarioSession();
         usuarioVentanilla =new UsuarioVentanilla();
         ventanilla =new Ventanilla();
@@ -165,10 +169,25 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return "asignarUsuarioVentanilla";
     }
     
+    public String asignarUsuarioVentanilla() {
+        try {
+            usuarioVentanilla.setIdSede(usuarioSession.getCodigoOD().longValue());
+            usuarioVentanilla.setEstadoAsignacion(EstadoRegistroType.ACTIVO.getKey());
+            usuarioVentanilla.setUsuarioCreacion(usuarioSession.getCodigo());
+            usuarioVentanilla.setFechaCreacion(new Date());
+            usuarioVentanillaService.registrarUsuarioVentanilla(usuarioVentanilla);
+        } catch (Exception e) {
+            log.error("ERROR - registrarAtencionTicket()" + e);
+        }
+        return "asignarUsuarioVentanilla";
+    }
+    
     public String atenderTicket() {
         usuarioSession();
         atencion =new Atencion();
         atencionTicket =new AtencionTicket();
+        UsuarioVentanilla usuarioParam =new UsuarioVentanilla();
+        UsuarioVentanilla usuarioVentanilla =new UsuarioVentanilla();
         ticket = new Ticket();
         FiltroTicket filtroTicket = new FiltroTicket();
         filtroTicket.setEstadoRegistro(EstadoRegistroType.ACTIVO.getKey());
@@ -182,6 +201,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             atencionTicket.setCodigoUsuarioAtencionTicket(usuarioSession.getCodigo());
             atencionTicket.setFechaInicioAtencionTicket(new Date());
             atencionTicket.setEstadoAtencionTicket(EstadoRegistroType.ACTIVO.getKey());
+            
+            usuarioParam.setCodigoUsuario(usuarioSession.getCodigo());
+            usuarioVentanilla = usuarioVentanillaService.buscarUsuarioVentanilla(usuarioParam);
+            atencionTicket.setIdVentanilla(usuarioVentanilla.getIdVentanilla());
+            
             ticketService.actualizarEstadoTicket(ticket);
             registrarAtencionTicket();
         }else{

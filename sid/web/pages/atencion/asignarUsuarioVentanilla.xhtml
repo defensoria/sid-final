@@ -65,33 +65,9 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="inputdni" class="control-label col-form-label"><strong>DNI</strong></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <input type="text" class="dni form-control" jsf:value="#{atencionController.atencionTicket.dniPersona}" disabled="true"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="inputapematerno" class="control-label col-form-label"><strong>Ape. Materno</strong></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <input type="text" class="apematerno form-control" jsf:value="#{atencionController.atencionTicket.apeMatPersona}" disabled="true"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group" style="text-align: center">
-                                                <a class="btn btn-warning" jsf:action="#{registroController.iniciarExpedienteSAC()}" >
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.asignarUsuarioVentanilla()}" >
                                                     <i class="fa fa-save"></i> Agregar Usuario-Ventanilla
                                                 </a>
                                             </div>

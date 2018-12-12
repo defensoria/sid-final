@@ -23,4 +23,11 @@ public class UsuarioVentanillaDAOImpl extends SqlSessionDaoSupport implements Us
         System.out.println("ID INSERTADO: " + usuarioVentanilla.getIdUsuVent());
     }
     
+    @Override
+    public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        
+        UsuarioVentanilla u = getSqlSession().selectOne("gob.dp.sid.atencion.dao.UsuarioVentanillaDAO.buscarUsuarioVentanilla", usuarioVentanilla);
+        return u;
+    }
+    
 }

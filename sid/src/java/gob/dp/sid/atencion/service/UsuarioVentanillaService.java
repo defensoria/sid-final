@@ -14,5 +14,6 @@ import gob.dp.sid.atencion.entity.UsuarioVentanilla;
 public interface UsuarioVentanillaService {
     
     public void registrarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
-    
+
+    public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla);
 }

@@ -33,6 +33,7 @@ public class AtencionTicket {
     private Date fechaInicioAtencionTicket;
     private Date fechaFinAtencionTicket;
     private Integer estadoAtencionTicket;
+    private Long idVentanilla;
     
     /**
      * @return the idTicket
@@ -312,6 +313,20 @@ public class AtencionTicket {
      */
     public void setIdSede(Long idSede) {
         this.idSede = idSede;
+    }
+
+    /**
+     * @return the idVentanilla
+     */
+    public Long getIdVentanilla() {
+        return idVentanilla;
+    }
+
+    /**
+     * @param idVentanilla the idVentanilla to set
+     */
+    public void setIdVentanilla(Long idVentanilla) {
+        this.idVentanilla = idVentanilla;
     }
 
     

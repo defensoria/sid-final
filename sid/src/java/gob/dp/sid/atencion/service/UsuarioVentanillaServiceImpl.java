@@ -26,4 +26,8 @@ public class UsuarioVentanillaServiceImpl implements UsuarioVentanillaService {
         usuarioVentanillaDAO.insertarUsuarioVentanilla(usuarioVentanilla);
     }
     
+    @Override
+    public UsuarioVentanilla buscarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        return usuarioVentanillaDAO.buscarUsuarioVentanilla(usuarioVentanilla);
+    }
 }

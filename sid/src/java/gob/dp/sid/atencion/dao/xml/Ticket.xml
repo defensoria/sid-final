@@ -36,6 +36,7 @@
         <result property="fechaInicioAtencionTicket" column="D_FECHA_INI_ATE" jdbcType="DATE"/>
         <result property="fechaFinAtencionTicket" column="D_FECHA_FIN_ATE" jdbcType="DATE"/>
         <result property="estadoAtencionTicket" column="N_ESTADO_REGISTRO" jdbcType="INTEGER"/>
+        <result property="idVentanilla" column="N_ID_VENTANILLA" jdbcType="INTEGER"/>
     </resultMap>
     
     <insert id="ticketInsertar" parameterType="ticket">
@@ -163,6 +164,9 @@
                 <if test="fechaFinAtencionTicket != null">
                 D_FECHA_FIN_ATE,
                 </if>
+                <if test="idVentanilla != null">
+                N_ID_VENTANILLA,
+                </if>
                 N_ESTADO_REGISTRO)
           VALUES (
                 SQ_SAC_REG_ATENCION_TICKET.NextVal,
@@ -180,6 +184,9 @@
                 </if>
                 <if test="fechaFinAtencionTicket != null">
                 #{fechaFinAtencionTicket},
+                </if>
+                <if test="idVentanilla != null">
+                #{idVentanilla},
                 </if>
                 #{estadoAtencionTicket}    
             )
