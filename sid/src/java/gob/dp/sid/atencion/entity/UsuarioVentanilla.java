@@ -24,6 +24,7 @@ public class UsuarioVentanilla {
     private String usuarioCreacion;
     private Date fechaCreacion;
 
+    private String codVentanilla;
     /**
      * @return the idUsuVent
      */
@@ -162,6 +163,20 @@ public class UsuarioVentanilla {
      */
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * @return the codVentanilla
+     */
+    public String getCodVentanilla() {
+        return codVentanilla;
+    }
+
+    /**
+     * @param codVentanilla the codVentanilla to set
+     */
+    public void setCodVentanilla(String codVentanilla) {
+        this.codVentanilla = codVentanilla;
     }
     
     

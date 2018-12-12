@@ -170,6 +170,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
         usuarioParam.setIdSede(usuarioSession.getCodigoOD().longValue());
         listaUsuarioVentanilla = usuarioVentanillaService.listarUsuarioVentanilla(usuarioParam);
+        for(UsuarioVentanilla uv: listaUsuarioVentanilla){
+            for(Ventanilla v: listaVentanilla){
+                if(uv.getIdVentanilla().equals(v.getIdVentanilla())){
+                    uv.setCodVentanilla(v.getCodVentanilla());
+                }
+            }
+        }
         return "asignarUsuarioVentanilla";
     }
     
@@ -184,6 +191,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             usuarioVentanilla.setUsuarioCreacion(usuarioSession.getCodigo());
             usuarioVentanilla.setFechaCreacion(new Date());
             usuarioVentanillaService.registrarUsuarioVentanilla(usuarioVentanilla);
+            cargarUsuarioVentanilla();
         } catch (Exception e) {
             log.error("ERROR - registrarAtencionTicket()" + e);
         }
