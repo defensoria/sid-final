@@ -158,7 +158,6 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         UsuarioVentanilla usuarioParam =new UsuarioVentanilla();
         usuarioVentanilla =new UsuarioVentanilla();
         ventanilla =new Ventanilla();
-        atencionTicket =new AtencionTicket();
         listaUsuarios = new ArrayList<>();
         listaVentanilla = new ArrayList<>();
         listaVentanilla = ventanillaService.listarVentanillas(ventanilla);
@@ -180,8 +179,11 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return "asignarUsuarioVentanilla";
     }
     
-    public void editarUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
-        
+    public String editarUsuarioVentanilla(UsuarioVentanilla usuVen) {
+        usuarioVentanilla =new UsuarioVentanilla();
+        usuarioVentanilla.setCodigoUsuario(usuVen.getCodigoUsuario());
+        usuarioVentanilla.setIdVentanilla(usuVen.getIdVentanilla());
+        return "asignarUsuarioVentanilla";
     }
     
     public String asignarUsuarioVentanilla() {
