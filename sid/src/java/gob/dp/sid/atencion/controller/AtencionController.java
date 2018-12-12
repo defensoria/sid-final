@@ -8,6 +8,7 @@ package gob.dp.sid.atencion.controller;
 import gob.dp.sid.administracion.parametro.constantes.Constantes;
 import gob.dp.sid.administracion.seguridad.controller.LoginController;
 import gob.dp.sid.administracion.seguridad.entity.Usuario;
+import gob.dp.sid.administracion.seguridad.service.UsuarioService;
 import gob.dp.sid.atencion.bean.ArchivoDocumentoBean;
 import gob.dp.sid.atencion.bean.AtencionBean;
 import gob.dp.sid.atencion.entity.Atencion;
@@ -20,6 +21,7 @@ import gob.dp.sid.atencion.entity.AtencionTicket;
 import gob.dp.sid.atencion.entity.Documento;
 import gob.dp.sid.atencion.entity.Ticket;
 import gob.dp.sid.atencion.entity.TipoDocumento;
+import gob.dp.sid.atencion.entity.UsuarioVentanilla;
 import gob.dp.sid.atencion.entity.VisitaCiudadano;
 import gob.dp.sid.atencion.entity.type.EstadoRegistroType;
 import gob.dp.sid.atencion.entity.type.EstadoTicketType;
@@ -79,6 +81,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private Usuario usuarioSession;
     private Atencion atencion;
     private AtencionTicket atencionTicket;
+    private UsuarioVentanilla usuarioVentanilla;
     private Documento documento;
     private AtencionBean atencionBean;
     private List<Parametro> listaTipoAtencion; 
@@ -133,6 +136,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     @Autowired
     private ExpedienteVisitaService expedienteVisitaService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    public String asignarUsuarioVentanilla() {
+        usuarioSession();
+        usuarioVentanilla =new UsuarioVentanilla();
+        atencionTicket =new AtencionTicket();
+        return "asignarUsuarioVentanilla";
+    }
     
     public String atenderTicket() {
         usuarioSession();
@@ -1281,6 +1294,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
+    }
+
+    /**
+     * @return the usuarioVentanilla
+     */
+    public UsuarioVentanilla getUsuarioVentanilla() {
+        return usuarioVentanilla;
+    }
+
+    /**
+     * @param usuarioVentanilla the usuarioVentanilla to set
+     */
+    public void setUsuarioVentanilla(UsuarioVentanilla usuarioVentanilla) {
+        this.usuarioVentanilla = usuarioVentanilla;
     }
     
     
