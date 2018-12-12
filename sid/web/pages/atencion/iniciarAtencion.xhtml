@@ -168,7 +168,7 @@
                                             }
                                         </script>
                                         <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                            <a class="btn btn-warning" jsf:rendered="" > <!--onclick="confirmar1()"-->
+                                            <a class="btn btn-warning" jsf:actionListener="#{atencionController.generarTicket()}"> <!--onclick="confirmar1()"-->
                                                 <i class="fa fa-ticket-alt"></i> Generar Ticket
                                             </a>
                                         </h:panelGroup>
