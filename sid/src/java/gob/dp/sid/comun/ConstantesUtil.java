@@ -24,19 +24,6 @@ public class ConstantesUtil implements Serializable{
     
     public static final int PAGINADO_30=30;
     
-    //public String FILE_SYSTEM="C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";
-    /**LINUX*/
-    //public String FILE_SYSTEM="/usr/local/glassfish4/glassfish/domains/domain1/docroot/filesystem/";
-    
-    //public static final String BASE_URL_REPORT = "C:\\recursos\\reportesSID\\";
-    /**LINUX*/
-    //public String BASE_URL_REPORT = "/usr/local/recursos/reportes/";
-    
-    public static final String BASE_URL_IMAGEPATH = "C:\\recursos\\images\\";
-    /**LINUX*/
-    // public String BASE_URL_IMAGEPATH = "/usr/local/recursos/images/";
-    public String BASE_URL_PRODUCCION_IMAGE = "http://localhost/filesystem/";
-    
     public static final String LISTA_VALOR_TODOS_CODIGO = "-1000";
     public static final String LISTA_VALOR_TODOS_NOMBRE = "TODOS";
 
@@ -47,9 +34,9 @@ public class ConstantesUtil implements Serializable{
     public static final String LISTA_VALOR_SELECCIONE_NOMBRE = "SELECCIONE";
     
     
-    //public static String FILE_DONWLOAD = "C:/filesystem";
+    public static String FILE_DONWLOAD = "C:/filesystem";
     
-    public static String FILE_DONWLOAD = "/srv/sid/filesystem";
+    //public static String FILE_DONWLOAD = "/srv/sid/filesystem";
     
     // PAGINAS ATENCION:
     public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";
