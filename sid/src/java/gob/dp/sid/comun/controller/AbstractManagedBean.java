@@ -27,8 +27,8 @@ public abstract class AbstractManagedBean implements Serializable{
     
     protected StringUtil stringUtil;
     
-    protected String separador = "/"; //linux
-    //protected String separador = "\\"; //windows 
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows 
 
     protected static String FILE_SYSTEM = ConstantesUtil.FILE_DONWLOAD+"/";
     

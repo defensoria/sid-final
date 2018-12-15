@@ -16,7 +16,9 @@ import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.bandeja.entity.Bandeja;
 import gob.dp.sid.bandeja.service.BandejaService;
 import gob.dp.sid.comun.ConstantesUtil;
+import gob.dp.sid.comun.CryptoAES;
 import gob.dp.sid.comun.ListadoClasificacion;
+import gob.dp.sid.comun.MEncript;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import gob.dp.sid.comun.entity.Distrito;
 import gob.dp.sid.comun.entity.FiltroParametro;
@@ -748,7 +750,20 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         }
         listarRegistrosCAV();
         limpiarCAV();
+        crearUsuarioFormularioVirtual(expedienteFormularioVirtual);
         msg.messageInfo("Se realizo el registro", null);
+    }
+    
+    private void crearUsuarioFormularioVirtual(ExpedienteFormularioVirtual efv){
+        try {
+            String formato = RandomStringUtils.random(32, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+            String encPass = MEncript.getStringMessageDigest(formato);
+            
+        System.out.println(encPass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
     }
     
     private void crearValidarExpediente(){
@@ -974,6 +989,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expedienteFormularioVirtual.setDepartamento(list.get(5));
                 expedienteFormularioVirtual.setProvincia(list.get(6));
                 expedienteFormularioVirtual.setDistrito(list.get(7));
+                expedienteFormularioVirtual.setTipo("01");
+                expedienteFormularioVirtual.setTipoDocumento("01");
                 if (StringUtils.isNotBlank(expedienteFormularioVirtual.getDepartamento())) {
                     comboProvinciaId(expedienteFormularioVirtual.getDepartamento());
                 }
