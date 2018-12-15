@@ -27,6 +27,11 @@ public class Ciudadano {
     private String usuarioCreacion;
     private Date fechaModifica;
     private String usuarioModifica;
+    private String direccion;
+    private String estadoCivil;
+    private String departamento;
+    private String provincia;
+    private String distrito;
 
     /**
      * @return the idPersona
@@ -222,6 +227,76 @@ public class Ciudadano {
      */
     public void setUsuarioModifica(String usuarioModifica) {
         this.usuarioModifica = usuarioModifica;
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the estadoCivil
+     */
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    /**
+     * @param estadoCivil the estadoCivil to set
+     */
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    /**
+     * @return the departamento
+     */
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * @param departamento the departamento to set
+     */
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    /**
+     * @return the provincia
+     */
+    public String getProvincia() {
+        return provincia;
+    }
+
+    /**
+     * @param provincia the provincia to set
+     */
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    /**
+     * @return the distrito
+     */
+    public String getDistrito() {
+        return distrito;
+    }
+
+    /**
+     * @param distrito the distrito to set
+     */
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
     }
     
     

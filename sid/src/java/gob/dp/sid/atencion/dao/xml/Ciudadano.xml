@@ -16,6 +16,11 @@
         <result property="usuarioCreacion" column="C_USUARIO_CREAC" jdbcType="VARCHAR"/>
         <result property="fechaModifica" column="D_FECHA_MODIFICA" jdbcType="DATE"/>
         <result property="usuarioModifica" column="C_USUARIO_MODIFICA" jdbcType="VARCHAR"/>
+        <result property="direccion" column="C_DIRECCION" jdbcType="VARCHAR"/>
+        <result property="estadoCivil" column="C_ESTADO_CIVIL" jdbcType="VARCHAR"/>
+        <result property="departamento" column="C_DEPARTAMENTO" jdbcType="VARCHAR"/>
+        <result property="provincia" column="C_PROVINCIA" jdbcType="VARCHAR"/>
+        <result property="distrito" column="C_DISTRITO" jdbcType="VARCHAR"/>
     </resultMap>
     
     <insert id="ciudadanoInsertar" parameterType="ciudadano">
