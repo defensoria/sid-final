@@ -3200,6 +3200,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     /*Inicio - JCARRILLO*/
     public void cargarValoresEstadisticos() {
         try {
+            estadisticaExpediente = new EstadisticaExpediente();
             EstadisticaExpediente estadisticaExp = new EstadisticaExpediente();
             estadisticaExpediente=expedienteService.estadisticaExpediente(estadisticaExp);
         } catch (Exception e) {
