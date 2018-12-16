@@ -74,7 +74,12 @@
         <result property="comisionado" column="COMISIONADO"/>
     </resultMap> 
     
-    
+    <resultMap id="estadisticaExpedienteMap" type="estadisticaExpediente">
+        <result property="cantQuejas" column="Q_QUEJA"/>
+        <result property="cantConsultas" column="Q_CONSULTA"/>
+        <result property="cantPetitorios" column="Q_PETITORIO"/>
+    </resultMap>
+            
     <insert id="expedienteInsertar" parameterType="expediente">
         INSERT INTO SID_REG_EXPEDIENTE
         (
@@ -926,6 +931,14 @@
     
     <select id="expedienteMayorInformacionCount" resultType="java.lang.Integer" parameterType="String">
         SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_NUMEROEXPEDIENTE = #{value} and N_INDMAYORINFORMA = 1
+    </select>
+    
+    <select id="estadisticaExpediente" resultType="estadisticaExpedienteMap" parameterType="estadisticaExpediente">
+        SELECT 
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION='01') Q_QUEJA,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION='02') Q_CONSULTA,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_TIPOCLASIFICACION='03') Q_PETITORIO
+        FROM DUAL
     </select>
     
 </mapper>

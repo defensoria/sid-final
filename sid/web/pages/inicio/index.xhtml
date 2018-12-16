@@ -17,6 +17,7 @@
     // ------------------------------
     // based on prepared DOM, initialize echarts instance
         var basicpieChart = echarts.init(document.getElementById('basic-pie'));
+        var qQuejas = document.getElementById('cantQuejas');
         var option = {
             // Add title
                 title: {
@@ -100,7 +101,7 @@
                     radius: '70%',
                     center: ['50%', '57.5%'],
                     data: [
-                        {value: 335, name: 'Quejas'},
+                        {value: qQuejas, name: 'Quejas'},
                         {value: 310, name: 'Petitorios'},
                         {value: 234, name: 'Consultas'}
                     ]
@@ -684,7 +685,7 @@
 });
                 </script>
                 
-                
+                <input type="hidden" id="cantQuejas" value="#{registroController.estadisticaExpediente.cantQuejas}" />
                 
                 <div class="row">
                     <div class="col-12">
