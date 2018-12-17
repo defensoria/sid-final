@@ -95,6 +95,8 @@ public class CacheServiceImpl implements CacheService{
     private static final Integer CACHE_PARAMETRO_LISTA_TRAMITE_INTERVENCION_PERSONAL = 180;//CAMBIAR POR SUS VALORES CORRECTOS
     
     private static final Integer CACHE_PARAMETRO_LISTA_TRAMITE_DOCUMENTARIO_ADMINISTRATIVO = 100;//CAMBIAR POR SUS VALORES CORRECTOS
+    
+    private static final Integer CACHE_PARAMETRO_LISTA_TIPO_DOCUMENTO_OCR = 370;
     /*Fin - jcarrillo*/
     
     /* JMATOS */
@@ -310,6 +312,13 @@ public class CacheServiceImpl implements CacheService{
     public List<Parametro> listaTipoAtencionIntervencion() {
         return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION, CACHE_PARAMETRO_LISTA_TIPO_ATENCION_INTERVENCION);
     }
+    
+    @Override
+    public List<Parametro> listarTipoDocumentoOCR() {
+        return buscarParametro(CACHE_PARAMETRO_LISTA_TIPO_DOCUMENTO_OCR, CACHE_PARAMETRO_LISTA_TIPO_DOCUMENTO_OCR);
+    }
+    
+    
 
     @Override
     public List<Parametro> listarTramitePostulacionesCAS() {
@@ -353,6 +362,8 @@ public class CacheServiceImpl implements CacheService{
         this.contenedor.put(key, objeto);
         notifyAll();
     }
+
+    
 
 }
 

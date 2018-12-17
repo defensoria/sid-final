@@ -5477,7 +5477,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return null;
     }
 
-    private String getFileExtension(String name) {
+    public String getFileExtension(String name) {
         try {
             return name.substring(name.lastIndexOf("."));
         } catch (Exception e) {

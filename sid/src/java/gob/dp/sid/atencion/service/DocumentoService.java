@@ -19,4 +19,6 @@ public interface DocumentoService {
     public void registrarDocumentosList(List<Documento> documentos);
     
     public List<ArchivoDocumentoBean> listarDocumentosServer();
+    
+    public List<Documento> buscarExpedienteByVisita(Long id);
 }
