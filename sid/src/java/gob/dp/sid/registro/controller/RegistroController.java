@@ -3200,8 +3200,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     /*Inicio - JCARRILLO*/
     public void cargarValoresEstadisticos() {
         try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            SeguridadUtilController seguridadUtilController = (SeguridadUtilController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "seguridadUtilController");
             estadisticaExpediente = new EstadisticaExpediente();
             EstadisticaExpediente estadisticaExp = new EstadisticaExpediente();
+            if(!seguridadUtilController.tieneRecurso("REC_EXP008")){
+                estadisticaExp.setCodUsuario(usuarioSession.getCodigo());
+            }
             estadisticaExpediente=expedienteService.estadisticaExpediente(estadisticaExp);
         } catch (Exception e) {
             log.error("ERROR - cargarValoresEstadisticos()" + e);
