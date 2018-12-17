@@ -12,6 +12,7 @@ import gob.dp.sid.administracion.seguridad.entity.Usuario;
 import gob.dp.sid.administracion.seguridad.service.UsuarioService;
 import gob.dp.sid.atencion.controller.AtencionController;
 import gob.dp.sid.atencion.entity.AtencionTicket;
+import gob.dp.sid.registro.entity.EstadisticaExpediente;
 import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.bandeja.entity.Bandeja;
 import gob.dp.sid.bandeja.service.BandejaService;
@@ -364,6 +365,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private List<ExpedienteFormularioVirtual> listaExpedienteFormularioVirtual;
     
     private List<ExpedienteVisita> listaDocumentosPorVisita;
+    
+    private EstadisticaExpediente estadisticaExpediente;
 
     @Autowired
     private ExpedienteService expedienteService;
@@ -1409,6 +1412,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             cargarGraficos001();
             cargarGraficos002();
             cargarGraficos003();
+            cargarValoresEstadisticos();//JCARRILLO
         } catch (Exception e) {
             log.error("ERROR - inicio()" + e);
         }
@@ -3192,6 +3196,23 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             log.error("ERROR - listarExpedienteUsuarioPaginado()" + e);
         }
     }
+    
+    /*Inicio - JCARRILLO*/
+    public void cargarValoresEstadisticos() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            SeguridadUtilController seguridadUtilController = (SeguridadUtilController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "seguridadUtilController");
+            estadisticaExpediente = new EstadisticaExpediente();
+            EstadisticaExpediente estadisticaExp = new EstadisticaExpediente();
+            if(!seguridadUtilController.tieneRecurso("REC_EXP008")){
+                estadisticaExp.setCodUsuario(usuarioSession.getCodigo());
+            }
+            estadisticaExpediente=expedienteService.estadisticaExpediente(estadisticaExp);
+        } catch (Exception e) {
+            log.error("ERROR - cargarValoresEstadisticos()" + e);
+        }
+    }
+    /*Fin - JCARRILLO*/
 
     public void listarExpedienteUsuarioPaginadoOrder(Integer pagina, int tipo) {
         try {
@@ -6431,6 +6452,20 @@ public class RegistroController extends AbstractManagedBean implements Serializa
 
     public void setListaDocumentosPorVisita(List<ExpedienteVisita> listaDocumentosPorVisita) {
         this.listaDocumentosPorVisita = listaDocumentosPorVisita;
+    }
+
+    /**
+     * @return the estadisticaExpediente
+     */
+    public EstadisticaExpediente getEstadisticaExpediente() {
+        return estadisticaExpediente;
+    }
+
+    /**
+     * @param estadisticaExpediente the estadisticaExpediente to set
+     */
+    public void setEstadisticaExpediente(EstadisticaExpediente estadisticaExpediente) {
+        this.estadisticaExpediente = estadisticaExpediente;
     }
 
     

@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.registro.service;
 
+import gob.dp.sid.registro.entity.EstadisticaExpediente;
 import gob.dp.sid.comun.entity.Parametro;
 import gob.dp.sid.comun.service.CacheService;
 import gob.dp.sid.registro.dao.ExpedienteDAO;
@@ -176,4 +177,11 @@ public class ExpedienteServiceImpl implements ExpedienteService{
         return expedienteDAO.expedienteBuscarPersonaByDNIPaginado(expediente);
     }
     // END JMATOS
+    
+    /*Inicio - JCARRILLO*/
+    @Override
+    public EstadisticaExpediente estadisticaExpediente(EstadisticaExpediente estExpediente){
+        return expedienteDAO.estadisticaExpediente(estExpediente);
+    }
+    /*Fin - JCARRILLO*/
 }

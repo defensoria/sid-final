@@ -56,6 +56,7 @@
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteHistorial" alias="expedienteHistorial"/>
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteFormularioVirtual" alias="expedienteFormularioVirtual"/>
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteVisita" alias="expedienteVisita"/>
+        <typeAlias type="gob.dp.sid.registro.entity.EstadisticaExpediente" alias="estadisticaExpediente"/>
         
         <typeAlias type="gob.dp.sid.atencion.entity.VisitaCiudadano" alias="visita"/>
         <typeAlias type="gob.dp.sid.atencion.entity.Documento" alias="documento"/>

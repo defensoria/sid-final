@@ -215,11 +215,20 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         }
     }
     
-    public String editarUsuarioVentanilla(UsuarioVentanilla usuVen) {
+    public String editarUsuarioVentanilla(UsuarioVentanilla usuVen,String accion) {
         disabledAgregarUsuVen=false;
-        //usuarioVentanilla.setCodigoUsuario(usuVen.getCodigoUsuario());
-        //usuarioVentanilla.setIdVentanilla(usuVen.getIdVentanilla());
-        usuarioVentanilla=usuVen;
+        if(accion.equals("I")){
+            if(usuVen.getEstadoAsignacion().equals(0)){
+                usuVen.setEstadoAsignacion(1);
+            }else{
+                usuVen.setEstadoAsignacion(0);
+            }
+            usuVen.setUsuarioModificacion(usuarioSession.getCodigo());
+            usuVen.setFechaModificacion(new Date());
+            usuarioVentanillaService.actualizarUsuarioVentanilla(usuVen);
+        }else{
+            usuarioVentanilla=usuVen;    
+        }
         return "asignarUsuarioVentanilla";
     }
     

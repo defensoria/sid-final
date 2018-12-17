@@ -129,6 +129,9 @@
             <if test="idVentanilla != null">
                 N_ID_VENTANILLA = #{idVentanilla},
             </if>
+            <if test="estadoAsignacion != null">
+                N_ESTADO_ASIGNACION = #{estadoAsignacion},
+            </if>
             <if test="usuarioModificacion != null">
                 C_USUARIO_MODIFICA = #{usuarioModificacion},
             </if>

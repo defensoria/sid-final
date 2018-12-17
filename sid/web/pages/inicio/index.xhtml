@@ -17,6 +17,7 @@
     // ------------------------------
     // based on prepared DOM, initialize echarts instance
         var basicpieChart = echarts.init(document.getElementById('basic-pie'));
+        //var qQuejas = document.getElementById('cantQuejas').value;
         var option = {
             // Add title
                 title: {
@@ -100,9 +101,9 @@
                     radius: '70%',
                     center: ['50%', '57.5%'],
                     data: [
-                        {value: 335, name: 'Quejas'},
-                        {value: 310, name: 'Petitorios'},
-                        {value: 234, name: 'Consultas'}
+                        {value: document.getElementById('cantQuejas').value, name: 'Quejas'},
+                        {value: document.getElementById('cantConsultas').value, name: 'Petitorios'},
+                        {value: document.getElementById('cantPetitorios').value, name: 'Consultas'}
                     ]
                 }]
         };
@@ -213,9 +214,9 @@
                         },
 
                         data: [
-                            {value: 234, name: 'Trámite'},
-                            {value: 135, name: 'Concluido'},
-                            {value: 1548, name: 'Desistido'}
+                            {value: document.getElementById('cantTramite').value, name: 'Trámite'},
+                            {value: document.getElementById('cantConcluido').value, name: 'Concluido'},
+                            {value: document.getElementById('cantDesistido').value, name: 'Desistido'}
                         ]
                     }
                 ]
@@ -260,8 +261,8 @@
                     radius : '55%',
                     center: ['50%', '50%'],
                     data:[
-                        {value:210, name:'En registro'},
-                        {value:400, name:'En borrador'}
+                        {value: document.getElementById('cantEnRegistro').value, name:'En registro'},
+                        {value: document.getElementById('cantEnBorrador').value, name:'En borrador'}
                     ].sort(function (a, b) { return a.value - b.value; }),
                     roseType: 'radius',
                     label: {
@@ -684,7 +685,14 @@
 });
                 </script>
                 
-                
+                <input type="hidden" id="cantQuejas" value="#{registroController.estadisticaExpediente.cantQuejas}" />
+                <input type="hidden" id="cantConsultas" value="#{registroController.estadisticaExpediente.cantConsultas}" />
+                <input type="hidden" id="cantPetitorios" value="#{registroController.estadisticaExpediente.cantPetitorios}" />
+                <input type="hidden" id="cantTramite" value="#{registroController.estadisticaExpediente.cantTramite}" />
+                <input type="hidden" id="cantConcluido" value="#{registroController.estadisticaExpediente.cantConcluido}" />
+                <input type="hidden" id="cantDesistido" value="#{registroController.estadisticaExpediente.cantDesistido}" />
+                <input type="hidden" id="cantEnBorrador" value="#{registroController.estadisticaExpediente.cantEnBorrador}" />
+                <input type="hidden" id="cantEnRegistro" value="#{registroController.estadisticaExpediente.cantEnRegistro}" />
                 
                 <div class="row">
                     <div class="col-12">

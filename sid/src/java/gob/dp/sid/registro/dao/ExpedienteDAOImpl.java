@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.registro.dao;
 
+import gob.dp.sid.registro.entity.EstadisticaExpediente;
 import gob.dp.sid.registro.entity.Expediente;
 import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -143,4 +144,11 @@ public class ExpedienteDAOImpl extends SqlSessionDaoSupport implements Expedient
         return getSqlSession().selectList("gob.dp.sid.registro.dao.ExpedienteDAO.expedienteBuscarUsuarioPaginado", expediente);
     }
     // END ADD JMATOS
+    
+    /*Inicio - JCARRILLO*/
+    @Override
+    public EstadisticaExpediente estadisticaExpediente(EstadisticaExpediente estExpediente) {
+        return getSqlSession().selectOne("gob.dp.sid.registro.dao.ExpedienteDAO.estadisticaExpediente", estExpediente);
+    }
+    /*Fin - JCARRILLO*/
 }

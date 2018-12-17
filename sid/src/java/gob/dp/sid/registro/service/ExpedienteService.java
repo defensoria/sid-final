@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.registro.service;
 
+import gob.dp.sid.registro.entity.EstadisticaExpediente;
 import gob.dp.sid.registro.entity.Expediente;
 import java.util.List;
 
@@ -67,4 +68,8 @@ public interface ExpedienteService {
     // ADD JMATOS
     public List<Expediente> expedienteBuscarPersonaByDNIPaginado(Expediente expediente);
     // END JMATOS
+    
+    /*Inicio - JCARRILLO*/
+    public EstadisticaExpediente estadisticaExpediente(EstadisticaExpediente estExpediente);
+    /*Fin - JCARRILLO*/
 }

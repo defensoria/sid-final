@@ -107,8 +107,17 @@
                                                 <h:outputText value="#{usuVen.codVentanilla}" />
                                             </h:column>
                                             <h:column>
-                                                <a jsf:action="#{atencionController.editarUsuarioVentanilla(usuVen)}">
-                                                    <i class="fas fa-edit" ></i>
+                                                <f:facet name="header">Estado</f:facet>
+                                                <h:outputText class="label #{usuVen.estadoAsignacion == 0? 'label-danger' : 'label-success' }" value="#{usuVen.estadoAsignacion == 0? 'Inactivo' : 'Activo' }" />
+                                            </h:column>
+                                            <h:column>
+                                                <h:panelGroup rendered="#{usuVen.estadoAsignacion == 0 ? false : true}">
+                                                    <a jsf:action="#{atencionController.editarUsuarioVentanilla(usuVen,'M')}">
+                                                        <i class="fas fa-edit" ></i>
+                                                    </a>
+                                                </h:panelGroup>
+                                                <a jsf:action="#{atencionController.editarUsuarioVentanilla(usuVen,'I')}">
+                                                    <i class="fas fa-trash" ></i>
                                                 </a>
 
                                             </h:column>
