@@ -87,5 +87,10 @@ public class BandejaDAOImpl extends SqlSessionDaoSupport implements BandejaDAO{
     public Long bandejaContarUsuarioProgramados(String destinatario) {
         return getSqlSession().selectOne("gob.dp.sid.bandeja.dao.BandejaDAO.bandejaContarUsuarioProgramados", destinatario);
     }
+
+    @Override
+    public Long bandejaContarPendientes(String destinatario) {
+        return getSqlSession().selectOne("gob.dp.sid.bandeja.dao.BandejaDAO.bandejaContarPendientes", destinatario);
+    }
     
 }

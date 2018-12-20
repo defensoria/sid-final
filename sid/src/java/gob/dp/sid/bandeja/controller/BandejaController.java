@@ -64,6 +64,8 @@ public class BandejaController extends AbstractManagedBean implements Serializab
     private Long nroMensajesAutomaticos = 0L;
     
     private Long nroMensajesProgramados = 0L;
+    
+    private Long nroMensajesNOVistos = 0L;
 
     private Bandeja mensajeBandeja;
     
@@ -121,6 +123,7 @@ public class BandejaController extends AbstractManagedBean implements Serializab
         nroMensajesInternos = bandejaService.bandejaContarUsuarioInternos(usuarioSession.getCodigo());
         nroMensajesProgramados = bandejaService.bandejaContarUsuarioProgramados(usuarioSession.getCodigo());
         nroMensajesAutomaticos = bandejaService.bandejaContarUsuarioAutomaticos(usuarioSession.getCodigo());
+        nroMensajesNOVistos = bandejaService.bandejaContarPendientes(usuarioSession.getCodigo());
     }
     
     public String cargarTotalInternos(Integer pagina){
@@ -829,6 +832,14 @@ public class BandejaController extends AbstractManagedBean implements Serializab
 
     public void setNroMensajesProgramados(Long nroMensajesProgramados) {
         this.nroMensajesProgramados = nroMensajesProgramados;
+    }
+
+    public Long getNroMensajesNOVistos() {
+        return nroMensajesNOVistos;
+    }
+
+    public void setNroMensajesNOVistos(Long nroMensajesNOVistos) {
+        this.nroMensajesNOVistos = nroMensajesNOVistos;
     }
 
 }

@@ -2,42 +2,49 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" 
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/gc">
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
             <h:form class="form-horizontal">
-                <script>function openModal(b){if(b.status==="success"){$("#myModal").modal("show")}}$(document).ready(function(){$(".tooltip-right").tooltip({placement:"right",viewport:{selector:"body",padding:2}})});</script>
-                <table style="width: 100%" class="table">
-                            <tr>
-                                <td colspan="2" style="width: 50%; padding-right: 2px;">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <span>Resultado de la búsqueda</span>
+                
+                <div class="tab-content tabcontent-border p-20" id="myTabContent">
+                <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                            <div class="col-4">
+                                                <h4 class="card-title">Resultado de la búsqueda</h4>
+                                            </div>
+                                            <div class="col-2" style="text-align: right">
+                                                
+                                            </div>
                                         </div>
-                                        <div class="panel-body">
-                                            <h:dataTable value="#{busquedaController.listadoGeneral}" var="exped" class="table table-hover" binding="#{ro3}">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                        <h:dataTable value="#{busquedaController.listadoGeneral}" var="exped" class="table table-hover" binding="#{ro3}">
                                                 <h:column>
                                                     <f:facet name="header">Nro</f:facet>
-                                                    <h:outputText value="#{(ro3.rowIndex+1)+(busquedaController.nroPagina-1)*20}" />
+                                                    <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(ro3.rowIndex+1)+(registroController.nroPagina-1)*10}" /></h5>
+                                                    
                                                 </h:column>
-                                                <h:column>
+                                                <h:column rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
                                                     <f:facet name="header">Comisionado</f:facet>
                                                     <h:outputText value="#{exped.comisionado}" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">OD</f:facet>
-                                                    <h:outputText value="#{exped.nombreOD}" />
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></b></f:facet>
+                                                    <label title="#{exped.sumilla == null? '' : exped.sumilla}" class="label label-danger">#{exped.numero}</label>
+                                                    
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">Expediente</f:facet>
-                                                    <h:outputText class="round tooltip-right" title="#{exped.sumilla == null? '' : exped.sumilla}" value="#{exped.numero}" />
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">Tipo</f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></b></f:facet>
                                                     <h:outputText value="#{exped.clasificacionTipoNombre}" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">Fecha Registro</f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></b></f:facet>
                                                     <h:outputText value="#{exped.fechaRegistro}" >
                                                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
                                                     </h:outputText>
@@ -46,41 +53,52 @@
                                                     <f:facet name="header">Etapa</f:facet>
                                                     <h:outputText value="#{exped.etapaDetalle}" />
                                                 </h:column>
+
                                                 <h:column>
-                                                    <f:facet name="header">Estado expediente</f:facet>
-                                                    <h:outputText value="#{exped.estadoDetalle}" />
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></b></f:facet>
+                                                    <h:outputText rendered="#{exped.general == 'A'}" value="Trámite" />
+                                                    <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == null}" value="Concluido" />
+                                                    <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == 1}" value="Desistido" />
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">Estado general</f:facet>
-                                                    <h:outputText value="#{exped.general == 'A'? 'Trámite': 'Concluido'}" />
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">Estado registro</f:facet>
+                                                    <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></b></f:facet>
                                                     <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
                                                 </h:column>
                                                 <h:column>
+                                                    
                                                     <a jsf:action="#{registroController.cargarExpedienteEdit(exped)}">
-                                                        <span class="glyphicon glyphicon-pencil"/>
+                                                        <i class="fas fa-pencil-alt" ></i>
                                                     </a>
                                                 </h:column>
+                                                <h:column>
+                                                    <a onclick="confirmar4#{row3.rowIndex+1}()">
+                                                        <i class="fas fa-trash"  ></i>
+                                                    </a>
+                                                    <script>
+                                                        function confirmar4#{row3.rowIndex+1}() {
+                                                            $(".confirmacion4#{row3.rowIndex+1}").modal('show');
+                                                        }
+                                                    </script>
+                                                    <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmacion4#{ro3.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
+                                                </h:column>
                                             </h:dataTable>
-                                            <ul class="pager">
-                                                <li>
-                                                    <a jsf:action="#{busquedaController.listarExpedientesPaginado(busquedaController.nroPagina -1)}" jsf:rendered="#{!empty busquedaController.listadoGeneral}" jsf:onclick="loadingModal()">Anterior
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a jsf:action="#{busquedaController.listarExpedientesPaginado(busquedaController.nroPagina +1)}" jsf:rendered="#{!empty busquedaController.listadoGeneral}" jsf:onclick="loadingModal()">Siguiente
-                                                        <f:ajax render="@form" onevent="closeModal"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <ul class="pagination">
+                    <li class="paginate_button page-item previous disabled" id="file_export_previous">
+                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                    </li>
+                    <li class="paginate_button page-item next" id="file_export_next">
+                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                    </li>
+                </ul>
                                     </div>
-                                </td>
-                            </tr>
-                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
             </h:form> 
         </ui:define>
     </ui:composition>

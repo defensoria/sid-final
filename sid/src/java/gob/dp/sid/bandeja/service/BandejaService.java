@@ -42,4 +42,6 @@ public interface BandejaService {
     public Long bandejaContarUsuarioAutomaticos(String destinatario);
     
     public Long bandejaContarUsuarioProgramados(String destinatario);
+    
+    public Long bandejaContarPendientes(String destinatario);
 }

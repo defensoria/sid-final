@@ -7,42 +7,42 @@
         <composite:attribute name="bean" required="true" method-signature="void action(java.lang.String)"/>
         <composite:attribute name="mensaje" default="Esta seguro que desea eliminar el registro ?"/>
         <composite:attribute name="classGC" default="confirmación"/>
-        <composite:attribute name="evento" default="loadingModal()"/>
     </composite:interface>
 
     <composite:implementation>
-        <div class="modal fade #{cc.attrs.classGC}" data-keyboard="false" data-backdrop="static" style="text-align: left">
-            <div class="modal-dialog modal-sm" >
-                <div class="modal-content" style=" background: #C7302C">
-                    <div class="modal-header" style="padding: 5px;">
-                        <h4 style="color: #FFFFFF"><b>Confirmación</b></h4>
-                    </div>
-                    <div style="background: white;" >
-                        <div class="modal-body" style="padding: 7px;">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="padding-right: 8px">
-                                        <img style="width: 30px" src="../../bootstrap/img/warning.png" />
-                                    </td>
-                                    <td>
-                                        <div style="color: #878787">
-                                            <h:outputText style="font-size: 1em" value="#{cc.attrs.mensaje}" />
+        
+            
+            <div class="modal fade #{cc.attrs.classGC}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Confirmación</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row form-group">
+                                                    <div class="col-2">
+                                                        <img src="../../bootstrap/img/warning.png" style="width: 30px"/>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <h:outputLabel style="text-justify: distribute" value="#{cc.attrs.mensaje}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                
+                                                <a class="btn btn-info" data-dismiss="modal" jsf:action="#{cc.attrs.bean}">
+                                                    <span class="fa fa-check"/> Aceptar
+                                                </a>
+                                                <a class="btn btn-danger" data-dismiss="modal">
+                                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cancelar</span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer" style="padding: 5px; background: white;">
-                        <a class="btn btn-warning" id="view" data-dismiss="modal" style="text-decoration: none" jsf:action="#{cc.attrs.bean}" jsf:onclick="#{cc.attrs.evento}">
-                            Aceptar
-                        </a>
-                        <a class="btn btn-danger" data-dismiss="modal" style="text-decoration: none">
-                            Cancelar
-                        </a>                
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    </div>
+                                </div>
+            
+            
+        
     </composite:implementation>
 </html>            

@@ -91,5 +91,10 @@ public class BandejaServiceImpl implements BandejaService{
     public Long bandejaContarUsuarioProgramados(String destinatario) {
         return bandejaDAO.bandejaContarUsuarioProgramados(destinatario);
     }
+
+    @Override
+    public Long bandejaContarPendientes(String destinatario) {
+        return bandejaDAO.bandejaContarPendientes(destinatario);
+    }
     
 }

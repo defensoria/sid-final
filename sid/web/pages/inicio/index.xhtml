@@ -746,7 +746,7 @@
                                                     </a>
                                                 </h:column>
                                                 <h:column>
-                                                    <a onclick="confirmar4#{row3.rowIndex+1}()">
+                                                    <a onclick="confirmar4#{row3.rowIndex+1}()" href="#">
                                                         <i class="fas fa-trash"  ></i>
                                                     </a>
                                                     <script>
@@ -754,7 +754,7 @@
                                                             $(".confirmacion4#{row3.rowIndex+1}").modal('show');
                                                         }
                                                     </script>
-                                                    <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmacion4#{row3.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
+                                                    <gc:confirmSubmitRemove bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmacion4#{row3.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente?" />
                                                 </h:column>
                                             </h:dataTable>
                                         <ul class="pagination">

@@ -20,12 +20,13 @@
     <link href="/sid/faces/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet"/>
     <link href="/sid/faces/assets/extra-libs/c3/c3.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
-    <link href="/sid/faces/dist/css/style.min.css" rel="stylesheet"/>
+    <link href="/sid/faces/dist/css/style.css" rel="stylesheet"/>
     
         <link rel="stylesheet" type="text/css" href="/sid/faces/assets/libs/pickadate/lib/themes/default.css"/>
     <link rel="stylesheet" type="text/css" href="/sid/faces/assets/libs/pickadate/lib/themes/default.date.css"/>
     <link rel="stylesheet" type="text/css" href="/sid/faces/assets/libs/pickadate/lib/themes/default.time.css"/>
     <link href="/sid/faces/jqueryui/js/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../assets/extra-libs/horizontal-timeline/horizontal-timeline.css" rel="stylesheet"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -107,7 +108,7 @@
                             
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <span style="font-weight: bold; color: white; font-size: 3em;">SID</span>
+                            <span style="font-weight: bold; color: white;">Inicio</span>
                             <!-- Light Logo icon -->
                             
                         </b>
@@ -150,7 +151,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <span class="d-none d-md-block">Acciones <i class="fa fa-angle-down"></i></span>
+                                <span class="d-none d-md-block">Acciones <i class="fa fa-angle-down"></i></span>
                              <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                             </a>
                             <h:form>
@@ -167,9 +168,6 @@
                                 
                                 <a class="dropdown-item" jsf:action="#{atencionController.cargarUsuarioVentanilla()}">Asignar Usuario Ventanilla</a>
                                 <!-- Fin - jcarrillo -->
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                                 </h:form>
                         </li>
@@ -205,115 +203,53 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
+                        <h:form>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
-                                
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" style="color: #fec418" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                                <span style="color: #ff3111; font-weight: bold">#{bandejaController.nroMensajesNOVistos}</span>
                             </a>
+                            
                             <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <ul class="list-style-none">
                                     <li>
                                         <div class="drop-title bg-primary text-white">
-                                            <h4 class="m-b-0 m-t-5">4 New</h4>
-                                            <span class="font-light">Notifications</span>
+                                            <h4 class="m-b-0 m-t-5">#{bandejaController.nroMensajesNOVistos} nueva(s) alerta</h4>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="message-center notifications">
                                             <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                            <h:commandLink class="message-item"  action="#{bandejaController.cargarTotalInternos(1)}">
+                                                <span class="btn btn-danger btn-circle">#{bandejaController.nroMensajesInternos}</span>
                                                 <div class="mail-contnet">
-                                                    <h5 class="message-title">Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span> </div>
-                                            </a>
+                                                    <h5 class="message-title">Alertas internas </h5>  </div>
+                                            </h:commandLink>
                                             <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                            <h:commandLink class="message-item" action="#{bandejaController.cargarTotalAutomaticos(1)}">
+                                                <span class="btn btn-success btn-circle">#{bandejaController.nroMensajesAutomaticos}</span>
                                                 <div class="mail-contnet">
-                                                    <h5 class="message-title">Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span> </div>
-                                            </a>
+                                                    <h5 class="message-title">Alertas automáticas</h5> </div>
+                                            </h:commandLink>
                                             <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                            <h:commandLink class="message-item" action="#{bandejaController.cargarTotalProgramados(1)}">
+                                                <span class="btn btn-info btn-circle">#{bandejaController.nroMensajesProgramados}</span>
                                                 <div class="mail-contnet">
-                                                    <h5 class="message-title">Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
-                                                <div class="mail-contnet">
-                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                            </a>
+                                                    <h5 class="message-title">Alertas programadas</h5> </div>
+                                            </h:commandLink>
+                                            
                                         </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center m-b-5" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                            </h:form>
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
-                                
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-                                <span class="with-arrow"><span class="bg-danger"></span></span>
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="drop-title text-white bg-danger">
-                                            <h4 class="m-b-0 m-t-5">5 New</h4>
-                                            <span class="font-light">Messages</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center message-body">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/1.jpg" alt="user" class="rounded-circle"/> <span class="profile-status online pull-right"></span> </span>
-                                                <div class="mail-contnet">
-                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/2.jpg" alt="user" class="rounded-circle"/> <span class="profile-status busy pull-right"></span> </span>
-                                                <div class="mail-contnet">
-                                                    <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/3.jpg" alt="user" class="rounded-circle"/> <span class="profile-status away pull-right"></span> </span>
-                                                <div class="mail-contnet">
-                                                    <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="message-item">
-                                                <span class="user-img"> <img src="/sid/faces/assets/images/users/4.jpg" alt="user" class="rounded-circle"/> <span class="profile-status offline pull-right"></span> </span>
-                                                <div class="mail-contnet">
-                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center link" href="javascript:void(0);"> <b>See all e-Mails</b> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        
-                        <!-- ============================================================== -->
                         <h:form>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/sid/DownloadFileServlet?fileName=#{loginController.usuarioSesion.ruta == null? '/sid/faces/bootstrap/img/user-admin.png' : loginController.usuarioSesion.ruta}" alt="user" class="rounded-circle" width="31"/></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/sid/DownloadFileServlet?fileName=#{loginController.usuarioSesion.ruta == null? '/sid/faces/bootstrap/img/user-admin.png' : loginController.usuarioSesion.ruta}" alt="user" class="rounded-circle" width="50"/></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
@@ -356,7 +292,7 @@
                         <li>
                             <!-- User Profile-->
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="/sid/faces/assets/images/users/1.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-profile"></div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">#{loginController.usuarioSesion.codigo} <i class="fa fa-angle-down"></i></h5>
@@ -542,7 +478,7 @@
     <script src="/sid/faces/assets/libs/moment/moment.js"></script>
     <script src="/sid/faces/assets/libs/daterangepicker/daterangepicker.js"></script>
     <script src="/sid/faces/dist/js/pages/forms/datetimepicker/datetimepicker.init.js"></script>
-           
+    <script src="/sid/faces/assets/extra-libs/horizontal-timeline/horizontal-timeline.js"></script>
     
 </body>
 

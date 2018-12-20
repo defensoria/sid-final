@@ -43,4 +43,6 @@ public interface BandejaDAO {
     
     public Long bandejaContarUsuarioProgramados(String destinatario);
     
+    public Long bandejaContarPendientes(String destinatario);
+    
 }

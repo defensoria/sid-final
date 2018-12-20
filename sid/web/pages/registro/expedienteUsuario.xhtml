@@ -89,7 +89,6 @@
                                                 <a jsf:action="#{registroController.setearPersonaSeleccionada(per)}">
                                                     <i class="fas fa-share" ></i>
                                                 </a>
-
                                             </h:column>
                                         </h:dataTable>
                                     </div>
@@ -102,8 +101,6 @@
                                             <a jsf:action="#{registroController.buscarPersonaGeneral(registroController.nroPaginaPersona +1)}" jsf:rendered="#{registroController.listaPersonaGeneral.size()>0}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
                                         </li>
                                     </ul>
-
-
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{!registroController.indSeleccion}">
                                     <div class="row">
@@ -114,7 +111,7 @@
 
                                                 <table style="width: 100%">
                                                     <tr>
-                                                        <td style="width: 50%">
+                                                        <td style="width: 35%">
                                                             <a class="btn btn-warning" jsf:action="#{registroController.retornoListaPersonasSeleccionadas()}">
                                                                 <span class="fas fa-reply" />Regresar
 
@@ -179,21 +176,15 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-
                                     <div class="table-responsive" style="overflow-y: auto; height:450px; ">
                                         <h:panelGroup rendered="#{registroController.listaExpedienteXPersona.size() > 0}">
-
                                             <h4 class="card-title">Historial de expedientes por persona</h4>
-
                                             <h:dataTable value="#{registroController.listaExpedienteXPersona}" var="exped" class="table table-hover" binding="#{row4}">
                                                 <h:column>
                                                     <f:facet name="header">Nro</f:facet>
@@ -227,23 +218,17 @@
                                                 </h:column>
                                                 <h:column>
                                                     <a jsf:action="#{registroController.cargarExpedienteEdit(exped)}">
-                                                        <span class="glyphicon glyphicon-pencil"/>
+                                                        <i class="fas fa-pencil-alt" ></i>
                                                     </a>
                                                 </h:column>
                                             </h:dataTable>
-
-
                                         </h:panelGroup>
                                     </div>                    
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
                 <script>
                     function openModalNuevaPersona(data) {
                         if (data.status === 'success') {
@@ -370,6 +355,9 @@
                                         <div class="form-group row">
                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de nacimiento</label>
                                             <div class="col-sm-8">
+                                                <script src="/sid/faces/assets/libs/pickadate/lib/compressed/picker.js"></script>
+                                                <script src="/sid/faces/assets/libs/pickadate/lib/compressed/picker.date.js"></script>
+                                                <script src="/sid/faces/dist/js/pages/forms/datetimepicker/datetimepicker.init.js"></script>
                                                 <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
                                             </div>
                                         </div>

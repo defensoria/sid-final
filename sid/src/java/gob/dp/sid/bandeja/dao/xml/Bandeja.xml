@@ -184,7 +184,6 @@
     
     <select id="bandejaContarPendientesAutomaticos" resultType="Long" parameterType="String" >
         SELECT count(*) FROM SID_MSG_BANDEJA WHERE C_DESTINATARIO = #{value} AND C_ESTADO = 'PEN' AND C_TIPOMENSAJE = 'AUT' AND C_ACTIVO = 'A'
-        ORDER BY N_ID_BANDEJA DESC
     </select>
     
     <select id="bandejaContarUsuarioInternos" resultType="Long" parameterType="String" >
@@ -197,6 +196,10 @@
     
     <select id="bandejaContarUsuarioAutomaticos"  resultType="Long" parameterType="String" >
         SELECT COUNT(*) FROM SID_MSG_BANDEJA WHERE C_DESTINATARIO = #{value} AND C_TIPOMENSAJE = 'AUT' AND C_ACTIVO = 'A'
+    </select>
+    
+    <select id="bandejaContarPendientes" resultType="Long" parameterType="String" >
+        SELECT COUNT(*) FROM SID_MSG_BANDEJA WHERE C_DESTINATARIO = #{value}  AND C_ACTIVO = 'A' AND c_estado = 'PEN'
     </select>
     
     <select id="bandejaBuscarUsuarioInternos" resultMap="bandejaMap" parameterType="filtroBusquedaMensaje" >

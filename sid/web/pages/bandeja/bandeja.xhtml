@@ -10,13 +10,15 @@
 
         <ui:define name="content">            
             <h:form id="idForm" class="form-horizontal">
-                <a jsf:action="#{bandejaController.cargarTotalInternos(1)}">Prueba</a>
+                
                 <div class="email-app">
                     <!-- ============================================================== -->
                     <!-- Left Part -->
                     <!-- ============================================================== -->
                     <div class="left-part">
+                        <a href="mail_compose.html" class="btn btn-block btn-primary compose-mail">Nuevo</a>
                         <a class="ti-menu ti-close btn btn-success show-left-part d-block d-md-none" href="javascript:void(0)"></a>
+                        
                         <div class="scrollable" style="height:100%;">                            
                             <div class="divider"></div>
                             <ul class="list-group">
@@ -39,23 +41,47 @@
                     <!-- Right Part -->
                     <!-- ============================================================== -->
                     <div class="right-part mail-list bg-white">
-                        <div class="p-15 b-b">
-                            <div class="d-flex align-items-center">                               
-                                
+                        <div class="p-15 b-b" style="padding: 15px">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h4>Bandeja</h4>
+                                    <span>Listado de Alertas</span>
+                                </div>
+                                <div class="ml-auto">
+                                    <input placeholder="buscar" id="" type="text" class="form-control"/>
+                                </div>
                             </div>
                         </div>
                         <!-- Action part -->                        
-                        <!-- Action part -->
+                        <!-- Button group part -->
+                        <div class="bg-light p-15 d-flex align-items-center do-block" style="padding: 15px">
+                            <div class="btn-group m-t-5 m-b-5">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input sl-all" id="cstall"/>
+                                    <label class="custom-control-label" for="cstall">Seleccionar todo</label>
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div class="btn-group m-r-10" role="group" aria-label="Button group with nested dropdown">
+                                    <button type="button" class="btn btn-outline-secondary font-18" onclick="window.location.reload();"><i class="mdi mdi-reload"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary font-18"><i class="mdi mdi-delete"></i></button>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Mail list-->
                         <div class="table-responsive">
                             <table class="table email-table no-wrap table-hover v-middle">
                                 <tbody>
                                     <c:forEach var="x" items="#{bandejaController.listaMensajes}">
                                         <!-- row -->
-                                        <tr class="unread" >                                            
-                                            <td class="check-mail" style="width: 10px;">                                               
-                                                <h:selectBooleanCheckbox value="#{x.indicador}"  class="i-checks" />                                                
-                                            </td>                                            
+                                        <tr class="unread" >
+
+                                            <td class="chb">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="#{x}" value="#{x.indicador}" />
+                                                    <label class="custom-control-label" for="#{x}"> </label>
+                                                </div>
+                                            </td>
                                             <td style="width: 350px;">                                                
                                                 <a jsf:action="#{bandejaController.verMensajeBandeja(x)}" style="color: #{x.estado == 'VIS'? '#787878' : 'red'} ; font-weight:  #{x.estado == 'VIS'? '' : 'bold'}">
                                                     <span>#{x.nombreRemitente}</span>
