@@ -5,6 +5,7 @@
 
 package gob.dp.sid.comun;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,6 +39,11 @@ public class ComunUtil {
         return fd.format(date);
     }
 
+    public static Date getDateDDMMYYYY(String date) throws ParseException{
+        SimpleDateFormat fd  = new SimpleDateFormat("dd/MM/yyyyy");
+        return fd.parse(date);
+    }
+        
     public static String generateCodigoByDate() {
         SimpleDateFormat fd = new SimpleDateFormat("yyyyMMddHHmmss");
         return fd.format(new Date());

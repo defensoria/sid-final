@@ -5,6 +5,7 @@
  */
 package gob.dp.sid.atencion.entity;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -49,11 +50,11 @@ public class Atencion implements Serializable{
     private String fechaNacimiento;
     
     private String discapacidad;
-    
+    private Date dtFechaNacimiento;
     private String indicadorCasoNuevo;
     private String indicadorCita;
     private String tipoDigitaliza;
-    
+    private String tipoDocumento;
     /**
      * @return the id
      */
@@ -349,5 +350,34 @@ public class Atencion implements Serializable{
     public void setDescTramite(String descTramite) {
         this.descTramite = descTramite;
     }
+
+    /**
+     * @return the dtFechaNacimiento
+     */
+    public Date getDtFechaNacimiento() {
+        return dtFechaNacimiento;
+    }
+
+    /**
+     * @param dtFechaNacimiento the dtFechaNacimiento to set
+     */
+    public void setDtFechaNacimiento(Date dtFechaNacimiento) {
+        this.dtFechaNacimiento = dtFechaNacimiento;
+    }
+    
+        /**
+     * @return the tipoDocumento
+     */
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    /**
+     * @param tipoDocumento the tipoDocumento to set
+     */
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
             
 }

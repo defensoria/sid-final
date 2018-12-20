@@ -116,6 +116,10 @@ public class ListasComunesController {
         return lista;
         
     }
+    
+    public List<Parametro> listaTipoDocumentoIdentidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.buscarListaDocumentoCAV(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
     /* fin jmatos*/
     
     public List<Parametro> buscarTipoEntidad(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {

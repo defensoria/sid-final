@@ -34,17 +34,17 @@ public class ConstantesUtil implements Serializable{
     public static final String LISTA_VALOR_SELECCIONE_NOMBRE = "SELECCIONE";
     
     
-    //public static String FILE_DONWLOAD = "C:/filesystem";
+    public static String FILE_DONWLOAD = "C:/filesystem";
     
-    public static String FILE_DONWLOAD = "/srv/sid/filesystem";
+    //public static String FILE_DONWLOAD = "/srv/sid/filesystem";
     
-    //public static String FILE_DONWLOAD_SCANNER = "C:/scaner";
+    public static String FILE_DONWLOAD_SCANNER = "C:/scaner";
     
-    public static String FILE_DONWLOAD_SCANNER = "/srv/sid/scaner";
+    // public static String FILE_DONWLOAD_SCANNER = "/srv/sid/scaner";
     
-    //public static String FILE_DONWLOAD_SCANNER_FINAL = "C:/filesystemAtencionCiudadano";
+    public static String FILE_DONWLOAD_SCANNER_FINAL = "C:/filesystemAtencionCiudadano";
     
-    public static String FILE_DONWLOAD_SCANNER_FINAL = "/srv/sid/filesystemAtencionCiudadano";
+    //public static String FILE_DONWLOAD_SCANNER_FINAL = "/srv/sid/filesystemAtencionCiudadano";
     
     // PAGINAS ATENCION:
     public static String PAGE_RECEPCION_DOCUMENTOS_ADMINISTRATIVOS = "recepDocumentosAdm";
@@ -61,5 +61,7 @@ public class ConstantesUtil implements Serializable{
     // public static final String SERVER_PATH_DOCUMENTOS = "/var/sid/mac/documentos";
     
     public static final String PARAMETRO_SOLICITUD_INTERVENCION_CONSULTA_CASO_EXISTENTE = "6";
-    
+    public static final String PARAMETRO_TIPO_DOCUMENTO_DNI = "02";
+    public static final String PARAMETRO_TIPO_DOCUMENTO_CE = "05";
+    public static final String PARAMETRO_TIPO_DOCUMENTO_INDOCUMENTADO = "07";
 }
