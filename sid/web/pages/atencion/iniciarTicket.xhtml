@@ -49,11 +49,22 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header header-dark">
-                                <h4 class="card-title"><a href="#">Monitoreo de Atención</a></h4>
+                                <h4 class="card-title"><a href="#">Ticket Asignado</a></h4>
                             </div>
                             <div class="card-body">
                                 <h:panelGroup id="idPanelGroupMonitoreoAtencion">
                                     <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group" style="text-align: center">
+                                                <label for="inputticket" class="control-label col-form-label">
+                                                    <strong>
+                                                        <label id="nroTicket"  style="font-size: 50px;background-color: #d4e0ff;color: red; font-weight: bold;" jsf:value="#{atencionController.atencionTicket.nroTicket}"></label>
+                                                    </strong>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+<!--                                    <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputsesion" class="control-label col-form-label"><strong>Inicio de Sesión</strong></label>
@@ -100,7 +111,7 @@
                                                 <input type="text" class="totalatencion form-control" jsf:value="#{atencionController.atencion.dni}" disabled="true" />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </h:panelGroup>
                             </div>
                         </div>
@@ -108,22 +119,14 @@
                     <div class="col-6">
                         <div class="card">
                             <div class="card-header header-dark">
-                                <h4 class="card-title"><a href="#">Ticket</a></h4>
+                                <h4 class="card-title"><a href="#">Tiempo de Atención</a></h4>
                             </div>
                             <div class="card-body">
                                 <h:panelGroup id="idPanelGroupTicket">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="form-group" style="text-align: center">
-                                                <label for="inputticket" class="control-label col-form-label">
-                                                    <strong>
-                                                        <label id="nroTicket"  style="font-size: 50px;background-color: #d4e0ff;color: red; font-weight: bold;" jsf:value="#{atencionController.atencionTicket.nroTicket}"></label>
-                                                    </strong>
-                                                </label>
-                                            </div>
+                                            <br/>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <!--
                                         <div class="col-4">
                                             <div class="form-group">
