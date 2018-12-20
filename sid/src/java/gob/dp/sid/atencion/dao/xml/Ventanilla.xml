@@ -19,7 +19,7 @@
             N_ESTADO_REGISTRO,
             C_USUARIO_CREA,
             D_FECHA_CREA 
-        FROM SID1.SAC_REG_VENTANILLA
+        FROM SAC_REG_VENTANILLA
         WHERE N_ESTADO_REGISTRO = 1
     </select>
     
