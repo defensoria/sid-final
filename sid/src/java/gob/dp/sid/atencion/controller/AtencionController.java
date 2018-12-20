@@ -34,6 +34,7 @@ import gob.dp.sid.atencion.service.TipoDocumentoService;
 import gob.dp.sid.atencion.service.UsuarioVentanillaService;
 import gob.dp.sid.atencion.service.VentanillaService;
 import gob.dp.sid.atencion.service.VisitaService;
+import gob.dp.sid.comun.AlphanumFileComparator;
 import gob.dp.sid.comun.ComunUtil;
 import gob.dp.sid.comun.ConstantesUtil;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
@@ -50,28 +51,32 @@ import gob.dp.sid.registro.entity.Expediente;
 import gob.dp.sid.registro.entity.ExpedienteVisita;
 import gob.dp.sid.registro.service.ExpedienteService;
 import gob.dp.sid.registro.service.ExpedienteVisitaService;
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileFilter;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import javax.faces.context.FacesContext;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pe.gob.defensoria.wsdl.service.ServiceReniec;
-
+import java.io.File; 
+import org.apache.commons.lang3.RandomStringUtils;
 /**
  *
  * @author jcarrillo
@@ -92,6 +97,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private List<Parametro> listaTipoTramite;
     private List<TipoDocumento> listaTipoDocumto;
     private List<Documento> listaDocumentosAtencion;
+    private List<Documento> listaDocumentosAtencionRetorno;
     private List<ArchivoDocumentoBean> listaDocumentoServer;
     private Ticket ticket;
     private List<Expediente> listaExpedienteXDNIPaginado;
@@ -181,11 +187,48 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return "asignarUsuarioVentanilla";
     }
     
-    public String editarUsuarioVentanilla(UsuarioVentanilla usuVen) {
+    public void leerArchivoAction(){
+        leerArchivosTemporales();
+    }
+    
+    private void leerArchivosTemporales(){
+        listaDocumentosAtencion = new ArrayList();
+        Scanner sc = new Scanner(System.in);
+        //String ruta = sc.nextLine();
+        String ruta = ConstantesUtil.FILE_DONWLOAD_SCANNER+"/";
+        //System.out.println("Escribe la extension: ");
+        //String ext = sc.nextLine();
+        String ext = "pdf";
+        File carpeta = new File(ruta);
+        FileFilter fileFilter = new WildcardFileFilter("*." + ext);
+        if (carpeta.exists()) {
+            if (carpeta.isDirectory()) {
+                File[] archivos = carpeta.listFiles(fileFilter);
+                Arrays.sort(archivos, new AlphanumFileComparator());
+                for (int i = 0; i < archivos.length; i++) {
+                    //System.out.println(archivos[i].getName());
+                    Documento doc = new Documento();
+                    doc.setFileName(archivos[i].getName());
+                    listaDocumentosAtencion.add(doc);
+                }
+            }
+        }
+    }
+    
+    public String editarUsuarioVentanilla(UsuarioVentanilla usuVen,String accion) {
         disabledAgregarUsuVen=false;
-        //usuarioVentanilla.setCodigoUsuario(usuVen.getCodigoUsuario());
-        //usuarioVentanilla.setIdVentanilla(usuVen.getIdVentanilla());
-        usuarioVentanilla=usuVen;
+        if(accion.equals("I")){
+            if(usuVen.getEstadoAsignacion().equals(0)){
+                usuVen.setEstadoAsignacion(1);
+            }else{
+                usuVen.setEstadoAsignacion(0);
+            }
+            usuVen.setUsuarioModificacion(usuarioSession.getCodigo());
+            usuVen.setFechaModificacion(new Date());
+            usuarioVentanillaService.actualizarUsuarioVentanilla(usuVen);
+        }else{
+            usuarioVentanilla=usuVen;    
+        }
         return "asignarUsuarioVentanilla";
     }
     
@@ -562,13 +605,46 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             listaDocumentosAtencion.add(oDocumento);
             documento.setIdTipoDocumento(null);
             documento.setAnexo(null);
-        
-        for(Documento d: listaDocumentosAtencion) {
-            System.out.println("cod: " + d.getCodDocumento());
-            System.out.println("anexo: " + d.getAnexo() );
-            System.out.println("tipo documento:"  + d.getIdTipoDocumento());
-            System.out.println("ruta: " + d.getRutaDoc() );
         }
+    }
+    
+    public Documento onDefinirDocumento(Documento oDocumento) {
+            oDocumento.setCodDocumento(oDocumento.getFileName());
+            oDocumento.setEstado(Constantes.ESTADO_ACTIVO);
+            oDocumento.setDescEstado(documento.getDescEstado());
+            //String ext = FilenameUtils.getExtension(fileUpload.getSubmittedFileName());
+            //String filename = ComunUtil.generateCodigoByDate() + "_" + usuarioSession.getCodigoOD() + "." + ext;
+            oDocumento.setRutaDoc(ConstantesUtil.FILE_DONWLOAD_SCANNER_FINAL+"/"+oDocumento.getFileName());
+
+            //oDocumento.setExtensionDoc(fileUpload.getContentType());
+            //oDocumento.setExtensionDoc(getFileExtension(oDocumento.getFileName()));
+            //oDocumento.setTamanioDoc(String.valueOf(fileUpload.getSize()));
+            //oDocumento.setAnexo(documento.getAnexo());
+            //oDocumento.setIdTipoDocumento(documento.getIdTipoDocumento());
+            oDocumento.setUsuarioRegistro(usuarioSession.getCodigo());
+            oDocumento.setFechaRegistro(new Date());
+            //oDocumento.setDocumento(fileUpload);
+            
+            /*FiltroTramite oFiltroTramite = new FiltroTramite();
+            oFiltroTramite.setIdTipoDocumento(documento.getIdTipoDocumento());
+            TipoDocumento tipoDocumento = tipoDocumentoService.getTipoDocumentoById(oFiltroTramite);
+            if(tipoDocumento != null)
+                oDocumento.setDescTipoDocumento(tipoDocumento.getTipoDocumento());
+            else*/
+                oDocumento.setDescTipoDocumento(TipoDocumentoType.OTROS.getValue());
+            //listaDocumentosAtencion.add(oDocumento);
+            //documento.setIdTipoDocumento(null);
+            //documento.setAnexo(null);
+        
+        return oDocumento;
+    }
+    
+    
+    public String getFileExtension(String name) {
+        try {
+            return name.substring(name.lastIndexOf("."));
+        } catch (Exception e) {
+            return "";
         }
     }
     
@@ -577,19 +653,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         System.out.println("file type: " + fileUpload.getContentType());
         System.out.println("file info: " + fileUpload.getHeader("Content-Disposition"));
         
-        //uploadFileTemporal();
+    
     }
 
-    public void uploadFileTemporal(Documento doc) {
-        // Obtener Ruta Temporal:
-        String folderServer = ConstantesUtil.FILE_DONWLOAD;
-        try {
-            InputStream input = doc.getDocumento().getInputStream();
-            Files.copy(input, new File(folderServer, doc.getFileName()).toPath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     
     public void uploadFileServer() {
         try {
@@ -630,7 +696,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     
     public void guardarAtencionCiudadano() {
         try {
-            if(validarFormularioAtencion()){
+            listaDocumentosAtencionRetorno = new ArrayList<>();
+          //  if(validarFormularioAtencion()){
                 VisitaCiudadano visita = new VisitaCiudadano();
                 visita.setFechaVisita(new Date());
                 visita.setMotivo(atencion.getTipoMotivo());
@@ -676,7 +743,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                 msg.messageInfo(message, "Registro de Atención");
                 // limpiarIniciarAtencion();
                 disabledGuardar = true;
-        }  
+                if(visita.getId() != null)
+                    listaDocumentosAtencionRetorno = documentoService.buscarExpedienteByVisita(visita.getId());
+                
+        //}  
             //FacesContext.getCurrentInstance().getExternalContext().redirect("iniciarAtencion.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
@@ -846,8 +916,8 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         System.out.println("Guardando Documentos...");
         for(Documento d : listaDocumentosAtencion) {
             d.setIdRegVisita(Integer.parseInt(String.valueOf(oVisita.getId())));
-            documentoService.registrarDocumento(d);
-            uploadFileTemporal(d);
+            moverArchivosAtencion(d);
+            documentoService.registrarDocumento(onDefinirDocumento(d));
         }
             
         if(oVisita.getIndicadorTratamiento().equals(TratamientoProcesoType.PROCESO_SID.getKey())){
@@ -861,7 +931,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         } else if(oVisita.getIndicadorTratamiento().equals(TratamientoProcesoType.PROCESO_SGD.getKey())){
             // Proceso de integración al SGD.
     }
+    }
     
+    public void moverArchivosAtencion(Documento d){
+        String formato = RandomStringUtils.random(32, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+        d.setExtensionDoc(getFileExtension(d.getFileName()));
+        String ruta = formato + d.getExtensionDoc();
+        File myFile = new File(ConstantesUtil.FILE_DONWLOAD_SCANNER+"/"+d.getFileName());
+        myFile.renameTo(new File(ConstantesUtil.FILE_DONWLOAD_SCANNER_FINAL+"/"+ruta));
+        d.setFileName(ruta);
+        d.setRutaDoc(ConstantesUtil.FILE_DONWLOAD_SCANNER_FINAL+"/"+ruta);
     }
     
     public void actualizarListaTipoAtencion(String idMotivo){
@@ -1440,6 +1519,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
      */
     public void setDisabledAgregarUsuVen(boolean disabledAgregarUsuVen) {
         this.disabledAgregarUsuVen = disabledAgregarUsuVen;
+    }
+
+    public List<Documento> getListaDocumentosAtencionRetorno() {
+        return listaDocumentosAtencionRetorno;
+    }
+
+    public void setListaDocumentosAtencionRetorno(List<Documento> listaDocumentosAtencionRetorno) {
+        this.listaDocumentosAtencionRetorno = listaDocumentosAtencionRetorno;
     }
     
     

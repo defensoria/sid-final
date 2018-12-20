@@ -74,7 +74,18 @@
         <result property="comisionado" column="COMISIONADO"/>
     </resultMap> 
     
-    
+    <resultMap id="estadisticaExpedienteMap" type="estadisticaExpediente">
+        <result property="cantQuejas" column="Q_QUEJA"/>
+        <result property="cantConsultas" column="Q_CONSULTA"/>
+        <result property="cantPetitorios" column="Q_PETITORIO"/>
+        <result property="cantTramite" column="Q_TRAMITE"/>
+        <result property="cantConcluido" column="Q_CONCLUIDO"/>
+        <result property="cantDesistido" column="Q_DESISTIDO"/>
+        <result property="cantEnBorrador" column="Q_EN_BORRADOR"/>
+        <result property="cantEnRegistro" column="Q_EN_REGISTRO"/>
+        <result property="codUsuario" column="C_USUREGISTRO"/>
+    </resultMap>
+            
     <insert id="expedienteInsertar" parameterType="expediente">
         INSERT INTO SID_REG_EXPEDIENTE
         (
@@ -926,6 +937,51 @@
     
     <select id="expedienteMayorInformacionCount" resultType="java.lang.Integer" parameterType="String">
         SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_NUMEROEXPEDIENTE = #{value} and N_INDMAYORINFORMA = 1
+    </select>
+    
+    <select id="estadisticaExpediente" resultMap="estadisticaExpedienteMap" parameterType="estadisticaExpediente">
+        SELECT 
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_TIPOCLASIFICACION='01' 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_QUEJA,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_TIPOCLASIFICACION='02' 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_CONSULTA,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_TIPOCLASIFICACION='03' 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>C_ESTADOGENERAL=
+            ) Q_PETITORIO,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='A' 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_TRAMITE,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='C' AND N_INDDESESTIMIENTO IS NULL 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_CONCLUIDO,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='C' AND N_INDDESESTIMIENTO=1 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_DESISTIDO,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='A' AND N_VERSION=0 AND EXTRACT(YEAR FROM D_FECHAREGISTRO)=EXTRACT(YEAR FROM SYSDATE) 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_EN_BORRADOR,
+            (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='A' AND N_VERSION!=0 AND EXTRACT(YEAR FROM D_FECHAREGISTRO)=EXTRACT(YEAR FROM SYSDATE) 
+            <if test="codUsuario != null">
+                AND C_USUREGISTRO  = #{codUsuario}
+            </if>
+            ) Q_EN_REGISTRO
+        FROM DUAL
     </select>
     
 </mapper>

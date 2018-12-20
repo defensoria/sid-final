@@ -54,5 +54,10 @@ public class DocumentoServiceImpl implements DocumentoService {
         }
         return listFiles;
     }
+
+    @Override
+    public List<Documento> buscarExpedienteByVisita(Long id) {
+        return documentoDAO.buscarExpedienteByVisita(id);
+    }
     
 }

@@ -74,4 +74,8 @@
         </selectKey>
     </insert>
     
+    <select id="buscarExpedienteByVisita" resultMap="documentoMap" parameterType="Long">
+        SELECT * FROM SAC_REG_DOCUMENTO WHERE N_ID_REG_VISITA = #{id}
+    </select>
+    
 </mapper>

@@ -219,6 +219,10 @@ public class ListasComunesController {
         return insertarValoresDefectoParametro(cacheService.listaTramiteIntervencionPresencial(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
     }
     
+    public List<Parametro> listarTipoDocumentoOCR(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
+        return insertarValoresDefectoParametro(cacheService.listarTipoDocumentoOCR(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);
+    }
+    
     /* ini jmatos */
     public List<Parametro> listaTramiteIntervencionDocumental(boolean insertarTODOS, boolean insertarNINGUNO, boolean insertarSELECCIONE) {
         return insertarValoresDefectoParametro(cacheService.listarTramiteIntervencionDocumental(), insertarTODOS, insertarNINGUNO, insertarSELECCIONE);

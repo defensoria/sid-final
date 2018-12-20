@@ -97,4 +97,6 @@ public interface CacheService {
     public List<Parametro> listarTramitePostulacionesCAS();
     public List<Parametro> listarTramiteIntervencionDocumental();
     /* Fin - jmatos */
+    
+    public List<Parametro> listarTipoDocumentoOCR();
 }

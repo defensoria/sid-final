@@ -8,6 +8,7 @@ package gob.dp.sid.atencion.dao;
 import gob.dp.sid.atencion.bean.FiltroTramite;
 import gob.dp.sid.atencion.entity.Documento;
 import gob.dp.sid.atencion.entity.TipoDocumento;
+import java.util.List;
 
 /**
  *
@@ -15,5 +16,7 @@ import gob.dp.sid.atencion.entity.TipoDocumento;
  */
 public interface DocumentoDAO {
     public void registrarDocumento(Documento documento);
+    
+    public List<Documento> buscarExpedienteByVisita(Long id);
     
 }

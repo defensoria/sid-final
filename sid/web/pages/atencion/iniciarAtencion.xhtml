@@ -11,15 +11,15 @@
             <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
-            
+
             <!-- COMPONENTE OCR -->
             <script type="text/javascript" src="../../assets/ocr/AbrirVisorArchivo.js"></script>
 
             <script>
                 $(function () {
                     $('#campo').keypad({keypadOnly: false});
-                    
-                });        
+
+                });
             </script>
             <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
                 <gc:confirmSubmit bean="#{atencionController.guardarAtencionCiudadano()}" classGC="confirmacion2" mensaje="¿Esta seguro que desea guardar la atención del ciudadano?" />
@@ -74,10 +74,10 @@
                         }
                         //$(".confirmacion1").modal('show');
                     }
-                    
-                    
+
+
                 </script>
-                
+
                 <div class="row" style="center">
                     <div class="col-6">
                         <div class="card">
@@ -149,7 +149,7 @@
                                         </div>
                                     </div>
                                 </h:panelGroup>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -161,43 +161,38 @@
                             <div class="card-body">
                                 <h:panelGroup id="idPanelFormAtencion">
                                     <div class="row">
-                                    <div class="col-12" style="text-align: right">
-                                        <script>
-                                            function confirmar2() {
-                                                $(".confirmacion2").modal('show');
-                                            }
-                                        </script>
-                                        <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                            <a class="btn btn-warning" jsf:actionListener="#{atencionController.generarTicket()}"> <!--onclick="confirmar1()"-->
-                                                <i class="fa fa-ticket-alt"></i> Generar Ticket
+                                        <div class="col-12" style="text-align: right">
+                                            <script>
+                                                function confirmar2() {
+                                                    $(".confirmacion2").modal('show');
+                                                }
+                                            </script>
+                                            <h:panelGroup rendered="#{atencionController.disabledGuardar}">
+                                                <a class="btn btn-warning" jsf:actionListener="#{atencionController.generarTicket()}"> <!--onclick="confirmar1()"-->
+                                                    <i class="fa fa-ticket-alt"></i> Generar Ticket
+                                                </a>
+                                            </h:panelGroup>
+                                            
+                                            &#160;
+                                            <a class="btn btn-info" jsf:actionListener="#{atencionController.limpiarIniciarAtencion()}">
+                                                <span class="fas fa-trash" /> Limpiar
                                             </a>
-                                        </h:panelGroup>
-                                        &#160;
-                                        <h:panelGroup rendered="#{!atencionController.disabledGuardar}">
-                                            <a class="btn btn-warning" onclick="confirmar2()" jsf:disabled="#{atencionController.disabledGuardar}" > <!--onclick="confirmar1()"-->
-                                                <i class="fa fa-save"></i> Guardar
-                                            </a>
-                                        </h:panelGroup>
-                                        &#160;
-                                        <a class="btn btn-info" jsf:actionListener="#{atencionController.limpiarIniciarAtencion()}">
-                                            <span class="fas fa-trash" /> Limpiar
-                                        </a>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="inputmotivo" class="control-label col-form-label"><strong>MOTIVO</strong></label>
-                                            <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}">
-                                                <f:selectItem itemLabel="Postulaciones" itemValue="P"/>&#160;&#160;
-                                                <f:selectItem itemLabel="Tramite Documentario" itemValue="D"/>&#160;&#160;
-                                                <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
-                                            </h:selectOneRadio>
                                         </div>
                                     </div>
-                                </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="inputmotivo" class="control-label col-form-label"><strong>MOTIVO</strong></label>
+                                                <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}">
+                                                    <f:selectItem itemLabel="Postulaciones" itemValue="P"/>&#160;&#160;
+                                                    <f:selectItem itemLabel="Tramite Documentario" itemValue="D"/>&#160;&#160;
+                                                    <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I"/>
+                                                    <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                </h:selectOneRadio>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <h:panelGroup id="idSolicitudIntervencionChk" rendered="#{atencionController.atencion.tipoMotivo == 'I'}" >
                                         <div class="row">
                                             <div class="col-6">
@@ -219,23 +214,23 @@
                                             </div>
                                         </div>
                                     </h:panelGroup>
-                                
 
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
-                                            <h:selectOneMenu id="cmbTipoAtencion" 
-                                                             disabled="#{atencionController.disableTipoAtencion}"
-                                                             value="#{atencionController.atencion.tipoAtencion}" 
-                                                             class="tipoatencion form-control">
-                                                <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
-                                                <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
-                                            </h:selectOneMenu>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
+                                                <h:selectOneMenu id="cmbTipoAtencion" 
+                                                                 disabled="#{atencionController.disableTipoAtencion}"
+                                                                 value="#{atencionController.atencion.tipoAtencion}" 
+                                                                 class="tipoatencion form-control">
+                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                    <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                </h:selectOneMenu>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                     <h:panelGroup id="idpaneldiscapacidad" layout="block" >
                                         <div class="row">
                                             <div class="col-6">
@@ -249,97 +244,102 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label"><strong>TIPO</strong></label>
-                                                        <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
-                                                            <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                            <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                        </h:selectOneMenu>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label"><strong>TIPO</strong></label>
+                                                    <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
+                                                        <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                                        <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    </h:selectOneMenu>
+                                                </div>
                                             </div>
                                         </div>
-                                  </h:panelGroup>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="inputtipotramite" class="control-label col-form-label" ><strong>TIPO DE TRAMITE</strong></label>
-                                            <h:selectOneListbox id="selTipoTramite" 
-                                                                value="#{atencionController.atencion.tipoTramite}" 
-                                                                class="tipotramite form-control"
-                                                                valueChangeListener="#{atencionController.valueChangeMethod(e)}"
-                                                                style="height: 120px; ">
-                                                <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
-                                                <f:ajax render="idpanelexpedientesSID idpanelDigitaDoc" />
-                                            </h:selectOneListbox>
+                                    </h:panelGroup>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputtipotramite" class="control-label col-form-label" ><strong>TIPO DE TRAMITE</strong></label>
+                                                <h:selectOneListbox id="selTipoTramite" 
+                                                                    value="#{atencionController.atencion.tipoTramite}" 
+                                                                    class="tipotramite form-control"
+                                                                    valueChangeListener="#{atencionController.valueChangeMethod(e)}"
+                                                                    style="height: 120px; ">
+                                                    <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
+                                                    <f:ajax render="idpanelexpedientesSID idpanelDigitaDoc" />
+                                                </h:selectOneListbox>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <h:panelGroup id="idpaneldocumentos">
-                                    <div class="row">
-                                        
+                                    <h:panelGroup id="idpaneldocumentos">
+                                        <div class="row">
+
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label for="inputdocumento" class="control-label col-form-label"><strong>CUENTA CON DOCUMENTOS</strong></label>
                                                     <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax render="idPanelButtonAttach idPanelDocumentosAttach" ></f:ajax>
+                                                        <!--<f:ajax render="idPanelButtonAttach idPanelDocumentosAttach" ></f:ajax>-->
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
-                                        
-                                        
-                                        
-                                    </div>
-                                </h:panelGroup><br />
+                                        </div>
+                                    </h:panelGroup><br />
                                 </h:panelGroup>
                             </div>
                         </div>
                     </div>
-                    
-                        <div class="col-12">
-                         <h:panelGroup id="idpanelDigitaDoc">
-                             <h:panelGroup rendered="#{atencionController.verificarTramiteDocumentario()}">
-                                 <div class="card">
-                                <div class="card-header header-dark">
-                                    <h4 class="card-title"><a href="#">Digitalización de Documentos</a></h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row" style="text-align: right;">
-                                        <div class="col-12" >
-                                            <h:panelGroup id="idPanelButtonAttach">
 
-                                                        <label for="inputdocumento" class="control-label col-form-label"><strong>&#160;</strong></label>
-                                                        <a class="btn btn-info" 
-                                                            jsf:action="#{atencionController.onCargarDocumentosAtencion()}">
-                                                            <span class="fas fa-paperclip" /> Adjuntar
-                                                        </a>
-                                                        &#160;
-                                                        <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                                            
-                                                            <script>
-                                                                function callOCR(){
-                                                                    console.log('Llamando componente OCR');
-                                                                    var tipoVisor = $('#cboTipoVisor').val();
-                                                                    console.log('Tipo de Visor: ' + tipoVisor);
-                                                                    switch (tipoVisor) {
-                                                                        case "1": 
-                                                                            abrirVisorArchivo({
-                                                                                "idAplicacion": 1,"idArchivo": '2'});
-                                                                            break;
-                                                                        default: 
-                                                                            abrirVisorArchivoExterno({"idAplicacion": 1
-                                                                            });
-                                                                            break;
-                                                                    }
-                                                                }
-                                                            </script>
-                                                        </h:panelGroup>
+                    <div class="col-12">
+                        <h:panelGroup id="idpanelDigitaDoc">
+                            <h:panelGroup rendered="#{atencionController.verificarTramiteDocumentario()}">
+                                <div class="card">
+                                    
+                                    <div class="card-body">
+                                        <div class="row" style="text-align: right;">
+                                            <div class="col-12" >
+                                                
+                                                <a class="btn btn-warning" jsf:action="#{atencionController.leerArchivoAction()}">
+                                                    <span class="fa fa-upload"> Actualizar</span>
+                                                </a>
+                                                &#160;
+                                                <h:panelGroup rendered="#{atencionController.listaDocumentosAtencion.size() > 0}">
+                                                <a class="btn btn-warning" onclick="confirmar2()" jsf:disabled="#{atencionController.disabledGuardar}" > <!--onclick="confirmar1()"-->
+                                                    <i class="fa fa-save"></i> Guardar
+                                                </a>
                                             </h:panelGroup>
+                                                <!--<h:panelGroup id="idPanelButtonAttach">
+
+                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>&#160;</strong></label>
+                                                    <a class="btn btn-info" 
+                                                       jsf:action="#{atencionController.onCargarDocumentosAtencion()}">
+                                                        <span class="fas fa-paperclip" /> Adjuntar
+                                                    </a>
+                                                    &#160;
+                                                    <h:panelGroup rendered="#{atencionController.disabledGuardar}">
+
+                                                        <script>
+                                                            function callOCR() {
+                                                                console.log('Llamando componente OCR');
+                                                                var tipoVisor = $('#cboTipoVisor').val();
+                                                                console.log('Tipo de Visor: ' + tipoVisor);
+                                                                switch (tipoVisor) {
+                                                                    case "1":
+                                                                        abrirVisorArchivo({
+                                                                            "idAplicacion": 1, "idArchivo": '2'});
+                                                                        break;
+                                                                    default:
+                                                                        abrirVisorArchivoExterno({"idAplicacion": 1
+                                                                        });
+                                                                        break;
+                                                                }
+                                                            }
+                                                        </script>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>-->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h:panelGroup id="idpanelExpediente" rendered="#{atencionController.adjuntarArchivosExpedExiste}">
-                                        <div class="row">
+                                        <h:panelGroup id="idpanelExpediente" rendered="#{atencionController.adjuntarArchivosExpedExiste}">
+                                            <div class="row">
 
                                                 <div class="col-md-4">
                                                     <label for="fileUpload" 
@@ -368,52 +368,30 @@
                                                            disabled="disabled"
                                                            placeholder="Fecha Expediente" id="fechaRegistro" />
                                                 </div>
-                                        </div>
-                                    </h:panelGroup>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="fileUpload" 
-                                                   class="control-label col-form-label"><strong>Cargar Archivo </strong></label> <br />
-                                            <h:inputFile value="#{atencionController.fileUpload}"
-                                                         class="fileupload"  
-                                                         id="fileUpload2" />
-                                        </div>
-                                        <div class="col-md-4" >
-                                                <label class="label-sm"><strong>Tipo Documento</strong></label> <br />
-                                                <h:selectOneMenu id="selTipoDocumento2" value="#{atencionController.documento.idTipoDocumento}" class="tipotramite form-control" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
-                                                    <f:selectItems value="#{atencionController.listaTipoDocumto}" var="x" itemLabel="#{x.tipoDocumento}" itemValue="#{x.id}" />
-                                                    <f:selectItem itemValue="10" itemLabel="OTROS" />
-                                                </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="inputmotivo" class="control-label col-form-label"><strong>Anexo </strong></label>
-                                            <h:selectOneRadio class="anexo" value="#{atencionController.documento.anexo}">
-                                                <f:selectItem itemLabel="SI" itemValue="SI"/>
-                                                <f:selectItem itemLabel="NO" itemValue="NO"/>
-                                            </h:selectOneRadio>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h:panelGroup id="idpanelOCR" rendered="#{atencionController.disabledGuardar}">
-                                                <label for="cboTipoVisor" 
-                                                       class="control-label col-form-label"><strong>Tipo de Visor </strong></label> <br />
-                                                <select id="cboTipoVisor"
-                                                        class="form-control"
-                                                        name="cboTipoVisor">
+                                            </div>
+                                        </h:panelGroup>
+
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h:panelGroup id="idpanelOCR" rendered="#{atencionController.disabledGuardar}">
+                                                    <label for="cboTipoVisor" 
+                                                           class="control-label col-form-label"><strong>Tipo de Visor </strong></label> <br />
+                                                    <select id="cboTipoVisor"
+                                                            class="form-control"
+                                                            name="cboTipoVisor">
                                                         <option value="1">INTERNO</option>
-                                                </select>
-                                            </h:panelGroup>
+                                                    </select>
+                                                </h:panelGroup>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div style="margin-top: 50px;"></div>
+                                        <div style="margin-top: 50px;"></div>
+                                        
                                         <h:panelGroup id="idPanelDocumentosAttach">
-                                           <div class="row">
+                                            <div class="row">
                                                 <div class="col-12">
                                                     <h:dataTable    value="#{atencionController.listaDocumentosAtencion}" 
-                                                                    rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}"
+                                                                    rendered="#{atencionController.listaDocumentosAtencionRetorno == null}"
                                                                     var="docs" 
                                                                     class="table no-wrap v-middle table-hover" 
                                                                     binding="#{row5}">
@@ -422,20 +400,28 @@
                                                             <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row5.rowIndex+1)}" /></h5>        
                                                         </h:column>
                                                         <h:column>
-                                                            <f:facet name="header"><b><a href="#">Codigo Documento</a></b></f:facet>
-                                                            <h:outputText value="#{docs.codDocumento}" />
+                                                            <f:facet name="header"><b><a href="#">Nombre</a></b></f:facet>
+                                                            <h:outputText value="#{docs.fileName}" />
                                                         </h:column>
                                                         <h:column>
                                                             <f:facet name="header"><b><a href="#">Tipo Documento</a></b></f:facet>
-                                                            <h:outputText value="#{docs.descTipoDocumento}" />
+                                                            <h:selectOneMenu value="#{docs.idTipoDocumento}" class="form-control">
+                                                                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                                                                                    <f:selectItems value="#{listasComunesController.listarTipoDocumentoOCR(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                                                                </h:selectOneMenu>
                                                         </h:column>
                                                         <h:column>
-                                                            <f:facet name="header"><b><a href="#">Ruta Documento</a></b></f:facet>
-                                                            <h:outputText value="#{docs.rutaDoc}" />
+                                                            <f:facet name="header"><b><a href="#">Es anexo?</a></b></f:facet>
+                                                            <h:selectOneRadio class="anexo" value="#{docs.anexo}">
+                                                    <f:selectItem itemLabel="SI" itemValue="SI"/>
+                                                    <f:selectItem itemLabel="NO" itemValue="NO"/>
+                                                </h:selectOneRadio>
                                                         </h:column>
                                                         <h:column>
-                                                            <f:facet name="header"><b><a href="#">Anexo</a></b></f:facet>
-                                                            <h:outputText value="#{docs.anexo}" />
+                                                            <f:facet name="header"><b><a href="#">Descargar archivo</a></b></f:facet>
+                                                            <a target="_blank" href="/sid/DownloadFileServletScanner?fileName=#{docs.fileName}">
+                                                                                <span class="fas fa-link" /> #{docs.fileName}
+                                                                            </a>
                                                         </h:column>
                                                         <h:column>
                                                             <a onclick="confirmar4#{row5.rowIndex+1}()">
@@ -447,108 +433,145 @@
                                                                 }
                                                             </script>
                                                             <gc:confirmSubmit bean="#{atencionController.eliminarDocumento(row5.rowIndex)}" classGC="confirmacion4#{row5.rowIndex+1}" mensaje="¿Esta seguro que desea eliminar el registro?" />
-                                                            <h:panelGroup rendered="#{atencionController.disabledGuardar}">
-                                                                <a onclick="invocarOCR4#{row5.rowIndex+1}(#{docs.id})">
+                                                            
+                                                        </h:column>
+                                                    </h:dataTable>
+                                                    
+                                                    <h:dataTable    value="#{atencionController.listaDocumentosAtencionRetorno}" 
+                                                                    rendered="#{atencionController.listaDocumentosAtencionRetorno.size() > 0}"
+                                                                    var="do" 
+                                                                    class="table no-wrap v-middle table-hover" 
+                                                                    binding="#{row50}">
+                                                        <h:column>
+                                                            <f:facet name="header">Nro</f:facet>
+                                                            <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row50.rowIndex+1)}" /></h5>        
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header"><b><a href="#">Nombre</a></b></f:facet>
+                                                            <h:outputText value="#{do.codDocumento}" />
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header"><b><a href="#">Tipo Documento</a></b></f:facet>
+                                                            <h:selectOneMenu value="#{do.idTipoDocumento}" class="form-control" disabled="true">
+                                                                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                                                                                    <f:selectItems value="#{listasComunesController.listarTipoDocumentoOCR(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                                                                </h:selectOneMenu>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header"><b><a href="#">Es anexo?</a></b></f:facet>
+                                                            <h:selectOneRadio class="anexo" value="#{do.anexo}" disabled="true">
+                                                    <f:selectItem itemLabel="SI" itemValue="SI"/>
+                                                    <f:selectItem itemLabel="NO" itemValue="NO"/>
+                                                </h:selectOneRadio>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header"><b><a href="#">Descargar archivo</a></b></f:facet>
+                                                            <a target="_blank" href="/sid/DownloadFileServletAtencion?fileName=#{do.codDocumento}">
+                                                                                <span class="fas fa-link" /> #{do.codDocumento}
+                                                                            </a>
+                                                        </h:column>
+                                                        <h:column>
+                                                            
+                                                            <!--<h:panelGroup rendered="#{atencionController.disabledGuardar}">-->
+                                                                <a href="#" onclick="invocarOCR4#{row50.rowIndex+1}(#{do.id})">
                                                                     <i class="fas fa-server"  ></i>
                                                                 </a>
                                                                 <script>
-                                                                    function invocarOCR4#{row5.rowIndex+1}(id) {
+                                                                    function invocarOCR4#{row50.rowIndex+1}(id) {
                                                                         // alert('id documento: ' + id);
                                                                         console.log('Llamando componente OCR');
                                                                         abrirVisorArchivo({
-                                                                                    "idAplicacion": 1,"idArchivo": id});
+                                                                            "idAplicacion": 1, "idArchivo": id});
                                                                     }
                                                                 </script>
-                                                            </h:panelGroup>
+                                                            <!--</h:panelGroup>-->
                                                         </h:column>
                                                     </h:dataTable>
                                                 </div>
                                             </div> 
                                         </h:panelGroup>
+                                    </div>
                                 </div>
-                            </div>
-                             </h:panelGroup>
-                            
+                            </h:panelGroup>
+
                         </h:panelGroup>
                     </div>
                     <!-- Tramites --> 
-                    
-                        <div class="col-12">
-                            <h:panelGroup id="idpanelexpedientesSID">
-                                <h:panelGroup rendered="#{atencionController.verificaTieneExpediente()}">
-                                    <div class="card">
-                                        <div class="card-header header-dark">
-                                            <h4 class="card-title"><a href="#">Tramites del Ciudadano</a></h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="codTramite" class="control-label col-form-label"><strong>N° Expediente: </strong></label> <br />
-                                                    <input  type="text" 
-                                                            class="form-control" 
-                                                            placeholder="N° de  Expediente"/>
-                                                </div>
+
+                    <div class="col-12">
+                        <h:panelGroup id="idpanelexpedientesSID">
+                            <h:panelGroup rendered="#{atencionController.verificaTieneExpediente()}">
+                                <div class="card">
+                                    <div class="card-header header-dark">
+                                        <h4 class="card-title"><a href="#">Tramites del Ciudadano</a></h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="codTramite" class="control-label col-form-label"><strong>N° Expediente: </strong></label> <br />
+                                                <input  type="text" class="form-control" placeholder="N° de  Expediente"/>
                                             </div>
-                                            <div class="row" style="padding-top: 20px;">
-                                                <div class="col-md-12">
-                                                    <h:dataTable id="tbl_expedientes" value="#{atencionController.listaExpedienteXDNIPaginado}" var="exped" class="table no-wrap v-middle" binding="#{row6}">
-                                                        <h:column>
-                                                            <f:facet name="header">Nro</f:facet>
-                                                            <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row6.rowIndex+1)+(atencionController.nroPagina-1)*10}" /></h5>
-                                                        </h:column>
-                                                        <h:column rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
-                                                            <f:facet name="header">Comisionado</f:facet>
-                                                            <h:outputText value="#{exped.comisionado}" />
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></b></f:facet>
-                                                            <label title="#{exped.sumilla == null? '' : exped.sumilla}" class="label label-danger">#{exped.numero}</label>        
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></b></f:facet>
-                                                            <h:outputText value="#{exped.clasificacionTipoNombre}" />
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></b></f:facet>
-                                                            <h:outputText value="#{exped.fechaRegistro}" >
-                                                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                                            </h:outputText>
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header">Etapa</f:facet>
-                                                            <h:outputText value="#{exped.etapaDetalle}" />
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></b></f:facet>
-                                                            <h:outputText rendered="#{exped.general == 'A'}" value="Trámite" />
-                                                            <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == null}" value="Concluido" />
-                                                            <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == 1}" value="Desistido" />
-                                                        </h:column>
-                                                        <h:column>
-                                                            <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></b></f:facet>
-                                                            <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
-                                                        </h:column>
-                                                        <h:column>
-                                                            <a jsf:actionListener="#{atencionController.abrirVentanaAdjuntarDocumentos(row6.rowIndex)}">
-                                                                <i class="fas fa-upload" ></i>
-                                                            </a>
-                                                        </h:column>
-                                                    </h:dataTable>
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled" id="file_export_previous">
-                                                            <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item next" id="file_export_next">
-                                                            <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        </div>
+                                        <div class="row" style="padding-top: 20px;">
+                                            <div class="col-md-12">
+                                                <h:dataTable id="tbl_expedientes" value="#{atencionController.listaExpedienteXDNIPaginado}" var="exped" class="table no-wrap v-middle" binding="#{row6}">
+                                                    <h:column>
+                                                        <f:facet name="header">Nro</f:facet>
+                                                        <h5 class="m-b-0 font-16 font-medium"><h:outputText value="#{(row6.rowIndex+1)+(atencionController.nroPagina-1)*10}" /></h5>
+                                                    </h:column>
+                                                    <h:column rendered="#{seguridadUtilController.tieneRecurso('REC_EXP008')}">
+                                                        <f:facet name="header">Comisionado</f:facet>
+                                                        <h:outputText value="#{exped.comisionado}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,2)}">Expediente</a></b></f:facet>
+                                                        <label title="#{exped.sumilla == null? '' : exped.sumilla}" class="label label-danger">#{exped.numero}</label>        
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,3)}">Tipo</a></b></f:facet>
+                                                        <h:outputText value="#{exped.clasificacionTipoNombre}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,4)}">Fecha Registro</a></b></f:facet>
+                                                        <h:outputText value="#{exped.fechaRegistro}" >
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </h:outputText>
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Etapa</f:facet>
+                                                        <h:outputText value="#{exped.etapaDetalle}" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,5)}">Estado general</a></b></f:facet>
+                                                        <h:outputText rendered="#{exped.general == 'A'}" value="Trámite" />
+                                                        <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == null}" value="Concluido" />
+                                                        <h:outputText rendered="#{exped.general == 'C' and exped.indicadorDesestimiento == 1}" value="Desistido" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></b></f:facet>
+                                                        <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
+                                                    </h:column>
+                                                    <h:column>
+                                                        <a jsf:actionListener="#{atencionController.abrirVentanaAdjuntarDocumentos(row6.rowIndex)}">
+                                                            <i class="fas fa-upload" ></i>
+                                                        </a>
+                                                    </h:column>
+                                                </h:dataTable>
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled" id="file_export_previous">
+                                                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina -1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item next" id="file_export_next">
+                                                        <a jsf:action="#{registroController.listarExpedienteUsuarioPaginado(registroController.nroPagina +1)}" jsf:rendered="#{!empty registroController.listaExpedienteXUsuarioPaginado}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
-                                </h:panelGroup>
-                           </h:panelGroup>
-                        </div>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
                 </div>
             </h:form>
         </ui:define>
