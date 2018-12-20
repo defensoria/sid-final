@@ -35,6 +35,9 @@ public class AtencionTicket {
     private Integer estadoAtencionTicket;
     private Long idVentanilla;
     
+    private String tipoClasificion;
+    
+    
     /**
      * @return the idTicket
      */
@@ -327,6 +330,20 @@ public class AtencionTicket {
      */
     public void setIdVentanilla(Long idVentanilla) {
         this.idVentanilla = idVentanilla;
+    }
+
+    /**
+     * @return the tipoClasificion
+     */
+    public String getTipoClasificion() {
+        return tipoClasificion;
+    }
+
+    /**
+     * @param tipoClasificion the tipoClasificion to set
+     */
+    public void setTipoClasificion(String tipoClasificion) {
+        this.tipoClasificion = tipoClasificion;
     }
 
     

@@ -584,7 +584,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             AtencionController  atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
             guardarVincularPersonaSAC(atencionController.getAtencionTicket());
             expediente = new Expediente();
-            personaSeleccionada.setTipoExpediente("01");
+            personaSeleccionada.setTipoExpediente(atencionController.getAtencionTicket().getTipoClasificion());//JCARRILLO
             persona = new Persona();
             expedientepersonaModalEdit = new ExpedientePersona();
             entidad = new Entidad();
@@ -4369,7 +4369,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             return false;
         }
         if (StringUtils.equals(expediente.getTipoClasificion(), ExpedienteType.CONSULTA.getKey())) {
-            if (expediente.getIndicadorOficio()) {
+            if (expediente.getIndicadorOficio() != null && expediente.getIndicadorOficio()) {
                 msg.messageAlert("Un expediente de oficio no puede ser del tipo consulta", null);
                 return false;
             }

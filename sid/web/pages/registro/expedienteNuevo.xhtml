@@ -350,25 +350,25 @@
                                     <div class="col-3">
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione1" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione2" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null and !seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione3" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa != 1 and registroController.etapaEstado.verEtapa != 5 and registroController.expediente.version != 0 and registroController.expediente.version != null) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione4" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>

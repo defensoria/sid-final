@@ -261,9 +261,12 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group" style="text-align: center">
-                                                <a class="btn btn-warning" jsf:action="#{registroController.iniciarExpedienteSAC()}" >
-                                                    <i class="fa fa-save"></i> Generar Expediente
-                                                </a>
+                                                <h:panelGroup>
+                                                    <h:selectOneMenu value="#{atencionController.atencionTicket.tipoClasificion}" class="form-control">
+                                                        <f:selectItem itemLabel="Seleccione" />
+                                                        <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
                                             </div>
                                         </div>
                                     </div>
@@ -272,26 +275,19 @@
                             </div>
                         </div>
                     </div>
-                    <!--
+                    
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group" style="text-align: center">
-                                    <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
-                                        <i class="fa fa-save"></i> Finalizar Atención y suspender
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="text-align: center">
-                                    <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
-                                        <i class="fa fa-save"></i> Finalizar Atención y continuar
+                                    <a class="btn btn-warning" jsf:action="#{registroController.iniciarExpedienteSAC()}" >
+                                        <i class="fa fa-save"></i> Generar Expediente
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    -->
+                    
                 </div>
             </h:form>
         </ui:define>
