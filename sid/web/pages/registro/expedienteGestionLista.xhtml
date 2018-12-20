@@ -85,24 +85,24 @@
                             <table style="width:100%">    
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open" style="font-size:medium"></span>
+                                        <span class="fas fa-folder-open" style="font-size:medium"></span>
                                         <span class="text-resalt-comun">&#160;&#160;Investigación&#160;(#{registroController.listaExpedientesInvestigacionQueja.size()})</span>
                                         <a id="addInvestigacion">
-                                            <span id="spanAddInvestigacion" class="glyphicon glyphicon-plus" style="font-size:medium;cursor:pointer"></span>
+                                            <span id="spanAddInvestigacion" class="fas fa-plus" style="font-size:medium;cursor:pointer"></span>
                                         </a>
                                     </td>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open" style="font-size:medium"></span>
+                                        <span class="fas fa-folder-open" style="font-size:medium"></span>
                                         <span class="text-resalt-comun">&#160;&#160;Persuasión&#160;(#{registroController.listaExpedientesPersuacionQueja.size()})</span>
                                         <a id="addPersuacion">
-                                            <span id="spanAddPersuacion" class="glyphicon glyphicon-plus" style="font-size:medium;cursor:pointer"></span>
+                                            <span id="spanAddPersuacion" class="fas fa-plus" style="font-size:medium;cursor:pointer"></span>
                                         </a>
                                     </td>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open" style="font-size:medium"></span>
+                                        <span class="fas fa-folder-open" style="font-size:medium"></span>
                                         <span class="text-resalt-comun">&#160;&#160;Seguimiento&#160;(#{registroController.listaExpedientesSeguimientoQueja.size()})</span>
                                         <a id="addSeguimiento">
-                                            <span id="spanAddSeguimiento" class="glyphicon glyphicon-plus" style="font-size:medium;cursor:pointer"></span>
+                                            <span id="spanAddSeguimiento" class="fas fa-plus" style="font-size:medium;cursor:pointer"></span>
                                         </a>
                                     </td>
                                 </tr>
@@ -112,17 +112,17 @@
                             <table style="width:100%">    
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open" style="font-size:medium"></span>
+                                        <span class="fas fa-folder-open" style="font-size:medium"></span>
                                         <span class="text-resalt-comun">&#160;&#160;Gestión&#160;(#{registroController.listaExpedientesGestionPetitorio.size()})</span>
                                         <a id="addInvestigacion">
-                                            <span id="spanAddInvestigacion" class="glyphicon glyphicon-plus" style="font-size:medium;cursor:pointer"></span>
+                                            <span id="spanAddInvestigacion" class="fas fa-plus" style="font-size:medium;cursor:pointer"></span>
                                         </a>
                                     </td>
                                     <td>
-                                        <span class="glyphicon glyphicon-folder-open" style="font-size:medium"></span>
+                                        <span class="fas fa-folder-open" style="font-size:medium"></span>
                                         <span class="text-resalt-comun">&#160;&#160;Persuasión&#160;(#{registroController.listaExpedientesPersuacionPetitorio.size()})</span>
                                         <a id="addPersuacion">
-                                            <span id="spanAddPersuacion" class="glyphicon glyphicon-plus" style="font-size:medium;cursor:pointer"></span>
+                                            <span id="spanAddPersuacion" class="fas fa-plus" style="font-size:medium;cursor:pointer"></span>
                                         </a>
                                     </td>
                                 </tr>
@@ -173,13 +173,13 @@
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa == 2}">
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}" jsf:action="#{registroController.setearExpedienteGestion(investigacion)}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 2}">
                                             <f:facet  name="header">Ver</f:facet>
                                             <a jsf:action="#{registroController.verExpedienteGestion(investigacion)}">
-                                                <span class="glyphicon glyphicon-search" />
+                                                <span class="fas fa-search" />
                                             </a>
                                         </h:column>
                                     </h:dataTable>
@@ -226,13 +226,13 @@
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa == 3}">
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}" jsf:action="#{registroController.setearExpedienteGestion(persuacion)}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 3}">
                                             <f:facet  name="header">Ver</f:facet>
                                             <a jsf:action="#{registroController.verExpedienteGestion(persuacion)}">
-                                                <span class="glyphicon glyphicon-search" />
+                                                <span class="fas fa-search" />
                                             </a>
                                         </h:column>
                                     </h:dataTable>
@@ -280,13 +280,13 @@
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa == 4}">
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}" jsf:action="#{registroController.setearExpedienteGestion(seguimiento)}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 4}">
                                             <f:facet  name="header">Ver</f:facet>
                                             <a jsf:action="#{registroController.verExpedienteGestion(seguimiento)}">
-                                                <span class="glyphicon glyphicon-search" />
+                                                <span class="fas fa-search" />
                                             </a>
                                         </h:column>
                                     </h:dataTable>
@@ -335,13 +335,13 @@
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa == 6}">
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:action="#{registroController.setearExpedienteGestion(gestion)}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 6}">
                                             <f:facet  name="header">Ver</f:facet>
                                             <a jsf:action="#{registroController.verExpedienteGestion(gestion)}">
-                                                <span class="glyphicon glyphicon-search" />
+                                                <span class="fas fa-search" />
                                             </a>
                                         </h:column>
                                     </h:dataTable>
@@ -388,13 +388,13 @@
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa == 7}">
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:action="#{registroController.setearExpedienteGestion(persuacion)}">
-                                                <span class="glyphicon glyphicon-pencil" />
+                                                <span class="fas fa-pencil-alt" />
                                             </a>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 7}">
                                             <f:facet  name="header">Ver</f:facet>
                                             <a jsf:action="#{registroController.verExpedienteGestion(persuacion)}">
-                                                <span class="glyphicon glyphicon-search" />
+                                                <span class="fas fa-search" />
                                             </a>
                                         </h:column>
                                     </h:dataTable>
@@ -404,54 +404,54 @@
                         <script>
                             $("#idPanelBodyCalificacion").hide();
                             $("#addCalificacion").click(function () {
-                                if ($("#spanAddCalificacion").attr('class') === "glyphicon glyphicon-plus")
+                                if ($("#spanAddCalificacion").attr('class') === "fas fa-plus")
                                 {
                                     $("#idPanelBodyCalificacion").slideDown(400).delay(800);
-                                    $("#spanAddCalificacion").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                                    $("#spanAddCalificacion").removeClass("fa-plus").addClass("fa-minus");
                                 }
                                 else
                                 {
                                     $("#idPanelBodyCalificacion").slideUp(300).delay(800);
-                                    $("#spanAddCalificacion").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                                    $("#spanAddCalificacion").removeClass("fa-minus").addClass("fa-plus");
                                 }
                             });
                             $("#idPanelBodyInvestigacion").hide();
                             $("#addInvestigacion").click(function () {
-                                if ($("#spanAddInvestigacion").attr('class') === "glyphicon glyphicon-plus")
+                                if ($("#spanAddInvestigacion").attr('class') === "fas fa-plus")
                                 {
                                     $("#idPanelBodyInvestigacion").slideDown(400).delay(800);
-                                    $("#spanAddInvestigacion").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                                    $("#spanAddInvestigacion").removeClass("fa-plus").addClass("fa-minus");
                                 }
                                 else
                                 {
                                     $("#idPanelBodyInvestigacion").slideUp(300).delay(800);
-                                    $("#spanAddInvestigacion").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                                    $("#spanAddInvestigacion").removeClass("fa-minus").addClass("fa-plus");
                                 }
                             });
                             $("#idPanelBodyPersuacion").hide();
                             $("#addPersuacion").click(function () {
-                                if ($("#spanAddPersuacion").attr('class') === "glyphicon glyphicon-plus")
+                                if ($("#spanAddPersuacion").attr('class') === "fas fa-plus")
                                 {
                                     $("#idPanelBodyPersuacion").slideDown(400).delay(800);
-                                    $("#spanAddPersuacion").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                                    $("#spanAddPersuacion").removeClass("fa-plus").addClass("fa-minus");
                                 }
                                 else
                                 {
                                     $("#idPanelBodyPersuacion").slideUp(300).delay(800);
-                                    $("#spanAddPersuacion").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                                    $("#spanAddPersuacion").removeClass("fa-minus").addClass("fa-plus");
                                 }
                             });
                             $("#idPanelBodySeguimiento").hide();
                             $("#addSeguimiento").click(function () {
-                                if ($("#spanAddSeguimiento").attr('class') === "glyphicon glyphicon-plus")
+                                if ($("#spanAddSeguimiento").attr('class') === "fas fa-plus")
                                 {
                                     $("#idPanelBodySeguimiento").slideDown(400).delay(800);
-                                    $("#spanAddSeguimiento").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                                    $("#spanAddSeguimiento").removeClass("fa-plus").addClass("fa-minus");
                                 }
                                 else
                                 {
                                     $("#idPanelBodySeguimiento").slideUp(300).delay(800);
-                                    $("#spanAddSeguimiento").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                                    $("#spanAddSeguimiento").removeClass("fa-minus").addClass("fa-plus");
                                 }
                             });
                         </script>

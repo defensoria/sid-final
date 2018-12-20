@@ -954,7 +954,7 @@
             (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_TIPOCLASIFICACION='03' 
             <if test="codUsuario != null">
                 AND C_USUREGISTRO  = #{codUsuario}
-            </if>C_ESTADOGENERAL=
+            </if>
             ) Q_PETITORIO,
             (SELECT COUNT(*) FROM SID_REG_EXPEDIENTE WHERE C_ESTADO='A' AND C_ESTADOGENERAL='A' 
             <if test="codUsuario != null">
