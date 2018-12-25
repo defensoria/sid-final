@@ -20,6 +20,8 @@ import gob.dp.sid.comun.ConstantesUtil;
 import gob.dp.sid.comun.CryptoAES;
 import gob.dp.sid.comun.ListadoClasificacion;
 import gob.dp.sid.comun.MEncript;
+import gob.dp.sid.comun.MailUtilitario;
+import gob.dp.sid.comun.Utilitarios;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
 import gob.dp.sid.comun.entity.Distrito;
 import gob.dp.sid.comun.entity.FiltroParametro;
@@ -90,6 +92,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -4467,6 +4470,23 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             log.error("ERROR - guardar()" + e);
         }
     }
+    
+    // jmatos
+    public void generarCodigoSendMail(String strEmailTo) throws Exception {
+        // Autogeneración de codigo - Enviar Correo:
+        Utilitarios utilitario = new Utilitarios();
+        String codigoAutogenerado = MEncript.randomAlphaNumeric(10);
+        String emailBody = MessageFormat.format(utilitario.getProperties(ConstantesUtil.MAIL_BODY_CODIGO_AUTO), 
+                                        codigoAutogenerado);
+        String subject = utilitario.getProperties(ConstantesUtil.MAIL_SUBJECT_CODIGO_AUTO);
+                
+        List<String> emailTo = new ArrayList<>();
+        emailTo.add(strEmailTo);
+        List<String> emailCC = new ArrayList<>();
+        emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
+        MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        // Fin Autogeneracion
+    }
 
     private void guardarSinClasificacion() {
         try {
@@ -5144,6 +5164,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 p.setTipoLengua(p.getPersona().getTipoLengua());
                 //p.setTipoPueblo(p.getPersona().getTipoPueblo());
                 expedientePersonaService.expedientePersonaInsertar(p);
+                // Enviar Correo jmatos:
+                generarCodigoSendMail(p.getPersona().getEmail());
+                // Fin Enviar Correo jmatos
             }
             for (ExpedienteEntidad e : entidadSeleccionadas) {
                 e.setExpediente(expediente);

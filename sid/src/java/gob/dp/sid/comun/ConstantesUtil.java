@@ -64,4 +64,21 @@ public class ConstantesUtil implements Serializable{
     public static final String PARAMETRO_TIPO_DOCUMENTO_DNI = "02";
     public static final String PARAMETRO_TIPO_DOCUMENTO_CE = "05";
     public static final String PARAMETRO_TIPO_DOCUMENTO_INDOCUMENTADO = "07";
+    
+    // Parametros Mail
+    public static final String MAIL_USERNAME = "pe.gob.dp.sid.smtp.username";
+    public static final String MAIL_PASSWORD = "pe.gob.dp.sid.smtp.password";
+    public static final String MAIL_HOST = "pe.gob.dp.sid.smtp.host";
+    public static final String MAIL_PORT = "pe.gob.dp.sid.smtp.port";
+    public static final String MAIL_FROM = "pe.gob.dp.sid.smtp.mail.from";
+    
+    // Parametros Mail
+    public static final String MAIL_GMAIL_USERNAME = "pe.gob.dp.sid.gmail.smtp.username";
+    public static final String MAIL_GMAIL_PASSWORD = "pe.gob.dp.sid.gmail.smtp.password";
+    public static final String MAIL_GMAIL_HOST = "pe.gob.dp.sid.gmail.smtp.host";
+    public static final String MAIL_GMAIL_PORT = "pe.gob.dp.sid.gmail.smtp.port";
+    
+    public static final String MAIL_BODY_CODIGO_AUTO = "pe.gob.dp.sid.mail.body.autogeneracion.code";
+    public static final String MAIL_SUBJECT_CODIGO_AUTO = "pe.gob.dp.sid.mail.subject.autogeneracion.code";
+    
 }

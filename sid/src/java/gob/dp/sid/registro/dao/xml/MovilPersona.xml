@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gob.dp.sid.registro.dao.MovilPersonaDAO">
+
+    <resultMap id="movilPersonaMap" type="movilPersona">
+        <id property="idPersona" column="N_ID_PERSONA" />
+        <result property="numeroDocumento" column="C_NUMDOCUMENTO"/>
+        <result property="contrasenia" column="C_CONTRA"/>
+        <result property="nombre" column="C_NOMBRE"/>
+        <result property="apellidoPaterno" column="C_APELLIDOPAT"/>
+        <result property="apellidoMaterno" column="C_APELLIDOMAT"/>
+        <result property="tipoDocumento" column="C_TIPODOCUMENTO"/>
+        <result property="fechaRegistro" column="D_FECHAREGISTRO"/>
+        <result property="sexo" column="C_SEXO"/>
+        <result property="telefono" column="C_TELEFONO"/>
+        <result property="email" column="C_EMAIL"/>
+        <result property="direccion" column="C_DIRECCION"/>
+        <result property="idDepartamento" column="C_IDDEPARTAMENTO"/>
+        <result property="idProvincia" column="C_IDPROVINCIA"/>
+        <result property="idDistrito" column="C_IDDISTRITO"/>
+        <result property="fechaNacimiento" column="D_FECHANACIMIENTO"/>
+        <result property="tipoLengua" column="C_TIPOLENGUA"/>
+        <result property="idDiscapacitado" column="C_INDDISCAPACITADO"/>
+        <result property="nacionalidad" column="C_NACIONALIDAD"/>
+        <result property="rol" column="C_ROL"/>
+        <result property="estado" column="N_ESTADO"/>
+    </resultMap>
+    <insert id="movilPersonaInsertar" parameterType="movilPersona">
+        INSERT
+            INTO SID_MOV_PERSONA
+              (
+                N_ID_PERSONA,
+                <if test="numeroDocumento != null">
+                    C_NUMDOCUMENTO,
+                </if>
+                <if test="contrasenia != null">
+                    C_CONTRA,
+                </if>
+                <if test="nombre != null">
+                    C_NOMBRE,
+                </if>
+                <if test="apellidoPaterno != null">
+                    C_APELLIDOPAT,
+                </if>
+                <if test="apellidoMaterno != null">
+                    C_APELLIDOMAT,
+                </if>
+                <if test="tipoDocumento != null">
+                    C_TIPODOCUMENTO,
+                </if>
+                <if test="fechaRegistro != null">
+                    D_FECHAREGISTRO,
+                </if>
+                <if test="sexo != null">
+                    C_SEXO,
+                </if>
+                <if test="telefono != null">
+                    C_TELEFONO,
+                </if>
+                <if test="email != null">
+                    C_EMAIL,
+                </if>
+                <if test="direccion != null">
+                    C_DIRECCION,
+                </if>
+                <if test="idDepartamento != null">
+                    C_IDDEPARTAMENTO,
+                </if>
+                <if test="idProvincia != null">
+                    C_IDPROVINCIA,
+                </if>
+                <if test="idDistrito != null">
+                    C_IDDISTRITO,
+                </if>
+                <if test="fechaNacimiento != null">
+                    D_FECHANACIMIENTO,
+                </if>
+                <if test="tipoLengua != null">
+                    C_TIPOLENGUA,
+                </if>
+                <if test="idDiscapacitado != null">
+                    C_INDDISCAPACITADO,
+                </if>
+                <if test="nacionalidad != null">
+                    C_NACIONALIDAD,
+                </if>
+                <if test="rol != null">
+                    C_ROL,
+                </if>
+                N_ESTADO
+              )
+              VALUES
+              (
+                #{idPersona},
+                <if test="numeroDocumento != null">
+                    #{numeroDocumento},
+                </if>
+                <if test="contrasenia != null">
+                    #{contrasenia},
+                </if>
+                <if test="nombre != null">
+                    #{nombre},
+                </if>
+                <if test="apellidoPaterno != null">
+                    #{apellidoPaterno},
+                </if>
+                <if test="apellidoMaterno != null">
+                    #{apellidoMaterno},
+                </if>
+                <if test="tipoDocumento != null">
+                    #{tipoDocumento},
+                </if>
+                <if test="fechaRegistro != null">
+                    #{fechaRegistro},
+                </if>
+                <if test="sexo != null">
+                    #{sexo},
+                </if>
+                <if test="telefono != null">
+                    #{telefono},
+                </if>
+                <if test="email != null">
+                    #{email},
+                </if>
+                <if test="direccion != null">
+                    #{direccion},
+                </if>
+                <if test="idDepartamento != null">
+                    #{idDepartamento},
+                </if>
+                <if test="idProvincia != null">
+                    #{idProvincia},
+                </if>
+                <if test="idDistrito != null">
+                    #{idDistrito},
+                </if>
+                <if test="fechaNacimiento != null">
+                    #{fechaNacimiento},
+                </if>
+                <if test="tipoLengua != null">
+                    #{tipoLengua},
+                </if>
+                <if test="idDiscapacitado != null">
+                    #{idDiscapacitado},
+                </if>
+                <if test="nacionalidad != null">
+                    #{nacionalidad},
+                </if>
+                <if test="rol != null">
+                    #{rol},
+                </if>
+                #{estado}
+              )
+    </insert>
+    <select id="movilPersonaBusarId" resultMap="movilPersonaMap" parameterType="movilPersona" >
+        SELECT N_ID_PERSONA,
+            C_NUMDOCUMENTO,
+            C_CONTRA,
+            C_NOMBRE,
+            C_APELLIDOPAT,
+            C_APELLIDOMAT,
+            C_TIPODOCUMENTO,
+            D_FECHAREGISTRO,
+            C_SEXO,
+            C_TELEFONO,
+            C_EMAIL,
+            C_DIRECCION,
+            C_IDDEPARTAMENTO,
+            C_IDPROVINCIA,
+            C_IDDISTRITO,
+            D_FECHANACIMIENTO,
+            C_TIPOLENGUA,
+            C_INDDISCAPACITADO,
+            C_NACIONALIDAD,
+            C_ROL,
+            N_ESTADO
+          FROM SID_MOV_PERSONA 
+            WHERE N_ID_PERSONA = #{idPersona}
+    </select>
+</mapper>

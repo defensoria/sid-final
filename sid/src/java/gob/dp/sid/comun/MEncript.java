@@ -10,9 +10,10 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.log4j.Logger;
 
 public class MEncript {
-     private static final Logger log = Logger.getLogger(MEncript.class);
-
-        /* Encriptación de la clave */
+    private static final Logger log = Logger.getLogger(MEncript.class);
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    
+    /* Encriptación de la clave */
     private static String toHexadecimal(byte[] digest){
         String hash = "";
         for(byte aux : digest) {
@@ -22,6 +23,16 @@ public class MEncript {
         }
         return hash;
     }
+
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+        int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+        builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
+    }
+
 
     public static String getStringMessageDigest(String message)
     {
