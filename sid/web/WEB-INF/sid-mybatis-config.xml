@@ -35,6 +35,7 @@
         
         <typeAlias type="gob.dp.sid.registro.entity.Expediente" alias="expediente"/>
         <typeAlias type="gob.dp.sid.registro.entity.Persona" alias="persona"/>
+        <typeAlias type="gob.dp.sid.registro.entity.MovilPersona" alias="movilPersona"/>
         <typeAlias type="gob.dp.sid.registro.entity.Entidad" alias="entidad"/>
         <typeAlias type="gob.dp.sid.registro.entity.ExpedientePersona" alias="expedientePersona"/>
         <typeAlias type="gob.dp.sid.registro.entity.ExpedienteEntidad" alias="expedienteEntidad"/>
@@ -116,7 +117,7 @@
         <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteHistorial.xml" />
         <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteFormularioVirtual.xml" />
         <mapper resource="gob/dp/sid/registro/dao/xml/ExpedienteVisita.xml" />
-        
+        <mapper resource="gob/dp/sid/registro/dao/xml/MovilPersona.xml" />
         
         <mapper resource="gob/dp/sid/bandeja/dao/xml/Bandeja.xml" />
         <mapper resource="gob/dp/sid/atencion/dao/xml/Ciudadano.xml" />
