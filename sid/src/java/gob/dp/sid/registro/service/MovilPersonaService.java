@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gob.dp.sid.registro.dao;
+package gob.dp.sid.registro.service;
 
 import gob.dp.sid.registro.entity.MovilPersona;
-import java.util.List;
 
 /**
  *
  * @author JMATOS
  */
-public interface MovilPersonaDAO {
-    public void movilPersonaInsertar(MovilPersona movilPersona);
-    public MovilPersona movilPersonaPorId(Long id);
+public interface MovilPersonaService {
+    
+    public void movilPersonaRegistro(MovilPersona movilPersona);
+    public MovilPersona movilPersonaBuscarId(Long id);
+    
 }
