@@ -409,13 +409,13 @@ body[data-theme="dark"] {
   cyan: #4fc3f7;
   orange: #fb8c00;
   purple: #7460ee;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1600px;
-  --font-family-sans-serif: "Nunito Sans", sans-serif;
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  breakpoint-xs: 0;
+  breakpoint-sm: 576px;
+  breakpoint-md: 768px;
+  breakpoint-lg: 992px;
+  breakpoint-xl: 1600px;
+  font-family-sans-serif: "Nunito Sans", sans-serif;
+  font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 *,
 *::before,
@@ -4416,7 +4416,6 @@ button.close {
     opacity: 0.5; }
 
 .modal-header {
-  display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 1rem;

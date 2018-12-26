@@ -347,7 +347,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
                                                 <f:selectItem itemLabel="Seleccione1" />
@@ -385,7 +385,7 @@
                                             </a>
                                         </h:panelGroup>
                                     </div>
-                                    <div class="col-6" style="text-align: right">
+                                    <div class="col-7" style="text-align: right">
                                         <h:panelGroup  id="idPanel3" rendered="#{registroController.expediente.id == null || registroController.expediente.version == 0}">
                                             <a class="btn btn-warning" jsf:action="#{registroController.guardarBorrador()}">
                                                 <span class="fas fa-eraser" /> Borrador
@@ -701,15 +701,21 @@
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-12" style="text-align: left">
                                                                         <c:forEach var="nivel" items="#{registroController.expediente.listaExpedienteNivel}">
-                                                                            <a onclick="confirmar4#{nivel.id}()">
+                                                                            <div class="row">
+                                                                                <div class="col-1">
+                                                                                    <a onclick="confirmar4#{nivel.id}()">
                                                                                 <span class="fas fa-times" style="color: red;"/>
                                                                             </a>
                                                                             <gc:confirmSubmit classGC="confirmacion4#{nivel.id}" bean="#{registroController.inactivarNivel(nivel)}" mensaje="Está seguro de eliminar la clasificación?"/>
+                                                                                </div>
+                                                                                <div class="col-11">
+                                                                                    <div class="alert alert-success">
                                                                             <script>
                                                                                 function confirmar4#{nivel.id}() {
                                                                                     $(".confirmacion4#{nivel.id}").modal('show');
                                                                                 }
                                                                             </script>
+                                                                        
                                                                             <a jsf:action="#{registroController.editarNivel(nivel)}" >
                                                                                 <span class="fas fa-pencil-alt"/>
                                                                                 <f:ajax render="idClasificador" />
@@ -729,6 +735,11 @@
                                                                                 <span class="fas fa-plus"/>
                                                                                 <f:ajax render="idPanelSegundaClasificacion" onevent="openModalSegundaClasificacion" />
                                                                             </a>
+                                                                            </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            
                                                                             <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01' and nivel.indicadorSegundoTipo == 'S'}">
                                                                                 <h:dataTable value="#{nivel.listaClasificacionTipo}" var="cla" class="table table-active">
                                                                                     <h:column>
