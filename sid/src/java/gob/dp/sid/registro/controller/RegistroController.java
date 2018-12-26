@@ -4503,7 +4503,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         MovilPersona movilPersona = new MovilPersona();
         movilPersona.setIdPersona(p.getId());
         movilPersona.setNumeroDocumento(p.getNumeroDocumento());
-        movilPersona.setContrasenia(codigoAutogenerado);
+        movilPersona.setContrasenia(MEncript.getStringMessageDigest(codigoAutogenerado));
         movilPersona.setNombre(p.getNombre());
         movilPersona.setApellidoPaterno(p.getApellidoPat());
         movilPersona.setApellidoMaterno(p.getApellidoMat());
