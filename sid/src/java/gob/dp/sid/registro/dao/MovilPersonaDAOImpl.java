@@ -6,16 +6,23 @@
 package gob.dp.sid.registro.dao;
 
 import gob.dp.sid.registro.entity.MovilPersona;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author JMATOS
  */
-public class MovilPersonaDAOImpl implements MovilPersonaDAO {
+@Repository
+public class MovilPersonaDAOImpl extends SqlSessionDaoSupport implements MovilPersonaDAO {
 
     @Override
     public void movilPersonaInsertar(MovilPersona movilPersona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getSqlSession().insert("gob.dp.sid.registro.dao.MovilPersonaDAO.movilPersonaInsertar", movilPersona);
     }
-    
+
+    @Override
+    public MovilPersona movilPersonaPorId(Long id) {
+        return getSqlSession().selectOne("gob.dp.sid.registro.dao.MovilPersonaDAO.movilPersonaBusarId", id);
+    }
 }

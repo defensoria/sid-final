@@ -23,7 +23,9 @@ public enum RolType {
         
         COMISIONADO_AD("ROL0000003", "COMISIONADO AD"),
         
-        APROBADOR_AD("ROL0000004", "SUPERVISOR AD");
+        APROBADOR_AD("ROL0000004", "SUPERVISOR AD"),
+        
+        ROL_ADMIN("ROL_ADMIN", "ROL ADMINISTRADOR");
         
 	
 	/** La Constante list. */

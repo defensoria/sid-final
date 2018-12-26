@@ -5,13 +5,14 @@
  */
 package gob.dp.sid.registro.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author JMATOS
  */
-public class MovilPersona {
+public class MovilPersona implements Serializable {
     
     private Long idPersona;
     private String numeroDocumento;
