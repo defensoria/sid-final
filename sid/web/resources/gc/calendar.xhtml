@@ -11,6 +11,7 @@
     </composite:interface>
 
     <composite:implementation>
+        <script src="/sid/faces/dist/js/pages/forms/datetimepicker/datetimepicker.init.js"></script>
         <div class="input-group" id="#{cc.attrs.idDiv}">
             <input type='text'  data-format="dd/MM/yyyy" jsf:value="#{cc.attrs.value}"  placeholder="Fecha" id="#{cc.attrs.id}" class="form-control pickadate-translations #{cc.attrs.clase}">
                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />

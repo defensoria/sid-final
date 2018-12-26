@@ -333,7 +333,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
+                                                            <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
                                                                 <span class="fa fa-save"/> Guardar
                                                             </a>
                                                             <a class="btn btn-danger" data-dismiss="modal">
@@ -393,7 +393,7 @@
                                         </h:panelGroup>
                                         &#160;&#160;        
                                         <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
-                                            <a class="btn btn-info" jsf:action="#{registroController.guardarVersion()}">
+                                            <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}">
                                                 <span class="fas fa-save" /> Guardar
                                             </a>
                                         </h:panelGroup>

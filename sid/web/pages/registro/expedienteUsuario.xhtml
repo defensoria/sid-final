@@ -19,7 +19,7 @@
                                     </div>
 
                                     <div class="col-6" style="text-align: right">
-                                        <a class="btn btn-info" jsf:action="#{registroController.buscarPersonaGeneral(1)}">
+                                        <a class="btn btn-secondary" jsf:action="#{registroController.buscarPersonaGeneral(1)}">
                                             <span class="fas fa-search" /> Buscar
                                         </a>
                                     </div>
@@ -59,7 +59,7 @@
                                 <h:panelGroup id="idPanelListaPersonas" rendered="#{registroController.indSeleccion}" style="text-align: left">
                                     <div class="row">
                                         <div class="col-12" style="text-align: right">
-                                            <a class="btn btn-info" jsf:rendered="#{registroController.indSeleccion}" jsf:action="#{registroController.cargarModalActor()}">
+                                            <a class="btn btn-secondary" jsf:rendered="#{registroController.indSeleccion}" jsf:action="#{registroController.cargarModalActor()}">
                                                 <span class="fas fa-user" />Nueva Persona
                                                 <f:ajax render=":idForm" onevent="openModalNuevaPersona"/>
                                             </a>
@@ -125,7 +125,7 @@
                                                             </h:selectOneMenu>
                                                         </td>
                                                         <td  style="text-align: right">
-                                                            <a class="btn btn-info" jsf:action="#{registroController.iniciarExpedienteNuevo()}" jsf:rendered="#{!registroController.indSeleccion}">
+                                                            <a class="btn btn-secondary" jsf:action="#{registroController.iniciarExpedienteNuevo()}" jsf:rendered="#{!registroController.indSeleccion}">
                                                                 <span class="far fa-share-square"/> Generar Expediente
                                                             </a>
                                                         </td>
@@ -243,15 +243,23 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Registro de Persona</h4>
-                                <div>
-                                    <a class="btn btn-danger" data-dismiss="modal">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4 class="modal-title">Registro de Persona</h4>
+                                    </div>
+                                    <div class="col-6" style="text-align: right">
+                                        <a class="btn btn-danger" data-dismiss="modal">
                                     <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
                                 </a>&#160;&#160;&#160;
                                 <a jsf:action="#{registroController.guardarVincularPersona()}" class="btn btn-primary">
                                     <span class="fas fa-save" /> Guardar
                                 </a>
+                                    </div>
                                 </div>
+                                
+                                
+                                    
+                                
                                 
                             </div>
                             <div class="modal-body">
@@ -355,9 +363,9 @@
                                         <div class="form-group row">
                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de nacimiento</label>
                                             <div class="col-sm-8">
-                                                <script src="/sid/faces/assets/libs/pickadate/lib/compressed/picker.js"></script>
-                                                <script src="/sid/faces/assets/libs/pickadate/lib/compressed/picker.date.js"></script>
-                                                <script src="/sid/faces/dist/js/pages/forms/datetimepicker/datetimepicker.init.js"></script>
+                                                
+                                                
+                                                
                                                 <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
                                             </div>
                                         </div>
@@ -456,12 +464,7 @@
                                     </div>
                                 </h:panelGroup>
                             </div>
-                            <div class="modal-footer">
-
-                                <a class="btn btn-danger" data-dismiss="modal">
-                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
