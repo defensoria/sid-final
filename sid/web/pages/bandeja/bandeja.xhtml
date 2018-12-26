@@ -64,7 +64,7 @@
                             <div class="ml-auto">
                                 <div class="btn-group m-r-10" role="group" aria-label="Button group with nested dropdown">
                                     <button type="button" class="btn btn-outline-secondary font-18" onclick="window.location.reload();"><i class="mdi mdi-reload"></i></button>
-                                    <button type="button" class="btn btn-outline-secondary font-18"><i class="mdi mdi-delete"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary font-18" ><i class="mdi mdi-delete"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -110,11 +110,33 @@
                         <div class="p-15 m-t-30">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">Next</a></li>
+                                    <!-- Pag Listado Alertas Internos -->
+                                    <li class="paginate_button page-item previous" id="file_export_previous">
+                                    <a jsf:action="#{bandejaController.cargarTotalInternos(bandejaController.nroPaginaAutomatica -1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 3}"
+                                       aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                                    </li>
+                                    <li class="paginate_button page-item next" id="file_export_next">
+                                    <a jsf:action="#{bandejaController.cargarTotalInternos(bandejaController.nroPaginaAutomatica +1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 3}"
+                                       aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                                    </li>
+                                    <!-- Pag Listado Alertas Automaticos -->    
+                                    <li class="paginate_button page-item previous" id="file_export_previous">
+                                    <a jsf:action="#{bandejaController.cargarTotalAutomaticos(bandejaController.nroPaginaAutomatica -1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 1}"
+                                       aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                                    </li>
+                                    <li class="paginate_button page-item next" id="file_export_next">
+                                    <a jsf:action="#{bandejaController.cargarTotalAutomaticos(bandejaController.nroPaginaAutomatica +1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 1}"
+                                       aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                                    </li>
+                                    <!-- Pag Listado Alertas Programas -->        
+                                    <li class="paginate_button page-item previous" id="file_export_previous">
+                                    <a jsf:action="#{bandejaController.cargarTotalProgramados(bandejaController.nroPaginaAutomatica -1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 2}"
+                                       aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                                    </li>
+                                    <li class="paginate_button page-item next" id="file_export_next">
+                                    <a jsf:action="#{bandejaController.cargarTotalProgramados(bandejaController.nroPaginaAutomatica +1)}" jsf:rendered="#{bandejaController.indicadorBandeja == 2}"
+                                       aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente</a>
+                                    </li>                                       
                                 </ul>
                             </nav>
                         </div>
