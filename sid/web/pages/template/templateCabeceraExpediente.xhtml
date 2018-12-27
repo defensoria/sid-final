@@ -158,7 +158,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 2}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Investigación
@@ -170,7 +170,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 3}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
@@ -182,7 +182,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 4}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Seguimiento
@@ -334,7 +334,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
+                                                            <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.guardarAsignado()}">
                                                                 <span class="fa fa-save"/> Guardar
                                                             </a>
                                                             <a class="btn btn-danger" data-dismiss="modal">
@@ -348,28 +348,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione1" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione2" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa != 0 and registroController.etapaEstado.verEtapa != null and !seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione3" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa != 1 and registroController.etapaEstado.verEtapa != 5 and registroController.expediente.version != 0 and registroController.expediente.version != null) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione" />
+                                                <f:selectItem itemLabel="Seleccione4" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
@@ -386,7 +386,7 @@
                                             </a>
                                         </h:panelGroup>
                                     </div>
-                                    <div class="col-6" style="text-align: right">
+                                    <div class="col-7" style="text-align: right">
                                         <h:panelGroup  id="idPanel3" rendered="#{registroController.expediente.id == null || registroController.expediente.version == 0}">
                                             <a class="btn btn-warning" jsf:action="#{registroController.guardarBorrador()}">
                                                 <span class="fas fa-eraser" /> Borrador
@@ -394,7 +394,7 @@
                                         </h:panelGroup>
                                         &#160;&#160;        
                                         <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
-                                            <a class="btn btn-info" jsf:action="#{registroController.guardarVersion()}">
+                                            <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}">
                                                 <span class="fas fa-save" /> Guardar
                                             </a>
                                         </h:panelGroup>

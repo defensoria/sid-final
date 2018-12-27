@@ -3,19 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/signin.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/WEB-INF/sid-mybatis-config.xml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/dao/xml/UsuarioLogin.xml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/resources/gc/calendar.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/inicio/index.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/controller/LoginController.java</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/WEB-INF/sid-data.xml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/dao/UsuarioLoginDAOImpl.java</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/WEB-INF/jdbc.properties</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/service/UsuarioLoginServiceImpl.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/bandeja/bandeja.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/dist/css/style.css</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
         </group>
     </open-files>
 </project-private>

@@ -9,25 +9,7 @@
         <ui:define name="content">
             <h:form id="idForm" class="form-horizontal">
                 <gc:confirmSubmit classGC="confirmacion1" bean="#{registroController.guardarRegistroCAV()}" mensaje="Esta seguro que desea realizar el registro?"/>
-                <style>
-                    .trPadding{
-                        padding-bottom: 10px;
-                    }
-                    .trPaddingRight{
-                        padding-right: 10px;
-                        padding-bottom: 10px;
-                    }
-
-                    .trPaddingLeft{
-                        padding-left: 10px;
-                        padding-bottom: 10px;
-                    }
-
-                    .clasRED{
-                        background: #F2DEDE;
-                        border: solid #A94442;
-                    }
-                </style>
+                
                 <script>
                     function confirmar1() {
                         if ($('.idAccion').val() === '0') {
@@ -153,14 +135,14 @@
                     }
                 </script>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-5">
                                         <h4 class="card-title">Datos de atención</h4>
                                     </div>
-                                    <div class="col-6" style="text-align: right">
+                                    <div class="col-7" style="text-align: right">
                                         <a class="btn btn-warning" onclick="confirmar1()">
                                             <i class="fa fa-save"></i> Guardar
                                         </a>
@@ -341,7 +323,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -420,12 +402,12 @@
                                                 <h:outputText value="#{item.accionDescripcion}" />
                                             </div>
                                         </h:column>
-                                        <h:column>
+                                        <!--<h:column>
                                             <div style="#{item.accion == null? 'background: #FFD400' : ''}">
                                                 <f:facet name="header">Descripción</f:facet>
                                                 <h:outputText value="#{item.descripcion}" />
                                             </div>
-                                        </h:column>
+                                        </h:column>-->
                                         <h:column>
                                             <f:facet name="header">Doc.</f:facet>
                                             <h:panelGroup rendered="#{item.ruta != null}">

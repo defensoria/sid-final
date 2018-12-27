@@ -737,6 +737,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     }
     
     public void guardarRegistroCAV(){
+        usuarioSession();
         if(StringUtils.equals(expedienteFormularioVirtual.getAccion(), "01") || StringUtils.equals(expedienteFormularioVirtual.getAccion(), "02") || StringUtils.equals(expedienteFormularioVirtual.getAccion(), "03")){
             expedienteFormularioVirtual.setEstado("E");
             if(expedienteFormularioVirtual.getId() == null){

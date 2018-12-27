@@ -157,7 +157,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" class="btn #{registroController.etapaEstado.verEtapa == 2? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 2}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Investigación
@@ -169,7 +169,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" class="btn #{registroController.etapaEstado.verEtapa == 3? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 3}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión
@@ -181,7 +181,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(1)}" class="btn #{registroController.etapaEstado.verEtapa == 4? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 4}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Seguimiento
@@ -998,17 +998,7 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </h:panelGroup>
-                                                                                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
-                                                                                                        <div class="form-group row">
-                                                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacionalidad</label>
-                                                                                                            <div class="col-sm-8">
-                                                                                                                <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
-                                                                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0"/>
-                                                                                                                    <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                                                                </h:selectOneMenu>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </h:panelGroup>
+                                                                                                    
                                                                                                     <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
                                                                                                         <div class="form-group row">
                                                                                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Número documento</label>
@@ -1023,15 +1013,17 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </h:panelGroup>
-                                                                                                    <div class="form-group row">
-                                                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacionalidad</label>
-                                                                                                        <div class="col-sm-8">
-                                                                                                            <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
-                                                                                                                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
-                                                                                                                <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                                                            </h:selectOneMenu>
+                                                                                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                                                                                        <div class="form-group row">
+                                                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacionalidad</label>
+                                                                                                            <div class="col-sm-8">
+                                                                                                                <h:selectOneMenu value="#{registroController.persona.nacionalidad}" class="form-control">
+                                                                                                                    <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                                                                                                                    <f:selectItems value="#{listasComunesController.listaListaNacionalidades(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                                                                </h:selectOneMenu>
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
+                                                                                                    </h:panelGroup>
                                                                                                     <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
                                                                                                         <div class="form-group row">
                                                                                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
