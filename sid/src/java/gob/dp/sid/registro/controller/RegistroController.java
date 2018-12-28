@@ -3090,7 +3090,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 String formato = format.format(new Date());
                 expedienteGestion.setUsuarioRegistro(usuarioSession.getCodigo());
                 expedienteGestion.setFechaRegistro(new Date());
-                expedienteGestion.setCodigoGestion("GES" + formato);
+                expedienteGestion.setCodigoGestion("G" + formato);
                 expedienteGestion.setFecha(new Date());
                 expedienteGestionService.expedienteGestionInsertar(expedienteGestion);
                 guardarGestionEtapa();
@@ -3367,7 +3367,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                         String formato = format.format(new Date());
                         eg.setUsuarioRegistro(usuarioSession.getCodigo());
                         eg.setFechaRegistro(new Date());
-                        eg.setCodigoGestion("GES" + formato + i);
+                        eg.setCodigoGestion("G" + formato + i);
                         i++;
                         expedienteGestionService.expedienteGestionInsertar(eg);
                         /*gestion etapa*/

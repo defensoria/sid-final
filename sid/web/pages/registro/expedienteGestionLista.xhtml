@@ -132,11 +132,11 @@
                         <br/>
                         <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                             
-                            <div id="idPanelBodyInvestigacion" class="panel panel-info">
-                                <div class="panel-heading">
-                                    <span style="font-size: 1.5em">Gestiones registradas en la etapa de Investigación:</span>
+                            <div id="idPanelBodyInvestigacion">
+                                <div>
+                                    <h4 class="card-title">Gestiones registradas en la etapa de Investigación:</h4>
                                 </div>
-                                <div  class="panel-body">
+                                <div  class="table-responsive">
                                     <h:dataTable value="#{registroController.listaExpedientesInvestigacionQueja}" var="investigacion" binding="#{rowx2}" class="table table-hover">
                                         <h:column>
                                             <f:facet name="header">N°</f:facet>
@@ -185,11 +185,11 @@
                                     </h:dataTable>
                                 </div>
                             </div>
-                            <div id="idPanelBodyPersuacion" class="panel panel-default">
-                                <div class="panel-heading">
-                                    <span style="font-size: 1.5em">Gestiones registradas en la etapa de Persuasión:</span>
+                            <div id="idPanelBodyPersuacion">
+                                <div>
+                                    <h4 class="card-title">Gestiones registradas en la etapa de Persuasión:</h4>
                                 </div>
-                                <div  class="panel-body">
+                                <div class="table-responsive">
                                     <h:dataTable value="#{registroController.listaExpedientesPersuacionQueja}" var="persuacion" binding="#{rowx3}" class="table table-hover">
                                         <h:column>
                                             <f:facet name="header">N°</f:facet>
@@ -239,11 +239,12 @@
                                 </div>
                             </div>
 
-                            <div id="idPanelBodySeguimiento" class="panel panel-primary">
+                            <div id="idPanelBodySeguimiento" >
                                 <div class="panel-heading">
-                                    <span style="font-size: 1.5em">Gestiones registradas en la etapa de Seguimiento:</span>
+                                    <h4  class="card-title">Gestiones registradas en la etapa de Seguimiento:</h4>
                                 </div>
-                                <div  class="panel-body">
+                                
+                                <div class="table-responsive">
                                     <h:dataTable value="#{registroController.listaExpedientesSeguimientoQueja}" var="seguimiento" binding="#{rowx4}" class="table table-hover">
                                         <h:column>
                                             <f:facet name="header">N°</f:facet>
@@ -294,11 +295,11 @@
                             </div>
                         </h:panelGroup>
                         <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '03'}">
-                            <div id="idPanelBodyInvestigacion" class="panel panel-info">
-                                <div class="panel-heading">
-                                    <span style="font-size: 1.5em">Gestiones registradas en la etapa de Gestión:</span>
+                            <div id="idPanelBodyInvestigacion">
+                                <div>
+                                   <h4  class="card-title">Gestiones registradas en la etapa de Gestión:</h4>
                                 </div>
-                                <div  class="panel-body">
+                                <div  class="table-responsive">
                                     <h:dataTable value="#{registroController.listaExpedientesGestionPetitorio}" var="gestion" binding="#{rowx6}" class="table table-hover">
                                         <h:column>
                                             <f:facet name="header">N°</f:facet>
@@ -347,11 +348,11 @@
                                     </h:dataTable>
                                 </div>
                             </div>
-                            <div id="idPanelBodyPersuacion" class="panel panel-default">
-                                <div class="panel-heading">
-                                    <span style="font-size: 1.5em">Gestiones registradas en la etapa de Persuasión:</span>
+                            <div id="idPanelBodyPersuacion">
+                                <div>
+                                    <h4 class="card-title">Gestiones registradas en la etapa de Persuasión:</h4>
                                 </div>
-                                <div  class="panel-body">
+                                <div  class="table-responsive">
                                     <h:dataTable value="#{registroController.listaExpedientesPersuacionPetitorio}" var="persuacion" binding="#{rowx7}" class="table table-hover">
                                         <h:column>
                                             <f:facet name="header">N°</f:facet>
