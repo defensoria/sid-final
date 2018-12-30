@@ -5280,7 +5280,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 msg.messageAlert("Debe ingresar si es persona u organización", null);
                 return false;
             } else {
-                if (StringUtils.isBlank(persona.getNombre().trim())) {
+                if (persona.getNombre() != null && StringUtils.isBlank(persona.getNombre().trim())) {
                     msg.messageAlert("Debe ingresar el nombre", null);
                     return false;
                 }
