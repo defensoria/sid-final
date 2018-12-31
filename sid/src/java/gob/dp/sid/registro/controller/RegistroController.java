@@ -4504,7 +4504,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         emailTo.add(p.getEmail());
         List<String> emailCC = new ArrayList<>();
         emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
-        MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        //MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
         // Fin Autogeneracion
     }
     
