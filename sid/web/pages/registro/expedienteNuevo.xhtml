@@ -1443,6 +1443,7 @@
                                                             </div>
                                                             <br/><br/>
                                                             <h:panelGroup id="idPanelEntidadesQue" rendered="#{registroController.expediente.tipoClasificion != '02'}">
+                                                                <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Entidad Intervenida"/></h4>
                                                                 <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Actuación o responsabilidad de entidad"/></h4>
                                                                 <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                     <div class="form-group row">

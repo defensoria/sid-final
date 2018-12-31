@@ -3742,6 +3742,15 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         try {
             personasSeleccionadas = expedientePersonaService.expedientePersonaBuscarXExpediente(expediente.getId());
             entidadSeleccionadas = expedienteEntidadService.expedienteEntidadBuscarXExpediente(expediente.getId());
+            //ADD JCARRILLO
+            if(personasSeleccionadas.get(0).getId()!=null ){
+                MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
+                if(movilPersona != null){
+                    String contra ="";
+                    contra=MEncript.fromHexadecimal(movilPersona.getContrasenia());
+                    expediente.setContrasenia(contra);
+                }
+            }
         } catch (Exception e) {
             log.error("ERROR - cargarPersonasEntidades()" + e);
         }
