@@ -145,9 +145,7 @@ $(function() {
 
     // Disable right click and f12
     
-    $("html").on("contextmenu",function(e){
-       return false;
-    });
+    
     $(document).keydown(function (event) {
         if (event.keyCode == 123) { // Prevent F12
             return false;
