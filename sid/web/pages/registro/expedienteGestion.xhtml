@@ -290,7 +290,7 @@
                                                                                             <h:outputText value="#{entidades.nombreDepartamento}"/>
                                                                                         </h:column>
                                                                                         <h:column>
-                                                                                            <a jsf:action="#{registroController.addEntidad(entidades)}">
+                                                                                            <a jsf:action="#{registroController.addEntidadQuejada(entidad)}">
                                                                                                 <span class="fas fa-share"></span>  
                                                                                             </a>
                                                                                         </h:column>
@@ -331,47 +331,18 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <div class="table-responsive">
-                                                                <h:dataTable value="#{registroController.entidadSeleccionadas}" var="entidad" class="table table-striped" rendered="#{registroController.entidadSeleccionadas.size() > 0}">
-                                                                    <h:column>
-                                                                        <f:facet name="header">Nombre</f:facet>
-                                                                        <h:outputText value="#{entidad.entidad.nombre}"/>
-                                                                    </h:column>
-                                                                    <h:column>
-                                                                        <f:facet name="header">Func. quejado</f:facet>
-                                                                        <input type="text" jsf:value="#{entidad.nombreCompleto}" placeholder="Nombre" maxlength="300"/> 
-                                                                    </h:column>
-                                                                    <h:column>
-                                                                        <f:facet name="header">Cargo</f:facet>
-                                                                        <input type="text" jsf:value="#{entidad.cargo}" placeholder="Cargo" maxlength="200"/>
-                                                                    </h:column>
-                                                                    <h:column>
-                                                                        <script>
-                                                                                    function confirmar3#{entidad.entidad.id}() {
-                                                                                        $(".confirmacion3#{entidad.entidad.id}").modal('show');
-                                                                                    }
-                                                                        </script>
-                                                                        <gc:confirmSubmit bean="#{registroController.removeEntidad(entidad)}" classGC="confirmacion3#{entidad.entidad.id}" mensaje="Esta seguro de desvincular la Entidad?" />
-                                                                        <a onclick="confirmar3#{entidad.entidad.id}()">
-                                                                            <span style="color: red" class="fas fa-times"></span>
-                                                                        </a>
-                                                                    </h:column>
-                                                                </h:dataTable>
-                                                            </div>
+                                                            <h:inputHidden value="#{registroController.expedienteGestion.idEntidad}" />
+                                                            <input type="text" class="form-control" readonly="true" jsf:value="#{registroController.expedienteGestion.nombreEntidad}" placeholder="Institución"/>
+                                                            Seleccionar la entidad de datos generales: <h:selectBooleanCheckbox value="#{registroController.expedienteGestion.indEntidadQuejada}" >
+                                                        <f:ajax render="idPanelEntidadesQue" listener="#{registroController.entidadQuejada()}" />
+                                                    </h:selectBooleanCheckbox>
                                                         </div>
                                                     </div>
                                                 </h:panelGroup>
                                             </div>
 
 
-                                            <div class="form-group row">
-                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Entidad</label>
-                                                <div class="col-sm-8">
-                                                    <h:selectBooleanCheckbox value="#{registroController.expedienteGestion.indEntidadQuejada}" >
-                                                        <f:ajax render="idPanelEntidadesQue" listener="#{registroController.entidadQuejada()}" />
-                                                    </h:selectBooleanCheckbox>
-                                                </div>
-                                            </div>
+                                 
 
                                             <div class="form-group row">
                                                 <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre del funcionario</label>

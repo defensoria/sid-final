@@ -4460,6 +4460,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setUsuarioResponsable(usuarioSession.getCodigo());
                 expediente.setVersion(1);
                 generarCodigoExpediente();
+                // Enviar Correo jmatos:
+                generarCodigoSendMail();
+                // Fin Enviar Correo jmatos
                 expediente.setFechaIngreso(new Date());
                 expediente.setFechaRegistro(new Date());
             } else {
@@ -4485,7 +4488,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     }
     
     // jmatos
-    public void generarCodigoSendMail(Persona p) throws Exception {
+    public void generarCodigoSendMail() throws Exception {
+        Persona p = personasSeleccionadas.get(0).getPersona();
         // Autogeneración de codigo - Enviar Correo:
         Utilitarios utilitario = new Utilitarios();
         String codigoAutogenerado = MEncript.randomAlphaNumeric(10);
@@ -4501,36 +4505,39 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                                         codigoAutogenerado);
         String subject = utilitario.getProperties(ConstantesUtil.MAIL_SUBJECT_CODIGO_AUTO);
         List<String> emailTo = new ArrayList<>();
-        emailTo.add(p.getEmail());
+        if(StringUtils.isNotBlank(p.getEmail())){
+            emailTo.add(p.getEmail());
         List<String> emailCC = new ArrayList<>();
         emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
         //MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
         MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
+        }
+        
         // Fin Autogeneracion
     }
     
     public void registrarDatosPersonaCAV(Persona p, String codigoAutogenerado) {
         // Guardar Datos Acceso CAV:
         MovilPersona movilPersona = new MovilPersona();
-        movilPersona.setIdPersona(p.getId());
-        movilPersona.setNumeroDocumento(p.getNumeroDocumento());
+        movilPersona.setIdPersona(p.getId() == null? null :p.getId());
+        movilPersona.setNumeroDocumento(p.getNumeroDocumento() == null? null :p.getNumeroDocumento());
         movilPersona.setContrasenia(MEncript.getStringMessageDigest(codigoAutogenerado));
-        movilPersona.setNombre(p.getNombre());
-        movilPersona.setApellidoPaterno(p.getApellidoPat());
-        movilPersona.setApellidoMaterno(p.getApellidoMat());
-        movilPersona.setTipoDocumento(p.getTipoDocumento());
+        movilPersona.setNombre(p.getNombre() == null? null :p.getNombre());
+        movilPersona.setApellidoPaterno(p.getApellidoPat() == null? null :p.getApellidoPat());
+        movilPersona.setApellidoMaterno(p.getApellidoMat() == null? null :p.getApellidoMat());
+        movilPersona.setTipoDocumento(p.getTipoDocumento() == null? null :p.getTipoDocumento());
         movilPersona.setFechaRegistro(new Date());
-        movilPersona.setSexo(p.getSexo());
-        movilPersona.setTelefono(p.getTelefono1());
-        movilPersona.setEmail(p.getEmail());
-        movilPersona.setDireccion(p.getDireccion());
-        movilPersona.setIdDepartamento(p.getIdDepartamento());
-        movilPersona.setIdProvincia(p.getIdProvincia());
-        movilPersona.setIdDistrito(p.getIdDistrito());
-        movilPersona.setFechaNacimiento(p.getFechaNacimiento());
-        movilPersona.setTipoLengua(p.getTipoLengua());
-        movilPersona.setIdDiscapacitado(p.getIndicadorDiscapacitado()? "S" : "N");
-        movilPersona.setNacionalidad(p.getNacionalidad());
+        movilPersona.setSexo(p.getSexo() == null? null :p.getSexo());
+        movilPersona.setTelefono(p.getTelefono1() == null? null :p.getTelefono1());
+        movilPersona.setEmail(p.getEmail() == null? null :p.getEmail());
+        movilPersona.setDireccion(p.getDireccion() == null? null :p.getDireccion());
+        movilPersona.setIdDepartamento(p.getIdDepartamento() == null? null :p.getIdDepartamento());
+        movilPersona.setIdProvincia(p.getIdProvincia() == null? null :p.getIdProvincia());
+        movilPersona.setIdDistrito(p.getIdDistrito() == null? null :p.getIdDistrito());
+        movilPersona.setFechaNacimiento(p.getFechaNacimiento() == null? null :p.getFechaNacimiento());
+        movilPersona.setTipoLengua(p.getTipoLengua() == null? null :p.getTipoLengua());
+        movilPersona.setIdDiscapacitado(p.getIndicadorDiscapacitado() ==  null? null : p.getIndicadorDiscapacitado()? "S" : "N");
+        movilPersona.setNacionalidad(p.getNacionalidad() == null? null :p.getNacionalidad());
         movilPersona.setRol(RolType.ROL_ADMIN.getKey());
         movilPersona.setEstado(1);
         movilPersonaService.movilPersonaRegistro(movilPersona);
@@ -5213,9 +5220,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 //p.setTipoPueblo(p.getPersona().getTipoPueblo());
                 expedientePersonaService.expedientePersonaInsertar(p);
                 
-                // Enviar Correo jmatos:
-                generarCodigoSendMail(p.getPersona());
-                // Fin Enviar Correo jmatos
+                
             }
             for (ExpedienteEntidad e : entidadSeleccionadas) {
                 e.setExpediente(expediente);

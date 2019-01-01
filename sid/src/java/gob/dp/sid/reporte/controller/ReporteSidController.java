@@ -30,6 +30,7 @@ import gob.dp.sid.reporte.entity.StringReport;
 import gob.dp.sid.reporte.service.ReporteSidExpedienteService;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1660,6 +1661,28 @@ public class ReporteSidController extends AbstractManagedBean implements Seriali
         } catch (Exception e) {
             log.error("ERROR - limpiarModalBusquedaClasificacion()" + e);
         }
+    }
+    
+    public String obtenToken(String destino) {
+        //Codificaccion del token
+    	String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    	String password = date +  "SomeExtraText" + destino;
+    	//Encriptando el token
+        MessageDigest md;
+        StringBuffer sb = new StringBuffer();
+		try {
+                    md = MessageDigest.getInstance("MD5");
+                    md.update(password.getBytes());
+                    byte byteData[] = md.digest();
+                    for (int i = 0; i < byteData.length; i++) {
+                     sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+                    }
+	        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+                        return "";
+		}
+                return sb.toString()+"&dst="+destino;
     }
 
     public void seleccionarNivel(ExpedienteNivel en) {
