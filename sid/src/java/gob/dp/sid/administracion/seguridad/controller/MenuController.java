@@ -202,6 +202,10 @@ public class MenuController implements Serializable {
             return atencionController.cargarInicioAtencion();
         }
         
+        if (codigoPagina == 37) {
+            RegistroController registroController = (RegistroController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "registroController");
+            return registroController.cargarNuevaBusqueda();
+        }
 
         if (codigoPagina == 32) {
             menuHijo = menuService.menuHijo(8);

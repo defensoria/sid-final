@@ -179,6 +179,9 @@ public class Expediente implements Serializable{
     // ADD JMATOS
     private String filtroNroDNI;
     
+    // ADD JCARRILLO
+    private String contrasenia;
+    
     public Long getId() {
         return id;
     }
@@ -836,4 +839,13 @@ public class Expediente implements Serializable{
         this.filtroNroDNI = filtroNroDNI;
     }
     // END ADD JMATOS
+    
+    //ADD JCARRILLO
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
 }

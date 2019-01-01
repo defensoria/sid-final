@@ -414,12 +414,14 @@
                                                 <span class="fas fa-save" style="color: white"/> <span style="color: white">Desistir</span>
                                             </a>
                                         </h:panelGroup>
+                                        <!--
                                         &#160;&#160;
                                         <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
                                             <a class="btn btn-info" onclick="confirmar6()" >
                                                 <span class="fas fa-save" style="color: white"/> <span style="color: white">Conclusión manual</span>
                                             </a>
                                         </h:panelGroup>
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -1352,13 +1354,15 @@
                                                                 <div class="col-sm-8">
                                                                     <gc:selectMultiBootstrap idSelect="idSelectGrupoViolencia" idHidden="idSelect1" lista="#{listasComunesController.buscarGrupoVulnerable(false,false,false)}" value="#{registroController.expediente.tipoGrupoVulnerable}"/>
                                                                 </div>
-                                                            </div>                                       
+                                                            </div>
+                                                            <!--
                                                             <div class="form-group row">
                                                                 <label for="fname" class="col-sm-4 text-right control-label col-form-label">Grupos especiales</label>
                                                                 <div class="col-sm-8">
                                                                     <gc:selectMultiBootstrap idSelect="idSelectGrupoEspecial" idHidden="idSelect32"  lista="#{listasComunesController.buscarGrupoEspecial(false,false,false)}" value="#{registroController.expediente.tipoGrupoEspecial}"/>
                                                                 </div>
-                                                            </div> 
+                                                            </div>
+                                                            -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1439,6 +1443,7 @@
                                                             </div>
                                                             <br/><br/>
                                                             <h:panelGroup id="idPanelEntidadesQue" rendered="#{registroController.expediente.tipoClasificion != '02'}">
+                                                                <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Entidad Intervenida"/></h4>
                                                                 <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Actuación o responsabilidad de entidad"/></h4>
                                                                 <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                     <div class="form-group row">
@@ -1585,7 +1590,7 @@
                         </div>
                     </div>
                 </div>  
-                <div class="card">
+                <div class="card" style="background-color: #EEEEEE">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -1664,6 +1669,7 @@
                         </div>
                     </div>
                 </div>
+                <!--
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -1727,6 +1733,7 @@
                         </div>
                     </div>
                 </div>
+                -->
                 <table style="width: 100%">       
                     <tr>
                         <td colspan="2">

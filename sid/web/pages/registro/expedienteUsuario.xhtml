@@ -15,7 +15,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 class="card-title">Búsqueda de personas</h4>
+                                        <h4 class="card-title">Búsqueda</h4>
                                     </div>
 
                                     <div class="col-6" style="text-align: right">
@@ -44,9 +44,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">Nombre / Razon Social</label>
+                                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">Nombre / Organización</label>
                                     <div class="col-sm-9">
-                                        <input jsf:value="#{registroController.personaBusqueda.nombre}" autocomplete="off" maxlength="100" type="text" placeholder="Nombre / Razon Social" class="form-control"/>
+                                        <input jsf:value="#{registroController.personaBusqueda.nombre}" autocomplete="off" maxlength="100" type="text" placeholder="Nombre / Organización" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -315,7 +315,7 @@
                                             </div>
                                         </div>
                                     </h:panelGroup>
-                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                    <h:panelGroup>
                                         <div class="form-group row">
                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
                                             <div class="col-sm-8">

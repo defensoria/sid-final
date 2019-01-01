@@ -3742,6 +3742,15 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         try {
             personasSeleccionadas = expedientePersonaService.expedientePersonaBuscarXExpediente(expediente.getId());
             entidadSeleccionadas = expedienteEntidadService.expedienteEntidadBuscarXExpediente(expediente.getId());
+            //ADD JCARRILLO
+            if(personasSeleccionadas.get(0).getId()!=null ){
+                MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
+                if(movilPersona != null){
+                    String contra ="";
+                    contra=MEncript.fromHexadecimal(movilPersona.getContrasenia());
+                    expediente.setContrasenia(contra);
+                }
+            }
         } catch (Exception e) {
             log.error("ERROR - cargarPersonasEntidades()" + e);
         }
@@ -4495,7 +4504,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         emailTo.add(p.getEmail());
         List<String> emailCC = new ArrayList<>();
         emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
-        MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        //MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
         // Fin Autogeneracion
     }
     
@@ -5280,7 +5290,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 msg.messageAlert("Debe ingresar si es persona u organización", null);
                 return false;
             } else {
-                if (StringUtils.isBlank(persona.getNombre().trim())) {
+                if (persona.getNombre() != null && StringUtils.isBlank(persona.getNombre().trim())) {
                     msg.messageAlert("Debe ingresar el nombre", null);
                     return false;
                 }

@@ -5,8 +5,10 @@
 
 package gob.dp.sid.comun;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
 import org.apache.log4j.Logger;
 
 public class MEncript {
@@ -50,6 +52,22 @@ public class MEncript {
             log.error("Error creando Digest : "+e);
         }
         return toHexadecimal(digest);
+    }
+    
+    public static String fromHexadecimal(String hex){
+        String psw ="";
+        try{
+            hex = hex.replaceAll("^(00)+", "");
+            byte[] bytes = new byte[hex.length() / 2];
+            for (int i = 0; i < hex.length(); i += 2) {
+                bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4) + Character.digit(hex.charAt(i + 1), 16));
+            }
+            psw =new String(bytes, "UTF-8");
+        } catch (Exception e) {
+            log.error("Error fromHexadecimal : "+e);
+        }
+        System.out.print("clave: "+psw);
+        return psw;
     }
 
 }
