@@ -356,9 +356,11 @@
                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de nacimiento</label>
                                             <div class="col-sm-8">
                                                 
+                                                <input type="date" jsf:value="#{registroController.persona.fechaNacimiento}"  placeholder="Fecha"  class="form-control">
+                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Lima" />
+            </input>
                                                 
                                                 
-                                                <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
                                             </div>
                                         </div>
                                     </h:panelGroup>
