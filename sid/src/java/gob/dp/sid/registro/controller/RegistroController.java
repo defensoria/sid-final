@@ -4497,7 +4497,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         Persona p = personasSeleccionadas.get(0).getPersona();
         // Autogeneración de codigo - Enviar Correo:
         Utilitarios utilitario = new Utilitarios();
-        String codigoAutogenerado = MEncript.randomAlphaNumeric(10);
+        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+
         // Registrar Datos en Mov Persona
         MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(p.getId());
         if(movilPersona != null){
@@ -4513,9 +4514,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         if(StringUtils.isNotBlank(p.getEmail())){
             emailTo.add(p.getEmail());
         List<String> emailCC = new ArrayList<>();
-        emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_USERNAME));
-        //MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
-        MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
+        emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
+        MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
+        //MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
         }
         
         // Fin Autogeneracion
@@ -4526,7 +4527,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         MovilPersona movilPersona = new MovilPersona();
         movilPersona.setIdPersona(p.getId() == null? null :p.getId());
         movilPersona.setNumeroDocumento(p.getNumeroDocumento() == null? null :p.getNumeroDocumento());
-        movilPersona.setContrasenia(MEncript.getStringMessageDigest(codigoAutogenerado));
+        movilPersona.setContrasenia(codigoAutogenerado);
         movilPersona.setNombre(p.getNombre() == null? null :p.getNombre());
         movilPersona.setApellidoPaterno(p.getApellidoPat() == null? null :p.getApellidoPat());
         movilPersona.setApellidoMaterno(p.getApellidoMat() == null? null :p.getApellidoMat());
