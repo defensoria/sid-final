@@ -4890,14 +4890,14 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                     }
                 }
 
-                /*if (Objects.equals(etapaEstado.getVerEtapa(), EtapaType.INVESTIGACION_QUEJA.getKey())) {
+                if (Objects.equals(etapaEstado.getVerEtapa(), EtapaType.INVESTIGACION_QUEJA.getKey())) {
                     if (listaExpedientesInvestigacionQueja != null) {
                         if (listaExpedientesInvestigacionQueja.size() == 0) {
                             msg.messageAlert("Debe ingresar por lo menos una gestion para culminar la etapa", null);
                             return false;
                         }
                     }
-                }*/
+                }
                 
                 if (Objects.equals(etapaEstado.getVerEtapa(), EtapaType.PERSUACION_QUEJA.getKey())) {
                     if (listaExpedientesPersuacionQueja != null) {

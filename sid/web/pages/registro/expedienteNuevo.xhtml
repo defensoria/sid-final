@@ -1444,18 +1444,8 @@
                                                             <br/><br/>
                                                             <h:panelGroup id="idPanelEntidadesQue" rendered="#{registroController.expediente.tipoClasificion != '02'}">
                                                                 <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Entidad Intervenida"/></h4>
-                                                                <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Actuación o responsabilidad de entidad"/></h4>
-                                                                <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
-                                                                    <div class="form-group row">
-                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Actuación o responsabilidad</label>
-                                                                        <div class="col-sm-8" style="text-align: right">
-                                                                            <h:selectOneMenu value="#{registroController.expediente.tipoActuacionResponsabilidad}" class="form-control">
-                                                                                <f:selectItem itemLabel="Seleccione" itemValue="0" />
-                                                                                <f:selectItems value="#{listasComunesController.buscarActuacionResponsabilidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                                            </h:selectOneMenu>
-                                                                        </div>
-                                                                    </div>
-                                                                </h:panelGroup>
+                                                                
+                                                                
                                                                 <br/>
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-3">

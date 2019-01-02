@@ -149,28 +149,7 @@
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-block">Acciones <i class="fa fa-angle-down"></i></span>
-                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
-                            </a>
-                            <h:form>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
-                                
-                                    <a class="dropdown-item" jsf:action="#{registroController.cargarNuevaBusqueda()}">Nueva atención</a>
-                            </h:panelGroup>
-                                <!-- Inicio - jcarrillo -->
-                                <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and !seguridadUtilController.tieneRol('ROL0000010')}" >
-                                    <a class="dropdown-item" jsf:action="#{atencionController.cargarInicioAtencion()}">Atención al Ciudadano</a>
-                                </h:panelGroup>
-                                <a class="dropdown-item" jsf:action="#{atencionController.atenderTicket()}">Atender Ticket</a>
-                                
-                                <a class="dropdown-item" jsf:action="#{atencionController.cargarUsuarioVentanilla()}">Asignar Usuario Ventanilla</a>
-                                <!-- Fin - jcarrillo -->
-                            </div>
-                                </h:form>
-                        </li>
+                        
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
