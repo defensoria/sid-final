@@ -184,4 +184,9 @@ public class ExpedienteServiceImpl implements ExpedienteService{
         return expedienteDAO.estadisticaExpediente(estExpediente);
     }
     /*Fin - JCARRILLO*/
+
+    @Override
+    public Integer validaUsuarioCount(String numeroDocumento) {
+        return expedienteDAO.validaUsuarioCount(numeroDocumento);
+    }
 }

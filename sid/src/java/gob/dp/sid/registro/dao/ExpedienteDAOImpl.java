@@ -151,4 +151,9 @@ public class ExpedienteDAOImpl extends SqlSessionDaoSupport implements Expedient
         return getSqlSession().selectOne("gob.dp.sid.registro.dao.ExpedienteDAO.estadisticaExpediente", estExpediente);
     }
     /*Fin - JCARRILLO*/
+
+    @Override
+    public Integer validaUsuarioCount(String numeroDocumento) {
+        return getSqlSession().selectOne("gob.dp.sid.registro.dao.ExpedienteDAO.validaUsuarioCount", numeroDocumento);
+    }
 }

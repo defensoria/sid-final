@@ -70,4 +70,6 @@ public interface ExpedienteDAO {
     /*Inicio - JCARRILLO*/
     public EstadisticaExpediente estadisticaExpediente(EstadisticaExpediente estExpediente);
     /*Fin - JCARRILLO*/
+    
+    public Integer validaUsuarioCount(String numeroDocumento);
 }

@@ -17,7 +17,6 @@ import gob.dp.sid.bandeja.controller.BandejaController;
 import gob.dp.sid.bandeja.entity.Bandeja;
 import gob.dp.sid.bandeja.service.BandejaService;
 import gob.dp.sid.comun.ConstantesUtil;
-import gob.dp.sid.comun.CryptoAES;
 import gob.dp.sid.comun.ListadoClasificacion;
 import gob.dp.sid.comun.MEncript;
 import gob.dp.sid.comun.MailUtilitario;
@@ -4461,8 +4460,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setVersion(1);
                 generarCodigoExpediente();
                 // Enviar Correo jmatos:
-                if(personasSeleccionadas.size() > 0)
+                if(personasSeleccionadas.size() > 0){
+                    String documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
+                    Integer validaEnvioEmail = expedienteService.validaUsuarioCount(documento);
+                    if(validaEnvioEmail == 0)
                 generarCodigoSendMail();
+                }
+                    
                 // Fin Enviar Correo jmatos
                 expediente.setFechaIngreso(new Date());
                 expediente.setFechaRegistro(new Date());
@@ -4509,7 +4513,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         if(StringUtils.isNotBlank(p.getEmail())){
             emailTo.add(p.getEmail());
         List<String> emailCC = new ArrayList<>();
-        emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_GMAIL_USERNAME));
+        emailCC.add(utilitario.getProperties(ConstantesUtil.MAIL_USERNAME));
         //MailUtilitario.sendEmailGmail(emailTo, true, emailCC, emailBody, subject);
         MailUtilitario.sendEmail(emailTo, true, emailCC, emailBody, subject);
         }

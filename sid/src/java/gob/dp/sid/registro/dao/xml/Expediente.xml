@@ -984,5 +984,13 @@
         FROM DUAL
     </select>
     
+    <select id="validaUsuarioCount" resultType="java.lang.Integer" parameterType="String">
+        SELECT COUNT(A.N_IDEXPEDIENTE) FROM SID_REG_EXPEDIENTE A
+        INNER JOIN sid_reg_expede_persona B ON A.N_IDEXPEDIENTE = b.n_idexpediente
+        INNER JOIN SID_REG_PERSONA C ON b.n_idpersona = c.n_idpersona
+        WHERE A.C_ESTADO = 'A' AND A.C_NUMEROEXPEDIENTE IS NOT NULL AND c.c_numerodocumento = #{value}
+    </select>
+    
+    
 </mapper>
 
