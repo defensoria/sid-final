@@ -3741,17 +3741,23 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         try {
             personasSeleccionadas = expedientePersonaService.expedientePersonaBuscarXExpediente(expediente.getId());
             entidadSeleccionadas = expedienteEntidadService.expedienteEntidadBuscarXExpediente(expediente.getId());
-            //ADD JCARRILLO
-            if(personasSeleccionadas.get(0).getId()!=null ){
-                MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
-                if(movilPersona != null){
-                    String contra ="";
-                    contra=MEncript.fromHexadecimal(movilPersona.getContrasenia());
-                    expediente.setContrasenia(contra);
-                }
-            }
+            cargarContraseniaExpediente();
         } catch (Exception e) {
             log.error("ERROR - cargarPersonasEntidades()" + e);
+        }
+    }
+    
+    private void cargarContraseniaExpediente() {
+        if (personasSeleccionadas != null){
+            for (ExpedientePersona p : personasSeleccionadas) {
+                if (p.getPersona() != null){
+                    MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(p.getPersona().getId());
+                    if(movilPersona != null){
+                        expediente.setContrasenia(movilPersona.getContrasenia());
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -4487,6 +4493,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             expediente.setGeneral("A");
             expedienteService.expedienteInsertar(expediente);
             insertListasPersonaEntidad();
+            cargarContraseniaExpediente();
         } catch (Exception e) {
             log.error("ERROR - guardar()" + e);
         }
