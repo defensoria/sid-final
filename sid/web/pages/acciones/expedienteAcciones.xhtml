@@ -57,10 +57,12 @@
                                     <br/>
                                     <h4 class="card-title">Listados de gestiones internas</h4>
                                     <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                        <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}" class="btn btn-secondary btn-default" style="color: white">Derivar</a>
-                                        <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}" class="btn btn-secondary btn-default" style="color: white">Consultar</a>
-                                        <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}" class="btn btn-secondary btn-default" style="color: white">Suspender</a>
-                                        <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}" class="btn btn-secondary btn-default" style="color: white">Ampliar</a>
+                                        <a jsf:action="#{registroController.inicioAccionesDerivacion()}" jsf:rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}" 
+                                            data-toggle="tooltip" data-placement="top" title="Derivar a nuevo comisionado."
+                                           class="btn btn-secondary btn-default" style="color: white">Derivar</a>
+                                        <a jsf:action="#{registroController.inicioAccionesConsultaPublic()}" class="btn btn-secondary btn-default" style="color: white" data-toggle="tooltip" data-placement="top" title="Realice sus consultas a la Primera juntilla" >Consultar</a>
+                                        <a jsf:action="#{registroController.inicioAccionesSuspenderPublic()}" class="btn btn-secondary btn-default" style="color: white" data-toggle="tooltip" data-placement="top" title="Solicite la suspención de dias al trámite.">Suspender</a>
+                                        <a jsf:action="#{registroController.inicioAccionesAmpliarPublic()}" class="btn btn-secondary btn-default" style="color: white" data-toggle="tooltip" data-placement="top" title="Solicite una ampliación de dias a su tramite.">Ampliar</a>
                                     </div>
                                 </div>
                             </div>
