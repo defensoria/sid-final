@@ -35,7 +35,6 @@
                     });
 
                 </script>
-                
                 <gc:confirmSubmit rendered="#{registroController.etapaEstado.verEtapa != 2}" classGC="confirmacion3" bean="#{registroController.concluir()}" mensaje="Está seguro que desea concluir la etapa?"/>
                 <gc:confirmSubmit rendered="#{registroController.etapaEstado.verEtapa == 2}" classGC="confirmacion3" bean="#{registroController.concluir()}" mensaje="Está seguro de haber completado la clasificación temática?      Está seguro que desea concluir la etapa?"/>
                 <gc:confirmSubmitRemove classGC="confirmacion0" bean="#{registroController.desistirExpediente()}"  mensaje="Está seguro que desea desistir expediente?"/>
@@ -502,7 +501,7 @@
                                                                 <div class="col-sm-8">
                                                                     <h:selectOneMenu value="#{registroController.expediente.tipoIngreso}" class="form-control">
                                                                         <f:selectItem itemValue="0" itemLabel="Seleccione" />
-                                                                        <f:selectItems value="#{registroController.listaCanalIngreso}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                        <f:selectItems value="#{listasComunesController.buscarExpedienteTipoIngreso(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                                     </h:selectOneMenu>
                                                                 </div>
                                                             </div>
@@ -533,8 +532,8 @@
                                                             </script>
                                                             <h4 class="card-title">Clasificación temática</h4>
                                                             <div class="form-group row">
-                                                                <label for="fname" class="col-sm-3 text-right control-label col-form-label">Buscador</label>
-                                                                <div class="col-sm-9" style="text-align: right">
+                                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Buscador</label>
+                                                                <div class="col-sm-8" style="text-align: right">
                                                                     <a jsf:rendered="#{registroController.expediente.numero != null and registroController.expediente.numero != '' and registroController.expediente.tipoClasificion == '01'}" style="cursor: pointer" jsf:action="#{registroController.limpiarModalBusquedaClasificacion()}">
                                                                         <span class="fas fa-search" style="font-size: large" />
                                                                         <f:ajax render="idPanelModalBusquedaClasificacion" onevent="openModalBusquedaClasificacion" />
@@ -622,8 +621,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="color: red">Ámbito</label>
-                                                                <div class="col-sm-9" style="text-align: right">
+                                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label" style="color: red">Ámbito</label>
+                                                                <div class="col-sm-8" style="text-align: right">
                                                                     <h:panelGroup rendered="#{registroController.expediente.numero != null and registroController.expediente.numero != ''}" style="text-align: right">
                                                                         <a class="btn btn-warning" jsf:rendered="#{registroController.expediente.numero != null}" jsf:action="#{registroController.guardarNivel()}">
                                                                             <span class="fas fa-sync" /> Agregar/Actualizar
@@ -634,8 +633,8 @@
                                                             <h:panelGroup id="idPanelClasificacionTem">
                                                                 <h:panelGroup id="idClasificador">
                                                                     <div class="form-group row">
-                                                                        <label for="fname" class="col-sm-2 text-right control-label col-form-label">Tema</label>
-                                                                        <div class="col-sm-10" style="text-align: right">
+                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tema</label>
+                                                                        <div class="col-sm-8" style="text-align: right">
                                                                             <h:selectOneMenu value="#{registroController.expedienteNivel.idPrimerNivel}" id="idSelectPrimerNivel" class="form-control">
                                                                                 <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                 <f:selectItems value="#{registroController.listaClasificacionPrimerLevel}" />
@@ -645,8 +644,8 @@
                                                                     </div>
                                                                     <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01' or registroController.expedienteNivel.idPrimerNivel == 807}">
                                                                         <div class="form-group row">
-                                                                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Sub tema</label>
-                                                                            <div class="col-sm-10" style="text-align: right">
+                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Sub tema</label>
+                                                                            <div class="col-sm-8" style="text-align: right">
                                                                                 <h:selectOneMenu id="idSelectSegundoNivel" value="#{registroController.expedienteNivel.idSegundoNivel}" class="form-control">
                                                                                     <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                     <f:selectItems value="#{registroController.listaClasificacionSegundoLevel}" />
@@ -658,8 +657,8 @@
                                                                     </h:panelGroup>
                                                                     <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                         <div class="form-group row">
-                                                                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Tercer nivel</label>
-                                                                            <div class="col-sm-10" style="text-align: right">
+                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tercer nivel</label>
+                                                                            <div class="col-sm-8" style="text-align: right">
                                                                                 <h:selectOneMenu id="idSelectTercerNivel" value="#{registroController.expedienteNivel.idTercerNivel}" class="form-control">
                                                                                     <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                     <f:selectItems value="#{registroController.listaClasificacionTercerLevel}" />
@@ -670,8 +669,8 @@
                                                                     </h:panelGroup>
                                                                     <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                         <div class="form-group row">
-                                                                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Cuarto nivel</label>
-                                                                            <div class="col-sm-10" style="text-align: right">
+                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Cuarto nivel</label>
+                                                                            <div class="col-sm-8" style="text-align: right">
                                                                                 <h:selectOneMenu id="idSelectCuartoNivel" value="#{registroController.expedienteNivel.idCuartoNivel}" class="form-control">
                                                                                     <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                     <f:selectItems value="#{registroController.listaClasificacionCuartoLevel}" />
@@ -682,8 +681,8 @@
                                                                     </h:panelGroup>
                                                                     <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                         <div class="form-group row">
-                                                                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Quinto nivel</label>
-                                                                            <div class="col-sm-10" style="text-align: right">
+                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Quinto nivel</label>
+                                                                            <div class="col-sm-8" style="text-align: right">
                                                                                 <h:selectOneMenu id="idSelectQuintoNivel" value="#{registroController.expedienteNivel.idQuintoNivel}" class="form-control">
                                                                                     <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                     <f:selectItems value="#{registroController.listaClasificacionQuintoLevel}" />
@@ -694,8 +693,8 @@
                                                                     </h:panelGroup>
                                                                     <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01'}">
                                                                         <div class="form-group row">
-                                                                            <label for="fname" class="col-sm-2 text-right control-label col-form-label">Sexto nivel</label>
-                                                                            <div class="col-sm-10" style="text-align: right">
+                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Sexto nivel</label>
+                                                                            <div class="col-sm-8" style="text-align: right">
                                                                                 <h:selectOneMenu id="idSelectSextoNivel" value="#{registroController.expedienteNivel.idSextoNivel}" class="form-control">
                                                                                     <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                     <f:selectItems value="#{registroController.listaClasificacionSextoLevel}" />
@@ -1748,4 +1747,4 @@
             </h:form>
         </ui:define>
     </ui:composition>
-</html>            
+</html>
