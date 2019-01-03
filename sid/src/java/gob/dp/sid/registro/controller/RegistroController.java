@@ -4466,12 +4466,12 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setVersion(1);
                 generarCodigoExpediente();
                 // Enviar Correo jmatos:
-                /*if(personasSeleccionadas.size() > 0){
+                if(personasSeleccionadas.size() > 0){
                     String documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
                     Integer validaEnvioEmail = expedienteService.validaUsuarioCount(documento);
                     if(validaEnvioEmail == 0)
                 generarCodigoSendMail();
-                }*/
+                }
                     
                 // Fin Enviar Correo jmatos
                 expediente.setFechaIngreso(new Date());
