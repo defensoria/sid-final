@@ -5953,12 +5953,11 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     }
 
     public List<SelectItem> getListaUsuariosComisionadosPorOD() {
-        System.out.println("getListaUsuariosComisionadosPorOD");
         List<SelectItem> listaUsuario = new ArrayList<>();
         try {
             Usuario u = new Usuario();
             u.setCodigoOD(expedienteDerivacionAprueba.getIdOficinaDefensorial());
-            if(expedienteDerivacionAprueba.getIdOficinaDefensorial() < 1000)
+            if(expedienteDerivacionAprueba.getIdOficinaDefensorial() < 10000)
                 u.setRol(RolType.COMISIONADO_OD.getKey());
             else
                 u.setRol(RolType.COMISIONADO_AD.getKey());

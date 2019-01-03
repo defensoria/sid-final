@@ -375,7 +375,7 @@ public class BandejaController extends AbstractManagedBean implements Serializab
         mensajeBandeja.setTituloMensaje("Solicita: reasignación por "+MensajeType.MENSAJE_DERIVACION.getDetalle()+" exp: "+ed.getNumeroExpediente()+" a: "+of.getNombre());
         Usuario usu = new Usuario();
         usu.setCodigoOD(ed.getIdOficinaDefensorial());
-        if(ed.getIdOficinaDefensorial() < 1000)
+        if(ed.getIdOficinaDefensorial() < 10000)
             usu.setRol(RolType.APROBADOR_OD.getKey());
         else
             usu.setRol(RolType.APROBADOR_AD.getKey());

@@ -80,9 +80,9 @@
                                         <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
                                     </div>
                                     <h:panelGroup rendered="#{registroController.expediente.contrasenia.length() > 0}">
-                                    <div class="col-3">
-                                        <h4 class="card-title" >Contraseña: <label class="label label-danger" style="font-size: 20px" >#{registroController.expediente.contrasenia}</label></h4>
-                                    </div> 
+                                        <div class="col-3">
+                                            <h4 class="card-title" >Contraseña: <label class="label label-danger" style="font-size: 20px" >#{registroController.expediente.contrasenia}</label></h4>
+                                        </div> 
                                     </h:panelGroup>
                                     <div class="col-6" style="text-align: right">
                                         <a jsf:rendered="#{registroController.expediente.version >= 1}" jsf:action="#{registroController.pdf()}">
@@ -439,20 +439,20 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title m-b-40">Secciones del expediente</h4>
-                                
-                                
-                                        
 
-                
-                    <ui:insert name="content2">
-                
-                    </ui:insert>
-               </div>
-                                    </div>
-                                </div>
+
+
+
+
+                                <ui:insert name="content2">
+
+                                </ui:insert>
                             </div>
-                        
-                
+                        </div>
+                    </div>
+                </div>
+
+
             </h:form>
         </ui:define>
     </ui:composition>

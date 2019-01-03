@@ -198,7 +198,10 @@
             C_APELLIDOMATERNO = #{apellidoMaterno},
         </if>
         <if test="tipoDocumento != null">
-            C_NUMERODOCUMENTO = #{tipoDocumento},
+            C_TIPODOCUMENTO = #{tipoDocumento},
+        </if>
+        <if test="numeroDocumento != null">
+            C_NUMERODOCUMENTO = #{numeroDocumento},
         </if>
         <if test="telefono != null">
             C_TELEFONO = #{telefono},

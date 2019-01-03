@@ -178,7 +178,7 @@
                                                     <div class="form-group row">
                                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">Oficina Defensorial</label>
                                                         <div class="col-sm-8">
-                                                            <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" rendered="#{registroController.expedienteDerivacionAprueba.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" >
+                                                            <h:selectOneMenu value="#{registroController.expedienteDerivacionAprueba.idOficinaDefensorial}" class="form-control" disabled="#{registroController.expedienteDerivacionAprueba.id == null? 'false':'true'}" >
                                                                 <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                 <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                                 <f:selectItems value="#{listasComunesController.buscarListaAdjuntia(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />

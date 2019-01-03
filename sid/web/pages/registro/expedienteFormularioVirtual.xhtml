@@ -242,7 +242,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-12">
                                             <div class="form-group">
-                                                <label for="inputname" class="control-label col-form-label">Nombres</label>
+                                                <label class="control-label col-form-label">Nombres</label>
                                                 <input type="text" class="nombre form-control" jsf:value="#{registroController.expedienteFormularioVirtual.nombre}" placeholder="Nombres"/>
                                             </div>
                                         </div>     
@@ -250,14 +250,14 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="inputEmail3" class="control-label col-form-label">A. paterno</label>
+                                                <label class="control-label col-form-label">A. paterno</label>
                                                 <input type="text" class="apellidoPaterno form-control" jsf:value="#{registroController.expedienteFormularioVirtual.apellidoPaterno}" placeholder="Apellido Paterno"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="inputcontact" class="control-label col-form-label">A. Materno</label>
-                                                <input type="text" class="apellidoMaterno form-control" value="#{registroController.expedienteFormularioVirtual.apellidoMaterno}"  placeholder="Apellido Materno"/>
+                                                <label class="control-label col-form-label">A. Materno</label>
+                                                <input type="text" class="apellidoMaterno form-control" jsf:value="#{registroController.expedienteFormularioVirtual.apellidoMaterno}"  placeholder="Apellido Materno"/>
                                             </div>
                                         </div>
                                     </div>
@@ -265,14 +265,14 @@
                                         <div class="col-sm-12 col-md-12">
                                             <div class="form-group">
                                                 <label for="inputname" class="control-label col-form-label">Dirección</label>
-                                                <input type="text" class="direccion form-control" value="#{registroController.expedienteFormularioVirtual.direccion}" />
+                                                <input type="text" class="direccion form-control" jsf:value="#{registroController.expedienteFormularioVirtual.direccion}" />
                                             </div>
                                         </div>     
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="inputEmail3" class="control-label col-form-label">Departamento</label>
+                                                <label  class="control-label col-form-label">Departamento</label>
                                                 <h:selectOneMenu class="departamento form-control" value="#{registroController.expedienteFormularioVirtual.departamento}">
                                                     <f:selectItem itemLabel="Departamento" itemValue="0"/>
                                                     <f:selectItems value="#{listasComunesController.listaDepartamentos(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
@@ -282,7 +282,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="inputcontact" class="control-label col-form-label">Provincia</label>
+                                                <label class="control-label col-form-label">Provincia</label>
                                                 <h:selectOneMenu class="provincia form-control" id="cmbProvincia1" value="#{registroController.expedienteFormularioVirtual.provincia}">
                                                     <f:selectItem itemLabel="Provincia" itemValue="0"/>
                                                     <f:selectItems value="#{registroController.listaProvincia}" var="y" itemLabel="#{y.value} #{y.label}" itemValue="#{y.id}" />
@@ -315,7 +315,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="inputname" class="control-label col-form-label">Email</label>
+                                            <label  class="control-label col-form-label">Email</label>
                                             <input type="text" class="email form-control" jsf:value="#{registroController.expedienteFormularioVirtual.email}" placeholder="Correo Electrónico"/>
                                         </div>
                                     </div>     
