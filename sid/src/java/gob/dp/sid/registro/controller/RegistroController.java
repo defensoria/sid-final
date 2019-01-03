@@ -3799,6 +3799,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     public void cargarModalActor() {
         persona = new Persona();
         persona.setTipo("PER");
+        persona.setNacionalidad(ConstantesUtil.LISTA_VALOR_PERU_CODIGO);
     }
 
     public boolean buscarPersonaGeneral(Long pagina) {
