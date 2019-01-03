@@ -22,6 +22,7 @@ import gob.dp.sid.comun.MEncript;
 import gob.dp.sid.comun.MailUtilitario;
 import gob.dp.sid.comun.Utilitarios;
 import gob.dp.sid.comun.controller.AbstractManagedBean;
+import gob.dp.sid.comun.controller.ListasComunesController;
 import gob.dp.sid.comun.entity.Distrito;
 import gob.dp.sid.comun.entity.FiltroParametro;
 import gob.dp.sid.comun.entity.Parametro;
@@ -371,7 +372,15 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private List<ExpedienteVisita> listaDocumentosPorVisita;
     
     private EstadisticaExpediente estadisticaExpediente;
-
+    
+    // Incidencia 2019-01-02
+    private List<Parametro> listaCanalIngreso;
+    
+    @Autowired
+    private ListasComunesController listasComunesController;
+    
+    // Fin Incidencia 2019-01-02
+    
     @Autowired
     private ExpedienteService expedienteService;
 
@@ -470,6 +479,27 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             setVerBotonRegistrarExpediente(true);
             expedienteClasificacionBusqueda = new ExpedienteClasificacion();
             expedientepersonaModalEdit = new ExpedientePersona();
+            // Incidencia 4 - 2019-01-02
+            listaCanalIngreso = new ArrayList<>();
+            //listaCanalIngreso = listasComunesController.buscarExpedienteTipoIngreso(false,false,false);
+            
+            // iniciar Tipo de Documentos
+            Utilitarios utilitarios = new Utilitarios();
+            if ( usuarioSession.getCodigoOD().equals(utilitarios.getProperties(ConstantesUtil.CODIGO_OD_LIMA))){ // muestra todo
+                listaCanalIngreso = listasComunesController.buscarExpedienteTipoIngreso(false,false,false);
+            } else { // filtra
+                List<Parametro> parametros = listasComunesController.buscarExpedienteTipoIngreso(false,false,false);
+                for(Parametro p: parametros){
+                    if(p.getValorParametro().equals(utilitarios.getProperties(ConstantesUtil.CODIGO_CANAL_INGRESO_VERBAL)) 
+                            || p.getValorParametro().equals(utilitarios.getProperties(ConstantesUtil.CODIGO_CANAL_INGRESO_ESCRITO)) 
+                            || p.getValorParametro().equals(utilitarios.getProperties(ConstantesUtil.CODIGO_CANAL_INGRESO_ITINERANTE))
+                            || p.getValorParametro().equals(utilitarios.getProperties(ConstantesUtil.CODIGO_CANAL_INGRESO_TELEFONICO))){
+                        listaCanalIngreso.add(p);
+                    }
+                }
+            }
+            System.out.println("OD: [cargarNuevoExpediente]" + usuarioSession.getCodigoOD() + " dpto." + usuarioSession.getIdDepartamento() + " - " + usuarioSession.getNombreDepartamento());
+            // Incidencia 4 - 2019-01-02
             setearSumilla();
             return "expedienteNuevo";
         } catch (Exception e) {
@@ -576,6 +606,10 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             setVerBotonRegistrarExpediente(true);
             expedienteClasificacionBusqueda = new ExpedienteClasificacion();
             setearSumilla();
+            // Incidencia 2019-01-02
+            // listaCanalIngreso = new ArrayList<>();
+            System.out.println("OD [iniciarExpedienteNuevo]: " + usuarioSession.getOficinaDefensorial());
+            // Incidencia 2019-01-02
             return "expedienteNuevo";
         } catch (Exception e) {
             log.error("ERROR - cargarObjetoExpediente()" + e);
@@ -1152,6 +1186,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         } else {
             ficha.setFechaConclusion("");
         }
+        
         /**
          * LISTA DE PERSONAS
          */
@@ -3764,6 +3799,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     public void cargarModalActor() {
         persona = new Persona();
         persona.setTipo("PER");
+        persona.setNacionalidad(ConstantesUtil.LISTA_VALOR_PERU_CODIGO);
     }
 
     public boolean buscarPersonaGeneral(Long pagina) {
@@ -6556,6 +6592,20 @@ public class RegistroController extends AbstractManagedBean implements Serializa
      */
     public void setEstadisticaExpediente(EstadisticaExpediente estadisticaExpediente) {
         this.estadisticaExpediente = estadisticaExpediente;
+    }
+
+    /**
+     * @return the listaCanalIngreso
+     */
+    public List<Parametro> getListaCanalIngreso() {
+        return listaCanalIngreso;
+    }
+
+    /**
+     * @param listaCanalIngreso the listaCanalIngreso to set
+     */
+    public void setListaCanalIngreso(List<Parametro> listaCanalIngreso) {
+        this.listaCanalIngreso = listaCanalIngreso;
     }
 
     

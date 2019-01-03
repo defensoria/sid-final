@@ -78,7 +78,12 @@
                                         <h4 class="card-title">Expediente: #{registroController.expediente.numero}</h4>
                                         <h:outputText value=" (CONCLUIDO)" rendered="#{registroController.expediente.general == 'C'}"  style="color: red; font-weight: bold; font-size: 1.5em" />
                                         <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
+                                    </div>
+                                    <h:panelGroup rendered="#{registroController.expediente.contrasenia.length() > 0}">
+                                    <div class="col-3">
+                                        <h4 class="card-title" >Contraseña: <label class="label label-danger" style="font-size: 20px" >#{registroController.expediente.contrasenia}</label></h4>
                                     </div> 
+                                    </h:panelGroup>
                                     <div class="col-6" style="text-align: right">
                                         <a jsf:rendered="#{registroController.expediente.version >= 1}" jsf:action="#{registroController.pdf()}">
                                             <img src="../../bootstrap/img/pdf.png" height="30" width="30"/>
@@ -415,12 +420,14 @@
                                                 <span class="fas fa-save" style="color: white"/> <span style="color: white">Desistir</span>
                                             </a>
                                         </h:panelGroup>
+                                        <!--
                                         &#160;&#160;
                                         <h:panelGroup rendered="#{registroController.expediente.id != null and registroController.expediente.version > 0 and registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
                                             <a class="btn btn-info" onclick="confirmar6()" >
                                                 <span class="fas fa-save" style="color: white"/> <span style="color: white">Conclusión manual</span>
                                             </a>
                                         </h:panelGroup>
+                                        -->
                                     </div>
                                 </div>
                             </div>

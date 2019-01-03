@@ -33,6 +33,7 @@ public class ConstantesUtil implements Serializable{
     public static final String LISTA_VALOR_SELECCIONE_CODIGO = "-3000";
     public static final String LISTA_VALOR_SELECCIONE_NOMBRE = "SELECCIONE";
     
+    public static final String LISTA_VALOR_PERU_CODIGO = "170";
     
     //public static String FILE_DONWLOAD = "C:/filesystem";
     
@@ -80,5 +81,11 @@ public class ConstantesUtil implements Serializable{
     
     public static final String MAIL_BODY_CODIGO_AUTO = "pe.gob.dp.sid.mail.body.autogeneracion.code";
     public static final String MAIL_SUBJECT_CODIGO_AUTO = "pe.gob.dp.sid.mail.subject.autogeneracion.code";
+    
+    public static final String CODIGO_OD_LIMA = "pe.gob.dp.sid.codigo.od.lima";
+    public static final String CODIGO_CANAL_INGRESO_VERBAL ="pe.gob.dp.sid.codigo.canal.ingreso.verbal";
+    public static final String CODIGO_CANAL_INGRESO_ESCRITO = "pe.gob.dp.sid.codigo.canal.ingreso.escrito";
+    public static final String CODIGO_CANAL_INGRESO_ITINERANTE = "pe.gob.dp.sid.codigo.canal.ingreso.itinerante";
+    public static final String CODIGO_CANAL_INGRESO_TELEFONICO = "pe.gob.dp.sid.codigo.canal.ingreso.telefonico";
     
 }

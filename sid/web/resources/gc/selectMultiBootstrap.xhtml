@@ -25,12 +25,14 @@
                     $("##{cc.attrs.idHidden}").val($("##{cc.attrs.idSelect}").val());
                 });
 
-                $('##{cc.attrs.idSelect}').multiselect();
+                $('##{cc.attrs.idSelect}').multiselect({
+                    buttonWidth: '350px'   
+                });
 
             });
 
         </script>
-        <select id="#{cc.attrs.idSelect}" multiple="multiple">
+        <select id="#{cc.attrs.idSelect}" multiple="multiple" style="width: 100%;">
             <c:forEach var="x" items="#{cc.attrs.lista}">
                 <option value="${x.valorParametro}">${x.nombreParametro}</option>
             </c:forEach>

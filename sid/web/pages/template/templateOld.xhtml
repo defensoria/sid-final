@@ -308,7 +308,9 @@
             </header>
             <script>
                 $(document).ready(function(){
-                    $('.selectRadio').multiselect();
+                    $('.selectRadio').multiselect({
+                        buttonWidth: '350px';
+                    });
                 var stateMenu;
                 var i = 0;
                 stateMenu = sessionStorage.getItem('stateMenu');
