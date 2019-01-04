@@ -315,7 +315,7 @@
                                                 <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
                                             </a>
                                         </h:panelGroup>
-                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C' and (registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5)}">
+                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C' }">
                                             <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}">
                                                 <span class="fas fa-user" /> Asignar Expediente
                                                 <f:ajax render="idPanelAsignar" onevent="modalAsignar" />

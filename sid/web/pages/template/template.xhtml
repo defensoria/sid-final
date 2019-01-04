@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <meta charset="utf-8"/>
@@ -18,7 +19,6 @@
     <title>SID</title>
     <!-- Custom CSS -->
     <link href="/sid/faces/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet"/>
-    <link href="/sid/faces/assets/extra-libs/c3/c3.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="/sid/faces/dist/css/style.css" rel="stylesheet"/>
     
@@ -64,8 +64,7 @@
     <script src="/sid/faces/assets/libs/chartist/dist/chartist.min.js"></script>
     
     <!--c3 charts -->
-    <script src="/sid/faces/assets/extra-libs/c3/d3.min.js"></script>
-    <script src="/sid/faces/assets/extra-libs/c3/c3.min.js"></script>
+
     <!--chartjs -->
         <script src="/sid/faces/assets/libs/chart.js/dist/Chart.min.js"></script>
     
@@ -153,13 +152,33 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"  href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <h:form class="app-search position-absolute" >
-                                <input jsf:value="#{busquedaController.expediente.observacion}" type="text"  class="form-control" placeholder="Buscar por expediente o sumilla"/> 
-                                <h:commandLink action="#{busquedaController.listarExpedientesPaginado(1)}" class="srh-btn" ><i class="ti-search"></i></h:commandLink>
+                        
+                            <h:form >
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <h:selectOneMenu value="#{busquedaController.expediente.anhoBusqueda}" class="form-control">
+                                            
+                                            <f:selectItem itemLabel="2019" itemValue="2019"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:selectOneMenu value="#{busquedaController.expediente.ODBusqueda}"  class="form-control">
+                                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                            <f:selectItems value="#{listasComunesController.buscarListaADOD(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" jsf:value="#{busquedaController.expediente.observacion}" class="form-control"  placeholder="Buscar"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <a style="margin: auto" jsf:action="#{busquedaController.listarExpedientesPaginado(1)}" >
+                                                    <span class="fas fa-search"/>
+                                                </a>
+                                    </div>
+                                </div>
+                               
                                 
                             </h:form>
-                        </li>
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->

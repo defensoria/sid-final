@@ -18,7 +18,7 @@
     </select>
     
     <select id="listaAdjuntiasDefensorialesTodos" resultMap="oficinaDefensorialMap" >
-        SELECT * FROM SID_SEG_OFICINA_DEFENSORIAL
+        SELECT * FROM SID_SEG_OFICINA_DEFENSORIAL  ORDER BY c_nombre
     </select>
     
     <select id="obtenerOficinaDefensorial" resultMap="oficinaDefensorialMap" parameterType="Long">

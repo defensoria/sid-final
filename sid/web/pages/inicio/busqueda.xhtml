@@ -64,14 +64,16 @@
                                                     <f:facet name="header"><b><a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoOrder(1,6)}">Estado registro</a></b></f:facet>
                                                     <h:outputText value="#{exped.version == 0? 'Borrador' : 'En registro' }" />
                                                 </h:column>
-                                                <h:column>
-                                                    
+           <h:column>
+               
                                                     <a jsf:action="#{registroController.cargarExpedienteEdit(exped)}">
                                                         <i class="fas fa-pencil-alt" ></i>
                                                     </a>
                                                 </h:column>
+                                                
                                                 <h:column>
-                                                    <a onclick="confirmar4#{row3.rowIndex+1}()">
+                                                    <h:panelGroup  rendered="#{registroController.usuarioSession.codigo eq exped.usuarioRegistro}">
+                                                        <a onclick="confirmar4#{row3.rowIndex+1}()">
                                                         <i class="fas fa-trash"  ></i>
                                                     </a>
                                                     <script>
@@ -79,8 +81,12 @@
                                                             $(".confirmacion4#{row3.rowIndex+1}").modal('show');
                                                         }
                                                     </script>
+                                                    </h:panelGroup>
+                                                    
                                                     <gc:confirmSubmit bean="#{registroController.inactivarExpediente(exped)}" classGC="confirmacion4#{ro3.rowIndex+1}" mensaje="Esta seguro de inactivar el expediente, esta acción no se puede revertir?" />
                                                 </h:column>
+                                            
+                                                
                                             </h:dataTable>
                                         <ul class="pagination">
                     <li class="paginate_button page-item previous disabled" id="file_export_previous">
