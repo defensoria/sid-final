@@ -826,6 +826,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private void generarExpedienteCAV(){
         iniciarExpedienteNuevo();
         expediente.setSumilla(expedienteFormularioVirtual.getDescripcion());
+        expediente.setObservacion(expedienteFormularioVirtual.getRespuesta());
         expediente.setTipoIngreso(expedienteFormularioVirtual.getForma());
         guardarVersion();
     }
