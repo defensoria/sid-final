@@ -32,9 +32,6 @@
                     }
                     $(document).ready(function () {
                         $("#idModalCulminar").modal('show');
-                        $('.datepicker').datepicker({
-                            language: 'es'
-                        });
                     });
 
                 </script>
@@ -1621,14 +1618,7 @@
                                     <div class="form-group row">
                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha</label>
                                         <div class="col-sm-8">
-                                            <div class="form-group">
-                                                <div class="input-group date" data-provide="datepicker">
-                                                    <input type="text" class="form-control" jsf:value="#{registroController.expediente.fechaArchivo}" />
-                                                    <div class="input-group-addon">
-                                                        <span class="ti-calendar"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <gc:calendar value="#{registroController.expediente.fechaArchivo}"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
