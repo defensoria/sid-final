@@ -391,11 +391,7 @@
                                         </h:panelGroup>
                                     </div>
                                     <div class="col-7" style="text-align: right">
-                                        <h:panelGroup  id="idPanel3" rendered="#{registroController.expediente.id == null || registroController.expediente.version == 0}">
-                                            <a class="btn btn-warning" jsf:action="#{registroController.guardarBorrador()}">
-                                                <span class="fas fa-eraser" /> Borrador
-                                            </a>
-                                        </h:panelGroup>
+                                        
                                         &#160;&#160;        
                                         <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
                                             <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}">

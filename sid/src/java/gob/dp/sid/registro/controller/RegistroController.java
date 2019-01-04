@@ -4463,6 +4463,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
 
     private void guardar() {
         try {
+            String documento= null;
+            Integer validaEnvioEmail = 0;
             expediente.setEtiqueta(encadenarEtiquetas());
             if (expediente.getId() == null || expediente.getVersion() == 0) {
                 if (expediente.getId() != null) {
@@ -4473,15 +4475,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setUsuarioResponsable(usuarioSession.getCodigo());
                 expediente.setVersion(1);
                 generarCodigoExpediente();
-                // Enviar Correo jmatos:
-                if(personasSeleccionadas.size() > 0){
-                    String documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
-                    Integer validaEnvioEmail = expedienteService.validaUsuarioCount(documento);
-                    if(validaEnvioEmail == 0)
-                generarCodigoSendMail();
-                }
-                    
-                // Fin Enviar Correo jmatos
+                documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
+                validaEnvioEmail = expedienteService.validaUsuarioCount(documento);
                 expediente.setFechaIngreso(new Date());
                 expediente.setFechaRegistro(new Date());
             } else {
@@ -4502,28 +4497,43 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             expedienteService.expedienteInsertar(expediente);
             insertListasPersonaEntidad();
             cargarContraseniaExpediente();
+            if(expediente.getVersion() == 1){
+                // Enviar Correo jmatos:
+                if(personasSeleccionadas.size() > 0){
+                    
+                    if(validaEnvioEmail == 0){
+                        
+        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+        MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
+        if(movilPersona != null){
+            codigoAutogenerado = movilPersona.getContrasenia();
+        } else {
+            registrarDatosPersonaCAV(personasSeleccionadas.get(0).getPersona(), codigoAutogenerado);
+        }
+        generarCodigoSendMail(codigoAutogenerado);
+                    }
+                
+                }
+                    
+                // Fin Enviar Correo jmatos
+            }
         } catch (Exception e) {
             log.error("ERROR - guardar()" + e);
         }
     }
     
     // jmatos
-    public void generarCodigoSendMail() throws Exception {
+    public void generarCodigoSendMail(String codigoAuto) throws Exception {
+        Utilitarios utilitario = new Utilitarios();
         Persona p = personasSeleccionadas.get(0).getPersona();
         // Autogeneración de codigo - Enviar Correo:
-        Utilitarios utilitario = new Utilitarios();
-        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+        
 
         // Registrar Datos en Mov Persona
-        MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(p.getId());
-        if(movilPersona != null){
-            codigoAutogenerado = movilPersona.getContrasenia();
-        } else {
-            registrarDatosPersonaCAV(p, codigoAutogenerado);
-        }
+        
         // Fin Registro Datos
         String emailBody = MessageFormat.format(utilitario.getProperties(ConstantesUtil.MAIL_BODY_CODIGO_AUTO), 
-                                        codigoAutogenerado);
+                                        codigoAuto);
         String subject = utilitario.getProperties(ConstantesUtil.MAIL_SUBJECT_CODIGO_AUTO);
         List<String> emailTo = new ArrayList<>();
         if(StringUtils.isNotBlank(p.getEmail())){
