@@ -826,6 +826,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private void generarExpedienteCAV(){
         iniciarExpedienteNuevo();
         expediente.setSumilla(expedienteFormularioVirtual.getDescripcion());
+        expediente.setObservacion(expedienteFormularioVirtual.getRespuesta());
         expediente.setTipoIngreso(expedienteFormularioVirtual.getForma());
         guardarVersion();
     }
@@ -4000,6 +4001,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             Persona p = personaService.personaBusquedaOne(ep.getPersona().getId());
             ep.setPersona(p);
             setExpedientepersonaModalEdit(ep);
+            expedientepersonaModalEdit.setNombre(expedientepersonaModalEdit.getPersona().getNombre());
+            expedientepersonaModalEdit.setApellidoPat(expedientepersonaModalEdit.getPersona().getApellidoPat());
+            expedientepersonaModalEdit.setApellidoMat(expedientepersonaModalEdit.getPersona().getApellidoMat());
             expedientepersonaModalEdit.setDireccion(expedientepersonaModalEdit.getPersona().getDireccion());
             expedientepersonaModalEdit.setIdDepartamento(expedientepersonaModalEdit.getPersona().getIdDepartamento());
             expedientepersonaModalEdit.setIdProvincia(expedientepersonaModalEdit.getPersona().getIdProvincia());
@@ -4027,6 +4031,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         try {
             expedientepersonaModalEdit.getPersona().setUsuModificacion(usuarioSession.getCodigo());
             expedientepersonaModalEdit.getPersona().setFechaModificacion(new Date());
+            expedientepersonaModalEdit.getPersona().setNombre(expedientepersonaModalEdit.getNombre());
+            expedientepersonaModalEdit.getPersona().setApellidoPat(expedientepersonaModalEdit.getApellidoPat());
+            expedientepersonaModalEdit.getPersona().setApellidoMat(expedientepersonaModalEdit.getApellidoMat());
             expedientepersonaModalEdit.getPersona().setDireccion(expedientepersonaModalEdit.getDireccion());
             expedientepersonaModalEdit.getPersona().setTelefono1(expedientepersonaModalEdit.getTelefono1());
             expedientepersonaModalEdit.getPersona().setEmail(expedientepersonaModalEdit.getEmail());

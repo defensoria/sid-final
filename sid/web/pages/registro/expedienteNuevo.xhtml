@@ -1031,7 +1031,7 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </h:panelGroup>
-                                                                                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                                                                                    <h:panelGroup>
                                                                                                         <div class="form-group row">
                                                                                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
                                                                                                             <div class="col-sm-8">
@@ -1067,7 +1067,10 @@
                                                                                                         <div class="form-group row">
                                                                                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha de nacimiento</label>
                                                                                                             <div class="col-sm-8">
-                                                                                                                <gc:calendar value="#{registroController.persona.fechaNacimiento}"/>
+                                                                                                                <!-- <gc:calendar value="#{registroController.persona.fechaNacimiento}"/> -->
+                                                                                                                <input type="date" jsf:value="#{registroController.persona.fechaNacimiento}"  placeholder="Fecha"  class="form-control">
+                                                                                                                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Lima" />
+                                                                                                                </input>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </h:panelGroup>
@@ -1238,10 +1241,30 @@
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                             </div>
                                                                             <div class="modal-body">
+                                                                                <!--
                                                                                 <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre completo</label>
                                                                                     <div class="col-sm-8">
                                                                                         <h:outputText style="font-weight: bold" value="#{registroController.expedientepersonaModalEdit.persona.nombre} #{registroController.expedientepersonaModalEdit.persona.apellidoPat} #{registroController.expedientepersonaModalEdit.persona.apellidoMat}" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                -->
+                                                                                <div class="form-group row">
+                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
+                                                                                    <div class="col-sm-8">
+                                                                                        <input type="text" placeholder="Nombre" jsf:value="#{registroController.expedientepersonaModalEdit.nombre}" class="form-control" maxlength="50"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido Paterno</label>
+                                                                                    <div class="col-sm-8">
+                                                                                        <input type="text" placeholder="Apellido Paterno" jsf:value="#{registroController.expedientepersonaModalEdit.apellidoPat}" class="form-control" maxlength="100"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido Materno</label>
+                                                                                    <div class="col-sm-8">
+                                                                                        <input type="text" placeholder="Apellido Materno" jsf:value="#{registroController.expedientepersonaModalEdit.apellidoMat}" class="form-control" maxlength="100"/>
                                                                                     </div>
                                                                                 </div>
 
