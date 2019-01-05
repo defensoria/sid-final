@@ -393,7 +393,7 @@
                                     <div class="col-7" style="text-align: right">
                                         
                                         &#160;&#160;        
-                                        <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
+                                        <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006') and ((registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null)) }">
                                             <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}">
                                                 <span class="fas fa-save" /> Guardar
                                             </a>
