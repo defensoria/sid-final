@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestion.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/inicio/index.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/xml/ExpedienteTiempo.xml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/GestionEtapaDAOImpl.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/GestionEtapaDAO.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestionLista.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/service/GestionEtapaService.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/xml/GestionEtapa.xml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/xml/Expediente.xml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/service/GestionEtapaServiceImpl.java</file>
+        </group>
     </open-files>
 </project-private>
