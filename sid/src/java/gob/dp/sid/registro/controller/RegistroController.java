@@ -478,6 +478,12 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return null;
     }
     
+    public void inactivarGestion(Long idGestion){
+        gestionEtapaService.inactivarGestion(idGestion);
+        cargarExpedienteGestionLista();
+        msg.messageInfo("Se elimino la gestion", null);
+    }
+    
     private void setearSumilla(){
         if(!StringUtils.equals(expediente.getTipoClasificion(), "02")){
             if(stringUtil.isBlank(expediente.getSumilla())){

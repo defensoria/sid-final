@@ -15,4 +15,8 @@ public interface GestionEtapaDAO {
     
     public void gestionEtapaInsertar(GestionEtapa gestionEtapa);
     
+    public void inactivarGestion(Long idGestion);
+    
+    
+    
 }

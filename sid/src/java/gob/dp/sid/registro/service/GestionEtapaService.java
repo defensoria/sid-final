@@ -15,4 +15,5 @@ public interface GestionEtapaService {
     
     public void gestionEtapaInsertar(GestionEtapa gestionEtapa);
     
+    public void inactivarGestion(Long idGestion);
 }

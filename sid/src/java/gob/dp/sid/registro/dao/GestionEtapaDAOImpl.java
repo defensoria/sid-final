@@ -20,6 +20,11 @@ public class GestionEtapaDAOImpl extends SqlSessionDaoSupport implements Gestion
     public void gestionEtapaInsertar(GestionEtapa gestionEtapa) {
         getSqlSession().insert("gob.dp.sid.registro.dao.GestionEtapaDAO.gestionEtapaInsertar", gestionEtapa);
     }
+
+    @Override
+    public void inactivarGestion(Long idGestion) {
+        getSqlSession().update("gob.dp.sid.registro.dao.GestionEtapaDAO.inactivarGestion", idGestion);
+    }
     
     
     

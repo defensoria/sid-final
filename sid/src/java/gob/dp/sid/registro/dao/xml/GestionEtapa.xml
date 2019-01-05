@@ -27,4 +27,12 @@
         )
     </insert>
     
+    <update id="inactivarGestion" parameterType="Long">
+        UPDATE SID_REG_GESTION_ETAPA SET
+            c_numeroexpediente = null
+        <where>
+            n_id_gestion = #{id}
+        </where>
+    </update>
+    
 </mapper>

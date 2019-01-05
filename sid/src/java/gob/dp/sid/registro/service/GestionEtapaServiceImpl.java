@@ -24,5 +24,10 @@ public class GestionEtapaServiceImpl implements GestionEtapaService{
     public void gestionEtapaInsertar(GestionEtapa gestionEtapa) {
         gestionEtapaDAO.gestionEtapaInsertar(gestionEtapa);
     }
+
+    @Override
+    public void inactivarGestion(Long idGestion) {
+        gestionEtapaDAO.inactivarGestion(idGestion);
+    }
     
 }
