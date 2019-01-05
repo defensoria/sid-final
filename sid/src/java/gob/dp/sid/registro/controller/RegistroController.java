@@ -4475,8 +4475,10 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setUsuarioResponsable(usuarioSession.getCodigo());
                 expediente.setVersion(1);
                 generarCodigoExpediente();
-                documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
-                validaEnvioEmail = expedienteService.validaUsuarioCount(documento);
+                if(personasSeleccionadas.size()>0){
+                    documento  = personasSeleccionadas.get(0).getPersona().getNumeroDocumento();
+                    validaEnvioEmail = expedienteService.validaUsuarioCount(documento);    
+                }
                 expediente.setFechaIngreso(new Date());
                 expediente.setFechaRegistro(new Date());
             } else {
@@ -4502,19 +4504,16 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 if(personasSeleccionadas.size() > 0){
                     
                     if(validaEnvioEmail == 0){
-                        
-        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
-        MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
-        if(movilPersona != null){
-            codigoAutogenerado = movilPersona.getContrasenia();
-        } else {
-            registrarDatosPersonaCAV(personasSeleccionadas.get(0).getPersona(), codigoAutogenerado);
-        }
-        generarCodigoSendMail(codigoAutogenerado);
+                        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+                        MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
+                        if(movilPersona != null){
+                            codigoAutogenerado = movilPersona.getContrasenia();
+                        } else {
+                            registrarDatosPersonaCAV(personasSeleccionadas.get(0).getPersona(), codigoAutogenerado);
+                        }
+                        generarCodigoSendMail(codigoAutogenerado);
                     }
-                
-                }
-                    
+                } 
                 // Fin Enviar Correo jmatos
             }
         } catch (Exception e) {
