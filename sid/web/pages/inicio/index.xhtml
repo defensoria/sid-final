@@ -699,11 +699,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
-                                    <div>
-                                        <h4 class="card-title">Listado de expedientes</h4>
-                                        <h5 class="card-subtitle">Por el comisionado #{loginController.usuarioSesion.codigo}</h5>
-                                    </div>
-                                    
+                                    <h:panelGroup rendered="#{seguridadUtilController.tieneRol('ROL0000002') or seguridadUtilController.tieneRol('ROL0000004')}">
+                                        <div>
+                                            <h4 class="card-title">Listado de expedientes</h4>
+                                            <h5 class="card-subtitle">Por el supervisor #{loginController.usuarioSesion.codigo}</h5>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000002') and !seguridadUtilController.tieneRol('ROL0000004')}">
+                                        <div>
+                                            <h4 class="card-title">Listado de expedientes</h4>
+                                            <h5 class="card-subtitle">Por el comisionado #{loginController.usuarioSesion.codigo}</h5>
+                                        </div>
+                                    </h:panelGroup>
                                 </div>
                                 <div class="row">
                                     <div class="table-responsive">
