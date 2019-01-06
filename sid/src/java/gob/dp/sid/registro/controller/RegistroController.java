@@ -578,6 +578,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             expediente.setTipoClasificion(personaSeleccionada.getTipoExpediente());
             ep.setPersona(personaSeleccionada);
             personasSeleccionadas.add(ep);
+            if(personasSeleccionadas.size()==1 && personaSeleccionada.getTipoExpediente().equals(ExpedienteType.QUEJA.getKey())){
+                personasSeleccionadas.get(0).setTipo("02");
+            }
             inicializarEtapaEstado(0);
             setVerBotonRegistrarExpediente(true);
             expedienteClasificacionBusqueda = new ExpedienteClasificacion();
