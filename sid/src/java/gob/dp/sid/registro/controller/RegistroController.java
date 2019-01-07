@@ -2469,6 +2469,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         return esSupervisor = false;
     }
 
+    
     public boolean respuestaAprobar() {
         try {
             if (StringUtils.isBlank(expedienteRespuestaAprueba.getDetalle())) {
@@ -4489,6 +4490,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expediente.setVersion(expediente.getVersion() + 1);
                 expediente.setEstado("I");
                 expediente.setFechaModificacion(new Date());
+                
                 expedienteService.expedienteUpdate(expediente);
             }
             expediente.setEstado("A");
@@ -4509,7 +4511,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                     
                     if(validaEnvioEmail == 0){
                         
-        String codigoAutogenerado = RandomStringUtils.random(8, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
+        String codigoAutogenerado = RandomStringUtils.random(6, 0, 10, true, true, "1234567890".toCharArray());
         MovilPersona movilPersona = movilPersonaService.movilPersonaBuscarId(personasSeleccionadas.get(0).getPersona().getId());
         if(movilPersona != null){
             codigoAutogenerado = movilPersona.getContrasenia();

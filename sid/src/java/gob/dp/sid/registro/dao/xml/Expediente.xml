@@ -331,7 +331,7 @@
             #{indicadorOficio},
         </if>
         <if test="usuarioResponsable != null">
-            #{usuarioRegistro},
+            #{usuarioResponsable},
         </if>
         <if test="indiceRecomendacion != null">
             #{indiceRecomendacion},

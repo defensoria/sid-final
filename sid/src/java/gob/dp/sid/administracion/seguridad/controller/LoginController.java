@@ -58,6 +58,7 @@ public class LoginController extends AbstractManagedBean implements Serializable
             login.setCodigo(usuario.getCodigo());
             String encPass = MEncript.getStringMessageDigest(usuario.getClave().trim());
             login.setClave(encPass);
+            //Integer val = 1;
             Integer val = usuarioLoginService.loginUsuario(login);
             if (val > 0) {
                 Usuario objUsuario = usuarioService.consultarUsuario(filtro);

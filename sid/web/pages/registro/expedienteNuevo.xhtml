@@ -309,18 +309,13 @@
                                                 <span class="fas fa-user" /> Extender plazo
                                             </a>
                                         </h:panelGroup>
-                                        <h:panelGroup rendered="#{((registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP015') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C') or   (registroController.expediente.tipoClasificion == '02' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C')}">
+                                        <h:panelGroup rendered="#{(seguridadUtilController.tieneRecurso('REC_EXP015') and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C') or   (registroController.expediente.usuarioResponsable == registroController.usuarioSession.codigo and registroController.expediente.general != 'C') or (seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C')}">
                                             <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}">
                                                 <span class="fas fa-user" /> Asignar Expediente
                                                 <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
                                             </a>
                                         </h:panelGroup>
-                                        <h:panelGroup rendered="#{seguridadUtilController.tieneRecurso('REC_EXP016') and registroController.esSupervisor and registroController.expediente.general != 'C' }">
-                                            <a class="btn btn-warning" jsf:action="#{registroController.limpiarModalAsignar()}">
-                                                <span class="fas fa-user" /> Asignar Expediente
-                                                <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
-                                            </a>
-                                        </h:panelGroup>
+                                        
                                         <h:panelGroup id="idPanelAsignar">
                                             <div id="idModalAsignar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
                                                 <div class="modal-dialog">
