@@ -63,10 +63,12 @@
                                                 <span class="fas fa-user" />Nueva Persona
                                                 <f:ajax render=":idForm" onevent="openModalNuevaPersona"/>
                                             </a>
-                                            &#160;&#160;&#160;
-                                            <a class="btn btn-warning" jsf:rendered="#{registroController.indSeleccion}"  jsf:action="#{registroController.irOficio()}">
-                                                <span class="far fa-folder-open" />Expediente de Oficio
-                                            </a>
+                                            <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006')}">
+                                                &#160;&#160;&#160;
+                                                <a class="btn btn-warning" jsf:rendered="#{registroController.indSeleccion}"  jsf:action="#{registroController.irOficio()}">
+                                                    <span class="far fa-folder-open" />Expediente de Oficio
+                                                </a>
+                                            </h:panelGroup>
 
                                         </div>
                                     </div>
@@ -125,9 +127,11 @@
                                                             </h:selectOneMenu>
                                                         </td>
                                                         <td  style="text-align: right">
-                                                            <a class="btn btn-secondary" jsf:action="#{registroController.iniciarExpedienteNuevo()}" jsf:rendered="#{!registroController.indSeleccion}">
-                                                                <span class="far fa-share-square"/> Generar Expediente
-                                                            </a>
+                                                            <h:panelGroup rendered="#{!seguridadUtilController.tieneRol('ROL0000005') and !seguridadUtilController.tieneRol('ROL0000006')}">
+                                                                <a class="btn btn-secondary" jsf:action="#{registroController.iniciarExpedienteNuevo()}" jsf:rendered="#{!registroController.indSeleccion}">
+                                                                    <span class="far fa-share-square"/> Generar Expediente
+                                                                </a>
+                                                            </h:panelGroup>
                                                         </td>
                                                     </tr>
                                                 </table>
