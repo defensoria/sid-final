@@ -337,13 +337,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-3">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="control-label col-form-label">Fecha de ingreso</label>
                                             <gc:calendar value="#{registroController.filtroFormularioVirtual.fecha}"/>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-3">
                                         <div class="form-group">
                                             <label for="inputcontact" class="control-label col-form-label">Acción</label>
                                             <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.accion}" class="form-control" >
@@ -352,12 +352,21 @@
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-3">
                                         <div class="form-group">
                                             <label for="inputcontact" class="control-label col-form-label">Forma de ingreso</label>
                                             <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.forma}" class="form-control" >
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{listasComunesController.buscarListaFormaCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="inputcontact" class="control-label col-form-label">Usuario registro</label>
+                                            <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.usuarioRegistro}" class="form-control" >
+                                                <f:selectItem itemValue="" itemLabel="Selecione" />
+                                                <f:selectItems value="#{registroController.listaUsuarioODCAV}" var="y" itemLabel="#{y.nombre} #{y.apellidoPaterno} #{y.apellidoMaterno}" itemValue="#{y.codigo}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>

@@ -26,4 +26,5 @@ public interface UsuarioDao {
     
     public Integer listaUsuarioCount(String codigoUsuario);
 
+    public List<Usuario> buscarListaUsuariosByODCAV(Usuario usuario);
 }

@@ -39,4 +39,6 @@ public interface UsuarioService {
     public Integer listaUsuarioCount(String codigoUsuario);
     
     public Usuario buscarUsuarioOne(String codigoUsuario);
+    
+    public List<Usuario> buscarListaUsuariosByODCAV(Usuario usuario);
 }

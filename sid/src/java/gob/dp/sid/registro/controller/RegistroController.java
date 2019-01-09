@@ -317,6 +317,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     private List<ExpedienteNivel> listaExpedienteNivelModal;
 
     private List<Usuario> listaUsuarioOD;
+    
+    private List<Usuario> listaUsuarioODCAV;
 
     private List<ExpedienteDerivacion> listaExpedienteDerivacion;
 
@@ -497,7 +499,21 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         expedienteFormularioVirtual = new ExpedienteFormularioVirtual();
         filtroFormularioVirtual = new ExpedienteFormularioVirtual();
         listarRegistrosCAV();
+        buscarListaUsuariosByODCAV();
         return "expedienteFormularioVirtual";
+    }
+    
+    public void buscarListaUsuariosByODCAV() {
+        listaUsuarioODCAV = new ArrayList<>();
+        try {
+            Usuario u = new Usuario();
+            u.setRol(RolType.COMISIONADO_OD_CAV.getKey());
+            u.setCodigoOD(usuarioSession.getCodigoOD());//Para obtener solo los usuarios de su OD
+            listaUsuarioODCAV = usuarioService.buscarListaUsuariosByODCAV(u);
+        } catch (Exception e) {
+            log.error("ERROR - buscarListaUsuariosByODCAV()" + e);
+        }
+        
     }
     
     private void cargarObjetoExpediente() {
@@ -6586,5 +6602,19 @@ public class RegistroController extends AbstractManagedBean implements Serializa
      */
     public void setEstadisticaExpediente(EstadisticaExpediente estadisticaExpediente) {
         this.estadisticaExpediente = estadisticaExpediente;
+    }
+
+    /**
+     * @return the listaUsuarioODCAV
+     */
+    public List<Usuario> getListaUsuarioODCAV() {
+        return listaUsuarioODCAV;
+    }
+
+    /**
+     * @param listaUsuarioODCAV the listaUsuarioODCAV to set
+     */
+    public void setListaUsuarioODCAV(List<Usuario> listaUsuarioODCAV) {
+        this.listaUsuarioODCAV = listaUsuarioODCAV;
     }
 }

@@ -275,7 +275,7 @@
         SELECT A.*, B.NOMBRE_PARAMETRO FORMADESCRIPCION, C.NOMBRE_PARAMETRO ACCIONDESCRIPCION FROM SID_REG_FORMULARIO_VIRTUAL A
         INNER JOIN SID_PARAMETRO B ON A.C_FORMA = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 20
         LEFT JOIN SID_PARAMETRO C ON A.C_ACCION = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 330
-        WHERE A.C_ESTADO NOT IN ('I') 
+        WHERE A.C_ESTADO NOT IN ('I') AND A.C_NUMEROEXPEDIENTE IS NULL 
         ORDER BY N_ID_REGISTRO DESC
     </select>
     
@@ -292,6 +292,9 @@
         </if>
         <if test="accion != 0">
             AND A.C_ACCION = #{accion}
+        </if>
+        <if test="usuarioRegistro != ''">
+            AND A.C_USUREGISTRO = #{usuarioRegistro}
         </if>
         ORDER BY N_ID_REGISTRO DESC
     </select>

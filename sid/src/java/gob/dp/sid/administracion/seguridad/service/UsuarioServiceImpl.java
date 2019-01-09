@@ -179,4 +179,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDao.listaUsuarioCount(codigoUsuario);
     }
 
+    @Override
+    public List<Usuario> buscarListaUsuariosByODCAV(Usuario usuario) {
+        return usuarioDao.buscarListaUsuariosByODCAV(usuario);
+    }
 }
