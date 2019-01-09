@@ -23,7 +23,7 @@
         <result property="contacto" column="C_CONTACTO"/>
         <result property="tipoLengua" column="C_TIPOLENGUA"/>
         <result property="indicadorDiscapacitado" column="C_INDDISCAPACITADO"/>
-        <result property="tipoPueblo" column="C_TIPOPUEBLO"/>
+        
     </resultMap> 
     
     
@@ -66,9 +66,7 @@
         <if test="indicadorDiscapacitado != null">
             C_INDDISCAPACITADO,
         </if>
-        <!--<if test="tipoPueblo != null">
-            C_TIPOPUEBLO,
-        </if>-->
+        
         N_IDEXPEDIENTE,
         N_IDPERSONA,
         N_IDEXPEDPERSONA
@@ -111,9 +109,7 @@
         <if test="indicadorDiscapacitado != null">
             #{indicadorDiscapacitado},
         </if>
-        <!--<if test="tipoPueblo != null">
-            #{tipoPueblo},
-        </if>-->
+        
         #{expediente.id},
         #{persona.id},
         SEQ_SID_REG_EXPEDE_PERSONA.NextVal
@@ -165,9 +161,7 @@
         <if test="direccion != null">
             C_DIRECCION = #{direccion},
         </if>
-        <if test="tipoPueblo != null">
-            C_TIPOPUEBLO = #{tipoPueblo},
-        </if>
+        
             C_INDDISCAPACITADO = #{indicadorDiscapacitado}
         </set>
         <where>

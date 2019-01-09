@@ -603,7 +603,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             setearSumilla();
             return "expedienteNuevo";
         } catch (Exception e) {
-            log.error("ERROR - cargarObjetoExpediente()" + e);
+            log.error("ERROR - iniciarExpedienteNuevo∫()" + e);
         }
         return null;
     }
@@ -636,7 +636,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             atencionController.actualizarFechaFinAtencionTicket();//Para actualizar la Fecha Fin
             return "expedienteNuevo";
         } catch (Exception e) {
-            log.error("ERROR - cargarObjetoExpediente()" + e);
+            log.error("ERROR - iniciarExpedienteSAC()" + e);
         }
         return null;
     }
@@ -4076,7 +4076,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             expedientepersonaModalEdit.getPersona().setContacto(expedientepersonaModalEdit.getContacto());
             expedientepersonaModalEdit.getPersona().setIndicadorDiscapacitado(expedientepersonaModalEdit.getIndicadorDiscapacitado());
             expedientepersonaModalEdit.getPersona().setTipoLengua(expedientepersonaModalEdit.getTipoLengua());
-            expedientepersonaModalEdit.getPersona().setTipoPueblo(expedientepersonaModalEdit.getTipoPueblo());
+            
             personaService.personaUpdate(expedientepersonaModalEdit.getPersona());
             expedientePersonaService.expedienteDatosPersonaUpdate(expedientepersonaModalEdit);
             if (StringUtils.equals(expedientepersonaModalEdit.getPersona().getTipo(), "PER")) {
