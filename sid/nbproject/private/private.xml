@@ -9,7 +9,9 @@
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/PersonaDAOImpl.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestion.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/acciones/expedienteAccionesDerivacion.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteFormularioVirtual.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/controller/AtencionController.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/service/PersonaServiceImpl.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/reporte/entity/ExpedienteFicha.java</file>
