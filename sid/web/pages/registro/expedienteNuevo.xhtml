@@ -229,7 +229,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 6? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(2)}" class="btn #{registroController.etapaEstado.verEtapa == 6? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 6}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Gestión
@@ -241,7 +241,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
-                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" type="button" class="btn #{registroController.etapaEstado.verEtapa == 7? 'btn-warning' : 'btn-default'}">
+                                                    <a style="cursor: auto" onclick="return false" jsf:action="#{registroController.cargarExpedienteEtapa(3)}" class="btn #{registroController.etapaEstado.verEtapa == 7? 'btn-warning' : 'btn-default'}">
                                                         <c:choose>
                                                             <c:when test="${registroController.etapaEstado.verEtapa == 7}">
                                                                 <span class="fa fa-paperclip" style="font-size: large; color: black"/>&#160;&#160;&#160;&#160;Persuasión

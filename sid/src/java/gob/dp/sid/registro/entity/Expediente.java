@@ -47,6 +47,8 @@ public class Expediente implements Serializable{
     
     private String usuarioRegistro;
     
+    private String usuarioCreacion;
+    
     private String estado;
     
     private Integer version;
@@ -848,4 +850,14 @@ public class Expediente implements Serializable{
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+    
+    
 }

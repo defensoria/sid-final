@@ -49,6 +49,8 @@ public class ExpedienteFicha extends AbstractManagedBean implements Serializable
     
     private String comisionado;
     
+    private String comisionadoCreacion;
+    
     private String estadoGeneral;
     
     private List<ExpedientePersona> expedientePersonas;
@@ -257,6 +259,14 @@ public class ExpedienteFicha extends AbstractManagedBean implements Serializable
 
     public void setRutaJasper(String rutaJasper) {
         this.rutaJasper = rutaJasper;
+    }
+
+    public String getComisionadoCreacion() {
+        return comisionadoCreacion;
+    }
+
+    public void setComisionadoCreacion(String comisionadoCreacion) {
+        this.comisionadoCreacion = comisionadoCreacion;
     }
     
 }

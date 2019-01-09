@@ -72,6 +72,8 @@
         <result property="estadoDetalle" column="C_NOMBRE"/>
         <result property="nombreOD" column="NOMBRE_OD"/>
         <result property="comisionado" column="COMISIONADO"/>
+        <result property="usuarioCreacion" column="C_USUCREACION"/>
+        
     </resultMap> 
     
     <resultMap id="estadisticaExpedienteMap" type="estadisticaExpediente">
@@ -131,7 +133,7 @@
         <if test="usuarioRegistro != null">
             C_USUREGISTRO,
         </if>
-        <if test="usuarioRegistro != null">
+        <if test="usuarioCreacion != null">
             C_USUCREACION,
         </if>
         <if test="estado != null">
@@ -279,8 +281,8 @@
         <if test="usuarioRegistro != null">
             #{usuarioRegistro},
         </if>
-        <if test="usuarioRegistro != null">
-            #{usuarioRegistro},
+        <if test="usuarioCreacion != null">
+            #{usuarioCreacion},
         </if>
         <if test="estado != null">
             #{estado},

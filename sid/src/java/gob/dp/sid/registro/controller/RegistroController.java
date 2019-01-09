@@ -1299,10 +1299,17 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         ficha.setEstadoGeneral(expediente.getGeneral().equals("C")? "Concluído" : "Trámite");
         ficha.setExpedienteNiveles(expediente.getListaExpedienteNivel());
         Usuario u = usuarioService.buscarUsuarioOne(expediente.getUsuarioRegistro());
+        Usuario usuCreacion = usuarioService.buscarUsuarioOne(expediente.getUsuarioCreacion());
         String nombreUsua = u.getNombre() == null? "" : u.getNombre();
         String apePatUsua = u.getApellidoPaterno() == null? "" : u.getApellidoPaterno();
         String apeMatUsua = u.getApellidoMaterno() == null? "" : u.getApellidoMaterno();
+        
+        String nombreUsuaCre = usuCreacion.getNombre() == null? "" : usuCreacion.getNombre();
+        String apePatUsuaCre = usuCreacion.getApellidoPaterno() == null? "" : usuCreacion.getApellidoPaterno();
+        String apeMatUsuaCre = usuCreacion.getApellidoMaterno() == null? "" : usuCreacion.getApellidoMaterno();
+        
         ficha.setComisionado(nombreUsua+" "+apePatUsua+" "+apeMatUsua);
+        ficha.setComisionadoCreacion(nombreUsuaCre+" "+apePatUsuaCre+" "+apeMatUsuaCre);
         ficha.setTieneOrientacion(null);
         ficha.setOrientacion(null);
         if(StringUtils.equals(expediente.getTipoClasificion(), ExpedienteType.CONSULTA.getKey())){
@@ -4499,6 +4506,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 }
                 expediente.setUsuarioRegistro(usuarioSession.getCodigo());
                 expediente.setUsuarioResponsable(usuarioSession.getCodigo());
+                expediente.setUsuarioCreacion(usuarioSession.getCodigo());
                 expediente.setVersion(1);
                 generarCodigoExpediente();
                 if(personasSeleccionadas != null && personasSeleccionadas.size()>0){

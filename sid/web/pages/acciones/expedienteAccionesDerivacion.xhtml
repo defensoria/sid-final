@@ -233,12 +233,14 @@
                                                                             </h:selectOneMenu>
                                                                             <br/>
                                                                             <br/>
-                                                                            <br/>
-                                                                            Descargar archivo: <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
-                                                                                <a target="_blank" href="/filesystem/#{registroController.expedienteDerivacionEnvia.ruta}">
-                                                                                    <span style="font-size: large" class="glyphicon glyphicon-link" />
-                                                                                </a>
-                                                                            </h:panelGroup>
+                                                                            
+                                                                            <h:panelGroup rendered="#{registroController.expedienteDerivacionEnvia.ruta != null}">
+                                                                                Descargar archivo: 
+                                                            <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{registroController.expedienteDerivacionEnvia.ruta}">
+                                                                <span class="fas fa-link" /> #{registroController.expedienteDerivacionEnvia.ruta}
+                                                            </a>
+                                                        </h:panelGroup>
+                                                                            
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -263,7 +265,7 @@
                                                                     <br/>
                                                                     <h:panelGroup rendered="#{registroController.expedienteDerivacionReasigna.id == null}">
                                                                         <a class="btn btn-primary" onclick="confirmar16()">
-                                                                            <span class="glyphicon glyphicon-share-alt"/>Enviar
+                                                                            <span style="color: white" class="fas fa-share">Enviar</span>
                                                                         </a>
                                                                     </h:panelGroup>    
                                                                     <br/>
@@ -274,7 +276,7 @@
                                                                             <td style="padding-right: 30px; width: 50%">
                                                                                 <label>Motivo de aceptar / rechazar</label>
                                                                                 <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id == null}" style="color: red" value="(max: 4000 carateres)" />
-                                                                                <textarea jsf:rendered="#{registroController.expedienteDerivacionReasigna.id == null}" jsf:value="#{registroController.expedienteDerivacionReasigna.detalle}" rows="6" style="width: 100%" maxlength="4000" placeholder="Motivo"/>
+                                                                                <textarea jsf:rendered="#{registroController.expedienteDerivacionReasigna.id == null}" jsf:value="#{registroController.expedienteDerivacionReasigna.detalle}" rows="6" class="form-control" maxlength="4000" placeholder="Motivo"/>
                                                                                 <h:outputText rendered="#{registroController.expedienteDerivacionReasigna.id != null}" value="#{registroController.expedienteDerivacionAprueba.detalle}" />
                                                                             </td>
                                                                             <td style="vertical-align: top">
@@ -286,7 +288,7 @@
                                                                                     </h:selectOneRadio>
                                                                                     <br/>
                                                                                     <label jsf:rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}">Comisionado:</label>
-                                                                                    <h:selectOneMenu value="#{registroController.expedienteDerivacionReasigna.codigoUsuarioDerivado}" rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
+                                                                                    <h:selectOneMenu value="#{registroController.expedienteDerivacionReasigna.codigoUsuarioDerivado}" class="form-control" rendered="#{registroController.expedienteDerivacionReasigna.aprueba == 'SI'}" disabled="#{registroController.expedienteDerivacionReasigna.id == null? 'false' : 'true'}">
                                                                                         <f:selectItem itemLabel="Seleccione" itemValue="0" />
                                                                                         <f:selectItems value="#{registroController.listaUsuariosComisionadosPorOD}" />
                                                                                     </h:selectOneMenu>
