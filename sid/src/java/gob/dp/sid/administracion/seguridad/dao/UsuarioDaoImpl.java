@@ -71,4 +71,9 @@ public class UsuarioDaoImpl extends SqlSessionDaoSupport implements UsuarioDao {
     public Integer listaUsuarioCount(String codigoUsuario) {
         return getSqlSession().selectOne("usuarioDao.listaUsuarioCount",codigoUsuario);
     }
+    
+    @Override
+    public List<Usuario> buscarListaUsuariosByODCAV(Usuario usuario) {
+        return getSqlSession().selectList("usuarioDao.buscarListaUsuariosByODCAV",usuario);
+    }
 }

@@ -25,6 +25,8 @@ public enum RolType {
         
         APROBADOR_AD("ROL0000004", "SUPERVISOR AD"),
         
+        COMISIONADO_OD_CAV("ROL0000011", "COMISIONADO OD-CAV"),
+        
         ROL_ADMIN("ROL_ADMIN", "ROL ADMINISTRADOR");
         
 	
