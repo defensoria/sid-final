@@ -4043,6 +4043,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             Persona p = personaService.personaBusquedaOne(ep.getPersona().getId());
             ep.setPersona(p);
             setExpedientepersonaModalEdit(ep);
+            expedientepersonaModalEdit.setTipo(expedientepersonaModalEdit.getPersona().getTipo());
             expedientepersonaModalEdit.setNombre(expedientepersonaModalEdit.getPersona().getNombre());
             expedientepersonaModalEdit.setApellidoPat(expedientepersonaModalEdit.getPersona().getApellidoPat());
             expedientepersonaModalEdit.setApellidoMat(expedientepersonaModalEdit.getPersona().getApellidoMat());
@@ -5427,13 +5428,29 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                     return false;
                 }
             }
+            if(StringUtils.equals(persona.getTipo(), "PER")){
+                if(!StringUtils.equals(persona.getTipoDocumento(), "05") && StringUtils.isBlank(persona.getNumeroDocumento())){
+                    msg.messageAlert("Debe ingresar el tipo y número de documento, en caso no tenga debera seleccionar la opción indocumentado", null);
+                    return false;
+                }
+                if(StringUtils.equals(persona.getTipoDocumento(), "05")){
+                    String numeroDocumentoPER = "I"+String.format("%7s", expedienteService.generarCodigoDocumento()).replace(' ', '0');
+                    persona.setNumeroDocumento(numeroDocumentoPER);
+                }
+                
+            }
             persona.setUsuRegistro(usuarioSession.getCodigo());
             persona.setFechaRegistro(new Date());
             persona.setFechaModificacion(new Date());
             persona.setUsuModificacion(usuarioSession.getCodigo());
+            if(StringUtils.equals(persona.getTipo(), "ORG")){
+                persona.setTipoDocumento("05");
+                String numeroDocumentoORG = "I"+String.format("%7s", expedienteService.generarCodigoDocumento()).replace(' ', '0');
+                persona.setNumeroDocumento(numeroDocumentoORG);
+            }
             boolean valid = personaService.personaInsertar(persona);
             if (!valid) {
-                msg.messageAlert("El DNI ya se encuentra registrado", null);
+                msg.messageAlert("El documento ya se encuentra registrado", null);
                 return false;
             }
             addPersona(persona);

@@ -177,7 +177,8 @@
                                                 <span class="fas fa-pencil-alt" />
                                             </a>
                                             &#160;&#160;&#160;
-                                            <a onclick="confirmar2#{rowx2.rowIndex+1}()" href="#">
+                                            <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                                <a onclick="confirmar2#{rowx2.rowIndex+1}()" href="#">
                                                 <i class="fas fa-times" style="color: red" ></i>
                                                     </a>
                                                     <script>
@@ -187,6 +188,8 @@
                                                     </script>
                                             <gc:confirmSubmit bean="#{registroController.inactivarGestion(investigacion.id)}" classGC="confirmacion2#{rowx2.rowIndex+1}" mensaje="Esta seguro de eliminar la gestión?" />
                                                 
+                                            </h:panelGroup>
+                                            
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 2}">
                                             <f:facet  name="header">Ver</f:facet>
@@ -241,6 +244,7 @@
                                                 <span class="fas fa-pencil-alt" />
                                             </a>
                                             &#160;&#160;&#160;
+                                            <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
                                             <a onclick="confirmar3#{rowx3.rowIndex+1}()" href="#">
                                                 <i class="fas fa-times" style="color: red" ></i>
                                                     </a>
@@ -250,7 +254,7 @@
                                                         }
                                                     </script>
                                             <gc:confirmSubmit bean="#{registroController.inactivarGestion(persuacion.id)}" classGC="confirmacion3#{rowx3.rowIndex+1}" mensaje="Esta seguro de eliminar la gestión?" />
-                                             
+                                             </h:panelGroup>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 3}">
                                             <f:facet  name="header">Ver</f:facet>
@@ -307,6 +311,8 @@
                                                 <span class="fas fa-pencil-alt" />
                                             </a>
                                             &#160;&#160;&#160;
+                                            <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            
                                             <a onclick="confirmar4#{rowx4.rowIndex+1}()" href="#">
                                                 <i class="fas fa-times" style="color: red" ></i>
                                                     </a>
@@ -316,7 +322,7 @@
                                                         }
                                                     </script>
                                             <gc:confirmSubmit bean="#{registroController.inactivarGestion(seguimiento.id)}" classGC="confirmacion4#{rowx4.rowIndex+1}" mensaje="Esta seguro de eliminar la gestión?" />
-                                             
+                                             </h:panelGroup>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 4}">
                                             <f:facet  name="header">Ver</f:facet>
@@ -373,6 +379,8 @@
                                                 <span class="fas fa-pencil-alt" />
                                             </a>
                                             &#160;&#160;&#160;
+                                            <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            
                                             <a onclick="confirmar6#{rowx6.rowIndex+1}()" href="#">
                                                 <i class="fas fa-times" style="color: red" ></i>
                                                     </a>
@@ -382,7 +390,7 @@
                                                         }
                                                     </script>
                                             <gc:confirmSubmit bean="#{registroController.inactivarGestion(gestion.id)}" classGC="confirmacion6#{rowx6.rowIndex+1}" mensaje="Esta seguro de eliminar la gestión?" />
-                                             
+                                             </h:panelGroup>
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 6}">
                                             <f:facet  name="header">Ver</f:facet>
@@ -435,18 +443,22 @@
                                             <f:facet name="header">Editar</f:facet>
                                             <a jsf:action="#{registroController.setearExpedienteGestion(persuacion)}">
                                                 <span class="fas fa-pencil-alt" />
+                                            </a>    
+                                            &#160;&#160;&#160;
+                                            <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo}">
+                                            
                                                 <a onclick="confirmar7#{rowx7.rowIndex+1}()" href="#">
                                                     <i class="fas fa-times" style="color: red" ></i>
                                                     </a>
-                                                &#160;&#160;&#160;
+                                                
                                                     <script>
                                                         function confirmar7#{rowx7.rowIndex+1}() {
                                                             $(".confirmacion7#{rowx7.rowIndex+1}").modal('show');
                                                         }
                                                     </script>
                                             <gc:confirmSubmit bean="#{registroController.inactivarGestion(persuacion.id)}" classGC="confirmacion7#{rowx7.rowIndex+1}" mensaje="Esta seguro de eliminar la gestión?" />
-                                             
-                                            </a>
+                                             </h:panelGroup>
+                                            
                                         </h:column>
                                         <h:column rendered="#{registroController.etapaEstado.verEtapa != 7}">
                                             <f:facet  name="header">Ver</f:facet>
