@@ -261,10 +261,6 @@
                                     </div>
                                 </div>
                                 
-                                
-                                    
-                                
-                                
                             </div>
                             <div class="modal-body">
                                 <h:panelGroup id="idPanelTipoPersona">
@@ -432,20 +428,24 @@
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
-
-                                    <div class="form-group row">
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">¿es persona con discapacidad?</label>
                                         <div class="col-sm-8">
                                             <h:selectBooleanCheckbox value="#{registroController.persona.indicadorDiscapacitado}" />
                                         </div>
                                     </div>
-
-                                    <div class="form-group row">
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                        <div class="form-group row">
                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
                                         <div class="col-sm-8">
                                             <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.persona.email}"  class="form-control" maxlength="100"/>
                                         </div>
                                     </div>
+                                    </h:panelGroup>
+                                    
 
                                     <div class="form-group row">
                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">Teléfono</label>

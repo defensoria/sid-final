@@ -72,4 +72,6 @@ public interface ExpedienteDAO {
     /*Fin - JCARRILLO*/
     
     public Integer validaUsuarioCount(String numeroDocumento);
+    
+    public Long generarCodigoDocumento();
 }

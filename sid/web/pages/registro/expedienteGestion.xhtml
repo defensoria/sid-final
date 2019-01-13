@@ -78,10 +78,7 @@
                                             
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    <a class="btn btn-warning" jsf:action="#{registroController.cargarModalReplica()}" jsf:rendered="#{registroController.expedienteGestion.codigoGestion != null}" >
-                                                        <span class="fas fa-tags" /> Replicar en otro expediente
-                                                        <f:ajax render="idPanelModalReplicar" execute="idPanelModalReplicar" onevent="modalReplicar" />
-                                                    </a>
+                                                    
                                                     <script>
                                                         function modalReplicar(data) {
                                                             if (data.status === 'success') {
@@ -452,10 +449,7 @@
                                             <div class="row">
                                                 
                                                 <div class="col-sm-6">
-                                                    <a class="btn btn-warning" jsf:action="#{registroController.cargarModalReplica()}"  jsf:rendered="#{registroController.expedienteGestion.codigoGestion != null}" >
-                                                        <span class="fas fa-tags" /> Replicar en otro expediente
-                                                        <f:ajax render="idPanelModalReplicar2" execute="idPanelModalReplicar2" onevent="modalReplicar2" />
-                                                    </a>
+                                                    
                                                     <script>
 
                                                         function modalReplicar2(data) {

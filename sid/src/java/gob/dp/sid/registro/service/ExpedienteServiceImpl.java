@@ -189,4 +189,9 @@ public class ExpedienteServiceImpl implements ExpedienteService{
     public Integer validaUsuarioCount(String numeroDocumento) {
         return expedienteDAO.validaUsuarioCount(numeroDocumento);
     }
+
+    @Override
+    public Long generarCodigoDocumento() {
+        return expedienteDAO.generarCodigoDocumento();
+    }
 }

@@ -934,7 +934,8 @@
     </select>
     
     <select id="expedienteCodigoPorOD" resultType="Long" parameterType="Long">
-        SELECT MAX(N_CONSECUTIVO) as N_CONSECUTIVO FROM SID_REG_EXPEDIENTE WHERE N_CODIGOOD = #{id} AND TO_CHAR(D_FECHAREGISTRO, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+        SELECT MAX(N_CONSECUTIVO) as N_CONSECUTIVO FROM SID_REG_EXPEDIENTE WHERE N_CODIGOOD = #{id} 
+        AND TO_CHAR(D_FECHAREGISTRO, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') AND C_INDDERIVADO IS NULL
     </select>
     
     <select id="expedienteMayorInformacionCount" resultType="java.lang.Integer" parameterType="String">
@@ -993,6 +994,9 @@
         WHERE A.C_ESTADO = 'A' AND A.C_NUMEROEXPEDIENTE IS NOT NULL AND c.c_numerodocumento = #{value}
     </select>
     
+    <select id="generarCodigoDocumento" resultType="Long" >
+        SELECT SEQ_SID_GENERADOR.NextVal FROM DUAL
+    </select>
     
 </mapper>
 

@@ -156,4 +156,9 @@ public class ExpedienteDAOImpl extends SqlSessionDaoSupport implements Expedient
     public Integer validaUsuarioCount(String numeroDocumento) {
         return getSqlSession().selectOne("gob.dp.sid.registro.dao.ExpedienteDAO.validaUsuarioCount", numeroDocumento);
     }
+
+    @Override
+    public Long generarCodigoDocumento() {
+        return getSqlSession().selectOne("gob.dp.sid.registro.dao.ExpedienteDAO.generarCodigoDocumento");
+    }
 }
