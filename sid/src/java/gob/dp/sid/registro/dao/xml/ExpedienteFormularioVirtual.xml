@@ -280,7 +280,7 @@
     </select>
     
     <select id="expedienteFormularioVirtualBuscar" resultMap="expedienteFormularioVirtualMap" parameterType="expedienteFormularioVirtual">
-        SELECT A.*, B.NOMBRE_PARAMETRO FORMADESCRIPCION, C.NOMBRE_PARAMETRO ACCIONDESCRIPCION FROM SID_REG_FORMULARIO_VIRTUAL A
+            SELECT A.*, B.NOMBRE_PARAMETRO FORMADESCRIPCION, C.NOMBRE_PARAMETRO ACCIONDESCRIPCION FROM SID_REG_FORMULARIO_VIRTUAL A
         INNER JOIN SID_PARAMETRO B ON A.C_FORMA = B.VALOR_PARAMETRO AND B.PADRE_PARAMETRO = 20
         LEFT JOIN SID_PARAMETRO C ON A.C_ACCION = C.VALOR_PARAMETRO AND C.PADRE_PARAMETRO = 330
         WHERE A.C_ESTADO NOT IN ('I') 
@@ -295,6 +295,18 @@
         </if>
         <if test="usuarioRegistro != ''">
             AND A.C_USUREGISTRO = #{usuarioRegistro}
+        </if>
+        <if test="numeroDocumento != ''">
+            AND A.C_NUMERODOCUMENTO = #{numeroDocumento} 
+        </if>
+        <if test="nombre != ''">
+            AND UPPER(A.C_NOMBRES) LIKE '%'||UPPER(#{nombre})||'%'
+        </if>
+        <if test="apellidoPaterno != ''">
+            AND UPPER(A.C_APELLIDOPATERNO) LIKE '%'||UPPER(#{apellidoPaterno})||'%'
+        </if>
+        <if test="apellidoMaterno != ''">
+            AND UPPER(A.C_APELLIDOMATERNO) LIKE '%'||UPPER(#{apellidoMaterno})||'%'
         </if>
         ORDER BY N_ID_REGISTRO DESC
     </select>
