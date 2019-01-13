@@ -40,6 +40,7 @@
                         } else {
                             $('.descripcion').removeClass("clasRED");
                         }
+                        /*
                         if ($('.respuesta').val() === '') {
                             $('.respuesta').focus().addClass("clasRED");
                             alertar("Debe ingresar una respuesta");
@@ -47,6 +48,7 @@
                         } else {
                             $('.respuesta').removeClass("clasRED");
                         }
+                        */
                         if ($('.tipo').val() === '0') {
                             $('.tipo').focus().addClass("clasRED");
                             alertar("Debe seleccionar un tipo");
@@ -148,7 +150,7 @@
                                         </a>
                                         &#160;&#160;&#160;
                                         <a class="btn btn-info" jsf:action="#{registroController.limpiarCAV()}">
-                                            <span class="fas fa-user" /> Nuevo
+                                            <span class="fas fa-user" /> Limpiar
                                         </a>
                                     </div>
                                 </div>
@@ -167,12 +169,16 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="control-label col-form-label">Fecha</label>
-                                            <gc:calendar clase="fechaRegistro" value="#{registroController.expedienteFormularioVirtual.fecha}"/>
+                                            <!-- <gc:calendar clase="fechaRegistro" value="#{registroController.expedienteFormularioVirtual.fecha}"/> -->
+                                            <input type="date" class="form-control" jsf:value="#{registroController.expedienteFormularioVirtual.fecha}" readonly="true">
+                                                    <!-- <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" /> -->
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Lima" />
+                                            </input>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Forma</label>
+                                            <label for="inputcontact" class="control-label col-form-label">Forma de ingreso</label>
                                             <h:selectOneMenu value="#{registroController.expedienteFormularioVirtual.forma}" class="form-control">
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoIngreso(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
@@ -225,7 +231,7 @@
                                         <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
-                                                <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Número de documento"/>
+                                                <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
 
                                             </div>
                                         </div>
@@ -250,7 +256,7 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label col-form-label">A. paterno</label>
+                                                <label class="control-label col-form-label">A. Paterno</label>
                                                 <input type="text" class="apellidoPaterno form-control" jsf:value="#{registroController.expedienteFormularioVirtual.apellidoPaterno}" placeholder="Apellido Paterno"/>
                                             </div>
                                         </div>
@@ -357,7 +363,8 @@
                                             <label for="inputcontact" class="control-label col-form-label">Forma de ingreso</label>
                                             <h:selectOneMenu value="#{registroController.filtroFormularioVirtual.forma}" class="form-control" >
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                <f:selectItems value="#{listasComunesController.buscarListaFormaCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <!-- <f:selectItems value="#{listasComunesController.buscarListaFormaCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" /> -->
+                                                <f:selectItems value="#{listasComunesController.buscarExpedienteTipoIngreso(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -368,6 +375,32 @@
                                                 <f:selectItem itemValue="" itemLabel="Selecione" />
                                                 <f:selectItems value="#{registroController.listaUsuarioODCAV}" var="y" itemLabel="#{y.nombre} #{y.apellidoPaterno} #{y.apellidoMaterno}" itemValue="#{y.codigo}" />
                                             </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="inputdocumento" class="control-label col-form-label">Nro. Documento</label>
+                                            <input type="text" class="filtrodococumento form-control" jsf:value="#{registroController.filtroFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="inputnombre" class="control-label col-form-label">Nombres</label>
+                                            <input type="text" class="filtronombres form-control" jsf:value="#{registroController.filtroFormularioVirtual.nombre}" placeholder="Nombres"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="inputpaterno" class="control-label col-form-label">A. Paterno</label>
+                                            <input type="text" class="filtropaterno form-control" jsf:value="#{registroController.filtroFormularioVirtual.apellidoPaterno}" placeholder="Apellido Paterno"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="inputmaterno" class="control-label col-form-label">A. Materno</label>
+                                            <input type="text" class="filtromaterno form-control" jsf:value="#{registroController.filtroFormularioVirtual.apellidoMaterno}" placeholder="Apellido Materno"/>
                                         </div>
                                     </div>
                                 </div>

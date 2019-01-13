@@ -500,6 +500,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         filtroFormularioVirtual = new ExpedienteFormularioVirtual();
         listarRegistrosCAV();
         buscarListaUsuariosByODCAV();
+        expedienteFormularioVirtual.setFecha(new Date());
+        expedienteFormularioVirtual.setTipo(ConstantesUtil.LISTA_VALOR_PERSONA_CODIGO);
         return "expedienteFormularioVirtual";
     }
     
@@ -816,6 +818,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             filtro.setDireccion(expedienteFormularioVirtual.getDireccion());
             filtro.setFechaRegistro(expedienteFormularioVirtual.getFechaRegistro());
             filtro.setUsuRegistro(expedienteFormularioVirtual.getUsuarioRegistro());
+            //filtro.setTelefono1(expedienteFormularioVirtual.getTelefono());
             personaService.personaInsertar(filtro);
         }else{
             filtro = perso;
@@ -846,6 +849,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     public void limpiarCAV(){
         expedienteFormularioVirtual = new ExpedienteFormularioVirtual();
         expedienteFormularioVirtual.setFechaRegistro(new Date());
+        expedienteFormularioVirtual.setFecha(new Date());
+        expedienteFormularioVirtual.setTipo(ConstantesUtil.LISTA_VALOR_PERSONA_CODIGO);
     }
     
     private void generarExpedienteCAV(){
