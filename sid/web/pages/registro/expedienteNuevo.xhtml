@@ -79,9 +79,9 @@
                                         <h:outputText value="- (DESISTIDO)" rendered="#{registroController.expediente.indicadorDesestimiento == 1}"  style="color: red; font-weight: bold; font-size: 1.5em" />
                                     </div> 
                                     <h:panelGroup rendered="#{registroController.expediente.contrasenia.length() > 0}">
-                                    <div class="col-3">
-                                        <h4 class="card-title" >Contraseña: <label class="label label-danger" style="font-size: 20px" >#{registroController.expediente.contrasenia}</label></h4>
-                                    </div> 
+                                        <div class="col-3">
+                                            <h4 class="card-title" >Contraseña: <label class="label label-danger" style="font-size: 20px" >#{registroController.expediente.contrasenia}</label></h4>
+                                        </div> 
                                     </h:panelGroup>
                                     <div class="col-3" style="text-align: right">
                                         <a jsf:rendered="#{registroController.expediente.version >= 1}" jsf:action="#{registroController.pdf()}">
@@ -315,7 +315,7 @@
                                                 <f:ajax render="idPanelAsignar" onevent="modalAsignar" />
                                             </a>
                                         </h:panelGroup>
-                                        
+
                                         <h:panelGroup id="idPanelAsignar">
                                             <div id="idModalAsignar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
                                                 <div class="modal-dialog">
@@ -350,13 +350,13 @@
                                     <div class="col-2">
                                         <h:panelGroup rendered="#{registroController.etapaEstado.verEtapa == 0 or registroController.etapaEstado.verEtapa == null or registroController.expediente.version == 0}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione1" />
+                                                <f:selectItem itemLabel="Seleccione" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{(registroController.etapaEstado.verEtapa == 1 or registroController.etapaEstado.verEtapa == 5) and seguridadUtilController.tieneRecurso('REC_EXP017')}">
                                             <h:selectOneMenu value="#{registroController.expediente.tipoClasificion}" class="form-control">
-                                                <f:selectItem itemLabel="Seleccione2" />
+                                                <f:selectItem itemLabel="Seleccione" />
                                                 <f:selectItems value="#{listasComunesController.buscarExpedienteTipoClasificacion(false,false,false)}" var="item" itemLabel="#{item.nombreParametro}" itemValue="#{item.valorParametro}" />
                                             </h:selectOneMenu>
                                         </h:panelGroup>
@@ -386,7 +386,7 @@
                                         </h:panelGroup>
                                     </div>
                                     <div class="col-7" style="text-align: right">
-                                        
+
                                         &#160;&#160;        
                                         <h:panelGroup rendered="#{(registroController.expediente.general != 'C' and registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo) or (registroController.expediente.usuarioRegistro == null) }">
                                             <a class="btn btn-primary" jsf:action="#{registroController.guardarVersion()}">
@@ -702,42 +702,42 @@
                                                                             <div class="row">
                                                                                 <div class="col-1">
                                                                                     <a onclick="confirmar4#{nivel.id}()">
-                                                                                <span class="fas fa-times" style="color: red;"/>
-                                                                            </a>
-                                                                            <gc:confirmSubmit classGC="confirmacion4#{nivel.id}" bean="#{registroController.inactivarNivel(nivel)}" mensaje="Está seguro de eliminar la clasificación?"/>
+                                                                                        <span class="fas fa-times" style="color: red;"/>
+                                                                                    </a>
+                                                                                    <gc:confirmSubmit classGC="confirmacion4#{nivel.id}" bean="#{registroController.inactivarNivel(nivel)}" mensaje="Está seguro de eliminar la clasificación?"/>
                                                                                 </div>
                                                                                 <div class="col-11">
                                                                                     <div class="alert alert-success">
-                                                                            <script>
-                                                                                function confirmar4#{nivel.id}() {
-                                                                                    $(".confirmacion4#{nivel.id}").modal('show');
-                                                                                }
-                                                                            </script>
-                                                                        
-                                                                            <a jsf:action="#{registroController.editarNivel(nivel)}" >
-                                                                                <span class="fas fa-pencil-alt"/>
-                                                                                <f:ajax render="idClasificador" />
-                                                                            </a>
-                                                                            <h:outputText value="#{nivel.primerNivel}"/>
-                                                                            <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.segundoNivel != null}"/>
-                                                                            <h:outputText value="#{nivel.segundoNivel}" />
-                                                                            <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.tercerNivel != null}"/>
-                                                                            <h:outputText value="#{nivel.tercerNivel}" />
-                                                                            <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.cuartoNivel != null}"/>
-                                                                            <h:outputText value="#{nivel.cuartoNivel}" />
-                                                                            <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.quintoNivel != null}"/>
-                                                                            <h:outputText value="#{nivel.quintoNivel}" />
-                                                                            <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.sextoNivel != null}"/>
-                                                                            <h:outputText value="#{nivel.sextoNivel}" />
-                                                                            <a jsf:action="#{registroController.cargarSegundaClasificacion(nivel.id, nivel.idPrimerNivel)}" style="font-size: 1.2em">
-                                                                                <span class="fas fa-plus"/>
-                                                                                <f:ajax render="idPanelSegundaClasificacion" onevent="openModalSegundaClasificacion" />
-                                                                            </a>
-                                                                            </div>
+                                                                                        <script>
+                                                                                            function confirmar4#{nivel.id}() {
+                                                                                                $(".confirmacion4#{nivel.id}").modal('show');
+                                                                                            }
+                                                                                        </script>
+
+                                                                                        <a jsf:action="#{registroController.editarNivel(nivel)}" >
+                                                                                            <span class="fas fa-pencil-alt"/>
+                                                                                            <f:ajax render="idClasificador" />
+                                                                                        </a>
+                                                                                        <h:outputText value="#{nivel.primerNivel}"/>
+                                                                                        <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.segundoNivel != null}"/>
+                                                                                        <h:outputText value="#{nivel.segundoNivel}" />
+                                                                                        <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.tercerNivel != null}"/>
+                                                                                        <h:outputText value="#{nivel.tercerNivel}" />
+                                                                                        <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.cuartoNivel != null}"/>
+                                                                                        <h:outputText value="#{nivel.cuartoNivel}" />
+                                                                                        <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.quintoNivel != null}"/>
+                                                                                        <h:outputText value="#{nivel.quintoNivel}" />
+                                                                                        <h:outputText style="color: red; font-weight: bold;" value=" > " rendered="#{nivel.sextoNivel != null}"/>
+                                                                                        <h:outputText value="#{nivel.sextoNivel}" />
+                                                                                        <a jsf:action="#{registroController.cargarSegundaClasificacion(nivel.id, nivel.idPrimerNivel)}" style="font-size: 1.2em">
+                                                                                            <span class="fas fa-plus"/>
+                                                                                            <f:ajax render="idPanelSegundaClasificacion" onevent="openModalSegundaClasificacion" />
+                                                                                        </a>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            
-                                                                            
+
+
                                                                             <h:panelGroup rendered="#{registroController.expediente.tipoClasificion == '01' and nivel.indicadorSegundoTipo == 'S'}">
                                                                                 <h:dataTable value="#{nivel.listaClasificacionTipo}" var="cla" class="table table-active">
                                                                                     <h:column>
@@ -968,16 +968,16 @@
                                                                                                     </div>
                                                                                                     <div class="col-6">
                                                                                                         <a class="btn btn-danger" data-dismiss="modal">
-                                                                                                        <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
-                                                                                                    </a>&#160;&#160;&#160;
-                                                                                                    <a jsf:action="#{registroController.guardarVincularListaPersona()}" class="btn btn-info">
-                                                                                                        <span class="fas fa-save" /> Guardar
-                                                                                                    </a>
+                                                                                                            <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                                                                                        </a>&#160;&#160;&#160;
+                                                                                                        <a jsf:action="#{registroController.guardarVincularListaPersona()}" class="btn btn-info">
+                                                                                                            <span class="fas fa-save" /> Guardar
+                                                                                                        </a>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                
+
                                                                                                 <div>
-                                                                                                    
+
                                                                                                 </div>
 
                                                                                             </div>
@@ -1004,7 +1004,7 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </h:panelGroup>
-                                                                                                    
+
                                                                                                     <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
                                                                                                         <div class="form-group row">
                                                                                                             <label for="fname" class="col-sm-4 text-right control-label col-form-label">Número documento</label>
@@ -1133,18 +1133,23 @@
                                                                                                             </h:selectOneMenu>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <div class="form-group row">
-                                                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">¿es persona con discapacidad?</label>
-                                                                                                        <div class="col-sm-8">
-                                                                                                            <h:selectBooleanCheckbox value="#{registroController.persona.indicadorDiscapacitado}" />
+                                                                                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                                                                                        <div class="form-group row">
+                                                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">¿es persona con discapacidad?</label>
+                                                                                                            <div class="col-sm-8">
+                                                                                                                <h:selectBooleanCheckbox value="#{registroController.persona.indicadorDiscapacitado}" />
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
-                                                                                                    <div class="form-group row">
-                                                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
-                                                                                                        <div class="col-sm-8">
-                                                                                                            <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.persona.email}"  class="form-control" maxlength="100"/>
+                                                                                                    </h:panelGroup>
+                                                                                                    <h:panelGroup rendered="#{registroController.persona.tipo == 'PER'}">
+                                                                                                        <div class="form-group row">
+                                                                                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
+                                                                                                            <div class="col-sm-8">
+                                                                                                                <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.persona.email}"  class="form-control" maxlength="100"/>
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </div>
+                                                                                                    </h:panelGroup>
+
                                                                                                     <div class="form-group row">
                                                                                                         <label for="fname" class="col-sm-4 text-right control-label col-form-label">Teléfono</label>
                                                                                                         <div class="col-sm-8">
@@ -1159,7 +1164,7 @@
                                                                                                     </div>
                                                                                                 </h:panelGroup>
                                                                                             </div>
-                                                                                            
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1236,48 +1241,30 @@
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <!--
-                                                                                <div class="form-group row">
-                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre completo</label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <h:outputText style="font-weight: bold" value="#{registroController.expedientepersonaModalEdit.persona.nombre} #{registroController.expedientepersonaModalEdit.persona.apellidoPat} #{registroController.expedientepersonaModalEdit.persona.apellidoMat}" />
-                                                                                    </div>
-                                                                                </div>
-                                                                                -->
+
                                                                                 <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nombre</label>
                                                                                     <div class="col-sm-8">
                                                                                         <input type="text" placeholder="Nombre" jsf:value="#{registroController.expedientepersonaModalEdit.nombre}" class="form-control" maxlength="50"/>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group row">
+                                                                                <h:panelGroup rendered="#{registroController.expedientepersonaModalEdit.tipo == 'PER'}">
+                                                                                    <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido Paterno</label>
                                                                                     <div class="col-sm-8">
                                                                                         <input type="text" placeholder="Apellido Paterno" jsf:value="#{registroController.expedientepersonaModalEdit.apellidoPat}" class="form-control" maxlength="100"/>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group row">
+                                                                                </h:panelGroup>
+                                                                                <h:panelGroup rendered="#{registroController.expedientepersonaModalEdit.tipo == 'PER'}">
+                                                                                    <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Apellido Materno</label>
                                                                                     <div class="col-sm-8">
                                                                                         <input type="text" placeholder="Apellido Materno" jsf:value="#{registroController.expedientepersonaModalEdit.apellidoMat}" class="form-control" maxlength="100"/>
                                                                                     </div>
                                                                                 </div>
-
-                                                                                <div class="form-group row">
-                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Sexo</label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <h:outputText rendered="#{registroController.expedientepersonaModalEdit.persona.sexo == 'M'}" value="Masculino"/>                                                                                            
-                                                                                        <h:outputText rendered="#{registroController.expedientepersonaModalEdit.persona.sexo == 'F'}" value="Femenino"/>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="fname" class="col-sm-4 text-right control-label col-form-label">Nacimiento</label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <h:outputText value="#{registroController.expedientepersonaModalEdit.persona.fechaNacimiento}">
-                                                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
-                                                                                        </h:outputText>
-                                                                                    </div>
-                                                                                </div>
+                                                                                </h:panelGroup>
+                                                                                
                                                                                 <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Dirección</label>
                                                                                     <div class="col-sm-8">
@@ -1318,18 +1305,24 @@
                                                                                         </h:selectOneMenu>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group row">
+                                                                                <h:panelGroup rendered="#{registroController.expedientepersonaModalEdit.tipo == 'PER'}">
+                                                                                    <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Persona con discapacidad</label>
                                                                                     <div class="col-sm-8">
                                                                                         <h:selectBooleanCheckbox value="#{registroController.expedientepersonaModalEdit.indicadorDiscapacitado}" />
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group row">
+                                                                                </h:panelGroup>
+                                                                                <h:panelGroup rendered="#{registroController.expedientepersonaModalEdit.tipo == 'PER'}">
+                                                                                    <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
                                                                                     <div class="col-sm-8">
                                                                                         <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.expedientepersonaModalEdit.email}" maxlength="100"  class="form-control"/>
                                                                                     </div>
                                                                                 </div>
+                                                                                </h:panelGroup>
+                                                                                
+                                                                                
                                                                                 <div class="form-group row">
                                                                                     <label for="fname" class="col-sm-4 text-right control-label col-form-label">Telefono</label>
                                                                                     <div class="col-sm-8">
@@ -1342,20 +1335,10 @@
                                                                                         <input type="text" placeholder="Lugar de notificación" jsf:value="#{registroController.expedientepersonaModalEdit.direccionNotifica}" maxlength="500"  class="form-control"/>
                                                                                     </div>
                                                                                 </div>
-                                                                                <h:panelGroup rendered="#{registroController.expedientepersonaModalEdit.persona.tipo == 'ORG'}">
-                                                                                    <div class="form-group row">
-                                                                                        <label for="fname" class="col-sm-4 text-right control-label col-form-label">Correo</label>
-                                                                                        <div class="col-sm-8">
-                                                                                            <input type="text" placeholder="Correo electrónico" jsf:value="#{registroController.expedientepersonaModalEdit.email}" maxlength="100"   class="form-control"/>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </h:panelGroup>
+                                                                                
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <a class="btn btn-danger" data-dismiss="modal">
-                                                                                    <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
-                                                                                </a>
-                                                                                &#160;&#160;
+                                                                                
                                                                                 <a jsf:action="#{registroController.editaPersonaExpediente()}" class="btn btn-info">
                                                                                     <span class="fas fa-save" /> Guardar
                                                                                 </a>
@@ -1378,14 +1361,7 @@
                                                                     <gc:selectMultiBootstrap idSelect="idSelectGrupoViolencia" idHidden="idSelect1" lista="#{listasComunesController.buscarGrupoVulnerable(false,false,false)}" value="#{registroController.expediente.tipoGrupoVulnerable}"/>
                                                                 </div>
                                                             </div>
-                                                            <!--
-                                                            <div class="form-group row">
-                                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Grupos especiales</label>
-                                                                <div class="col-sm-8">
-                                                                    <gc:selectMultiBootstrap idSelect="idSelectGrupoEspecial" idHidden="idSelect32"  lista="#{listasComunesController.buscarGrupoEspecial(false,false,false)}" value="#{registroController.expediente.tipoGrupoEspecial}"/>
-                                                                </div>
-                                                            </div>
-                                                            -->
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1413,31 +1389,31 @@
                                                                 </div>
                                                                 <br/>
                                                                 <div class="table-responsive">
-                                                                <h:dataTable value="#{registroController.listaDocumentosPorVisita}" var="doc" class="table table-hover" binding="#{dot}" rendered="#{registroController.listaDocumentosPorVisita.size() > 0}">
-                                                <h:column>
-                                                    <f:facet name="header">N°</f:facet>
-                                                    <h:outputText value="#{dot.rowIndex + 1}" />
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">Código</f:facet>
-                                                    <h:outputText value="#{doc.codigoDocumento}" />
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">Visita</f:facet>
-                                                    <h:outputText value="#{doc.idVisita}" />
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">Documento</f:facet>
-                                                    <h:panelGroup rendered="#{doc.rutaDocumento != null}">
-                                                        <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{doc.rutaDocumento}">
-                                                            <span class="fas fa-link" /> #{doc.codigoDocumento}
-                                                        </a>
-                                                    </h:panelGroup>    
-                                                </h:column>
-                                            </h:dataTable>
-                                                        </div>        
-                                                                
-                                                                
+                                                                    <h:dataTable value="#{registroController.listaDocumentosPorVisita}" var="doc" class="table table-hover" binding="#{dot}" rendered="#{registroController.listaDocumentosPorVisita.size() > 0}">
+                                                                        <h:column>
+                                                                            <f:facet name="header">N°</f:facet>
+                                                                            <h:outputText value="#{dot.rowIndex + 1}" />
+                                                                        </h:column>
+                                                                        <h:column>
+                                                                            <f:facet name="header">Código</f:facet>
+                                                                            <h:outputText value="#{doc.codigoDocumento}" />
+                                                                        </h:column>
+                                                                        <h:column>
+                                                                            <f:facet name="header">Visita</f:facet>
+                                                                            <h:outputText value="#{doc.idVisita}" />
+                                                                        </h:column>
+                                                                        <h:column>
+                                                                            <f:facet name="header">Documento</f:facet>
+                                                                            <h:panelGroup rendered="#{doc.rutaDocumento != null}">
+                                                                                <a target="_blank" href="/sid/DownloadFileServlet?fileName=#{doc.rutaDocumento}">
+                                                                                    <span class="fas fa-link" /> #{doc.codigoDocumento}
+                                                                                </a>
+                                                                            </h:panelGroup>    
+                                                                        </h:column>
+                                                                    </h:dataTable>
+                                                                </div>        
+
+
                                                             </div>
                                                             <div class="form-group row">
                                                                 <h:panelGroup rendered="#{registroController.expediente.ruta != null}">
@@ -1467,8 +1443,8 @@
                                                             <br/><br/>
                                                             <h:panelGroup id="idPanelEntidadesQue" rendered="#{registroController.expediente.tipoClasificion != '02'}">
                                                                 <h4 class="card-title"><h:outputText rendered="#{registroController.expediente.tipoClasificion == '01'}" value="Entidad Intervenida"/></h4>
-                                                                
-                                                                
+
+
                                                                 <br/>
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-3">
@@ -1682,71 +1658,7 @@
                         </div>
                     </div>
                 </div>
-                <!--
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <h4 class="card-title">Ejercicio de atribuciones</h4>
-                                        </div>
-                                    </div>
-                                    <h:panelGroup id="idTrEjercicioAtr">
-                                        <div class="form-group row">
-                                            <label for="fname" class="col-sm-4 text-right control-label col-form-label">Ejercicio de atribuciones</label>
-                                            <div class="col-sm-8">
-                                                <h:selectBooleanCheckbox value="#{registroController.expediente.indicadorAtr}" >
-                                                    <f:ajax render="idTrEjercicioAtr" />
-                                                </h:selectBooleanCheckbox>
-                                            </div>
-                                        </div>
-                                        <h:panelGroup rendered="#{registroController.expediente.indicadorAtr}">
-                                            <div class="form-group row">
-                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tipo</label>
-                                                <div class="col-sm-8">
-                                                    <h:selectOneMenu value="#{registroController.expediente.tipoAtr}" rendered="#{registroController.expediente.indicadorAtr}" class="form-control">
-                                                        <f:selectItem itemValue="0" itemLabel="Seleccione" />
-                                                        <f:selectItems value="#{listasComunesController.listaTipoAtr(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </div>
-                                            </div>
-                                        </h:panelGroup>
-                                        <h:panelGroup rendered="#{registroController.expediente.indicadorAtr}">
-                                            <div class="form-group row">
-                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Tipo</label>
-                                                <div class="col-sm-8">
-                                                    <h:selectOneMenu value="#{registroController.expediente.tipoAtr}" rendered="#{registroController.expediente.indicadorAtr}" class="form-control">
-                                                        <f:selectItem itemValue="0" itemLabel="Seleccione" />
-                                                        <f:selectItems value="#{listasComunesController.listaTipoAtr(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    </h:selectOneMenu>
-                                                </div>
-                                            </div>
-                                        </h:panelGroup>
-                                        <h:panelGroup rendered="#{registroController.expediente.indicadorAtr}">
-                                            <div class="form-group row">
-                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Fecha</label>
-                                                <div class="col-sm-8">
-                                                    <gc:calendar value="#{registroController.expediente.fechaAtr}"/>
-                                                </div>
-                                            </div>
-                                        </h:panelGroup> 
-                                        <h:panelGroup rendered="#{registroController.expediente.indicadorAtr}">
-                                            <div class="form-group row">
-                                                <label for="fname" class="col-sm-4 text-right control-label col-form-label">Detalle</label>
-                                                <div class="col-sm-8">
-                                                    <textarea rows="5" jsf:rendered="#{registroController.expediente.indicadorAtr}" jsf:value="#{registroController.expediente.detalleAtr}" class="form-control" placeholder="Detalle" maxlength="1400"/>
-                                                </div>
-                                            </div>
-                                        </h:panelGroup>
-                                    </h:panelGroup>              
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                -->
+
                 <table style="width: 100%">       
                     <tr>
                         <td colspan="2">
