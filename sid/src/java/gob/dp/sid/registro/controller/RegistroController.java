@@ -364,6 +364,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     
     private Boolean esSupervisor;
     
+    private Boolean mostrarDescripcionRespuesta = false;
+    
     private ExpedienteFormularioVirtual expedienteFormularioVirtual;
     
     private ExpedienteFormularioVirtual filtroFormularioVirtual;
@@ -5676,6 +5678,14 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             return "";
         }
     }
+    
+    public void esMensaje(String valor){
+        if(valor.equals("D")){
+            mostrarDescripcionRespuesta=true;
+        }else if(valor.equals("R")) {
+            mostrarDescripcionRespuesta=false;
+        }
+    }
 
     public Expediente getExpediente() {
         return expediente;
@@ -6651,4 +6661,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     public void setListaUsuarioODCAV(List<Usuario> listaUsuarioODCAV) {
         this.listaUsuarioODCAV = listaUsuarioODCAV;
     }
+    
+    public Boolean getMostrarDescripcionRespuesta() {
+        return mostrarDescripcionRespuesta;
+    }
+
+    public void setMostrarDescripcionRespuesta(Boolean mostrarDescripcionRespuesta) {
+        this.mostrarDescripcionRespuesta = mostrarDescripcionRespuesta;
+    }
+    
 }
