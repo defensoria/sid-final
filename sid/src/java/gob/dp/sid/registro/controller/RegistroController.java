@@ -762,7 +762,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         limpiarCAV();
     }
     
-    public void guardarRegistroCAV(){
+    public String guardarRegistroCAV(){
         usuarioSession();
         if(StringUtils.equals(expedienteFormularioVirtual.getAccion(), "01") || StringUtils.equals(expedienteFormularioVirtual.getAccion(), "02") || StringUtils.equals(expedienteFormularioVirtual.getAccion(), "03")){
             expedienteFormularioVirtual.setEstado("E");
@@ -774,6 +774,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 expedienteFormularioVirtualService.expedienteFormularioVirtualUpdate(expedienteFormularioVirtual);
             }
             crearValidarExpediente();
+            cargarExpedienteEdit(expediente);
+            return "expedienteEdit";
         }else{
             expedienteFormularioVirtual.setEstado("A");
             if(expedienteFormularioVirtual.getId() == null){
@@ -783,11 +785,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             }else{
                 expedienteFormularioVirtualService.expedienteFormularioVirtualUpdate(expedienteFormularioVirtual);
             }
+            listarRegistrosCAV();
+            limpiarCAV();
+            crearUsuarioFormularioVirtual(expedienteFormularioVirtual);
+            msg.messageInfo("Se realizo el registro", null);
+            return "expedienteFormularioVirtual";
         }
-        listarRegistrosCAV();
-        limpiarCAV();
-        crearUsuarioFormularioVirtual(expedienteFormularioVirtual);
-        msg.messageInfo("Se realizo el registro", null);
+        
     }
     
     private void crearUsuarioFormularioVirtual(ExpedienteFormularioVirtual efv){
@@ -818,7 +822,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             filtro.setDireccion(expedienteFormularioVirtual.getDireccion());
             filtro.setFechaRegistro(expedienteFormularioVirtual.getFechaRegistro());
             filtro.setUsuRegistro(expedienteFormularioVirtual.getUsuarioRegistro());
-            //filtro.setTelefono1(expedienteFormularioVirtual.getTelefono());
+            filtro.setTelefono1(expedienteFormularioVirtual.getTelefono());
             personaService.personaInsertar(filtro);
         }else{
             filtro = perso;
