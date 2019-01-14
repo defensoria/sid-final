@@ -832,6 +832,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             filtro.setUsuRegistro(expedienteFormularioVirtual.getUsuarioRegistro());
             filtro.setTelefono1(expedienteFormularioVirtual.getTelefono());
             filtro.setTipo(expedienteFormularioVirtual.getTipo());
+            filtro.setEmail(expedienteFormularioVirtual.getEmail());
+            filtro.setDireccion(expedienteFormularioVirtual.getDireccion());
             personaService.personaInsertar(filtro);
         }else{
             filtro = perso;
