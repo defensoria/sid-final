@@ -5,16 +5,20 @@
         <group>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/ExpedienteDAO.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/xml/ExpedienteGestion.xml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestionLista.xhtml</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/reporte/controller/ReporteController.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/ExpedienteDAOImpl.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestion.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteFormularioVirtual.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/controller/RegistroController.java</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/inicio/index.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/service/ExpedienteService.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/atencion/controller/AtencionController.java</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteGestionLista.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteNuevo.xhtml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/dao/xml/Expediente.xml</file>
             <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/registro/service/ExpedienteServiceImpl.java</file>
-            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/web/pages/registro/expedienteUsuario.xhtml</file>
+            <file>file:/Users/carlosleon/NetBeansProjects/sid-final/sid/src/java/gob/dp/sid/administracion/seguridad/controller/MenuController.java</file>
         </group>
     </open-files>
 </project-private>
