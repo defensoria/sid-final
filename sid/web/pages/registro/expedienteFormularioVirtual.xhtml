@@ -84,12 +84,14 @@
                         } else {
                             $('.document').removeClass("clasRED");
                         }
-                        if ($('.nroDocumento').val() === '') {
-                            $('.nroDocumento').focus().addClass("clasRED");
-                            alertar("Debe ingresar el número de documento");
-                            return false;
-                        } else {
-                            $('.nroDocumento').removeClass("clasRED");
+                        if ($('.document').val() !== '05') {
+                            if ($('.nroDocumento').val() === '') {
+                                $('.nroDocumento').focus().addClass("clasRED");
+                                alertar("Debe ingresar el número de documento");
+                                return false;
+                            } else {
+                                $('.nroDocumento').removeClass("clasRED");
+                            }    
                         }
                         if ($('.direccion').val() === '') {
                             $('.direccion').focus().addClass("clasRED");
@@ -189,13 +191,23 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="control-label col-form-label">Descripción</label>
+                                            <label for="inputDescripcion" class="control-label col-form-label">Descripción
+                                                <a jsf:action="#{registroController.esMensaje('D')}" jsf:rendered="true">
+                                                    <span class="fas fa-eye" />
+                                                    <f:ajax render=":idForm" onevent="openModalDescripcion"/>
+                                                </a>
+                                            </label>
                                             <textarea class="form-control descripcion" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.descripcion}"  placeholder="Descripción"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="inputcontact" class="control-label col-form-label">Respuesta</label>
+                                            <label for="inputcontact" class="control-label col-form-label">Respuesta
+                                                <a jsf:action="#{registroController.esMensaje('R')}" jsf:rendered="true">
+                                                    <span class="fas fa-eye" />
+                                                    <f:ajax render=":idForm" onevent="openModalDescripcion"/>
+                                                </a>
+                                            </label>
                                             <textarea class="form-control respuesta" rows="6" jsf:value="#{registroController.expedienteFormularioVirtual.respuesta}" placeholder="Respuesta"/>
                                         </div>
                                     </div>
@@ -213,7 +225,9 @@
                                             <label for="inputname" class="control-label col-form-label">Tipo</label>
                                             <h:selectOneMenu class="tipo form-control" value="#{registroController.expedienteFormularioVirtual.tipo}" >
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                <f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <f:selectItem itemValue="PER" itemLabel="Persona" />
+                                                <f:selectItem itemValue="ORG" itemLabel="Organización" />
+                                                <!--<f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />-->
                                             </h:selectOneMenu>
                                         </div>
                                     </div>     
@@ -225,25 +239,28 @@
                                                 <h:selectOneMenu class="document form-control" value="#{registroController.expedienteFormularioVirtual.tipoDocumento}" >
                                                     <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                     <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona" />
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
-                                            <div class="form-group">
-                                                <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
-                                                <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
+                                        <h:panelGroup rendered="#{registroController.expedienteFormularioVirtual.tipoDocumento != '05'}">
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
+                                                    <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-2">
-                                            <div class="form-group">
-                                                <br/>
-                                                <a class="btn btn-warning" jsf:action="#{registroController.consultarReniecCAV()}">
-                                                    <span class="far fa-share-square" /> Reniec
-                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
-                                                </a>
+                                            <div class="col-sm-12 col-md-2">
+                                                <div class="form-group">
+                                                    <br/>
+                                                    <a class="btn btn-warning" jsf:action="#{registroController.consultarReniecCAV()}">
+                                                        <span class="far fa-share-square" /> Reniec
+                                                        <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </h:panelGroup>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-12">
@@ -271,7 +288,7 @@
                                         <div class="col-sm-12 col-md-12">
                                             <div class="form-group">
                                                 <label for="inputname" class="control-label col-form-label">Dirección</label>
-                                                <input type="text" class="direccion form-control" jsf:value="#{registroController.expedienteFormularioVirtual.direccion}" />
+                                                <input type="text" class="direccion form-control" jsf:value="#{registroController.expedienteFormularioVirtual.direccion}" placeholder="Dirección"/>
                                             </div>
                                         </div>     
                                     </div>
@@ -440,6 +457,12 @@
                                         </h:column>
                                         <h:column>
                                             <div style="#{item.accion == null? 'background: #FFD400' : ''}">
+                                                <f:facet name="header">Persona</f:facet>
+                                                <h:outputText value="#{item.nombre} #{item.apellidoMaterno} #{item.apellidoMaterno}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div style="#{item.accion == null? 'background: #FFD400' : ''}">
                                                 <f:facet name="header">Forma</f:facet>
                                                 <h:outputText value="#{item.formaDescripcion}" />
                                             </div>
@@ -474,6 +497,53 @@
                                         </h:column>
                                     </h:dataTable>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function openModalDescripcion(data) {
+                        if (data.status === 'success') {
+                            $("#loadModal").modal('hide');
+                            $('body').removeClass('modal-open');
+                            $(".modal-backdrop").removeClass("modal-backdrop");
+                            $("#idModalDescripcion").modal('show');
+                        }
+                    }
+                </script>
+                <div id="idModalDescripcion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <h:panelGroup rendered="#{registroController.mostrarDescripcionRespuesta}">
+                                        <div class="col-6">
+                                            <h4 class="modal-title">Descripción</h4>
+                                        </div>    
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{!registroController.mostrarDescripcionRespuesta}">
+                                        <div class="col-6">
+                                            <h4 class="modal-title">Respuesta</h4>
+                                        </div>    
+                                    </h:panelGroup>
+                                    <div class="col-6" style="text-align: right">
+                                        <a class="btn btn-danger" data-dismiss="modal">
+                                            <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <h:panelGroup id="idPanelDescripcion" rendered="#{registroController.mostrarDescripcionRespuesta}">
+                                    <div class="form-group row">
+                                        #{registroController.expedienteFormularioVirtual.descripcion}
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup id="idPanelMensaje" rendered="#{!registroController.mostrarDescripcionRespuesta}">
+                                    <div class="form-group row">
+                                        #{registroController.expedienteFormularioVirtual.respuesta}
+                                    </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </div>

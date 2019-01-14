@@ -35,9 +35,9 @@ public class ConstantesUtil implements Serializable{
     
     public static final String LISTA_VALOR_PERU_CODIGO = "170";
     
-    public static final String LISTA_VALOR_PERSONA_CODIGO = "01";
+    public static final String LISTA_VALOR_PERSONA_CODIGO = "PER";//01
     
-    public static final String LISTA_VALOR_ORGANIZACION_CODIGO = "02";
+    public static final String LISTA_VALOR_ORGANIZACION_CODIGO = "ORG";//02
     
     //public static String FILE_DONWLOAD = "C:/filesystem";
     
