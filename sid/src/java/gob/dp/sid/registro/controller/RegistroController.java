@@ -809,9 +809,15 @@ public class RegistroController extends AbstractManagedBean implements Serializa
     }
     
     private void crearValidarExpediente(){
-        Persona perso = personaService.personaXDNI(expedienteFormularioVirtual.getNumeroDocumento());
+        Persona perso =new Persona();
         Persona filtro = new Persona();
-        if (perso == null){
+        if(!expedienteFormularioVirtual.getTipoDocumento().equals("05")){
+            perso = personaService.personaXDNI(expedienteFormularioVirtual.getNumeroDocumento());    
+        }else{
+            String numeroDocumentoCAV = "I"+String.format("%7s", expedienteService.generarCodigoDocumento()).replace(' ', '0');
+            expedienteFormularioVirtual.setNumeroDocumento(numeroDocumentoCAV);
+        }
+        if (perso.getId() == null){
             filtro.setNumeroDocumento(expedienteFormularioVirtual.getNumeroDocumento());
             filtro.setNombre(expedienteFormularioVirtual.getNombre());
             filtro.setApellidoPat(expedienteFormularioVirtual.getApellidoPaterno());
@@ -825,6 +831,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
             filtro.setFechaRegistro(expedienteFormularioVirtual.getFechaRegistro());
             filtro.setUsuRegistro(expedienteFormularioVirtual.getUsuarioRegistro());
             filtro.setTelefono1(expedienteFormularioVirtual.getTelefono());
+            filtro.setTipo(expedienteFormularioVirtual.getTipo());
             personaService.personaInsertar(filtro);
         }else{
             filtro = perso;

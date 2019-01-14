@@ -84,12 +84,14 @@
                         } else {
                             $('.document').removeClass("clasRED");
                         }
-                        if ($('.nroDocumento').val() === '') {
-                            $('.nroDocumento').focus().addClass("clasRED");
-                            alertar("Debe ingresar el número de documento");
-                            return false;
-                        } else {
-                            $('.nroDocumento').removeClass("clasRED");
+                        if ($('.document').val() !== '05') {
+                            if ($('.nroDocumento').val() === '') {
+                                $('.nroDocumento').focus().addClass("clasRED");
+                                alertar("Debe ingresar el número de documento");
+                                return false;
+                            } else {
+                                $('.nroDocumento').removeClass("clasRED");
+                            }    
                         }
                         if ($('.direccion').val() === '') {
                             $('.direccion').focus().addClass("clasRED");
@@ -223,7 +225,9 @@
                                             <label for="inputname" class="control-label col-form-label">Tipo</label>
                                             <h:selectOneMenu class="tipo form-control" value="#{registroController.expedienteFormularioVirtual.tipo}" >
                                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                                <f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                <f:selectItem itemValue="PER" itemLabel="Persona" />
+                                                <f:selectItem itemValue="ORG" itemLabel="Organización" />
+                                                <!--<f:selectItems value="#{listasComunesController.buscarListaTipoCAV(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />-->
                                             </h:selectOneMenu>
                                         </div>
                                     </div>     
@@ -235,25 +239,28 @@
                                                 <h:selectOneMenu class="document form-control" value="#{registroController.expedienteFormularioVirtual.tipoDocumento}" >
                                                     <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                     <f:selectItems value="#{listasComunesController.buscarTipoDocumento(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona" />
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
-                                            <div class="form-group">
-                                                <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
-                                                <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
+                                        <h:panelGroup rendered="#{registroController.expedienteFormularioVirtual.tipoDocumento != '05'}">
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="inputcontact" class="control-label col-form-label">Nro. Documento</label>
+                                                    <input type="text" class="nroDocumento form-control" jsf:value="#{registroController.expedienteFormularioVirtual.numeroDocumento}" placeholder="Nro. Documento"/>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-2">
-                                            <div class="form-group">
-                                                <br/>
-                                                <a class="btn btn-warning" jsf:action="#{registroController.consultarReniecCAV()}">
-                                                    <span class="far fa-share-square" /> Reniec
-                                                    <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
-                                                </a>
+                                            <div class="col-sm-12 col-md-2">
+                                                <div class="form-group">
+                                                    <br/>
+                                                    <a class="btn btn-warning" jsf:action="#{registroController.consultarReniecCAV()}">
+                                                        <span class="far fa-share-square" /> Reniec
+                                                        <f:ajax render="idPanelTipoPersona" execute="idPanelTipoPersona"/>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </h:panelGroup>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-12">
