@@ -70,7 +70,7 @@
                                                 <div class="col-5" style="text-align: right">
                                                     <h:panelGroup rendered="#{registroController.expediente.usuarioRegistro == registroController.usuarioSession.codigo and registroController.expediente.general != 'C'}">
                                                 <a class="btn btn-primary" onclick="confirmar7()">
-                                                    <span class="fas fa-save" style="color: white"> Guardar</span>
+                                                    <span class="fas fa-save" style="color: white"> Guardar gestión</span>
                                                 </a>
                                             </h:panelGroup> 
                                                 </div>
@@ -79,99 +79,8 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     
-                                                    <script>
-                                                        function modalReplicar(data) {
-                                                            if (data.status === 'success') {
-                                                                $("#loadModal").modal('hide');
-                                                                $('body').removeClass('modal-open');
-                                                                $(".modal-backdrop").removeClass("modal-backdrop");
-                                                                $("#idModalReoplicar").modal('show');
-                                                            }
-                                                        }
-                                                    </script>
-                                                    <h:panelGroup id="idPanelModalReplicar">
-                                                        <div id="idModalReoplicar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Replicar gestiones</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <h:panelGroup id="idPanelBusquedaReplic">
-                                                      
-                                                                            <div class="form-group row">
-                                                                                <div class="col-9">
-                                                                                    <label for="fname" class="control-label col-form-label">Número de expediente</label>
-                                                                                <div>
-                                                                                    <input type="text" id="idExpedienteNumero" jsf:value="#{registroController.expedienteBusquedaReplica.numero}" placeholder="Ingrese número de expediente" maxlength="50" class="form-control"/>
-                                                                                </div>
-                                                                                </div>
-                                                                                <div class="col-3">
-                                                                                    <a class="btn btn-primary" jsf:action="#{registroController.buscarModalReplica()}">
-                                                                                        <span class="fas fa-search" />Buscar 
-                                                                                        <f:ajax render="idPanelBusquedaReplic" execute="idPanelBusquedaReplic" />
-                                                                                    </a>
-                                                                                </div>
-                                                                                
-                                                                            </div>
-                                                                            <div class="table-responsive">
-                                                                                <h:dataTable id="idDatatableReplica" value="#{registroController.listaExpedienteXUsuarioPaginadoReplica.subList(registroController.inicioPaginado, registroController.finPaginado)}" rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}" var="exped" class="table table-hover" binding="#{ro5}">
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Nro</f:facet>
-                                                                                        <h:outputText value="#{(ro5.rowIndex+1)+(registroController.nroPagina-1)*10}" />
-                                                                                    </h:column>
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Expediente</f:facet>
-                                                                                        <h:outputText value="#{exped.numero}" />
-                                                                                    </h:column>
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Tipo</f:facet>
-                                                                                        <h:outputText value="#{exped.clasificacionTipoNombre}" />
-                                                                                    </h:column>
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Etapa</f:facet>
-                                                                                        <h:outputText value="#{exped.etapaDetalle}" />
-                                                                                    </h:column>
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Estado expediente</f:facet>
-                                                                                        <h:outputText value="#{exped.estadoDetalle}" />
-                                                                                    </h:column>
-
-                                                                                    <h:column>
-                                                                                        <f:facet name="header">Seleccionar</f:facet>
-                                                                                        <h:selectBooleanCheckbox value="#{exped.indReplica}"/>
-                                                                                    </h:column>
-                                                                                </h:dataTable>
-                                                                            </div>
-                                                                            <ul class="pagination">
-                                                                                <li class="paginate_button page-item previous" id="file_export_previous">
-                                                                                    <a  jsf:action="#{registroController.listarExpedienteUsuarioPaginadoCompletoPagina(registroController.nroPagina -1)}" jsf:rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior
-                                                                                        <f:ajax render="idDatableBusquedaEntida" />
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="paginate_button page-item next" id="file_export_next">
-                                                                                    <a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoCompletoPagina(registroController.nroPagina +1)}" jsf:rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente
-                                                                                        <f:ajax render="idDatableBusquedaEntida" />
-                                                                                    </a>    
-                                                                                </li>
-                                                                            </ul>
-                                                                        </h:panelGroup>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <a class="btn btn-info" data-dismiss="modal" jsf:action="#{registroController.insertarReplicaGestion1()}">
-                                                                            <span class="fa fa-save"/> Guardar
-                                                                            <f:ajax render="idPanelBusquedaReplic" execute="idPanelBusquedaReplic"/>
-                                                                        </a>
-
-                                                                        <a class="btn btn-danger" data-dismiss="modal">
-                                                                            <span class="fas fa-times" style="color: white"/> <span style="color: white">Cerrar</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </h:panelGroup>
+                                                    
+                                                  
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -450,110 +359,8 @@
                                                 
                                                 <div class="col-sm-6">
                                                     
-                                                    <script>
-
-                                                        function modalReplicar2(data) {
-                                                            if (data.status === 'success') {
-                                                                $("#loadModal").modal('hide');
-                                                                $('body').removeClass('modal-open');
-                                                                $(".modal-backdrop").removeClass("modal-backdrop");
-                                                                $("#idModalReoplicar2").modal('show');
-                                                            }
-                                                        }
-                                                    </script>
-                                                    <h:panelGroup id="idPanelModalReplicar2">
-                                                        <div id="idModalReoplicar2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" >
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Replicar gestiones</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <h:panelGroup id="idPanelBusquedaReplic2">
-                                                                            <div class="row">
-                                                                                <div class="col-9">
-                                                                                    <input type="text" jsf:value="#{registroController.expedienteBusquedaReplica.numero}" class="form-control" placeholder="Ingrese número de expediente" maxlength="50"/>
-                                                                                </div>
-                                                                                <div class="col-3">
-                                                                                    <a class="btn btn-primary" jsf:action="#{registroController.buscarModalReplica()}">
-                                                                                            <span class="fas fa-search" />Buscar 
-                                                                                            <f:ajax render="idPanelBusquedaReplic2" execute="idPanelBusquedaReplic2" />
-                                                                                        </a>
-                                                                                </div>
-                                                                            </div>
-                                                                          
-                                                                           
-                                                                            <br/>
-                                                                            <div class="table-responsive">
-                                                                                <h:dataTable id="idDatatableReplica2" value="#{registroController.listaExpedienteXUsuarioPaginadoReplica.subList(registroController.inicioPaginado, registroController.finPaginado)}" rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}"  var="exped" class="table table-hover" binding="#{ro6}">
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Nro</f:facet>
-                                                                                    <h:outputText value="#{(ro6.rowIndex+1)+(registroController.nroPagina-1)*10}" />
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Expediente</f:facet>
-                                                                                    <h:outputText value="#{exped.numero}" />
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Tipo</f:facet>
-                                                                                    <h:outputText value="#{exped.clasificacionTipoNombre}" />
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Etapa</f:facet>
-                                                                                    <h:outputText value="#{exped.etapaDetalle}" />
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Estado expediente</f:facet>
-                                                                                    <h:outputText value="#{exped.estadoDetalle}" />
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <a class="btn btn-primary" jsf:action="#{registroController.gestionesPorExpediente(exped.numero)}">
-                                                                                        <span class="fas fa-arrow-alt-circle-right" />
-                                                                                        <f:ajax render=":idForm:idPanelBusquedaReplic2" />
-                                                                                    </a>
-                                                                                </h:column>
-                                                                            </h:dataTable>
-                                                                            </div>
-                                                                            <ul class="pagination">
-                                                                                        <li class="paginate_button page-item previous" id="file_export_previous">
-                                                                                            <a  jsf:action="#{registroController.listarExpedienteUsuarioPaginadoCompletoPagina(registroController.nroPagina -1)}" jsf:rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}" aria-controls="file_export" data-dt-idx="0" tabindex="0" class="page-link">Anterior
-                                                                                                <f:ajax render="idPanelBusquedaReplic2" />
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li class="paginate_button page-item next" id="file_export_next">
-                                                                                            <a jsf:action="#{registroController.listarExpedienteUsuarioPaginadoCompletoPagina(registroController.nroPagina +1)}" jsf:rendered="#{registroController.listaExpedienteXUsuarioPaginadoReplica.size() > 0}" aria-controls="file_export" data-dt-idx="7" tabindex="0" class="page-link">Siguiente
-                                                                                                <f:ajax render="idPanelBusquedaReplic2" />
-                                                                                            </a>    
-                                                                                        </li>
-                                                                                    </ul>
-
-
-                                                                            <br/><br/>
-                                                                            <h:panelGroup id="idPanelListaGestiones" rendered="#{registroController.listaGestionesParaReplica.size() > 0}">
-
-                                                                                <label>Seleccione las gestión  del expediente:</label>
-                                                                                <h:selectOneMenu value="#{registroController.idGestionReplica}">
-                                                                                    <f:selectItems value="#{registroController.listaGestionesParaReplica}" var="x" itemValue="#{x.id}" itemLabel="#{x.codigoGestion}" />
-                                                                                </h:selectOneMenu>
-                                                                            </h:panelGroup>
-                                                                            <br/><br/>
-                                                                            <div class="modal-footer">
-                                                                                <a class="btn btn-primary" data-dismiss="modal" jsf:action="#{registroController.actualizarReplicaGestion()}">
-                                                                                    <span class="fas fa-save"/>Guardar
-                                                                                </a>
-                                                                            </div>
-                                                                        </h:panelGroup>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-
-                                                    </h:panelGroup>
+                                                     
+                                                    
                                                 </div>
                                             </div>
                                             <div class="form-group row">

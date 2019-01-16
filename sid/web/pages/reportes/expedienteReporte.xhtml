@@ -9,53 +9,15 @@
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
             <h:form id="idForm" class="form-horizontal">
-                <style>
-                    .trPadding{
-                        padding-bottom: 10px;
-                    }
-                    .trPaddingRight{
-                        padding-right: 10px;
-                        padding-bottom: 10px;
-                    }
 
-                    .trPaddingLeft{
-                        padding-left: 10px;
-                        padding-bottom: 10px;
-                    }
-
-                    .clasRED{
-                        background: #F2DEDE;
-                        border: solid #A94442;
-                    }
-                </style>
                 <script>
                     function reporteOnChange(sel) {
-                        if (sel.value=="R1"){
-                             $("#repo1").show();
-                             $("#repo2").hide();
-                             $("#repo3").hide();
-                             $("#repo4").hide();
-                        }else if(sel.value=="R2"){
-                            $("#repo1").hide();
-                             $("#repo2").show();
-                             $("#repo3").hide();
-                             $("#repo4").hide();
-                        }else if(sel.value=="R3"){
-                            $("#repo1").hide();
-                             $("#repo2").hide();
-                             $("#repo3").show();
-                             $("#repo4").hide();
-                        }else if(sel.value=="R4"){
-                            $("#repo1").hide();
-                             $("#repo2").hide();
-                             $("#repo3").hide();
-                             $("#repo4").show();
-                        }else{
-                             $("#repo1").hide();
-                             $("#repo2").hide();
-                             $("#repo3").hide();
-                             $("#repo4").hide();
-                        }
+                        
+                        var loops = [1,2,3,4,5,6,7,8,9,10];
+                        $.each(loops, function(i, val) {
+                             $("#repoR"+val).hide();
+                        });
+                        $("#repo"+sel.value).show(); 
                     }
                     
                     function tipoOnChange(sel) {
@@ -92,10 +54,10 @@
                                 <div class="row">
                                     <div class="col-sm-4 col-md-6 col-lg-12">
                                         <div class="form-group">
-                                            <label for="inputmotivo" class="control-label col-form-label"><strong>SELECCIONE</strong></label>
+                                            <label for="inputmotivo" class="control-label col-form-label"><strong>SELECCIONE ACCIÓN</strong></label>
                                             <h:selectOneRadio required="true" requiredMessage="Debe seleccionar una opción" class="tipo" onclick="tipoOnChange(this)">
                                                 <f:selectItem itemLabel="Generar Reporte" itemValue="R"/>
-                                                <f:selectItem itemLabel="Análisar CUBOS" itemValue="C"/>
+                                                <f:selectItem itemLabel="Analizar CUBOS" itemValue="C"/>
                                             </h:selectOneRadio>
                                         </div>
                                     </div>
@@ -105,54 +67,96 @@
                                     <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="inputtipoReporte" class="control-label col-form-label"><strong>TIPO DE REPORTE</strong></label>
-                                            <h:selectOneMenu requiredMessage="Debe seleccionar el tipo de atención" id="cmbTipoReporte" onchange="reporteOnChange(this)" class="tipoatencion form-control">
+                                            <h:selectOneMenu requiredMessage="Debe seleccionar el Tipo de Acción" id="cmbTipoReporte" onchange="reporteOnChange(this)" class="tipoatencion form-control">
                                                 <f:selectItem itemValue="#{null}" itemLabel="Selecione Reporte" />
-                                                <f:selectItem itemLabel="Reporte de Centro Atención Virtual" itemValue="R1" />
-                                                <f:selectItem itemLabel="Reporte Anual de Cargo por Sede" itemValue="R2" />
-                                                <f:selectItem itemLabel="Reporte Anual de Clasificación por Sede" itemValue="R3" />
-                                                <f:selectItem itemLabel="Reporte Anual de Clasificación por Estado" itemValue="R4" />
+                                                <f:selectItem itemLabel="CAV - Reporte Forma de Ingreso por Departamento" itemValue="R1" />
+                                                <f:selectItem itemLabel="CAV - Reporte Acción Realizada por Forma de Ingreso" itemValue="R2" />
+                                                <f:selectItem itemLabel="CAV - Reporte Género por Forma de Ingreso" itemValue="R3" />
+                                                
+                                                <f:selectItem itemLabel="Reporte de Carga por Comisionado" itemValue="R4" />
+                                                <f:selectItem itemLabel="Reporte de Carga por Comisionado - Fecha Conclusión" itemValue="R5" />
+                                                
+                                                <f:selectItem itemLabel="Reporte Clasificación por Sede" itemValue="R6" />
+                                                <f:selectItem itemLabel="Reporte Clasificación por Sede - Consolidado" itemValue="R7" />
+                                                <f:selectItem itemLabel="Reporte Clasificación por Sede - Consolidado Itinerante" itemValue="R8" />
+                                                <f:selectItem itemLabel="Reporte Estado Final por Clasificación" itemValue="R9" />
+                                                
+                                                <f:selectItem itemLabel="Reporte Temas por Persona" itemValue="R10" />                                               
                                           
                                             </h:selectOneMenu>
                                         </div>                                     
                                         
                                         
                                     </div>
-                                    
-                                    <div class="row" id="repo1" style="display:none;">
+                                        <div class="row" id="repoR1" style="display:none;">
                                             <div class="col-md-12">
                                                 <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_1')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
                                 
-                                        <div class="row" id="repo2" style="display:none;">
+                                        <div class="row" id="repoR2" style="display:none;">
                                             <div class="col-md-12">
                                                 <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_2')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
                                 
-                                        <div class="row" id="repo3" style="display:none;">
+                                        <div class="row" id="repoR3" style="display:none;">
                                             <div class="col-md-12">
                                                 <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_3')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
                                         
-                                        <div class="row" id="repo4" style="display:none;">
+                                        <div class="row" id="repoR4" style="display:none;">
                                             <div class="col-md-12">
                                                 <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_4')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
-                                </div>
-                                
-                                        
-                         
-                                        <div class="row" id="cubo" style="display:none;">
+                                    
+                                        <div class="row" id="repoR5" style="display:none;">
                                             <div class="col-md-12">
-                                                <p>Un <a href="https://es.wikipedia.org/wiki/Cubo_OLAP" target="_blank">Cubo OLAP</a> es una herramienta para generar respuestas con fines analíticos a consultas de grandes volúmenes de datos. A continuación, se muestra un analizador de Cubos OLAP</p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_5')}" width="100%" height="800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_5')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
+                                    
+                                        <div class="row" id="repoR6" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_6')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row" id="repoR7" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_7')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row" id="repoR8" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_8')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row" id="repoR9" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_9')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row" id="repoR10" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_10')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="row" id="cubo" style="display:none;">
+                                        <div class="col-md-12">
+                                            <p>Un <a href="https://es.wikipedia.org/wiki/Cubo_OLAP" target="_blank">Cubo OLAP</a> es una herramienta para generar respuestas con fines analíticos a consultas de grandes volúmenes de datos. A continuación, se muestra un analizador de Cubos OLAP</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_20')}" width="100%" height="800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>

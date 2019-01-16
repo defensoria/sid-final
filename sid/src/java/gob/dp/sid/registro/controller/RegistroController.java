@@ -3323,6 +3323,8 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                     }
                     listaExpedienteXUsuarioPaginado = list;
                     nroPagina = pagina;
+                }else{
+                    listaExpedienteXUsuarioPaginado = null;
                 }
             }
         } catch (Exception e) {
