@@ -174,7 +174,7 @@ public class MenuController implements Serializable {
             return bandejaController.cargarBandeja();
         }
 
-        
+
 
         if (codigoPagina == 33) {
             CatalogoController catalogoController = (CatalogoController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "catalogoController");
@@ -187,20 +187,25 @@ public class MenuController implements Serializable {
             menuHijo = menuService.menuHijo(15);
             return catalogoController.cargarPaginaDerivados();
         }
-        
+
         if (codigoPagina == 35) {
             RegistroController registroController = (RegistroController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "registroController");
             return registroController.cargarFormularioVirtual();
         }
-        
+
         if (codigoPagina == 36) {
             AtencionController atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
             return atencionController.cargarInicioAtencion();
         }
-        
+
         if (codigoPagina == 37) {
             RegistroController registroController = (RegistroController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "registroController");
             return registroController.cargarNuevaBusqueda();
+        }
+
+        if (codigoPagina == 38) {
+            AtencionController atencionController = (AtencionController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "atencionController");
+            return atencionController.atenderTicket();
         }
 
         if (codigoPagina == 32) {
