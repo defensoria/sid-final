@@ -11,6 +11,10 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.ReniecPRO.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.bean-validator.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -60,10 +64,6 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.log4j-1.2.16.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.mail-1.4.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -133,10 +133,6 @@
                 <library dirs="200">
                     <file>${file.reference.lib-spring-security-3.1.0}</file>
                     <path-in-war>WEB-INF/classes</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.ReniecPRO_prueba.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
