@@ -12,7 +12,7 @@
             <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/cronometro/cronometro.css" />
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
-            <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
+            <h:form id="idFormUsuarioVentanilla" class="form-horizontal" enctype="multipart/form-data">
                 <style>
                     .trPadding{
                         padding-bottom: 10px;
@@ -37,7 +37,7 @@
                                 <h4 class="card-title"><a href="#">Asignar Usuario-Ventanilla</a></h4>
                             </div>
                             <div class="card-body">
-                                <h:panelGroup id="idPanelGroupDatosCiudadano">
+                                <h:panelGroup id="idPanelGroupAsignarUsuarioVentanilla">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-12">
                                             <div class="form-group">
@@ -93,10 +93,10 @@
                                 <h:panelGroup id="idPanelGroupUsuarioVentanilla">
                                     <br/>
                                     <div class="table-responsive row">
-                                        <h:dataTable value="#{atencionController.listaUsuarioVentanilla}" var="usuVen" binding="#{row}" class="table table-hover" rendered="#{atencionController.listaUsuarioVentanilla.size() > 0}">
+                                        <h:dataTable id="dtUsuarioVentanilla" value="#{atencionController.listaUsuarioVentanilla}" var="usuVen" binding="#{rowUsuVen}" class="table table-hover" rendered="#{atencionController.listaUsuarioVentanilla.size() > 0}">
                                             <h:column>
                                                 <f:facet name="header">Nro</f:facet>
-                                                <h:outputText value="#{row.rowIndex+1}" />
+                                                <h:outputText value="#{rowUsuVen.rowIndex+1}" />
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">Usuario</f:facet>

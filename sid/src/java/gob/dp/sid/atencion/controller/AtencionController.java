@@ -623,6 +623,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         return true;
     }
     
+    public void registrarAtencionCiudadano(){
+        
+    }
+    
     public String irRecepcionDocumentosAdministrativos() {
         FiltroTramite filtroTramite = new FiltroTramite();
         filtroTramite.setIdTipoTramite(Integer.parseInt(atencion.getTipoTramite()));
@@ -786,7 +790,10 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         try {
             listaDocumentosAtencionRetorno = new ArrayList<>();
           //  if(validarFormularioAtencion()){
-                if(!atencion.getTipoDocumento().equals(ConstantesUtil.PARAMETRO_TIPO_DOCUMENTO_DNI)){
+//                if(!atencion.getTipoDocumento().equals(ConstantesUtil.PARAMETRO_TIPO_DOCUMENTO_DNI)){
+//                    guardarDatosPersona();
+//                }
+                if(atencion.getIdPersona()==null){
                     guardarDatosPersona();
                 }
                 VisitaCiudadano visita = new VisitaCiudadano();
