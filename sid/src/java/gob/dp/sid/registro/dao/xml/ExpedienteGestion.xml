@@ -374,9 +374,9 @@
             D_FECHAMODIFICACION = SYSDATE
         </set>
         <where>
-            <if test="id != null">
+            
                 N_ID_GESTION = #{id}
-            </if>
+            
             <if test="codigoONP != null">
                 C_CODIGOONP = #{codigoONP}
             </if>

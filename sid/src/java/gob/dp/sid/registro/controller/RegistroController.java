@@ -3172,10 +3172,13 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                 if (StringUtils.isNotBlank(expedienteGestion.getCodigoONP())) {
                     expedienteGestion.setCodigoONP(null);
                 }
-                expedienteGestionService.expedienteGestionUpdate(expedienteGestion);
+                if(expedienteGestion.getId() != null){
+                    expedienteGestionService.expedienteGestionUpdate(expedienteGestion);
                 msg.messageInfo("Se actualizo la gestión", null);
                 historial = new ExpedienteHistorial(HistorialType.HISTORIAL_GESTION_MODIFICAR.getKey(), HistorialType.HISTORIAL_GESTION_MODIFICAR.getValue());
                 guardarHistorial(historial);
+                }
+                
             }
             return cargarExpedienteGestionLista();
         } catch (Exception e) {
@@ -3394,7 +3397,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
 
     }
 
-    public boolean insertarReplicaGestion1() {
+    /*public boolean insertarReplicaGestion1() {
         int i = 0;
         int j = 0;
         for (Expediente e : listaExpedienteXUsuarioPaginadoReplica) {
@@ -3435,7 +3438,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
                         eg.setCodigoGestion("G" + formato + i);
                         i++;
                         expedienteGestionService.expedienteGestionInsertar(eg);
-                        /*gestion etapa*/
+                        
                         inicializarEtapaEstado(1, e);
                         GestionEtapa ge = new GestionEtapa(eg.getId(), e.getId(), etapaEstado.getVerEtapa(), e.getNumero());
                         gestionEtapaService.gestionEtapaInsertar(ge);
@@ -3448,9 +3451,9 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         listarExpedienteUsuarioPaginadoCompleto(1, expedienteBusquedaReplica);
         msg.messageInfo("Se realizaron las replicas", null);
         return true;
-    }
+    }*/
 
-    public void actualizarReplicaGestion() {
+    /*public void actualizarReplicaGestion() {
         try {
             if (idGestionReplica != null) {
                 ExpedienteGestion eg = expedienteGestionService.expedienteGestionBuscarOne(idGestionReplica);
@@ -3470,7 +3473,7 @@ public class RegistroController extends AbstractManagedBean implements Serializa
         } catch (Exception e) {
             log.error("ERROR - actualizarReplicaGestion()" + e);
         }
-    }
+    }*/
 
     public boolean listarExpedienteUsuarioPaginadoCompletoPagina(Integer pagina) {
         if (pagina > 0) {
