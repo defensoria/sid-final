@@ -8,18 +8,98 @@
 
     <ui:composition template="../template/template.xhtml">
         <ui:define name="content">
-            <link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
+            <!--<link rel="stylesheet" type="text/css" href="../../assets/extra-libs/jquery.kaypad/css/jquery.keypad.css" />
             <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.plugin.js"></script>
-            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>
+            <script type="text/javascript" src="../../assets/extra-libs/jquery.kaypad/js/jquery.keypad.js"></script>-->
 
             <!-- COMPONENTE OCR -->
             <script type="text/javascript" src="../../assets/ocr/AbrirVisorArchivo.js"></script>
 
             <script>
-                $(function () {
-                    $('#campo').keypad({keypadOnly: false});
-
+                $( document ).ready(function() {
+                    //$('#campo').keypad({keypadOnly: false});
+                    $('#tituloPanelFormulario').text('Registro de Datos');
+                    $("[id='idForm:selTipoDNI']").val("02");
+                    //$("[id='nroDni']").prop( "disabled", true );
+                    //$("[id='nombres']").prop( "disabled", true );
+                    //$("[id='apPaterno']").prop( "disabled", true );
+                    //$("[id='apMaterno']").prop( "disabled", true );
+                    //$("[id='fechaNacimiento']").prop( "disabled", true );
+                    //$("[id='genero']").prop( "disabled", true );
+                    //$("[id='discapacidad']").prop( "disabled", true );
+                    onChangeTipoDoc();
+                   
                 });
+                function onChangeTipoDoc(){
+                    //alert('entro');
+                    //alert($("[id='idForm:selTipoDNI']").val());
+                    if($("[id='idForm:selTipoDNI']").val()==='02'){
+                        //alert('02');
+                        $("[id='buscarDni']").removeClass("disabled");
+                        $("[id='idForm:nroDocumento']").val("");
+                        $("[id='idForm:nroDocumento']").prop( "disabled", false );
+                        $("[id='idForm:nroDocumento']").attr("maxlength", 8);
+                        $("[id='idForm:nroDocumento']").keypress(function (e) {
+                            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+                        });
+                        $("[id='nroDni']").val("");
+                        $("[id='nombres']").val("");
+                        $("[id='apPaterno']").val("");
+                        $("[id='apMaterno']").val("");
+                        $("[id='fechaNacimiento']").val("");
+                        $("[id='genero']").val("");
+                        $("[id='discapacidad']").val("");
+                        $("[id='nroDni']").prop( "disabled", true );
+                        $("[id='nombres']").prop( "disabled", true );
+                        $("[id='apPaterno']").prop( "disabled", true );
+                        $("[id='apMaterno']").prop( "disabled", true );
+                        $("[id='fechaNacimiento']").prop( "disabled", true );
+                        $("[id='genero']").prop( "disabled", true );
+                        $("[id='discapacidad']").prop( "disabled", true );
+                        
+                    }else if ($("[id='idForm:selTipoDNI']").val()==='05'){
+                        //alert('05');
+                        $("[id='idForm:nroDocumento']").attr("maxlength", 9);
+                        $("[id='idForm:nroDocumento']").val("");
+                        $("[id='idForm:nroDocumento']").prop( "disabled", false );
+                        $("[id='nroDni']").val("");
+                        $("[id='nombres']").val("");
+                        $("[id='apPaterno']").val("");
+                        $("[id='apMaterno']").val("");
+                        $("[id='fechaNacimiento']").val("");
+                        $("[id='genero']").val("");
+                        $("[id='discapacidad']").val("");
+                        $("[id='buscarDni']").addClass("disabled"); 
+                        $("[id='nombres']").prop( "disabled", false );
+                        $("[id='apPaterno']").prop( "disabled", false );
+                        $("[id='apMaterno']").prop( "disabled", false );
+                        $("[id='fechaNacimiento']").prop( "disabled", false );
+                        $("[id='genero']").prop( "disabled", false );
+                        $("[id='discapacidad']").prop( "disabled", false );
+                        //$("[id='nombres']").prop( "disabled", false );
+                    }else if ($("[id='idForm:selTipoDNI']").val()==='07'){
+                        //alert('05');
+                        $("[id='idForm:nroDocumento']").attr("maxlength", 9);
+                        $("[id='idForm:nroDocumento']").val("");
+                        $("[id='idForm:nroDocumento']").prop( "disabled", true );
+                        $("[id='nroDni']").val("");
+                        $("[id='nombres']").val("");
+                        $("[id='apPaterno']").val("");
+                        $("[id='apMaterno']").val("");
+                        $("[id='fechaNacimiento']").val("");
+                        $("[id='genero']").val("");
+                        $("[id='discapacidad']").val("");
+                        $("[id='buscarDni']").addClass("disabled"); 
+                        $("[id='nombres']").prop( "disabled", false );
+                        $("[id='apPaterno']").prop( "disabled", false );
+                        $("[id='apMaterno']").prop( "disabled", false );
+                        $("[id='fechaNacimiento']").prop( "disabled", false );
+                        $("[id='genero']").prop( "disabled", false );
+                        $("[id='discapacidad']").prop( "disabled", false );
+                        
+                    }
+                }
+               
             </script>
             <h:form id="idForm" class="form-horizontal" enctype="multipart/form-data">
                 <gc:confirmSubmit bean="#{atencionController.guardarAtencionCiudadano(false)}" classGC="confirmacion2" mensaje="¿Esta seguro que desea guardar la atención del ciudadano?" />
@@ -92,25 +172,27 @@
                                                 <label for="inputname" class="control-label col-form-label"><strong>TIPO DOC</strong></label>
                                                 <h:selectOneMenu 
                                                                 value="#{atencionController.atencion.tipoDocumento}" 
-                                                                id="selTipoDNI" class="selTipoDNI form-control" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
-                                                    <f:selectItems value="#{atencionController.listaTipoDocumentoIdentidad}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    <f:ajax render="idPanelGroupDatosCiudadano" />
+                                                                id="selTipoDNI" class="selTipoDNI form-control"
+                                                                onchange="onChangeTipoDoc()"
+                                                                >
+                                                                <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                                <f:selectItems value="#{atencionController.listaTipoDocumentoIdentidad}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                                <!--<f:ajax render="idPanelGroupDatosCiudadano" />-->
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="inputname" class="control-label col-form-label"><strong>NRO. DOCUMENTO</strong></label>
-                                                <h:inputText id="campo" class="dni form-control" value="#{atencionController.atencion.dni}">
+                                                <h:inputText id="nroDocumento" class="dni form-control" value="#{atencionController.atencion.dni}">
                                                     <f:ajax listener="#{atencionController.onChangeDniField}" render="idPanelGroupDatosCiudadano idpaneldiscapacidad tbl_expedientes" />
                                                 </h:inputText>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="form-group">
+                                            <div id="divBuscarDni" class="form-group">
                                                 <label for="inputname" class="control-label col-form-label">&#160;</label><br/>
-                                                <a class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
+                                                <a id="buscarDni" class="btn btn-warning" jsf:action="#{atencionController.onBuscarDatosCiudadano()}" >
                                                     <i class="fa fa-search"></i> Buscar
                                                 </a>
                                             </div>
@@ -120,53 +202,55 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="inputname" class="control-label col-form-label"><strong>DNI</strong></label>
-                                                <input type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" jsf:disabled="#{atencionController.disableField}" />
+                                                <input id="nroDni" type="text" class="dni form-control" jsf:value="#{atencionController.atencion.dni}" placeholder="DNI" jsf:disabled="#{atencionController.disableField}" />
                                             </div>
                                         </div>  
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="inputname" class="control-label col-form-label"><strong>NOMBRES</strong></label>
-                                                <input type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" jsf:disabled="#{atencionController.disableField}" placeholder="Nombres"/>
+                                                <input id="nombres" type="text" class="nombres form-control" jsf:value="#{atencionController.atencion.nombres}" jsf:disabled="#{atencionController.disableField}" placeholder="Nombres"/>
                                             </div>
                                         </div>    
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="control-label col-form-label"><strong>PATERNO</strong></label>
-                                                <input type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" jsf:disabled="#{atencionController.disableField}" placeholder="Apellido Paterno"/>
+                                                <input id="apPaterno" type="text" class="apellidoPaterno form-control" jsf:value="#{atencionController.atencion.apellidoPaterno}" jsf:disabled="#{atencionController.disableField}" placeholder="Apellido Paterno"/>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="inputcontact" class="control-label col-form-label"><strong>MATERNO</strong></label>
-                                                <input type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.apellidoMaterno}" jsf:disabled="#{atencionController.disableField}"   placeholder="Apellido Materno"/>
+                                                <input id="apMaterno" type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.apellidoMaterno}" jsf:disabled="#{atencionController.disableField}"   placeholder="Apellido Materno"/>
                                             </div>
                                         </div>
                                     </div>
                                     
                                         <h:panelGroup id="idpanelDNI" rendered="#{atencionController.disableField}">
                                             <div class="row" >
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                     <div class="form-group">
                                                         <label for="inputcontact" class="control-label col-form-label"><strong>FEC. NAC.</strong></label>
-                                                        <input type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.fechaNacimiento}" jsf:disabled="#{atencionController.disableField}"  placeholder="Fecha Nacimiento"/>
+                                                        <input id="fechaNacimiento" style="width: 160px;" type="date" class="form-control" jsf:value="#{atencionController.atencion.fechaNacimiento}" jsf:disabled="#{atencionController.disableField}"  placeholder="Fecha Nacimiento">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Lima" />
+                                                        </input>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="inputcontact" class="control-label col-form-label"><strong>GENERO</strong></label>
-                                                        <input type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.sexo}" jsf:disabled="#{atencionController.disableField}" placeholder="Sexo"/>
+                                                        <input id="genero" type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.sexo}" jsf:disabled="#{atencionController.disableField}" placeholder="Sexo"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="inputcontact" class="control-label col-form-label"><strong>DISCAPACIDAD</strong></label>
-                                                        <input type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.discapacidad}" jsf:disabled="#{atencionController.disableField}" placeholder="Discapacidad"/>
+                                                        <input id="discapacidad" type="text" class="apellidoMaterno form-control" jsf:value="#{atencionController.atencion.discapacidad}" jsf:disabled="#{atencionController.disableField}" placeholder="Discapacidad"/>
                                                     </div>
                                                 </div>
                                             </div>
                                                 
                                         </h:panelGroup>
-                                    
+                                        <!--
                                         <h:panelGroup id="idpanelCE" rendered="#{!atencionController.disableField}">
                                             <div class="row" >
                                                 <div class="col-md-4">
@@ -198,6 +282,7 @@
                                                 </div>
                                             </div>
                                         </h:panelGroup>
+                                    -->
                                 </h:panelGroup>
                                 
                             </div>
@@ -612,4 +697,4 @@
             </h:form>
         </ui:define>
     </ui:composition>
-</html>            
+</html>         
