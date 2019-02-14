@@ -1159,11 +1159,13 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         if(StringUtils.equals(atencion.getTipoMotivo(), "I") && atencion.getIndicadorCasoNuevo() != null){
             if(StringUtils.equals(atencion.getIndicadorCasoNuevo(), "S")){
                 atencion.setTipoAtencion("01");
+                disableTipoAtencion = true;
             }else {
                 atencion.setTipoAtencion("02");
+                disableTipoAtencion = false;
             }
             actualizarListaTipoTramite(atencion.getTipoAtencion(), atencion.getTipoMotivo());
-            disableTipoAtencion = true;
+            
             atencion.setTipoTramite("02");
             disableTipoTramite = true;
             disableActualizarDocumentos=true;
@@ -1209,6 +1211,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         } catch (Exception e) {
             log.error("ERROR - actualizarListaTipoTramite()" + e);
         }
+    }
+    
+    public void onChangeCuentaConDocumento(){
+     if (StringUtils.equals(atencion.getIndicadorDocumentos(), "S")) {
+         disableActualizarDocumentos=false;
+     }else{
+         disableActualizarDocumentos=true;
+     }
     }
     
     public void iniciarListaTipoDocumento(FiltroTramite filtroTramite) {

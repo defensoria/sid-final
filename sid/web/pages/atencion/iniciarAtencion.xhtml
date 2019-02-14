@@ -34,7 +34,9 @@
                     onChangeCasoNuevo();
                     //$("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
                     $("[id='idForm:chkDocumento:1']").prop( "checked", true );
-                    $("[id='botonActualizarDocumentos']").addClass("disabled"); 
+                    //$("[id='botonActualizarDocumentos']").addClass("disabled");
+                    $("[id='botonActualizarDocumentos']").prop( "disabled", true );
+                    //$('#botonActualizarDocumentos').attr('disabled', 'true');
                     onChangeCuentaConDocumento();
                     
                     
@@ -173,9 +175,11 @@
                     
                     if($("[id='idForm:chkDocumento:1']").prop( "checked")){
                         //alert("entro");
-                        $("[id='botonActualizarDocumentos']").addClass("disabled"); 
+                        $("[id='botonActualizarDocumentos']").addClass("disabled");
+                        $("[id='botonActualizarDocumentos']").prop( "disabled", true );
                     }else if($("[id='idForm:chkDocumento:0']").prop( "checked")){
                         $("[id='botonActualizarDocumentos']").removeClass("disabled");
+                        $("[id='botonActualizarDocumentos']").prop( "disabled", false );
                     }
                 }
                
@@ -381,7 +385,7 @@
                                                     $(".confirmacion2").modal('show');
                                                 }
                                             </script>
-                                            <h:panelGroup rendered="#{atencionController.disabledGuardar}">
+                                            <h:panelGroup rendered="#{atencionController.disabledGuardar}" id="panelGenerarTicket">
                                                 <a class="btn btn-warning" jsf:actionListener="#{atencionController.generarTicket()}"> <!--onclick="confirmar1()"-->
                                                     <i class="fa fa-ticket-alt"></i> Generar Ticket
                                                 </a>
@@ -401,6 +405,7 @@
                                                 <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}" >
                                                     <f:selectItem itemLabel="Tramite Documentario" itemValue="D" itemDisabled="true" />&#160;&#160;
                                                     <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I" />
+                                                    <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="panelGenerarTicket"/>
                                                     <!--<f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>-->
                                                 </h:selectOneRadio>
                                             </div>
@@ -437,7 +442,7 @@
                                                     <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}" onchange="onChangeCasoNuevo()">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idpanelTipoAteTipoTra idpanelDigitaDoc" />
+                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idPanelFormAtencion idpanelTipoAteTipoTra" /><!--idpanelDigitaDoc-->
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
@@ -460,7 +465,7 @@
                                                                      class="tipoatencion form-control" disabled="#{atencionController.disableTipoAtencion}">
                                                         <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                                         <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                        <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                        <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="panelGenerarTicket idpanelDigitaDoc idpanelexpedientesSID"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
@@ -490,7 +495,7 @@
                                                     <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}" onchange="onChangeCuentaConDocumento()">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <!--<f:ajax render="idpanelDigitaDoc" ></f:ajax>-->
+                                                        <f:ajax listener="#{atencionController.onChangeCuentaConDocumento()}" event="click" render="idpanelBotonActualizar" ></f:ajax>
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
@@ -503,16 +508,17 @@
 
                     <div class="col-12">
                         <h:panelGroup id="idpanelDigitaDoc">
-                            <h:panelGroup rendered="true">
+                            <h:panelGroup>
                                 <div class="card">
                                     
                                     <div class="card-body">
                                         <div class="row" style="text-align: right;">
                                             <div class="col-12" >
-                                                
-                                                <a id="botonActualizarDocumentos" class="btn btn-warning" jsf:action="#{atencionController.leerArchivoAction()}" disabled="#{atencionController.disableActualizarDocumentos}">
+                                                <h:panelGroup id="idpanelBotonActualizar">
+                                                <a id="botonActualizarDocumentos" class="btn btn-warning" jsf:action="#{atencionController.leerArchivoAction()}" jsf:disabled="#{atencionController.disableActualizarDocumentos}">
                                                     <span class="fa fa-upload"> Actualizar</span>
                                                 </a>
+                                                </h:panelGroup>
                                                 &#160;
                                                 <h:panelGroup rendered="#{atencionController.listaDocumentosAtencion.size() > 0}">
                                                 <a class="btn btn-warning" onclick="confirmar2()" jsf:disabled="#{atencionController.disabledGuardar}" > <!--onclick="confirmar1()"-->
