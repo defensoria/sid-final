@@ -123,6 +123,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private boolean adjuntarArchivosExpedExiste = false;
     private boolean disabledAgregarUsuVen;
     private Expediente expediente;
+    private boolean disableActualizarDocumentos= false;
             
     @Autowired
     private ListasComunesController listasComunesController;
@@ -1165,6 +1166,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             disableTipoAtencion = true;
             atencion.setTipoTramite("02");
             disableTipoTramite = true;
+            disableActualizarDocumentos=true;
             
         } else {
             disableTipoAtencion = false;
@@ -1683,6 +1685,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
 
     public void setDisableTipoTramite(boolean disableTipoTramite) {
         this.disableTipoTramite = disableTipoTramite;
+    }
+
+    public boolean isDisableActualizarDocumentos() {
+        return disableActualizarDocumentos;
+    }
+
+    public void setDisableActualizarDocumentos(boolean disableActualizarDocumentos) {
+        this.disableActualizarDocumentos = disableActualizarDocumentos;
     }
     
     

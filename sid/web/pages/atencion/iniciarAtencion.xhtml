@@ -21,12 +21,7 @@
                     $('#tituloPanelFormulario').text('Registro de Datos');
                     $("[id='idForm:selTipoDNI']").val("02");
                     //$("[id='nroDni']").prop( "disabled", true );
-                    //$("[id='nombres']").prop( "disabled", true );
-                    //$("[id='apPaterno']").prop( "disabled", true );
-                    //$("[id='apMaterno']").prop( "disabled", true );
-                    //$("[id='fechaNacimiento']").prop( "disabled", true );
-                    //$("[id='genero']").prop( "disabled", true );
-                    //$("[id='discapacidad']").prop( "disabled", true );
+                    //$("[id='buscarDni']").addClass("disabled"); 
                     onChangeTipoDoc();
                     //$("[id='idForm:atencionPreferencial:0']").val("N");
                     $("[id='idForm:atencionPreferencial:1']").prop( "checked", true );
@@ -38,7 +33,9 @@
                     $("[id='idForm:cmbTipoAtencion']").val("01");
                     onChangeCasoNuevo();
                     //$("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
-                    
+                    $("[id='idForm:chkDocumento:1']").prop( "checked", true );
+                    $("[id='botonActualizarDocumentos']").addClass("disabled"); 
+                    onChangeCuentaConDocumento();
                     
                     
                     
@@ -73,7 +70,11 @@
                         
                     }else if ($("[id='idForm:selTipoDNI']").val()==='05'){
                         //alert('05');
+                        //alert($("[id='idForm:nroDocumento']").length);
                         $("[id='idForm:nroDocumento']").attr("maxlength", 9);
+                        $("[id='idForm:nroDocumento']").keypress(function (e) {
+                            if (String.fromCharCode(e.keyCode).match(/[^a-z0-9]/g)) return false;
+                        });
                         $("[id='idForm:nroDocumento']").val("");
                         $("[id='idForm:nroDocumento']").prop( "disabled", false );
                         $("[id='nroDni']").val("");
@@ -143,7 +144,13 @@
                             $("[id='idForm:cmbTipoAtencion']").prop('disabled', true);
                         });*/
                         $("[id='idForm:chkCita:1']").prop( "checked", true );
+                        $("[id='idForm:chkCita:0']").prop("disabled", true);
+                        $("[id='idForm:chkCita:1']").prop("disabled", true);
+                        //$("[id='idForm:chkCita']").addClass("disabled");
                         $("[id='idForm:chkCasoNuevo:0']").click();
+                        $("[id='idForm:chkDocumento:1']").prop( "checked", true );
+                        //$("[id='idForm:chkDocumento:0']").prop("disabled", true);
+                        //$("[id='idForm:chkDocumento:1']").prop("disabled", true);
                        //$("[id='idForm:cmbTipoAtencion']").prop('disabled', true);
                         //$("[id='idForm:cmbTipoAtencion']").addClass("disabled");
                         //$("[id='idForm:atencionPreferencial:1']").val("N");
@@ -160,6 +167,15 @@
                         //$("[id='idForm:tipoAtencionPreferencial']").prop('disabled', false);
                         //alert($("[id='idForm:atencionPreferencial:1']").val());
                         //alert($("[id='idForm:atencionPreferencial:0']").val());
+                    }
+                }
+                function onChangeCuentaConDocumento(){
+                    
+                    if($("[id='idForm:chkDocumento:1']").prop( "checked")){
+                        //alert("entro");
+                        $("[id='botonActualizarDocumentos']").addClass("disabled"); 
+                    }else if($("[id='idForm:chkDocumento:0']").prop( "checked")){
+                        $("[id='botonActualizarDocumentos']").removeClass("disabled");
                     }
                 }
                
@@ -427,7 +443,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="inputdocumento"  class="control-label col-form-label"><strong>CON CITA </strong></label>
-                                                <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}">
+                                                <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}" >
                                                     <f:selectItem itemLabel="Si" itemValue="S"/>
                                                     <f:selectItem itemLabel="No" itemValue="N"/>
                                                 </h:selectOneRadio>
@@ -471,10 +487,10 @@
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label for="inputdocumento" class="control-label col-form-label"><strong>CUENTA CON DOCUMENTOS</strong></label>
-                                                    <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}">
+                                                    <h:selectOneRadio id="chkDocumento" class="documento" value="#{atencionController.atencion.indicadorDocumentos}" onchange="onChangeCuentaConDocumento()">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax render="idpanelDigitaDoc" ></f:ajax>
+                                                        <!--<f:ajax render="idpanelDigitaDoc" ></f:ajax>-->
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
@@ -487,14 +503,14 @@
 
                     <div class="col-12">
                         <h:panelGroup id="idpanelDigitaDoc">
-                            <h:panelGroup rendered="#{atencionController.atencion.indicadorDocumentos == 'S'}">
+                            <h:panelGroup rendered="true">
                                 <div class="card">
                                     
                                     <div class="card-body">
                                         <div class="row" style="text-align: right;">
                                             <div class="col-12" >
                                                 
-                                                <a class="btn btn-warning" jsf:action="#{atencionController.leerArchivoAction()}">
+                                                <a id="botonActualizarDocumentos" class="btn btn-warning" jsf:action="#{atencionController.leerArchivoAction()}" disabled="#{atencionController.disableActualizarDocumentos}">
                                                     <span class="fa fa-upload"> Actualizar</span>
                                                 </a>
                                                 &#160;
