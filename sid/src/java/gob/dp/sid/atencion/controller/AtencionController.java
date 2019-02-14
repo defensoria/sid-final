@@ -119,6 +119,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private boolean renderTieneDiscapacidad = false;
     private boolean renderTicketAtencion = false;
     private boolean disableTipoAtencion = false;
+    private boolean disableTipoTramite = false;
     private boolean adjuntarArchivosExpedExiste = false;
     private boolean disabledAgregarUsuVen;
     private Expediente expediente;
@@ -1162,6 +1163,9 @@ public class AtencionController extends AbstractManagedBean implements Serializa
             }
             actualizarListaTipoTramite(atencion.getTipoAtencion(), atencion.getTipoMotivo());
             disableTipoAtencion = true;
+            atencion.setTipoTramite("02");
+            disableTipoTramite = true;
+            
         } else {
             disableTipoAtencion = false;
         }
@@ -1672,5 +1676,14 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void setListaTipoDocumentoIdentidad(List<Parametro> listaTipoDocumentoIdentidad) {
         this.listaTipoDocumentoIdentidad = listaTipoDocumentoIdentidad;
     }
+
+    public boolean isDisableTipoTramite() {
+        return disableTipoTramite;
+    }
+
+    public void setDisableTipoTramite(boolean disableTipoTramite) {
+        this.disableTipoTramite = disableTipoTramite;
+    }
+    
     
 }

@@ -28,6 +28,20 @@
                     //$("[id='genero']").prop( "disabled", true );
                     //$("[id='discapacidad']").prop( "disabled", true );
                     onChangeTipoDoc();
+                    //$("[id='idForm:atencionPreferencial:0']").val("N");
+                    $("[id='idForm:atencionPreferencial:1']").prop( "checked", true );
+                    $("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
+                    //alert($("[id='idForm:atencionPreferencial:0']").val());
+                    onChangeAtencionPreferente();
+                    //$("[id='idForm:chkCasoNuevo:0']").val("S");
+                    $("[id='idForm:chkCasoNuevo:0']").prop( "checked", true );
+                    $("[id='idForm:cmbTipoAtencion']").val("01");
+                    onChangeCasoNuevo();
+                    //$("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
+                    
+                    
+                    
+                    
                    
                 });
                 function onChangeTipoDoc(){
@@ -97,6 +111,55 @@
                         $("[id='genero']").prop( "disabled", false );
                         $("[id='discapacidad']").prop( "disabled", false );
                         
+                    }
+                }
+                function onChangeAtencionPreferente(){
+                    //alert($("[id='idForm:atencionPreferencial:1']").val());
+                    if($("[id='idForm:atencionPreferencial:1']").prop( "checked")){
+                        $("[id='idForm:atencionPreferencial:1']").val("N");
+                        $("[id='idForm:atencionPreferencial:1']").prop( "checked", true );
+                        $("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
+                        //alert($("[id='idForm:atencionPreferencial:0']").val());
+                        //alert($("[id='idForm:atencionPreferencial:1']").val());
+                    }else if($("[id='idForm:atencionPreferencial:0']").prop( "checked")){
+                        $("[id='idForm:atencionPreferencial:0']").val("S");
+                        $("[id='idForm:atencionPreferencial:0']").prop( "checked", true );
+                        $("[id='idForm:tipoAtencionPreferencial']").prop('disabled', false);
+                        //alert($("[id='idForm:atencionPreferencial:1']").val());
+                        //alert($("[id='idForm:atencionPreferencial:0']").val());
+                    }
+                }
+                function onEventAfterCallCasoNuevoSI(){
+                    alert("Entroafter");
+                    $("[id='idForm:cmbTipoAtencion']").prop('disabled', true);
+                }
+                function onChangeCasoNuevo(){
+                    //alert($("[id='idForm:cmbTipoAtencion']").val());
+                    if($("[id='idForm:chkCasoNuevo:0']").prop( "checked")){
+                        //alert("Entro");
+                        /*
+                        $("[id='idForm:chkCasoNuevo:0']").click(function(){
+                            //alert("entro");
+                            $("[id='idForm:cmbTipoAtencion']").prop('disabled', true);
+                        });*/
+                        $("[id='idForm:chkCita:1']").prop( "checked", true );
+                        $("[id='idForm:chkCasoNuevo:0']").click();
+                       //$("[id='idForm:cmbTipoAtencion']").prop('disabled', true);
+                        //$("[id='idForm:cmbTipoAtencion']").addClass("disabled");
+                        //$("[id='idForm:atencionPreferencial:1']").val("N");
+                        //$("[id='idForm:atencionPreferencial:1']").prop( "checked", true );
+                        //("[id='idForm:tipoAtencionPreferencial']").prop('disabled', true);
+                        //alert($("[id='idForm:atencionPreferencial:0']").val());
+                        //alert($("[id='idForm:atencionPreferencial:1']").val());
+                    }else if($("[id='idForm:chkCasoNuevo:1']").prop( "checked")){
+                        $("[id='idForm:cmbTipoAtencion']").prop('disabled', false);
+                        //$("[id='idForm:cmbTipoAtencion']").val("S");
+                        //$("[id='idForm:cmbTipoAtencion']").prop('disabled', false);
+                        
+                        //$("[id='idForm:atencionPreferencial:0']").prop( "checked", true );
+                        //$("[id='idForm:tipoAtencionPreferencial']").prop('disabled', false);
+                        //alert($("[id='idForm:atencionPreferencial:1']").val());
+                        //alert($("[id='idForm:atencionPreferencial:0']").val());
                     }
                 }
                
@@ -322,45 +385,8 @@
                                                 <h:selectOneRadio class="motivo" value="#{atencionController.atencion.tipoMotivo}" >
                                                     <f:selectItem itemLabel="Tramite Documentario" itemValue="D" itemDisabled="true" />&#160;&#160;
                                                     <f:selectItem itemLabel="Solicitud de Intervención" itemValue="I" />
-                                                    <f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                    <!--<f:ajax listener="#{atencionController.actualizarListaTipoAtencion(atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>-->
                                                 </h:selectOneRadio>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h:panelGroup id="idSolicitudIntervencionChk" rendered="#{atencionController.atencion.tipoMotivo == 'I'}" >
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>CASO NUEVO </strong></label>
-                                                    <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}">
-                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
-                                                        <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idPanelFormAtencion idpanelDigitaDoc" />
-                                                    </h:selectOneRadio>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="inputdocumento" jsf:rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N' and atencionController.atencion.tipoMotivo == 'I'}" class="control-label col-form-label"><strong>CON CITA </strong></label>
-                                                <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}" rendered="#{atencionController.atencion.indicadorCasoNuevo == 'N' and atencionController.atencion.tipoMotivo == 'I'}">
-                                                    <f:selectItem itemLabel="Si" itemValue="S"/>
-                                                    <f:selectItem itemLabel="No" itemValue="N"/>
-                                                </h:selectOneRadio>
-                                            </div>
-                                        </div>
-                                    </h:panelGroup>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <div class="form-group">
-                                                <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
-                                                <h:selectOneMenu id="cmbTipoAtencion"
-                                                                 value="#{atencionController.atencion.tipoAtencion}" 
-                                                                 class="tipoatencion form-control">
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
-                                                    <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                    <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
-                                                </h:selectOneMenu>
                                             </div>
                                         </div>
                                     </div>
@@ -369,17 +395,17 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="inputcontact" class="control-label col-form-label"><strong>ATENCIÓN PREFERENCIAL</strong></label>
-                                                    <h:selectOneRadio class="sexo" value="#{atencionController.atencion.atencionPreferencial}">
+                                                    <h:selectOneRadio id="atencionPreferencial" class="sexo" value="#{atencionController.atencion.atencionPreferencial}" onchange="onChangeAtencionPreferente()">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax render="idpaneldiscapacidad" />
+                                                        <!--<f:ajax render="idpaneldiscapacidad" />-->
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label jsf:rendered="#{atencionController.atencion.atencionPreferencial == 'S'}" for="inputEmail3" class="control-label col-form-label"><strong>TIPO</strong></label>
-                                                    <h:selectOneMenu class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" rendered="#{atencionController.atencion.atencionPreferencial == 'S'}"   >
+                                                    <label for="inputEmail3" class="control-label col-form-label"><strong>TIPO</strong></label>
+                                                    <h:selectOneMenu id="tipoAtencionPreferencial" class="document form-control" value="#{atencionController.atencion.tipoDiscapacidad}" >
                                                         <f:selectItem itemValue="0" itemLabel="Selecione" />
                                                         <f:selectItems value="#{listasComunesController.buscarTipoDiscapacidad(false,false,false)}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
                                                     </h:selectOneMenu>
@@ -387,21 +413,58 @@
                                             </div>
                                         </div>
                                     </h:panelGroup>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <div class="form-group">
-                                                <label for="inputtipotramite" class="control-label col-form-label" ><strong>TIPO DE TRAMITE</strong></label>
-                                                <h:selectOneListbox id="selTipoTramite" 
-                                                                    value="#{atencionController.atencion.tipoTramite}" 
-                                                                    class="tipotramite form-control"
-                                                                    valueChangeListener="#{atencionController.valueChangeMethod(e)}"
-                                                                    style="height: 120px; ">
-                                                    <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
-                                                    <f:ajax render="idpanelexpedientesSID idpanelDigitaDoc" />
-                                                </h:selectOneListbox>
+                                    <h:panelGroup id="idSolicitudIntervencionChk" rendered="#{atencionController.atencion.tipoMotivo == 'I'}" >
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputdocumento" class="control-label col-form-label"><strong>CASO NUEVO </strong></label>
+                                                    <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}" onchange="onChangeCasoNuevo()">
+                                                        <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                        <f:selectItem itemLabel="No" itemValue="N"/>
+                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idpanelTipoAteTipoTra idpanelDigitaDoc" />
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="inputdocumento"  class="control-label col-form-label"><strong>CON CITA </strong></label>
+                                                <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}">
+                                                    <f:selectItem itemLabel="Si" itemValue="S"/>
+                                                    <f:selectItem itemLabel="No" itemValue="N"/>
+                                                </h:selectOneRadio>
                                             </div>
                                         </div>
-                                    </div>
+                                    </h:panelGroup> 
+                                    <h:panelGroup id="idpanelTipoAteTipoTra">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="inputtipoatencion" class="control-label col-form-label"><strong>TIPO DE ATENCIÓN</strong></label>
+                                                    <h:selectOneMenu id="cmbTipoAtencion" 
+                                                                     value="#{atencionController.atencion.tipoAtencion}" 
+                                                                     class="tipoatencion form-control" disabled="#{atencionController.disableTipoAtencion}">
+                                                        <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
+                                                        <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
+                                                        <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="idPanelFormAtencion idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="inputtipotramite" class="control-label col-form-label" ><strong>TIPO DE TRAMITE</strong></label>
+                                                    <h:selectOneListbox id="selTipoTramite" 
+                                                                        value="#{atencionController.atencion.tipoTramite}" 
+                                                                        class="tipotramite form-control"
+                                                                        valueChangeListener="#{atencionController.valueChangeMethod(e)}"
+                                                                        style="height: 120px; " disabled="#{atencionController.disableTipoTramite}">
+                                                        <f:selectItems value="#{atencionController.listaTipoTramite}" var="x" itemLabel="#{x.nombreParametro}" itemValue="#{x.valorParametro}" />
+                                                        <f:ajax render="idpanelexpedientesSID idpanelDigitaDoc" />
+                                                    </h:selectOneListbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </h:panelGroup>
                                     <h:panelGroup id="idpaneldocumentos">
                                         <div class="row">
 
