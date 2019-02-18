@@ -38,6 +38,13 @@ public class MenuController implements Serializable {
         menuPadre = menuService.menuPadre();
         FacesContext context = FacesContext.getCurrentInstance();
         SeguridadUtilController seguridadUtilController = (SeguridadUtilController) context.getELContext().getELResolver().getValue(context.getELContext(), null, "seguridadUtilController");
+        if (!seguridadUtilController.tieneRecurso("REC_TIC001")) {
+            menuPadre.remove(9);
+            menuPadre.remove(8);
+        }
+        if (!seguridadUtilController.tieneRecurso("REC_ATE001")) {
+            menuPadre.remove(6);
+        }
         if (!seguridadUtilController.tieneRecurso("REC_CAV001")) {
             menuPadre.remove(5);
         }
