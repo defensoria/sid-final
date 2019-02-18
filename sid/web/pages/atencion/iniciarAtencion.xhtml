@@ -162,6 +162,9 @@
                         //alert($("[id='idForm:atencionPreferencial:1']").val());
                     }else if($("[id='idForm:chkCasoNuevo:1']").prop( "checked")){
                         $("[id='idForm:cmbTipoAtencion']").prop('disabled', false);
+                        $("[id='idForm:chkCita:1']").prop( "checked", true );
+                        $("[id='idForm:chkCita:0']").prop("disabled", false);
+                        $("[id='idForm:chkCita:1']").prop("disabled", false);
                         //$("[id='idForm:cmbTipoAtencion']").val("S");
                         //$("[id='idForm:cmbTipoAtencion']").prop('disabled', false);
                         
@@ -442,7 +445,7 @@
                                                     <h:selectOneRadio id="chkCasoNuevo" class="documento" value="#{atencionController.atencion.indicadorCasoNuevo}" onchange="onChangeCasoNuevo()">
                                                         <f:selectItem itemLabel="Si" itemValue="S"/>
                                                         <f:selectItem itemLabel="No" itemValue="N"/>
-                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idPanelFormAtencion idpanelTipoAteTipoTra" /><!--idpanelDigitaDoc-->
+                                                        <f:ajax listener="#{atencionController.casoNuevoSolicitudIntervencion()}" render="idpanelTipoAteTipoTra panelGenerarTicket" /><!--idpanelDigitaDoc-->
                                                     </h:selectOneRadio>
                                                 </div>
                                             </div>

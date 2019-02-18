@@ -45,6 +45,7 @@ import gob.dp.sid.comun.service.ParametroService;
 import gob.dp.sid.comun.service.UbigeoService;
 import gob.dp.sid.comun.type.EstadoNumberType;
 import gob.dp.sid.comun.type.MotivoAtencionType;
+import gob.dp.sid.comun.type.SiNoType;
 import gob.dp.sid.comun.type.TipoDocumentoIdentidadType;
 import gob.dp.sid.registro.controller.RegistroController;
 import gob.dp.sid.registro.entity.Expediente;
@@ -300,6 +301,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     public void inicializarProcesoSolicitudIntervencion() {
         // Inicializar con solicitud de intervencion
         atencion.setTipoMotivo(MotivoAtencionType.SOLICITUD_INTERVENCION.getKey());
+        atencion.setIndicadorCasoNuevo(SiNoType.SI.getKey());
         actualizarListaTipoAtencion(MotivoAtencionType.SOLICITUD_INTERVENCION.getKey());
     }
     
