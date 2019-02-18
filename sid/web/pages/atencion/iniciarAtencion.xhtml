@@ -53,7 +53,7 @@
                         $("[id='idForm:nroDocumento']").prop( "disabled", false );
                         $("[id='idForm:nroDocumento']").attr("maxlength", 8);
                         $("[id='idForm:nroDocumento']").keypress(function (e) {
-                            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+                          if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
                         });
                         $("[id='nroDni']").val("");
                         $("[id='nombres']").val("");
@@ -74,8 +74,10 @@
                         //alert('05');
                         //alert($("[id='idForm:nroDocumento']").length);
                         $("[id='idForm:nroDocumento']").attr("maxlength", 9);
+                        $("[id='idForm:nroDocumento']").removeAttr("keypress");
                         $("[id='idForm:nroDocumento']").keypress(function (e) {
-                            if (String.fromCharCode(e.keyCode).match(/[^a-z0-9]/g)) return false;
+                            if (String.fromCharCode(e.keyCode).match(/[^a-z]/g)) return false;
+                            //if (String.fromCharCode(e.keyCode).match(/[^0-9a-z]/g)) return false;
                         });
                         $("[id='idForm:nroDocumento']").val("");
                         $("[id='idForm:nroDocumento']").prop( "disabled", false );
@@ -454,6 +456,7 @@
                                                 <h:selectOneRadio id="chkCita" class="documento" value="#{atencionController.atencion.indicadorCita}" >
                                                     <f:selectItem itemLabel="Si" itemValue="S"/>
                                                     <f:selectItem itemLabel="No" itemValue="N"/>
+                                                    <f:ajax listener="#{atencionController.seleccionarCita(atencionController.atencion.indicadorCita)}" render="idpanelTipoAteTipoTra"></f:ajax>
                                                 </h:selectOneRadio>
                                             </div>
                                         </div>
@@ -468,7 +471,7 @@
                                                                      class="tipoatencion form-control" disabled="#{atencionController.disableTipoAtencion}">
                                                         <f:selectItem itemValue="#{null}" itemLabel="Selecione" />
                                                         <f:selectItems value="#{atencionController.listaTipoAtencion}" var="y" itemLabel="#{y.nombreParametro}" itemValue="#{y.valorParametro}" />
-                                                        <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="panelGenerarTicket idpanelDigitaDoc idpanelexpedientesSID"/>
+                                                        <f:ajax listener="#{atencionController.actualizarListaTipoTramite(atencionController.atencion.tipoAtencion,atencionController.atencion.tipoMotivo)}" render="panelGenerarTicket idpanelDigitaDoc idpanelTipoAteTipoTra idpanelexpedientesSID"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>

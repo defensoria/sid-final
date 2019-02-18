@@ -302,6 +302,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         // Inicializar con solicitud de intervencion
         atencion.setTipoMotivo(MotivoAtencionType.SOLICITUD_INTERVENCION.getKey());
         atencion.setIndicadorCasoNuevo(SiNoType.SI.getKey());
+        atencion.setIndicadorCita(SiNoType.NO.getKey());
         actualizarListaTipoAtencion(MotivoAtencionType.SOLICITUD_INTERVENCION.getKey());
     }
     
@@ -1188,8 +1189,34 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     listaTipoTramite = listasComunesController.listaTramiteExistenteDocumentario(false, false, false);
                 } else if (StringUtils.equals(idAtencion, "01") && StringUtils.equals(idMotivo, "I")) {
                     listaTipoTramite = listasComunesController.listaTramiteIntervencionPresencial(false, false, false);
+                    if(atencion.getIndicadorCita().equals(SiNoType.SI.getKey()) && atencion.getIndicadorCasoNuevo().equals(SiNoType.NO.getKey())){                      
+                        int i=0;
+                        for(Parametro parametro:listaTipoTramite){
+                            if(parametro.getCodigoParametro()!=5035){
+                                listaTipoTramite.remove(i);
+                            }
+                            i++;
+                        }
+                    }else if(atencion.getIndicadorCita().equals(SiNoType.NO.getKey())&& atencion.getIndicadorCasoNuevo().equals(SiNoType.NO.getKey())){  
+                        int i=0;
+                        for(Parametro parametro:listaTipoTramite){
+                            if(parametro.getCodigoParametro()!=5034){
+                                listaTipoTramite.remove(i);
+                            }
+                            i++;
+                        }
+                    }
                 } else if (StringUtils.equals(idAtencion, "02") && StringUtils.equals(idMotivo, "I")) {
                     listaTipoTramite = listasComunesController.listaTramiteIntervencionDocumental(false, false, false);
+                    if(atencion.getIndicadorCita().equals(SiNoType.NO.getKey())&& atencion.getIndicadorCasoNuevo().equals(SiNoType.NO.getKey())){  
+                        int i=0;
+                        for(Parametro parametro:listaTipoTramite){
+                            if(parametro.getCodigoParametro()!=5033){
+                                listaTipoTramite.remove(i);
+                            }
+                            i++;
+                        }
+                    }
                 }
             }
             
@@ -1227,6 +1254,16 @@ public class AtencionController extends AbstractManagedBean implements Serializa
         listaTipoDocumto = tipoDocumentoService.listarDocumentosByTramite(filtroTramite);
     }
     
+    public void seleccionarCita(String opcionCita){
+        /*
+        if (StringUtils.equals(atencion.getIndicadorCita(), "N")) {
+            atencion.setIndicadorCita("N");
+        }else{
+            atencion.setIndicadorCita("S");
+        }*/
+        casoNuevoSolicitudIntervencion();
+    }
+          
     
     /**
      * @return the atencion
