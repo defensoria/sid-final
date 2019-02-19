@@ -13,7 +13,7 @@
                 <script>
                     function reporteOnChange(sel) {
                         
-                        var loops = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+                        var loops = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
                         $.each(loops, function(i, val) {
                              $("#repoR"+val).hide();
                         });
@@ -85,6 +85,7 @@
 												<f:selectItem itemLabel="Reporte Forma de Ingreso" itemValue="R11" />
 												<f:selectItem itemLabel="Reporte Instituciones más Quejadas" itemValue="R12" />
 												<f:selectItem itemLabel="Reporte Ranking de Temas" itemValue="R13" />
+												<f:selectItem itemLabel="Reporte de Etapas por Estado" itemValue="R14" />
                                           
                                             </h:selectOneMenu>
                                         </div>                                     
@@ -168,6 +169,12 @@
                                                 <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_13')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
                                             </div>
                                         </div>
+										
+										<div class="row" id="repoR14" style="display:none;">
+                                            <div class="col-md-12">
+                                                <iframe runat="server" id="iframe2" src="http://apps2.defensoria.gob.pe:8085/pentaho/Urbano?token=#{reporteSidController.obtenToken('destination_14')}" width="100%" height="1800" frameBorder="0"  scrolling="no" style="overflow: hidden;" ></iframe>
+                                            </div>
+                                        </div>
                                     </div>
                                 
                                     <div class="row" id="cubo" style="display:none;">
@@ -186,4 +193,4 @@
             </h:form>
         </ui:define>
     </ui:composition>
-</html>
+</html>            
