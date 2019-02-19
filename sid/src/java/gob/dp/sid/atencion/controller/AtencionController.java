@@ -125,6 +125,7 @@ public class AtencionController extends AbstractManagedBean implements Serializa
     private boolean disabledAgregarUsuVen;
     private Expediente expediente;
     private boolean disableActualizarDocumentos= false;
+    private List<Parametro> listaTipoTramiteBorrar;
             
     @Autowired
     private ListasComunesController listasComunesController;
@@ -1189,21 +1190,42 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                     listaTipoTramite = listasComunesController.listaTramiteExistenteDocumentario(false, false, false);
                 } else if (StringUtils.equals(idAtencion, "01") && StringUtils.equals(idMotivo, "I")) {
                     listaTipoTramite = listasComunesController.listaTramiteIntervencionPresencial(false, false, false);
+                    listaTipoTramiteBorrar= new ArrayList<>();
+                    
                     if(atencion.getIndicadorCita().equals(SiNoType.SI.getKey()) && atencion.getIndicadorCasoNuevo().equals(SiNoType.NO.getKey())){                      
                         int i=0;
                         for(Parametro parametro:listaTipoTramite){
                             if(parametro.getCodigoParametro()!=5035){
-                                listaTipoTramite.remove(i);
+                                listaTipoTramiteBorrar.add(parametro);
                             }
                             i++;
+                        }
+                        if(listaTipoTramiteBorrar!=null && listaTipoTramiteBorrar.size()>0){
+                            listaTipoTramite.removeAll(listaTipoTramiteBorrar);
                         }
                     }else if(atencion.getIndicadorCita().equals(SiNoType.NO.getKey())&& atencion.getIndicadorCasoNuevo().equals(SiNoType.NO.getKey())){  
                         int i=0;
                         for(Parametro parametro:listaTipoTramite){
-                            if(parametro.getCodigoParametro()!=5034){
-                                listaTipoTramite.remove(i);
+                            if(parametro.getCodigoParametro()==5035){
+                                listaTipoTramiteBorrar.add(parametro);
                             }
                             i++;
+                        }
+                        if(listaTipoTramiteBorrar!=null && listaTipoTramiteBorrar.size()>0){
+                            listaTipoTramite.removeAll(listaTipoTramiteBorrar);
+                        }
+                    }
+                    else if(atencion.getIndicadorCasoNuevo().equals(SiNoType.SI.getKey())){                      
+                        int i=0;
+                        for(Parametro parametro:listaTipoTramite){
+                            if(parametro.getCodigoParametro()!=5034){
+                                listaTipoTramiteBorrar.add(parametro);
+                                //listaTipoTramite.remove(i);
+                            }
+                            i++;
+                        }
+                        if(listaTipoTramiteBorrar!=null && listaTipoTramiteBorrar.size()>0){
+                            listaTipoTramite.removeAll(listaTipoTramiteBorrar);
                         }
                     }
                 } else if (StringUtils.equals(idAtencion, "02") && StringUtils.equals(idMotivo, "I")) {
@@ -1212,9 +1234,12 @@ public class AtencionController extends AbstractManagedBean implements Serializa
                         int i=0;
                         for(Parametro parametro:listaTipoTramite){
                             if(parametro.getCodigoParametro()!=5033){
-                                listaTipoTramite.remove(i);
+                                listaTipoTramiteBorrar.add(parametro);
                             }
                             i++;
+                        }
+                        if(listaTipoTramiteBorrar!=null && listaTipoTramiteBorrar.size()>0){
+                            listaTipoTramite.removeAll(listaTipoTramiteBorrar);
                         }
                     }
                 }
